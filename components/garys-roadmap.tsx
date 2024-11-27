@@ -160,7 +160,7 @@ export function GarysRoadmap({
                 >
                   {formatAmount(step.votes, 0)}
                 </div>
-                <h3 className="text-3xl font-bold text-gary-yellow uppercase">
+                <h3 className="text-2xl sm:text-3xl font-bold text-gary-yellow uppercase mb-2">
                   {step.title}
                 </h3>
                 <p className="text-xl font-bold">{step.description}</p>

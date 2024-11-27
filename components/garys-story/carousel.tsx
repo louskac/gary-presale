@@ -27,7 +27,7 @@ const slides = [
     story: "Gary was fired for redundancy, the company wants to change the brand and Gary, who was the model for the company logo, no longer fits into the new brand.",
     text: "We're going to rebrand, and we don't need you anymore, Gary. Your job with us is done.",
     storyPosition: "absolute lg:top-[15%] lg:right-0 lg:w-[500px] lg:h-[420px] sm:top-[15%] sm:right-[5%] sm:w-[300px] sm:h-[200px]",
-    textPosition: "absolute lg:top-[30%] lg:left-[20%] lg:w-[500px] lg:h-[280px] sm:top-[30%] sm:left-[10%] sm:w-[280px] sm:h-[150px]",
+    textPosition: "absolute lg:top-[25%] lg:left-[5%] lg:w-[500px] lg:h-[280px] sm:top-[30%] sm:left-[10%] sm:w-[280px] sm:h-[150px]",
     garyPosition: "absolute lg:-bottom-6 right-[16%] lg:w-[600px] lg:h-[500px] sm:bottom- sm:w-[300px] sm:w-[250px]",
   }, 
   {
@@ -133,7 +133,7 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
             "absolute w-[200px] h-[160px] sm:w-[500px] sm:h-[350px] m-0 p-0",
             isActive ? "animate-fade-in-1" : "opacity-0",
             "sm:left-0 sm:bottom-[5%] sm:transform-none",
-            "left-20 bottom-[250px] transform -translate-x-1/2 -translate-y-1/3 sm:translate-y-0"
+            "left-20 bottom-[50px] transform -translate-x-1/2 -translate-y-1/3 sm:translate-y-0"
           )}
         >
           <Image
@@ -160,8 +160,15 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
                     width: "240px",
                     height: "240px",
                   }
+                : slideNumber === 1
+                ? {
+                    bottom: "-30px",
+                    right: "0px",
+                    width: "300px",
+                    height: "300px",
+                  }
                 : {
-                    bottom: "320px",
+                    bottom: "60px",
                     left: "35%",
                     width: "240px",
                     height: "240px",
@@ -190,8 +197,8 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
         > 
           <p
             className={cn(
-              "z-10 text-xl font-bold",
-              slideNumber === 4 ? "pl-16 pt-8 pb-[]" : "pb-20 pl-20 pr-16 pt-28"
+              "z-10 text-[20px] font-bold",
+              slideNumber === 4 ? "pl-16 pt-8 pb-20" : "pb-20 pl-20 pr-16 pt-28"
             )}
           >
             {slide.story}
@@ -204,18 +211,16 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
           />
         </div>
       )}
-
-      {/* Mobile Yellow Box Always at Bottom */}
       {slideNumber !== 0 && (
         <div
           className={cn(
-            "absolute bottom-[40px] left-0 w-full pb-[40px]",
+            "absolute top-0 left-0 w-full",
             slideNumber === 4 ? "lg:hidden" : "sm:hidden", // Hide only on large screens for slide 4
             isActive ? "animate-fade-in-2" : "opacity-0"
           )}
         >
-          <div className="bg-[#FFDA96] h-[230px] border-t-8 border-b-8 border-black flex items-center justify-center">
-            <p className="text-center text-2xl font-bold">{slide.story}</p>
+          <div className="bg-[#FFDA96] h-[180px] border-t-8 border-b-8 border-black flex items-center justify-center">
+            <p className="text-left text-lg font-black px-4">{slide.story}</p>
           </div>
         </div>
       )}
@@ -231,7 +236,7 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
           style={
             isMobile
               ? {
-                  bottom: "500px",
+                  bottom: "220px",
                   left: "40%",
                   maxWidth: "80%",
                   transform: "translateX(-50%)",
@@ -241,7 +246,7 @@ function Slide({ slideNumber, slide, carouselApi }: { slideNumber: number; slide
         >
           <p
             className={cn(
-              "z-10 pt-20 text-center font-bold",
+              "z-10 py-28 lg:py-20 text-center font-black",
               slideNumber === 2 || (isMobile && slideNumber === 4)
                 ? "text-sm lg:text-2xl pl-10 lg:pr-20 pr-12"
                 : "text-sm lg:text-2xl lg:pl-20 pl-14 pr-10"

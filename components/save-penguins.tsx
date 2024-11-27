@@ -159,7 +159,7 @@ export const SavePenguins = () => {
           </div>
         )}
         <div className="flex flex-col justify-center lg:w-[44%] lg:max-w-[500px]">
-          <Heading className="mt-20 text-center text-4xl font-bold leading-none tracking-normal lg:text-left lg:text-[70px]">
+          <Heading className="mt-20 text-center text-4xl font-bold leading-none tracking-normal lg:text-left">
             Save penguins
           </Heading>
           {isMobile && (

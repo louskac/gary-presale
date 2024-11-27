@@ -1,33 +1,43 @@
-import { polygon, mainnet, bsc, type Chain } from "viem/chains"
-import { BigNumberish, HexAddress } from "@/types"
-import { createPublicClient, decodeFunctionData, http, parseAbi, parseEther, parseUnits } from "viem"
-import { sendMail } from "@/lib/mailer"
+import { polygon, mainnet, bsc, type Chain } from "viem/chains";
+import { BigNumberish, HexAddress } from "@/types";
+import {
+  createPublicClient,
+  decodeFunctionData,
+  http,
+  parseAbi,
+  parseUnits,
+} from "viem";
+import { sendMail } from "@/lib/mailer";
 
-export const getGaraEstimate = (token: string, amount: number, tokenValue?: number) => {
-  if (!token || !amount) return 0
+export const getGaraEstimate = (
+  token: string,
+  amount: number,
+  tokenValue?: number
+) => {
+  if (!token || !amount) return 0;
 
   if (token === "USDC" || token === "USDT") {
-    return usdcToGara(amount)
+    return usdcToGara(amount);
   }
 
-  if (!tokenValue) return 0
-  return amount * tokenValue
-}
+  if (!tokenValue) return 0;
+  return amount * tokenValue;
+};
 
-export const usdcToGara = (usdc: number) => usdc / 0.1 // 1 USDC = 0.1 GARA
+export const usdcToGara = (usdc: number) => usdc / 0.1; // 1 USDC = 0.1 GARA
 
 export const getChainByName = (chain: string): Chain => {
   switch (chain) {
     case "Polygon":
-      return polygon
+      return polygon;
     case "Ethereum":
-      return mainnet
+      return mainnet;
     case "BNB Smart Chain":
-      return bsc
+      return bsc;
     default:
-      return polygon
+      return polygon;
   }
-}
+};
 
 // The ABI of the ERC-20 contract (relevant parts for the `transfer` function)
 const erc20Abi = [
@@ -40,52 +50,65 @@ const erc20Abi = [
     ],
     outputs: [{ name: "", type: "bool" }],
   },
-]
+];
 
 const handleOpsAbi = parseAbi([
   "function handleOps((address,uint256,bytes,bytes,uint256,uint256,uint256,uint256,uint256,bytes,bytes)[],address)",
-])
+]);
 
 export function validateTransactionHash(txHash: string) {
-  return /^(0x)?[0-9a-fA-F]{64}$/.test(txHash)
+  return /^(0x)?[0-9a-fA-F]{64}$/.test(txHash);
 }
 
 function toLowerCase(address: string) {
-  if (!address || typeof address !== "string") return ""
-  return address.toLowerCase()
+  if (!address || typeof address !== "string") return "";
+  return address.toLowerCase();
 }
 
-export const ethereumRpcUrl = process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL || "https://ethereum-rpc.publicnode.com"
-export const polygonRpcUrl = process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-bor-rpc.publicnode.com"
-export const bscRpcUrl = process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bsc-rpc.publicnode.com"
+export const ethereumRpcUrl =
+  process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL ||
+  "https://ethereum-rpc.publicnode.com";
+export const polygonRpcUrl =
+  process.env.NEXT_PUBLIC_POLYGON_RPC_URL ||
+  "https://polygon-bor-rpc.publicnode.com";
+export const bscRpcUrl =
+  process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bsc-rpc.publicnode.com";
 
 export const getRpcNode = (chain: string) => {
   switch (chain) {
     case "Ethereum":
-      return http(ethereumRpcUrl)
+      return http(ethereumRpcUrl);
     case "Polygon":
-      return http(polygonRpcUrl)
+      return http(polygonRpcUrl);
     case "BNB Smart Chain":
-      return http(bscRpcUrl)
+      return http(bscRpcUrl);
     default:
-      return http()
+      return http();
   }
-}
+};
 // Helper function for retrying with a delay
-const retryWithDelay = async (fn: () => Promise<any>, retries: number, delay: number) => {
+const retryWithDelay = async (
+  fn: () => Promise<any>,
+  retries: number,
+  delay: number
+) => {
   for (let i = 0; i < retries; i++) {
     try {
-      return await fn()
+      return await fn();
     } catch (error) {
       if (i < retries - 1) {
-        console.log(`Retry ${i + 1}/${retries} failed, retrying in ${delay / 1000} seconds...`)
-        await new Promise((resolve) => setTimeout(resolve, delay))
+        console.log(
+          `Retry ${i + 1}/${retries} failed, retrying in ${
+            delay / 1000
+          } seconds...`
+        );
+        await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
-        throw error // If all retries fail, throw the error
+        throw error; // If all retries fail, throw the error
       }
     }
   }
-}
+};
 
 export async function validateTransaction({
   chain,
@@ -94,100 +117,85 @@ export async function validateTransaction({
   to,
   amount,
 }: {
-  chain: string
-  txHash: HexAddress
-  from: HexAddress
-  to: HexAddress
-  amount: string
+  chain: string;
+  txHash: HexAddress;
+  from: HexAddress;
+  to: HexAddress;
+  amount: string;
 }) {
-  console.log({ chain, txHash, from, to, amount })
   try {
     if (!validateTransactionHash(txHash)) {
-      throw new Error("Invalid transaction hash")
+      throw new Error("Invalid transaction hash");
     }
-    const _chain = getChainByName(chain)
-    const transport = getRpcNode(chain)
+    const _chain = getChainByName(chain);
+    const transport = getRpcNode(chain);
     const publicClient = createPublicClient({
       chain: _chain,
       transport: transport,
-    })
-
-    let decoded
-    let functionTo = "" as HexAddress
-    let functionFrom = "" as HexAddress
-    let functionValue = "" as BigNumberish
+    });
 
     // Retry mechanism for getTransactionReceipt with a 5-second delay and 3 retries
-    const receipt = await retryWithDelay(() => publicClient.getTransactionReceipt({ hash: txHash }), 3, 5000)
-    console.log({ receipt })
-    if (receipt?.from === from) functionFrom = receipt.from
-    if (receipt?.to === to) functionTo = receipt.to
+    const receipt = await retryWithDelay(
+      () => publicClient.getTransactionReceipt({ hash: txHash }),
+      3,
+      5000
+    );
 
-    const transaction = await publicClient.getTransaction({ hash: txHash })
-    console.log({ transaction })
-    if (!functionFrom) functionFrom = transaction?.from
-    if (!functionTo) functionTo = transaction?.to
-    if (!functionValue) functionValue = parseUnits(transaction.value.toString(), 0)
+    const transaction = await publicClient.getTransaction({ hash: txHash });
 
-    if (!functionFrom || !functionTo || !functionValue) {
-      try {
-        decoded = decodeFunctionData({
-          abi: erc20Abi,
-          data: transaction.input,
-        })
-        console.log({ decoded })
-        if (!functionFrom) functionFrom = transaction?.from
-        if (!functionTo) functionTo = (decoded?.args?.[0] || "") as HexAddress
-        if (!functionValue) functionValue = (decoded?.args?.[1] || "") as BigNumberish
-      } catch (error) {
-        decoded = decodeFunctionData({
-          abi: handleOpsAbi,
-          data: transaction.input,
-        })
-        console.log({ decoded })
-        if (!functionFrom) functionFrom = (decoded?.args?.[0]?.[0]?.[0] || "") as HexAddress
-        if (!functionTo) functionTo = transaction?.from
-        if (!functionValue) functionValue = (parseUnits(transaction.v.toString(), 0) || "") as BigNumberish
-      }
+    let decoded;
+    let functionTo = "" as HexAddress;
+    let functionFrom = "" as HexAddress;
+    let functionValue = "" as BigNumberish;
+    try {
+      decoded = decodeFunctionData({
+        abi: erc20Abi,
+        data: transaction.input,
+      });
+      functionTo = (decoded?.args?.[0] || "") as HexAddress;
+      functionFrom = transaction.from;
+      functionValue = (decoded?.args?.[1] || "") as BigNumberish;
+    } catch (error) {
+      decoded = decodeFunctionData({
+        abi: handleOpsAbi,
+        data: transaction.input,
+      });
+      functionFrom = (decoded?.args?.[0]?.[0]?.[0] || "") as HexAddress;
+      functionTo = transaction.from;
+      functionValue = (parseUnits(transaction.v.toString(), 0) ||
+        "") as BigNumberish;
     }
 
-    console.log("values after check")
-    console.log({ functionFrom, functionTo, functionValue })
-
-    let amountInWei
-    if (chain === "Ethereum") {
-      amountInWei = parseEther(amount.toString())
-      // amountInWei = parseUnits(amount.toString(), 18)
-    } else if (chain !== "BNB Smart Chain") {
-      amountInWei = parseUnits(amount.toString(), 6)
-    } else {
-      amountInWei = parseUnits(amount.toString(), 18)
-    }
-
-    console.log({ amountInWei })
+    const amountInWei =
+      chain !== "BNB Smart Chain"
+        ? parseUnits(amount.toString(), 6)
+        : parseUnits(amount.toString(), 18);
 
     if (receipt.status !== "success") {
-      throw new Error("Invalid transaction status")
+      throw new Error("Invalid transaction status");
     }
-    if (toLowerCase(functionFrom) !== toLowerCase(from)) {
-      throw new Error("Invalid sender address")
+    if (toLowerCase(transaction.from) !== toLowerCase(from)) {
+      throw new Error("Invalid sender address");
     }
     if (toLowerCase(functionTo) !== toLowerCase(to)) {
-      throw new Error("Invalid recipient address")
+      throw new Error("Invalid recipient address");
     }
-    console.log({ functionValue, amountInWei })
     if (functionValue !== amountInWei) {
-      throw new Error("Invalid amount")
+      throw new Error("Invalid amount");
     }
 
-    return { success: true }
+    return { success: true };
   } catch (error) {
     await sendMail({
       recipients: ["d.forejtek@gmail.com", "office@coingarage.io"],
       subject: `GARA Coin - Error in transaction validation`,
-      content: JSON.stringify({ inputData: { chain, txHash, from, to, amount }, error }, undefined, 2),
-    })
-    console.error("Error:", error)
-    return { success: false, message: error?.message || "Unknown error" }
+      content: JSON.stringify(
+        { inputData: { chain, txHash, from, to, amount }, error },
+        undefined,
+        2
+      ),
+    });
+    console.error("Error:", error);
+    return { success: false, message: error?.message || "Unknown error" };
   }
 }

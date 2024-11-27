@@ -44,7 +44,6 @@ export const NavBar = () => {
           ))}
         </ul>
       </nav>
-
       <div className="hidden lg:flex lg:items-center lg:justify-end">
         <AnchorLink anchor="help-gary">
           <Button className="my-2 h-14 border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:bg-white hover:text-gary-pink hover:border-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
@@ -52,7 +51,6 @@ export const NavBar = () => {
           </Button>
         </AnchorLink>
       </div>
-
       {/* Burger Menu Button */}
       <button
         className="fixed top-4 right-4 z-50 lg:hidden focus:outline-none"
@@ -98,17 +96,16 @@ export const NavBar = () => {
               </li>
             ))}
           </ul>
-
           <div className="mt-8">
-            <AnchorLink anchor="buy-gara">
+            <AnchorLink anchor="help-gary">
               <Button
                 className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all hover:bg-white hover:text-gary-pink hover:border-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
+                onClick={() => setMenuOpen(false)} // Close menu on click
               >
                 Buy GARA coin
               </Button>
             </AnchorLink>
           </div>
-
           <div className="mt-8 flex flex-row gap-4">
             <Button className="h-12 w-12 rounded-full border-none bg-[#0D1E35] hover:!bg-gary-yellow flex items-center justify-center">
               <a href="https://www.facebook.com/profile.php?id=61568221981440">

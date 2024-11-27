@@ -192,7 +192,7 @@ export function Widget({ className }: { className?: string }) {
       <p className="my-4 flex items-center justify-center space-x-2">
         <span className="text-xl leading-none">Powered by</span>
         <span className="inline-flex items-center">
-          <Image src="/images/gara-coin/helio.svg" alt="Polygon" width={80} height={40} />
+          <Image src="/images/gara-coin/helio.svg" alt="Helio" width={80} height={40} />
         </span>
       </p>
     </section>
