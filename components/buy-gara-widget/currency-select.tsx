@@ -60,9 +60,9 @@ export function CurrencySelect({ form }: { form: any }) {
                       className="mr-1"
                     />
                     {field.value && !address && ethTokens.find((token) => token.value === field.value)?.label}
-                    {field.value && chain?.id===11155111 && ethTokens.find((token) => token.value === field.value)?.label}
+                    {field.value && chain?.id===1 && ethTokens.find((token) => token.value === field.value)?.label}
                     {field.value && chain?.id===137 && polTokens.find((token) => token.value === field.value)?.label}
-                    {field.value && chain?.id===97 && bnbTokens.find((token) => token.value === field.value)?.label}
+                    {field.value && chain?.id===56 && bnbTokens.find((token) => token.value === field.value)?.label}
                     <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                   </Button>
                 </FormControl>
@@ -73,7 +73,7 @@ export function CurrencySelect({ form }: { form: any }) {
                   <CommandList>
                     <CommandEmpty>No coin found.</CommandEmpty>
                     <CommandGroup>
-                      {chain?.id===11155111 && address && ethTokens.map((token) => (
+                      {chain?.id===1 && address && ethTokens.map((token) => (
                         <CommandItem
                           value={token.label}
                           key={token.value}
@@ -121,7 +121,7 @@ export function CurrencySelect({ form }: { form: any }) {
                           
                         </CommandItem>
                       ))}
-                      {chain?.id===97&& address && bnbTokens.map((token) => (
+                      {chain?.id===56&& address && bnbTokens.map((token) => (
                         <CommandItem
                           value={token.label}
                           key={token.value}

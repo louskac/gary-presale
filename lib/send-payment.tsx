@@ -1132,7 +1132,7 @@ export const sendPayment = async ({
         if (transactionApproveReceipt.status == "success") {
           hash = await writeContract(config, {
             abi: polVaultAbi,
-            address: "0x61fceb354644A818aB8f1d4d776E1A1831F986cA",
+            address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
             functionName: "buyTokenPolPay",
             args: ["1", parseUnits(amount.toString(), 6)],
           })
