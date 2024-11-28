@@ -11,4 +11,4 @@ export type Numeric = number | bigint
 export type BigNumberish = string | Numeric
 
 export type SupportedChains = "Polygon" | "Ethereum" | "BNB Smart Chain"
-export type SupportedTokens = "USDC" | "USDT"
+export type SupportedTokens = "USDC" | "USDT" | "ETH" | "POL" | "BNB"

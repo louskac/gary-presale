@@ -4,7 +4,7 @@ import { ReactNode } from "react"
 import { getDefaultConfig, RainbowKitProvider, darkTheme, connectorsForWallets } from "@rainbow-me/rainbowkit"
 import { metaMaskWallet, coinbaseWallet, rainbowWallet, walletConnectWallet, trustWallet, phantomWallet } from "@rainbow-me/rainbowkit/wallets"
 import { WagmiProvider, cookieStorage, createConfig, createStorage, http, type Locale } from "wagmi"
-import { polygon, mainnet, bsc } from "wagmi/chains"
+import { polygon, mainnet, bsc, sepolia, bscTestnet } from "wagmi/chains"
 import { GaraStoreProvider } from "@/lib/store/provider"
 import { getRpcNode } from "@/app/api/gara/lib/utils"
 
@@ -12,25 +12,25 @@ const connectors = connectorsForWallets(
   [
     {
       groupName: "Recommended",
-      wallets: [metaMaskWallet, coinbaseWallet, phantomWallet],
+      wallets: [metaMaskWallet],
     },
     {
       groupName: "Other",
-      wallets: [rainbowWallet, walletConnectWallet].filter(
+      wallets: [rainbowWallet, walletConnectWallet, coinbaseWallet, phantomWallet].filter(
         (wallet) => wallet !== trustWallet
       ),
     },
   ],
   {
-    appName: "Coingarage",
+    appName: "PenguinPresale",
     projectId: process.env.NEXT_PUBLIC_CONNECT_WALLET_PROJECT_ID,
   }
 )
 export const config = getDefaultConfig({
-  appName: "Coingarage",
+  appName: "PenguinPresale",
   connectors,
   projectId: process.env.NEXT_PUBLIC_CONNECT_WALLET_PROJECT_ID,
-  chains: [polygon, mainnet, bsc],
+  chains: [polygon, mainnet, bsc], //monda
   transports: {
     [mainnet.id]: getRpcNode(mainnet.name),
     [polygon.id]: getRpcNode(polygon.name),

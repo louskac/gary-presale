@@ -1,8 +1,8 @@
 import { Heading } from "@/components/heading";
 import { GarysRoadmap } from "@/components/garys-roadmap";
-// import { BuyGara } from "@/components/buy-gara-widget/widget";
+import { BuyGara } from "@/components/buy-gara-widget/widget";
 import Image from "next/image";
-import { Widget } from "@/components/widget";
+// import { Widget } from "@/components/widget";
 
 export const HelpGary = () => {
   return (
@@ -21,7 +21,8 @@ d
         {/* Widget First on Mobile */}
         <div className="order-1 lg:order-2 mt-10 lg:mt-0">
           <div className="sticky top-0">
-            <Widget />
+            <BuyGara />
+            {/* monda */}
             {/* Ice Image */}
             <div className="absolute -bottom-[7.5rem] -left-3 h-[160px] w-[106%] hidden lg:block">
               <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />

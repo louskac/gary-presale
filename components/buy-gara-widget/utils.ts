@@ -25,17 +25,20 @@ export type ContractAddresses = {
 
 export const contractAddresses: ContractAddresses = {
   USDC: {
-    Polygon: USDC_POLYGON_CONTRACT_ADDRESS,
-    Ethereum: USDC_ETHEREUM_CONTRACT_ADDRESS,
-    "BNB Smart Chain": USDC_BSC_CONTRACT_ADDRESS,
+    "Polygon": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
+    "Sepolia": "0x9c47394eD6ba28EC5336d3197416dF95c5A632eB",
+    "Binance Smart Chain Testnet": "0x77e578B49a0a5bCa5c22520eae5e5FE40480944a",
   },
   USDT: {
-    Polygon: USDT_POLYGON_CONTRACT_ADDRESS,
-    Ethereum: USDT_ETHEREUM_CONTRACT_ADDRESS,
-    "BNB Smart Chain": USDT_BSC_CONTRACT_ADDRESS,
+    "Polygon": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+    "Sepolia": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
+    "Binance Smart Chain Testnet": "0xD4da7413C8fd983689E0F5fb7311EFf3d3A4E5FD",
   },
   ETH: {
-    Ethereum: ETH_ETH_CONTRACT_ADDRESS,
+    "Sepolia": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
+  },
+  POL: {
+    "Polygon": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
   },
 };
 
