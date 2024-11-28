@@ -47,6 +47,17 @@ const contractAddress = "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"
 const ethAddress = "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"
 const polygonAddress = "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be"
 const bscAddress = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead"
+const handleWalletConnect = () => {
+  // Trigger Google Analytics event
+  if (typeof gtag === "function") {
+    gtag("event", "wallet");
+  }
+
+  // Trigger Facebook Pixel event
+  if (typeof fbq === "function") {
+    fbq("track", "Lead");
+  }
+};
 const ethVaultAbi = [
   {
     anonymous: false,
@@ -1221,6 +1232,24 @@ export function BuyGara({ className }: { className?: string }) {
     })
 
     setTransactionStatus({ process: "receivePayment", status: "pending" })
+
+    // Successful deposit: Trigger purchase event
+    const depositValue = parseFloat(amount).toFixed(2);
+
+    // Google Analytics
+    if (typeof gtag === "function") {
+      gtag("event", "purchase", {
+        value: depositValue,
+        currency: "USD",
+      })
+    }
+    
+    // Facebook Pixel
+    if (typeof fbq === "function") {
+      fbq("track", "Purchase", { value: depositValue, currency: "USD" });
+    }
+
+
     // const garaTransactionResponse = await fetch("/api/gara/exchange", {
     //   method: "POST",
     //   body: JSON.stringify({
@@ -1337,7 +1366,7 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" name="chain" value={chain?.name} />
 
         <div className="mt-8 flex flex-col gap-4">
-          <ConnectButton label={t("btnConnectWallet")} showBalance={false} />
+          <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
           <Button
             type="submit"
             variant={address ? "default" : "outlinePrimary"}
