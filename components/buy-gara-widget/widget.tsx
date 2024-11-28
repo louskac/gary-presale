@@ -48,6 +48,7 @@ const ethAddress = "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"
 const polygonAddress = "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be"
 const bscAddress = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead"
 const handleWalletConnect = () => {
+  console.log('wallet connect triggered')
   // Trigger Google Analytics event
   if (typeof gtag === "function") {
     gtag("event", "wallet");
@@ -1236,6 +1237,7 @@ export function BuyGara({ className }: { className?: string }) {
     // Successful deposit: Trigger purchase event
     const depositValue = parseFloat(amount).toFixed(2);
 
+    console.log('buy button triggered')
     // Google Analytics
     if (typeof gtag === "function") {
       gtag("event", "purchase", {
@@ -1366,7 +1368,7 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" name="chain" value={chain?.name} />
 
         <div className="mt-8 flex flex-col gap-4">
-          <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
+        <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
           <Button
             type="submit"
             variant={address ? "default" : "outlinePrimary"}

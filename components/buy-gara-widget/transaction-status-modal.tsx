@@ -54,18 +54,18 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
               ) : null}
               {hasFailed ? (
                 <div className="flex h-14 w-full items-center justify-center rounded-full bg-red-500 text-foreground">
-                  <X className="size-10" />
+                  <X className="size-10 dark:text-white" />
                 </div>
               ) : null}
             </div>
-            <h3 className="mb-2 w-full text-center font-heading text-lg font-medium text-foreground">
+            <h3 className="mb-2 w-full text-center font-heading text-lg font-medium text-foreground dark:text-white">
               <ArrowUpRight className="inline-block h-6 w-6" />
               Outgoing Transaction
             </h3>
             <div className="grid gap-4">
               <div className="grid grid-rows-[1fr_auto] items-center gap-4 rounded-md border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-700 dark:bg-neutral-800 md:grid-cols-[1fr_auto] md:grid-rows-1">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Transaction Hash</p>
+                  <p className="text-sm font-medium text-foreground dark:text-white">Transaction Hash</p>
                   {outcomingTransaction.txHash ? (
                     <a
                       href={`${senderChainTxUrl}${outcomingTransaction.txHash}`}
@@ -83,7 +83,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                   {!outcomingTransaction.done ? (
                     <>
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 text-foreground">
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4 dark:text-white" />
                       </div>
                       <p className="text-sm font-medium text-yellow-500">Transaction Pending</p>
                     </>
@@ -91,7 +91,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                   {outcomingTransaction.error ? (
                     <>
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-foreground">
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4 dark:text-white" />
                       </div>
                       <p className="text-sm font-medium text-red-500">Transaction Failed</p>
                     </>
@@ -109,14 +109,14 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
             </div>
           </div>
           <div>
-            <h3 className="mb-2 w-full text-center font-heading text-lg font-medium text-foreground">
+            <h3 className="mb-2 w-full text-center font-heading text-lg font-medium text-foreground dark:text-white">
               <ArrowDownRight className="inline-block h-6 w-6" />
               Incoming Transaction
             </h3>
             <div className="grid gap-4">
               <div className="grid grid-rows-[1fr_auto] items-center gap-4 rounded-md border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-700 dark:bg-neutral-800 md:grid-cols-[1fr_auto] md:grid-rows-1">
                 <div>
-                  <p className="text-sm font-medium text-foreground">Transaction Hash</p>
+                  <p className="text-sm font-medium text-foreground dark:text-white">Transaction Hash</p>
                   {incomingTransaction.txHash ? (
                     <a
                       href={`https://polygonscan.com/tx/${incomingTransaction.txHash}`}
@@ -134,7 +134,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                   {!incomingTransaction.done ? (
                     <>
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 text-foreground">
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4 dark:text-white" />
                       </div>
                       <p className="text-sm font-medium text-yellow-500">Transaction Pending</p>
                     </>
@@ -142,7 +142,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                   {incomingTransaction.error ? (
                     <>
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-red-500 text-foreground">
-                        <X className="h-4 w-4" />
+                        <X className="h-4 w-4 dark:text-white" />
                       </div>
                       <p className="text-sm font-medium text-red-500">Transaction Failed</p>
                     </>
@@ -166,7 +166,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
         <DialogFooter>
           <div>
             {!isPending ? (
-              <Button type="button" onClick={toggleOpen} className="!bg-yellow-500 !text-foreground">
+              <Button type="button" onClick={toggleOpen} className="dark:text-foreground">
                 Close
               </Button>
             ) : null}

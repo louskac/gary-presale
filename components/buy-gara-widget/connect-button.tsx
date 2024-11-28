@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { formatAddress } from "@/lib/utils"
 import { ConnectButton as RainbowkitConnectButton } from "@rainbow-me/rainbowkit"
 import { Loader2 } from "lucide-react"
-export const ConnectButton = ({ label, showBalance }) => {
+export const ConnectButton = ({ label, showBalance, onClick }) => {
   return (
     <RainbowkitConnectButton.Custom>
       {({ account, chain, openAccountModal, openChainModal, openConnectModal, mounted }) => {
@@ -16,6 +16,7 @@ export const ConnectButton = ({ label, showBalance }) => {
             </Button>
           )
         }
+
         return (
           <div>
             {(() => {
@@ -23,7 +24,10 @@ export const ConnectButton = ({ label, showBalance }) => {
                 return (
                   <Button
                     variant="default"
-                    onClick={openConnectModal}
+                    onClick={() => {
+                      if (onClick) onClick(); // Trigger custom onClick handler
+                      openConnectModal(); // Open the Rainbowkit modal
+                    }}
                     type="button"
                     className="h-12 w-full border-none bg-gary-pink text-xl font-bold outline-none hover:bg-gary-pink/80 dark:hover:bg-gary-pink/80"
                   >
@@ -59,13 +63,22 @@ export const ConnectButton = ({ label, showBalance }) => {
                         }}
                       >
                         {chain.iconUrl && (
-                          <img alt={chain.name ?? "Chain icon"} src={chain.iconUrl} style={{ width: 12, height: 12 }} />
+                          <img
+                            alt={chain.name ?? "Chain icon"}
+                            src={chain.iconUrl}
+                            style={{ width: 12, height: 12 }}
+                          />
                         )}
                       </div>
                     )}
                     {chain.name}
                   </Button>
-                  <Button variant="outline" onClick={openAccountModal} type="button" className="w-full text-[#FFAE17]">
+                  <Button
+                    variant="outline"
+                    onClick={openAccountModal}
+                    type="button"
+                    className="w-full text-[#FFAE17]"
+                  >
                     {formatAddress(account.address, 12)}
                     {showBalance ? ` (${account.displayBalance})` : ""}
                   </Button>
