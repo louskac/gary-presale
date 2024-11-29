@@ -69,7 +69,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                   {outcomingTransaction.txHash ? (
                     <a
                       href={`${senderChainTxUrl}${outcomingTransaction.txHash}`}
-                      className="text-tertiary/80 hover:text-tertiary inline-flex items-center text-sm underline"
+                      className="text-tertiary/80 hover:text-tertiary inline-flex items-center text-sm underline dark:text-white"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
