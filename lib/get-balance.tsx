@@ -33,7 +33,7 @@ export async function getTokenBalance({
 }: {
   walletAddress: string
   token: string
-  chainName: "Polygon" | "Sepolia" | "Binance Smart Chain Testnet"
+  chainName: "Polygon" | "Ethereum" | "BNB Smart Chain"
 }): Promise<{ balance: string; humanReadableBalance: number }> {
   const client = createPublicClient({
     chain: getChainByName(chainName),
@@ -50,7 +50,7 @@ export async function getTokenBalance({
     args: [walletAddress],
   })) as string
 
-  const decimals = chainName === "Binance Smart Chain Testnet"&&token === "USDT" ? 18 : 6 // USDC has 6 decimals on Polygon and BSC
+  const decimals = chainName === "BNB Smart Chain"? 18 : 6 
 
   // The balance is returned in the token's smallest units (e.g., wei for ETH, smallest unit for ERC-20 tokens)
   const humanReadableBalance = Number(balance) / 10 ** decimals

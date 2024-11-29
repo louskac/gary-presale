@@ -26,16 +26,16 @@ export type ContractAddresses = {
 export const contractAddresses: ContractAddresses = {
   USDC: {
     "Polygon": "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
-    "Sepolia": "0x9c47394eD6ba28EC5336d3197416dF95c5A632eB",
-    "Binance Smart Chain Testnet": "0x77e578B49a0a5bCa5c22520eae5e5FE40480944a",
+    "Ethereum": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "BNB Smart Chain": "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
   },
   USDT: {
     "Polygon": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
-    "Sepolia": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
-    "Binance Smart Chain Testnet": "0xD4da7413C8fd983689E0F5fb7311EFf3d3A4E5FD",
+    "Ethereum": "0xdAC17F958D2ee523a2206206994597C13D831ec7",
+    "BNB Smart Chain": "0x55d398326f99059fF775485246999027B3197955",
   },
   ETH: {
-    "Sepolia": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
+    "Ethereum": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",
   },
   POL: {
     "Polygon": "0x34Bb47732aF26EC7fF493a49694342945090a7F7",

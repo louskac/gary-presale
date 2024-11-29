@@ -62,18 +62,18 @@ function toLowerCase(address: string) {
   return address.toLowerCase()
 }
 
-export const ethereumRpcUrl = process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL || "https://ethereum-sepolia-rpc.publicnode.com"
-export const polygonRpcUrl = process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-bor-rpc.publicnode.com"
-export const bscRpcUrl = process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bsc-testnet-rpc.publicnode.com"
+export const ethereumRpcUrl = process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
+export const polygonRpcUrl = process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-mainnet.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
+export const bscRpcUrl = process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bnb-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
 
 export const getRpcNode = (chain: string) => {
   //monda
   switch (chain) {
-    case "Sepolia":
+    case "Ethereum":
       return http(ethereumRpcUrl)
     case "Polygon":
       return http(polygonRpcUrl)
-    case "Binance Smart Chain Testnet":
+    case "BNB Smart Chain":
       return http(bscRpcUrl)
     default:
       return http()
