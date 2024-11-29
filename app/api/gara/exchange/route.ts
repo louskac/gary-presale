@@ -15,7 +15,7 @@ import {
   updateTransactionByTxHash,
 } from "@/lib/db/helpers"
 
-export const maxDuration = 300
+export const maxDuration = 60
 export const dynamic = "force-dynamic"
 
 // Infura API key and URL
