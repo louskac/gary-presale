@@ -20,7 +20,7 @@ export const CoinInput = forwardRef<
     <div className="flex flex-col">
       <div
         className={cn(
-          "bg-gary-input-blue flex w-full flex-row justify-between gap-4 rounded-full px-6 py-2 font-bold text-gary-blue hover:bg-gary-light-blue"
+          "flex w-full flex-row justify-between gap-4 rounded-full bg-gary-input-blue px-6 py-2 font-bold text-gary-blue hover:bg-gary-light-blue"
         )}
       >
         <input

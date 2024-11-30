@@ -32,33 +32,38 @@ import { Rounds } from "@/components/rounds"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
-const TOKENS_SOLD = 647149
+const TOKENS_SOLD = Number("652989").toLocaleString()
+
 const TOTAL_TOKEN_AMOUNT = 99000000
 const endDate = 1740787199
 const firstRoundEndDate = 1735689599
 const secondRoundEndDate = 1738367999
-const polygonRpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
-const ethRpcUrl = "https://eth-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
-const bscRpcUrl = "https://bnb-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
+const polygonRpcUrl = "https://polygon-mainnet.g.alchemy.com/v2/" + process.env.NEXT_PUBLIC_POLYGON_RPC_KEY
+const ethRpcUrl = "https://eth-mainnet.g.alchemy.com/v2/" + process.env.NEXT_PUBLIC_ETH_RPC_KEY
+const bscRpcUrl = "https://bnb-mainnet.g.alchemy.com/v2/" + process.env.NEXT_PUBLIC_BSC_RPC_KEY
+
 const polygonProvider = new ethers.providers.JsonRpcProvider(polygonRpcUrl)
 const ethProvider = new ethers.providers.JsonRpcProvider(ethRpcUrl)
 const bscProvider = new ethers.providers.JsonRpcProvider(bscRpcUrl)
+
 const contractAddress = "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"
+
 const ethAddress = "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"
 const polygonAddress = "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be"
 const bscAddress = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead"
+
 const handleWalletConnect = () => {
-  console.log('wallet connect triggered')
+  console.log("wallet connect triggered")
   // Trigger Google Analytics event
   if (typeof gtag === "function") {
-    gtag("event", "wallet");
+    gtag("event", "wallet")
   }
 
   // Trigger Facebook Pixel event
   if (typeof fbq === "function") {
-    fbq("track", "Lead");
+    fbq("track", "Lead")
   }
-};
+}
 const ethVaultAbi = [
   {
     anonymous: false,
@@ -1002,7 +1007,7 @@ export function BuyGara({ className }: { className?: string }) {
 
     try {
       const tokenBalance = await contract.getTokenBalance()
-      console.log("tokenBalance", Math.floor(tokenBalance))
+      //console.log("tokenBalance", Math.floor(tokenBalance))
       setTokenSold(TOTAL_TOKEN_AMOUNT - Math.floor(tokenBalance / 10 ** 6))
       // return Math.floor(tokenBalance/10**18)
     } catch (error) {
@@ -1027,34 +1032,40 @@ export function BuyGara({ className }: { className?: string }) {
     reset: resetState,
   } = useGaraStore((state) => state)
   const { address, chain } = useAccount()
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["ethereumPrice"],
-    queryFn: async () => {
-      console.log("-----------")
-      // let response = null;
-      // if(chain?.id === 11155111){
-      const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
-      // }else if(chain?.id === 97){
-      //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
-      // }else{
-      //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
-      // }
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["ethereumPrice"],
+  //   queryFn: async () => {
+  //     console.log("-----------")
+  //     // let response = null;
+  //     // if(chain?.id === 11155111){
+  //     const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
+  //     // }else if(chain?.id === 97){
+  //     //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
+  //     // }else{
+  //     //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
+  //     // }
 
-      const data = await response?.json()
-      console.log("price:", data)
-      return data
-    },
-  })
+  //     const data = await response?.json()
+  //     console.log("price:", data)
+  //     return data
+  //   },
+  // })
   useEffect(() => {
     const fetchPrice = async () => {
       if (chain?.id === 1) {
+        //ETH
         const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
         setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       } else if (chain?.id === 56) {
+        //BNB
         const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
         setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       } else {
+        //POL
         const tokenBalance = await polygonContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("POL: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
         setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       }
     }
@@ -1065,6 +1076,8 @@ export function BuyGara({ className }: { className?: string }) {
 
   const [open, setOpen] = useState(false)
   const [hasUnsufficientBalance, setHasUnsufficientBalance] = useState(false)
+  const [hasLowerInputBalance, setHasLowerInputBalance] = useState(false)
+  const [isCalculatingMinBalance, setIsCalculatingMinBalance] = useState(false)
   const toggleOpen = () => setOpen(!open)
   const handleOnOpenChange = () => {
     setOpen(!open)
@@ -1111,8 +1124,35 @@ export function BuyGara({ className }: { className?: string }) {
     name: "token",
   })
 
+  const minBalance = 20 // 20 USD
+  const [minTokenBalance, setMinTokenBalance] = useState(0)
+
   useEffect(() => {
-    if (!address || !token || !chain) return
+    if (!address || !token || !chain || !nativeUSD) return
+
+    const calculateMinTokenBalance = async () => {
+      setIsCalculatingMinBalance(true) // calculate timer after changing chain solver
+
+      if (token === "USDC" || token === "USDT") {
+        setMinTokenBalance(minBalance)
+      } else {
+        const calculatedMinBalance = minBalance / (nativeUSD / 10)
+        setMinTokenBalance(calculatedMinBalance)
+      }
+
+      setIsCalculatingMinBalance(false)
+    }
+
+    calculateMinTokenBalance()
+
+    if (Number(amount) < minTokenBalance) {
+      form.setError("amount", { message: `Amount must be greater than $${minTokenBalance}` })
+      setHasLowerInputBalance(true)
+    } else {
+      form.clearErrors("amount")
+      setHasLowerInputBalance(false)
+    }
+
     if (token === "ETH" || token === "POL" || token === "BNB") {
       const isInsufficientBalance = Number(balance?.formatted) < Number(amount)
 
@@ -1130,7 +1170,6 @@ export function BuyGara({ className }: { className?: string }) {
             token: token,
             chainName: chain?.name as string,
           })
-          // console.log(balance)
           const isInsufficientBalance = balance?.humanReadableBalance < Number(amount)
           if (isInsufficientBalance) {
             form.setError("amount", { message: "Insufficient balance" })
@@ -1145,7 +1184,7 @@ export function BuyGara({ className }: { className?: string }) {
         console.error(error)
       }
     }
-  }, [amount, address, balance, token, chain])
+  }, [amount, address, balance, token, chain, nativeUSD])
 
   useEffect(() => {
     const round = calculateRound()
@@ -1235,9 +1274,9 @@ export function BuyGara({ className }: { className?: string }) {
     setTransactionStatus({ process: "receivePayment", status: "pending" })
 
     // Successful deposit: Trigger purchase event
-    const depositValue = parseFloat(amount).toFixed(2);
+    const depositValue = parseFloat(amount).toFixed(2)
 
-    console.log('buy button triggered')
+    console.log("buy button triggered")
     // Google Analytics
     if (typeof gtag === "function") {
       gtag("event", "purchase", {
@@ -1245,12 +1284,11 @@ export function BuyGara({ className }: { className?: string }) {
         currency: "USD",
       })
     }
-    
+
     // Facebook Pixel
     if (typeof fbq === "function") {
-      fbq("track", "Purchase", { value: depositValue, currency: "USD" });
+      fbq("track", "Purchase", { value: depositValue, currency: "USD" })
     }
-
 
     // const garaTransactionResponse = await fetch("/api/gara/exchange", {
     //   method: "POST",
@@ -1311,7 +1349,8 @@ export function BuyGara({ className }: { className?: string }) {
           <TableRow className="!border-none hover:bg-transparent">
             <TableCell className="!p-1 font-bold">{t("soldTokens")}</TableCell>
             <TableCell className="!p-1 text-end font-bold text-gary-pink" suppressHydrationWarning>
-              {formatAmount(tokenSold, 0)} GARA
+              {/* {formatAmount(tokenSold, 0)} GARA */}
+              {TOKENS_SOLD} GARA
             </TableCell>
           </TableRow>
         </TableBody>
@@ -1347,12 +1386,17 @@ export function BuyGara({ className }: { className?: string }) {
             coin="USDC"
             type="number"
             placeholder="0.000"
-            {...register("amount")}
-            error={errors?.["amount"]?.message}
+            {...register("amount", { required: "Amount is required" })}
             showIcon={false}
           />
           <CurrencySelect name="token" form={form} />
         </div>
+        {hasLowerInputBalance && (
+          <p className="mt-2 pl-4 text-sm text-red-500">
+            Amount must be greater than {minTokenBalance} {token}
+          </p>
+        )}
+        {hasUnsufficientBalance && <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>}
         <div className="mt-4">
           <CoinInput
             coin="GARA"
@@ -1368,11 +1412,11 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" name="chain" value={chain?.name} />
 
         <div className="mt-8 flex flex-col gap-4">
-        <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
+          <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
           <Button
             type="submit"
             variant={address ? "default" : "outlinePrimary"}
-            disabled={!address || hasUnsufficientBalance}
+            disabled={!address || hasUnsufficientBalance || hasLowerInputBalance || isCalculatingMinBalance}
             className="h-12 rounded-full bg-[#061022] text-xl font-bold text-[#FFAE17]"
           >
             {t("btnBuyGARA")}
@@ -1410,6 +1454,9 @@ export function BuyGara({ className }: { className?: string }) {
         </Button>
       </div>
       */}
+      <p className="my-4 flex items-center justify-center space-x-2 text-nowrap">
+        Supported Chains <b className="ml-1"> ETH, BNB, POL</b>
+      </p>
       <p className="my-4 flex items-center justify-center space-x-2">
         <span className="text-xl leading-none">{t("poweredBy")}</span>
         <span className="inline-flex items-center">
