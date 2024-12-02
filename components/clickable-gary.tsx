@@ -56,6 +56,10 @@ export default function GarySection() {
     if (isEating) return // Prevent double-clicking during animation
     setIsEating(true)
 
+    // Play the sound
+    const audio = new Audio('/sounds/eat.mp3')
+    audio.play()
+
     const { state, eatImage } = getRandomState()
 
     setGaryImage(`/images/${eatImage}.png`)
