@@ -32,7 +32,7 @@ import { Rounds } from "@/components/rounds"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
-const TOKENS_SOLD = Number("652989").toLocaleString()
+const TOKENS_SOLD = 652989
 
 const TOTAL_TOKEN_AMOUNT = 99000000
 const endDate = 1740787199
@@ -1008,7 +1008,7 @@ export function BuyGara({ className }: { className?: string }) {
     try {
       const tokenBalance = await contract.getTokenBalance()
       //console.log("tokenBalance", Math.floor(tokenBalance))
-      setTokenSold(TOTAL_TOKEN_AMOUNT - Math.floor(tokenBalance / 10 ** 6))
+      setTokenSold(TOTAL_TOKEN_AMOUNT - Math.floor(tokenBalance / 10 ** 6) + TOKENS_SOLD)
       // return Math.floor(tokenBalance/10**18)
     } catch (error) {
       console.error("Error reading contract function:", error)
@@ -1124,7 +1124,7 @@ export function BuyGara({ className }: { className?: string }) {
     name: "token",
   })
 
-  const minBalance = 20 // 20 USD
+  const [minBalance,setMinBalance] =  useState(10);
   const [minTokenBalance, setMinTokenBalance] = useState(0)
 
   useEffect(() => {
@@ -1132,7 +1132,13 @@ export function BuyGara({ className }: { className?: string }) {
 
     const calculateMinTokenBalance = async () => {
       setIsCalculatingMinBalance(true) // calculate timer after changing chain solver
-
+      
+      if (chain?.name === "Ethereum"){
+        setMinBalance(20)
+      } else {
+        setMinBalance(10)
+      }
+      
       if (token === "USDC" || token === "USDT") {
         setMinTokenBalance(minBalance)
       } else {
@@ -1349,8 +1355,7 @@ export function BuyGara({ className }: { className?: string }) {
           <TableRow className="!border-none hover:bg-transparent">
             <TableCell className="!p-1 font-bold">{t("soldTokens")}</TableCell>
             <TableCell className="!p-1 text-end font-bold text-gary-pink" suppressHydrationWarning>
-              {/* {formatAmount(tokenSold, 0)} GARA */}
-              {TOKENS_SOLD} GARA
+              {formatAmount(tokenSold, 0)} GARA
             </TableCell>
           </TableRow>
         </TableBody>

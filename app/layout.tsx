@@ -25,11 +25,11 @@ export default function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  unstable_setRequestLocale(params.locale || "en");
-  const messages = useMessages();
+  unstable_setRequestLocale("en");
+  const messages = useMessages("en");
 
   return (
-    <html lang={params.locale || "en"} className="overflow-hidden">
+    <html lang="en" className="overflow-hidden">
       <head>
         {/* Google Analytics */}
         <Script

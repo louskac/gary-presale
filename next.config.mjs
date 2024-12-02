@@ -3,7 +3,6 @@ const redeploy = 0.1
 
 const withNextIntl = createNextIntlPlugin()
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
     remotePatterns: [
