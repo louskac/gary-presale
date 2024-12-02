@@ -1389,8 +1389,8 @@ export function BuyGara({ className }: { className?: string }) {
           </TableRow>
           <TableRow className="!border-none hover:bg-transparent">
             <TableCell className="!p-1 font-bold">{t("soldTokens")}</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink" suppressHydrationWarning>
-              {formatAmount(tokenSold, 0)} GARA
+            <TableCell className="!p-1 text-end font-bold text-gary-pink" lang="en-US" suppressHydrationWarning>
+              {new Intl.NumberFormat('en-US').format(tokenSold)} GARA
             </TableCell>
           </TableRow>
         </TableBody>
