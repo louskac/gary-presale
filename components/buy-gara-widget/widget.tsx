@@ -1202,7 +1202,7 @@ export function BuyGara({ className }: { className?: string }) {
     )
     setValue(
       "garaEstimate",
-      garaEstimate.toLocaleString(undefined, {
+      garaEstimate.toLocaleString("en-US", {
         minimumFractionDigits: 3,
         maximumFractionDigits: 3,
       })
