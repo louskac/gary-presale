@@ -1097,7 +1097,7 @@ export function BuyGara({ className }: { className?: string }) {
     // resolver: zodResolver(formSchema),
     defaultValues: {
       garaEstimate: usdcToGara(10).toString(),
-      amount: "10.000",
+      amount: "0",
       to: COINGARAGE_CONTRACT_ADDRESS,
       from: address,
       token: "USDT",
@@ -1138,7 +1138,7 @@ export function BuyGara({ className }: { className?: string }) {
       } else {
         setMinBalance(10)
       }
-      
+
       if (token === "USDC" || token === "USDT") {
         setMinTokenBalance(minBalance)
       } else {

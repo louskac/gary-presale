@@ -74,7 +74,7 @@ export default function RootLayout({
           />
         </noscript>
 
-        <Providers locale={params.locale || "en"} messages={messages}>
+        <Providers locale="en" messages={messages}>
           {children}
         </Providers>
       </body>
