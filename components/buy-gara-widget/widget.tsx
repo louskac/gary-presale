@@ -996,7 +996,7 @@ const calculateRound = () => {
 
 export function BuyGara({ className }: { className?: string }) {
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
-  
+
   const t = useTranslations("GARA.main.buyGARA")
   const [tokenSold, setTokenSold] = useState(0)
   const [nativeUSD, setNativeUSD] = useState(0)
@@ -1054,14 +1054,15 @@ export function BuyGara({ className }: { className?: string }) {
   // })
   useEffect(() => {
     const fetchPrice = async () => {
-      if (!chain) return;
-  
-      if (chain?.id === 1) {
+      // Default to Ethereum chain if no chain is connected
+      const currentChainId = chain?.id || 1;
+
+      if (currentChainId === 1) {
         // ETH
         const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
         console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
         setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
-      } else if (chain?.id === 56) {
+      } else if (currentChainId === 56) {
         // BNB
         const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
         console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
@@ -1073,13 +1074,13 @@ export function BuyGara({ className }: { className?: string }) {
         setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
       }
     };
-  
-    // Run once on load if it hasn't yet been fetched
+
+    // Run once on load with default chain
     if (!hasFetchedOnLoad) {
       fetchPrice();
       setHasFetchedOnLoad(true);
     }
-  
+
     // Run normally when dependencies change
     if (chain) {
       fetchPrice();
