@@ -1300,17 +1300,35 @@ export function BuyGara({ className }: { className?: string }) {
     const depositValue = parseFloat(amount).toFixed(2)
 
     console.log("buy button triggered")
+
+    let usdValue = depositValue; // Default to USD value if already in USD
+
+    // Check if the currency is not USD (e.g., ETH, BNB, etc.)
+    if (token === "ETH" || token === "BNB" || token === "POL") {
+      try {
+        // Assuming `nativeUSD` is the value of 1 ETH/BNB/POL in USD
+        const currentRate = nativeUSD; // Use your `nativeUSD` calculation from earlier
+
+        if (currentRate) {
+          usdValue = depositValue * currentRate; // Convert to USD
+        } else {
+          console.warn("Exchange rate not available, defaulting to deposit value");
+        }
+      } catch (error) {
+        console.error("Error calculating USD value:", error);
+      }
+    }
     // Google Analytics
     if (typeof gtag === "function") {
       gtag("event", "purchase", {
-        value: depositValue,
+        value: usdValue.toFixed(2), // Ensure a consistent format
         currency: "USD",
-      })
+      });
     }
 
     // Facebook Pixel
     if (typeof fbq === "function") {
-      fbq("track", "Purchase", { value: depositValue, currency: "USD" })
+      fbq("track", "Purchase", { value: usdValue.toFixed(2), currency: "USD" });
     }
 
     // const garaTransactionResponse = await fetch("/api/gara/exchange", {
