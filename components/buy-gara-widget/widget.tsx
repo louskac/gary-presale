@@ -1310,7 +1310,7 @@ export function BuyGara({ className }: { className?: string }) {
         const currentRate = nativeUSD; // Use your `nativeUSD` calculation from earlier
 
         if (currentRate) {
-          usdValue = depositValue * currentRate; // Convert to USD
+          usdValue = depositValue * currentRate * 0.1; // Convert to USD
         } else {
           console.warn("Exchange rate not available, defaulting to deposit value");
         }
