@@ -995,6 +995,8 @@ const calculateRound = () => {
 }
 
 export function BuyGara({ className }: { className?: string }) {
+  const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
+  
   const t = useTranslations("GARA.main.buyGARA")
   const [tokenSold, setTokenSold] = useState(0)
   const [nativeUSD, setNativeUSD] = useState(0)
@@ -1052,25 +1054,37 @@ export function BuyGara({ className }: { className?: string }) {
   // })
   useEffect(() => {
     const fetchPrice = async () => {
+      if (!chain) return;
+  
       if (chain?.id === 1) {
-        //ETH
-        const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
-        console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
+        // ETH
+        const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
+        console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
       } else if (chain?.id === 56) {
-        //BNB
-        const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
-        console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
+        // BNB
+        const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
+        console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
       } else {
-        //POL
-        const tokenBalance = await polygonContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
-        console.log("POL: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
+        // POL
+        const tokenBalance = await polygonContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
+        console.log("POL: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
       }
+    };
+  
+    // Run once on load if it hasn't yet been fetched
+    if (!hasFetchedOnLoad) {
+      fetchPrice();
+      setHasFetchedOnLoad(true);
     }
-    fetchPrice()
-  }, [chain])
+  
+    // Run normally when dependencies change
+    if (chain) {
+      fetchPrice();
+    }
+  }, [chain, hasFetchedOnLoad]);
 
   // const eth_usd = data?.ethereum?.usd
 
@@ -1135,8 +1149,10 @@ export function BuyGara({ className }: { className?: string }) {
       
       if (chain?.name === "Ethereum"){
         setMinBalance(20)
+        console.log('ETH')
       } else {
         setMinBalance(10)
+        console.log('Not ETH')
       }
 
       if (token === "USDC" || token === "USDT") {
