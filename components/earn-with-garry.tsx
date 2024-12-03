@@ -11,11 +11,11 @@ export const EarnWithGary = () => {
   return (
     <div className="container mx-auto flex flex-col items-center justify-normal px-6">
       <div className="flex flex-col items-center gap-6">
-        <Heading className="text-center text-3xl sm:text-6xl font-bold">Earn with Gary</Heading>
-        <p className="my-5 text-center text-xl sm:text-4xl font-bold text-gary-blue">
+        <Heading className="text-center text-3xl font-bold sm:text-6xl">Earn with Gary</Heading>
+        <p className="my-5 text-center text-xl font-bold text-gary-blue sm:text-3xl">
           Stake your GARA coins and earn up to{" "}
           <span
-            className="inline text-2xl sm:text-5xl text-[#19FB9B] ml-2"
+            className="ml-2 inline text-xl text-[#19FB9B] sm:text-3xl"
             style={{
               WebkitTextStroke: "12px hsl(var(--gary-blue))",
               textStroke: "12px hsl(var(--gary-blue))",
@@ -25,7 +25,7 @@ export const EarnWithGary = () => {
             35% p.a.
           </span>
         </p>
-        <p className="max-w-[800px] text-center text-md sm:text-2xl font-bold text-gary-blue">
+        <p className="text-md max-w-[800px] text-center font-bold text-gary-blue sm:text-xl">
           Gary isn&apos;t just a cute penguin, but he&apos;s also smart and knows how to make the most money. Gary
           stakes his GARA coins on the{" "}
           <a href="https://coingarage.io/en" target="_blank" rel="noopener noreferrer">
@@ -36,9 +36,9 @@ export const EarnWithGary = () => {
         <Button
           variant="default"
           size="lg"
-          className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all sm:hover:bg-white sm:hover:text-gary-pink sm:hover:border-gary-pink dark:sm:hover:bg-white dark:sm:hover:text-gary-pink"
+          className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all sm:hover:border-gary-pink sm:hover:bg-white sm:hover:text-gary-pink dark:sm:hover:bg-white dark:sm:hover:text-gary-pink"
           onClick={() => {
-            handleClick("https://trade.coingarage.io/stake");
+            handleClick("https://trade.coingarage.io/stake")
           }}
         >
           Stake plans

@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Heading } from "@/components/heading";
-import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Heading } from "@/components/heading"
+import { useState } from "react"
+import { ChevronDown, ChevronUp } from "lucide-react"
 
 const faqData = [
   {
@@ -15,47 +15,44 @@ const faqData = [
   },
   {
     title: "Tokenomics",
-    text: "11% Stake rewards, 21% Reserved for public pre-sale, 10% Angel investors, 11% company reserves, 11% liquidity, 11% founding team, 10% for marketing use, 15% to be burned if requirements are met",
+    text: "11% Stake rewards<br>21% Reserved for public pre-sale<br>10% Angel investors<br>11% company reserves<br>11% liquidity<br>11% founding team<br>10% for marketing use<br>15% to be burned if requirements are met",
   },
-];
+]
 
 export const Faq = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0); // Default to the first FAQ item being open
+  const [activeIndex, setActiveIndex] = useState<number | null>(0) // Default to the first FAQ item being open
 
   const toggleFaq = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+    setActiveIndex(activeIndex === index ? null : index)
+  }
 
   return (
-    <div className="container mx-auto mt-40 flex flex-col items-center justify-center">
-      <Heading className="text-left text-4xl font-bold leading-none tracking-normal">FAQ</Heading>
+    <div className="container mx-auto mt-20 flex flex-col items-center justify-center">
+      <Heading className="text-left text-6xl font-bold leading-none tracking-normal">FAQ</Heading>
       <div className="mb-20 mt-16 flex flex-col gap-10">
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="mx-auto flex w-full flex-col gap-4 rounded-3xl bg-[#0D1E35] px-6 py-8 lg:w-3/5 lg:px-16 lg:py-12"
+            className="mx-auto flex w-full flex-col rounded-3xl bg-[#0D1E35] px-6 py-8 lg:w-3/5 lg:px-16 lg:py-12"
           >
             <div className="flex items-center justify-between">
-              <Heading className="text-2xl font-bold text-left">{faq.title}</Heading>
-              <button
-                onClick={() => toggleFaq(index)}
-                className="text-white focus:outline-none"
-              >
+              <Heading className="text-left text-2xl font-bold" stroke={false}>
+                {faq.title}
+              </Heading>
+              <button onClick={() => toggleFaq(index)} className="text-white focus:outline-none">
                 {activeIndex === index ? <ChevronUp size={32} /> : <ChevronDown size={32} />}
               </button>
             </div>
             <div
               className={`overflow-hidden transition-all duration-300 ${
-                activeIndex === index ? "max-h-screen" : "max-h-0"
+                activeIndex === index ? "mt-4 max-h-screen" : "max-h-0"
               }`}
             >
-              <p className="text-xl font-bold text-white text-left">
-                {faq.text}
-              </p>
+              <p className="text-left text-xl font-bold text-white" dangerouslySetInnerHTML={{ __html: faq.text }}></p>
             </div>
           </div>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

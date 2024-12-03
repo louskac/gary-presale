@@ -1055,37 +1055,37 @@ export function BuyGara({ className }: { className?: string }) {
   useEffect(() => {
     const fetchPrice = async () => {
       // Default to Ethereum chain if no chain is connected
-      const currentChainId = chain?.id || 1;
+      const currentChainId = chain?.id || 1
 
       if (currentChainId === 1) {
         // ETH
-        const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
-        console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
+        const tokenBalance = await sepoliaContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("ETH: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       } else if (currentChainId === 56) {
         // BNB
-        const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
-        console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
+        const tokenBalance = await bscContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("BNB: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       } else {
         // POL
-        const tokenBalance = await polygonContract.calculateTokenAmountPay(parseUnits("1", 18), 0);
-        console.log("POL: " + ethers.utils.formatUnits(tokenBalance.toString(), 6));
-        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)));
+        const tokenBalance = await polygonContract.calculateTokenAmountPay(parseUnits("1", 18), 0)
+        console.log("POL: " + ethers.utils.formatUnits(tokenBalance.toString(), 6))
+        setNativeUSD(Number(ethers.utils.formatUnits(tokenBalance.toString(), 6)))
       }
-    };
+    }
 
     // Run once on load with default chain
     if (!hasFetchedOnLoad) {
-      fetchPrice();
-      setHasFetchedOnLoad(true);
+      fetchPrice()
+      setHasFetchedOnLoad(true)
     }
 
     // Run normally when dependencies change
     if (chain) {
-      fetchPrice();
+      fetchPrice()
     }
-  }, [chain, hasFetchedOnLoad]);
+  }, [chain, hasFetchedOnLoad])
 
   // const eth_usd = data?.ethereum?.usd
 
@@ -1139,7 +1139,7 @@ export function BuyGara({ className }: { className?: string }) {
     name: "token",
   })
 
-  const [minBalance,setMinBalance] =  useState(10);
+  const [minBalance, setMinBalance] = useState(10)
   const [minTokenBalance, setMinTokenBalance] = useState(0)
 
   useEffect(() => {
@@ -1147,13 +1147,13 @@ export function BuyGara({ className }: { className?: string }) {
 
     const calculateMinTokenBalance = async () => {
       setIsCalculatingMinBalance(true) // calculate timer after changing chain solver
-      
-      if (chain?.name === "Ethereum"){
+
+      if (chain?.name === "Ethereum") {
         setMinBalance(20)
-        console.log('ETH')
+        console.log("ETH")
       } else {
         setMinBalance(10)
-        console.log('Not ETH')
+        console.log("Not ETH")
       }
 
       if (token === "USDC" || token === "USDT") {
@@ -1301,21 +1301,21 @@ export function BuyGara({ className }: { className?: string }) {
 
     console.log("buy button triggered")
 
-    let usdValue = depositValue; // Default to USD value if already in USD
+    let usdValue = depositValue // Default to USD value if already in USD
 
     // Check if the currency is not USD (e.g., ETH, BNB, etc.)
     if (token === "ETH" || token === "BNB" || token === "POL") {
       try {
         // Assuming `nativeUSD` is the value of 1 ETH/BNB/POL in USD
-        const currentRate = nativeUSD; // Use your `nativeUSD` calculation from earlier
+        const currentRate = nativeUSD // Use your `nativeUSD` calculation from earlier
 
         if (currentRate) {
-          usdValue = depositValue * currentRate * 0.1; // Convert to USD
+          usdValue = depositValue * currentRate * 0.1 // Convert to USD
         } else {
-          console.warn("Exchange rate not available, defaulting to deposit value");
+          console.warn("Exchange rate not available, defaulting to deposit value")
         }
       } catch (error) {
-        console.error("Error calculating USD value:", error);
+        console.error("Error calculating USD value:", error)
       }
     }
     // Google Analytics
@@ -1323,12 +1323,12 @@ export function BuyGara({ className }: { className?: string }) {
       gtag("event", "purchase", {
         value: usdValue.toFixed(2), // Ensure a consistent format
         currency: "USD",
-      });
+      })
     }
 
     // Facebook Pixel
     if (typeof fbq === "function") {
-      fbq("track", "Purchase", { value: usdValue.toFixed(2), currency: "USD" });
+      fbq("track", "Purchase", { value: usdValue.toFixed(2), currency: "USD" })
     }
 
     // const garaTransactionResponse = await fetch("/api/gara/exchange", {
@@ -1372,7 +1372,7 @@ export function BuyGara({ className }: { className?: string }) {
     <section
       id="buy-gara"
       className={cn(
-        "relative mt-4 w-full max-w-full flex-1 rounded-t-2xl bg-gradient-to-b from-white to-[#CFEFFF] p-6 px-5 shadow-md",
+        "relative mt-4 w-full max-w-full flex-1 rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md",
         className
       )}
     >
@@ -1390,7 +1390,7 @@ export function BuyGara({ className }: { className?: string }) {
           <TableRow className="!border-none hover:bg-transparent">
             <TableCell className="!p-1 font-bold">{t("soldTokens")}</TableCell>
             <TableCell className="!p-1 text-end font-bold text-gary-pink" lang="en-US" suppressHydrationWarning>
-              {new Intl.NumberFormat('en-US').format(tokenSold)} GARA
+              {new Intl.NumberFormat("en-US").format(tokenSold)} GARA
             </TableCell>
           </TableRow>
         </TableBody>

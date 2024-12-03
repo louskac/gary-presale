@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import React from "react";
-import { Star } from "lucide-react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { cn, formatAmount } from "@/lib/utils";
+import React from "react"
+import { Star } from "lucide-react"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { cn, formatAmount } from "@/lib/utils"
 
 interface Step {
-  votes: number;
-  title: string;
-  description: string;
-  img: string;
+  votes: number
+  title: string
+  description: string
+  img: string
 }
 
 interface VerticalProgressIndicatorProps {
-  steps?: Step[];
-  activeStep?: number;
+  steps?: Step[]
+  activeStep?: number
 }
 
 const garysRoadMapData = [
@@ -35,8 +35,7 @@ const garysRoadMapData = [
   {
     votes: 2000000,
     title: "NEW JOB FOR GARY",
-    description:
-      "Gary will get new job in company and will be able to enforce at least 2 GARA airdrops.",
+    description: "Gary will get new job in company and will be able to enforce at least 2 GARA airdrops.",
     img: "new_job.png",
   },
   {
@@ -67,12 +66,9 @@ const garysRoadMapData = [
       "GARY gains a huge influx of power and quickly expands his influence worldwide. He will use money from the pre-sale for marketing and development of new products which will use GARA coin.",
     img: "influence.png",
   },
-];
+]
 
-export function GarysRoadmap({
-  steps = garysRoadMapData,
-  activeStep = 0,
-}: VerticalProgressIndicatorProps) {
+export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: VerticalProgressIndicatorProps) {
   return (
     <div className="relative flex h-full w-full flex-col justify-between py-4 text-white">
       <div className="relative flex flex-col gap-8 p-5 sm:px-0">
@@ -114,9 +110,7 @@ export function GarysRoadmap({
                 ></div>
                 <motion.div
                   className={`z-100 relative flex size-12 items-center justify-center rounded-full bg-[#0D1E35] ring-8 ${
-                    index <= activeStep
-                      ? "ring-gary-light-blue"
-                      : "bg-[#0D1E35] ring-transparent"
+                    index <= activeStep ? "ring-gary-light-blue" : "bg-[#0D1E35] ring-transparent"
                   }`}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
@@ -128,7 +122,7 @@ export function GarysRoadmap({
                   }}
                 >
                   {index <= activeStep ? (
-                    <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" fill="currentColor" />
+                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" fill="currentColor" />
                   ) : (
                     <div className="h-3 w-3 rounded-full bg-slate-500" />
                   )}
@@ -138,32 +132,27 @@ export function GarysRoadmap({
 
             <div
               className={cn(
-                "flex w-full max-w-full md:max-w-[700px] flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 lg:flex-row lg:pb-2 relative",
+                "relative flex w-full max-w-full flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 md:max-w-[700px] lg:flex-row lg:pb-2",
                 index <= activeStep && "border-4 border-gary-yellow"
               )}
             >
               {index <= activeStep && (
-                <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-gary-yellow text-black px-3 py-1 text-sm rounded-t-md">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded-t-md bg-gary-yellow px-3 py-1 text-sm text-black">
                   Goal Reached
                 </div>
               )}
 
               <motion.div
-                className="flex w-full max-w-[620px] flex-col px-4 sm:px-8 py-4 sm:py-6 lg:w-full"
+                className="flex w-full max-w-[620px] flex-col px-4 py-4 sm:px-8 sm:py-6 lg:w-full"
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
               >
-                <div
-                  className="text-xl font-bold text-gary-light-blue"
-                  suppressHydrationWarning
-                >
+                <div className="text-lg font-bold text-gary-light-blue" suppressHydrationWarning>
                   {formatAmount(step.votes, 0)}
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-gary-yellow uppercase mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-xl font-bold">{step.description}</p>
+                <h3 className="mb-2 text-lg font-bold uppercase text-gary-yellow sm:text-2xl">{step.title}</h3>
+                <p className="text-lg font-bold">{step.description}</p>
               </motion.div>
               <motion.div
                 className="relative mr-5 flex h-32 w-32 items-center justify-center"
@@ -175,7 +164,7 @@ export function GarysRoadmap({
                   src={`/images/help-gary/${step.img}`}
                   alt=""
                   fill
-                  className="object-contain max-w-full"
+                  className="max-w-full object-contain"
                   sizes="(max-width: 768px) 100vw, 365px"
                   quality={100}
                 />
@@ -185,5 +174,5 @@ export function GarysRoadmap({
         ))}
       </div>
     </div>
-  );
+  )
 }
