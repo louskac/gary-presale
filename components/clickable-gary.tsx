@@ -135,11 +135,11 @@ export default function GarySection() {
         <>
           {/* Penguin */}
           <button onClick={handleGaryClick} className="focus:outline-none">
-            <Image src={garyImage} alt="Gary" width={250} height={300} className="relative lg:h-[340px] lg:w-[300px]" />
+            <Image src={garyImage} alt="Gary" width={250} height={300} className="relative lg:h-auto lg:w-auto" />
           </button>
           {/* Bubble */}
-          <div className="absolute -top-[40%] left-[50%] mb-4 h-[200px] w-[350px]">
-            <p className="absolute left-[40%] top-[40%] -translate-x-1/2 -translate-y-1/2 transform text-center text-3xl font-bold text-gary-blue">
+          <div className="absolute -top-[45%] left-[40%] mb-4 h-[250px] w-[250px]">
+            <p className="absolute left-[50%] top-[25%] -translate-x-1/2 -translate-y-1/2 transform text-center text-3xl font-bold text-gary-blue">
               Click to feed me
             </p>
             <Image
