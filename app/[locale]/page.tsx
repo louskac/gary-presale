@@ -12,6 +12,7 @@ import { Faq } from "@/components/faq"
 import { Footer } from "@/components/footer"
 import { ScrollToComicsButton } from "@/components/scroll-to-comics-button"
 import GarySection from "@/components/clickable-gary"
+import Roadmap from "@/components/roadmap"
 
 export default function Home() {
   const [backgroundSrc, setBackgroundSrc] = useState("/backgrounds/0.jpg")
@@ -67,6 +68,10 @@ export default function Home() {
       <div className="relative -mb-12 -mt-8 h-40 w-full sm:-mb-16 sm:-mt-10 sm:h-60">
         <Image src={`/backgrounds/ice.svg`} alt="" className="object-cover" fill />
       </div>
+      <section id="tokenomics" className="mt-24">
+        <Roadmap></Roadmap>
+      </section>
+      <section id="roadmap"></section>
       <section className="-mt-32 flex bg-background px-4 sm:-mt-44 sm:px-6">
         <SavePenguins />
       </section>
