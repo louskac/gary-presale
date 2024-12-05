@@ -46,7 +46,7 @@ export default function Home() {
         {/* Add GarySection */}
         <GarySection />
 
-        <div className="z-20 mt-0 flex w-full flex-row justify-center sm:mt-6">
+        <div className="z-1 mt-0 flex w-full flex-row justify-center sm:mt-6">
           <ScrollToComicsButton />
         </div>
       </section>

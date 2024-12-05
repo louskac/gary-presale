@@ -27,27 +27,53 @@ export const HelpGary = () => {
           Help Gary reach his goals
         </Heading>
         <Heading className="mt-10 text-center text-2xl uppercase text-gary-light-blue">1 GARA sold = 1 vote</Heading>
-        <div className="my-6 overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 px-6 text-center lg:flex">
-          <p className="font-bold text-gary-yellow">GARA Contract</p>
-          <p className="overflow-x-auto truncate whitespace-nowrap font-normal text-white lg:ml-2">
-            <a
-              href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
-              target="_blank"
-              rel="noopener noreferrer"
+        <div className="my-6 overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 px-6 text-center">
+          {/* Mobile Layout */}
+          <div className="block lg:hidden">
+            <div className="flex items-center justify-between">
+              <p className="font-bold text-gary-yellow mr-2">GARA Contract</p>
+              <button
+                onClick={handleCopyClick}
+                className="font-bold text-gary-yellow hover:text-white"
+                aria-label="Copy address"
+              >
+                {copied ? <Check size={18} /> : <Copy size={18} />}
+              </button>
+            </div>
+            <p className="mt-2 overflow-x-auto truncate whitespace-nowrap font-normal text-white">
+              <a
+                href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f
+              </a>
+            </p>
+          </div>
+
+          {/* Desktop Layout */}
+          <div className="hidden lg:flex lg:items-center lg:justify-center">
+            <p className="font-bold text-gary-yellow">GARA Contract</p>
+            <p className="overflow-x-auto truncate whitespace-nowrap font-normal text-white lg:ml-2">
+              <a
+                href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f
+              </a>
+            </p>
+            <button
+              onClick={handleCopyClick}
+              className="ml-2 font-bold text-gary-yellow hover:text-white"
+              aria-label="Copy address"
             >
-              0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f
-            </a>
-          </p>
-          <button
-            onClick={handleCopyClick}
-            className="mt-2 pl-4 font-bold text-gary-yellow hover:text-white lg:ml-2 lg:mt-0"
-            aria-label="Copy address"
-          >
-            {copied ? <Check size={18} /> : <Copy size={18} />}
-          </button>
+              {copied ? <Check size={18} /> : <Copy size={18} />}
+            </button>
+          </div>
         </div>
       </div>
-      d{/* Adjusting order for mobile */}
+      {/* Adjusting order for mobile */}
       <div className="container mx-auto grid justify-center gap-8 lg:grid-cols-[1fr_auto] lg:justify-between">
         {/* Widget First on Mobile */}
         <div className="order-1 mt-0 lg:order-2">
