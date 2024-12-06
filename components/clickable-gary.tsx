@@ -81,16 +81,22 @@ export default function GarySection() {
   
       console.log(`Updating clicks for user country: ${userCountry}`);
   
-      // Get the current clicks from local storage or the leaderboard state
-      const currentClicks =
-        parseInt(localStorage.getItem(`clicks_${userCountry}`) || "0", 10) ||
-        leaderboard.find((entry) => entry.country === userCountry)?.clicks ||
-        0;
+      // Fetch the current clicks for the user country from Supabase
+      const { data, error: fetchError } = await supabase
+        .from("leaderboard")
+        .select("clicks")
+        .eq("country", userCountry)
+        .single();
   
-      // Increment the clicks
+      if (fetchError) {
+        console.error("Error fetching clicks from database:", fetchError.message);
+        return;
+      }
+  
+      const currentClicks = data?.clicks || 0;
       const newClicks = currentClicks + 1;
   
-      // Update the database
+      // Update the database with the incremented clicks
       const { error: updateError } = await supabase
         .from("leaderboard")
         .update({ clicks: newClicks })
@@ -98,15 +104,15 @@ export default function GarySection() {
   
       if (updateError) {
         console.error("Error updating clicks in the database:", updateError.message);
+        return;
       }
   
       // Update local storage with the new value
       localStorage.setItem(`clicks_${userCountry}`, newClicks.toString());
+      console.log(`LocalStorage updated for ${userCountry}: ${newClicks}`);
   
       // Trigger a manual storage event
       window.dispatchEvent(new Event("storage"));
-  
-      console.log(`LocalStorage updated for ${userCountry}: ${newClicks}`);
     } catch (error) {
       console.error("Unexpected error updating clicks:", error);
     }
