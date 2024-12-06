@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabase";
 import Image from "next/image";
+import { useRef } from "react";
 
 type LeaderboardEntry = {
   id: number;
@@ -28,14 +29,7 @@ function incrementSmoothly(currentValue: number, targetValue: number, setValue: 
 }
 
 function formatNumber(value: number): string {
-  if (value >= 1_000_000_000) {
-    return (value / 1_000_000_000).toFixed(2) + "B";
-  } else if (value >= 1_000_000) {
-    return (value / 1_000_000).toFixed(2) + "M";
-  } else if (value >= 1_000) {
-    return (value / 1_000).toFixed(2) + "k";
-  }
-  return value.toString();
+  return value.toLocaleString(); // Display number with commas (e.g., 1,234,567)
 }
 
 export default function Leaderboard() {
@@ -48,6 +42,18 @@ export default function Leaderboard() {
   const [secondCountryRank, setSecondCountryRank] = useState<number | null>(null);
 
   const [isMobile, setIsMobile] = useState(false);
+  const leaderboardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (leaderboardRef.current && !leaderboardRef.current.contains(event.target as Node)) {
+        setIsOpen(false); // Close the leaderboard
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => {
@@ -59,21 +65,49 @@ export default function Leaderboard() {
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+  
+  useEffect(() => {
+    const handleStorageChange = () => {
+      console.log("Local storage changed. Updating leaderboard...");
+  
+      setLeaderboard((prevLeaderboard) => {
+        return prevLeaderboard.map((entry) => {
+          const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10);
+          return { ...entry, clicks: Math.max(entry.clicks, localClicks) };
+        }).sort((a, b) => b.clicks - a.clicks);
+      });
+    };
+  
+    // Listen to storage changes
+    window.addEventListener("storage", handleStorageChange);
+  
+    return () => {
+      // Cleanup the event listener on component unmount
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchLeaderboard() {
       setLoading(true);
       try {
         const { data, error } = await supabase
-          .from<LeaderboardEntry>("leaderboard")
+          .from("leaderboard")
           .select("*")
           .order("clicks", { ascending: false });
   
         if (error) {
           console.error("Error fetching leaderboard:", error);
-        } else {
-          setLeaderboard(data || []);
+          return;
         }
+  
+        // Merge local storage data with Supabase data
+        const mergedData = data.map((entry) => {
+          const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10);
+          return { ...entry, clicks: Math.max(entry.clicks, localClicks) };
+        });
+  
+        setLeaderboard(mergedData);
       } catch (error) {
         console.error("Unexpected error fetching leaderboard:", error);
       } finally {
@@ -81,49 +115,47 @@ export default function Leaderboard() {
       }
     }
   
-    fetchLeaderboard(); // Initial fetch
+    fetchLeaderboard();
   
-    // Set an interval to fetch leaderboard data every 15 seconds
     const interval = setInterval(() => {
       fetchLeaderboard();
     }, 15000);
   
-    // Clear the interval on component unmount
     return () => clearInterval(interval);
   }, []);
-  
 
   // Fetch user country
   useEffect(() => {
     async function fetchCountry() {
       const storedCountry = localStorage.getItem("userCountry");
-      const storedSecondCountry = localStorage.getItem("secondCountry");
-
-      if (storedCountry && storedSecondCountry) {
+  
+      if (storedCountry) {
+        console.log(`User country found in localStorage: ${storedCountry}`);
         setUserCountry(storedCountry);
-        setSecondCountry(storedSecondCountry);
       } else {
         try {
+          console.log("Fetching country from IP geolocation API...");
           const response = await fetch(
             `https://api.ipgeolocation.io/ipgeo?apiKey=fc55acc2a2644a55a04cba6d4829803b`
           );
           const data = await response.json();
+  
           const fetchedCountry = data.country_name || "Unknown";
-          const fetchedSecondCountry = data.state_prov || "Unknown";
-
-          setUserCountry(fetchedCountry);
-          setSecondCountry(fetchedSecondCountry);
-
-          localStorage.setItem("userCountry", fetchedCountry);
-          localStorage.setItem("secondCountry", fetchedSecondCountry);
+          console.log(`Fetched country: ${fetchedCountry}`);
+  
+          if (fetchedCountry !== "Unknown") {
+            localStorage.setItem("userCountry", fetchedCountry);
+            setUserCountry(fetchedCountry);
+          } else {
+            console.error("Could not fetch the user's country.");
+          }
         } catch (error) {
           console.error("Error fetching user country:", error);
           setUserCountry("Unknown");
-          setSecondCountry("Unknown");
         }
       }
     }
-
+  
     fetchCountry();
   }, []);
 
@@ -140,7 +172,7 @@ export default function Leaderboard() {
   const sortedLeaderboard = [...leaderboard].sort((a, b) => b.clicks - a.clicks);
 
   return (
-    <div className="relative w-full max-w-3xl mx-auto mt-4">
+    <div ref={leaderboardRef} className="relative w-full max-w-3xl mx-auto mt-4">
       {/* Leaderboard Button */}
       <button
         onClick={() => {

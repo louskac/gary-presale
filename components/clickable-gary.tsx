@@ -52,42 +52,61 @@ export default function GarySection() {
     return states[0];
   };
 
+  useEffect(() => {
+    const logCountryClicks = () => {
+      const allKeys = Object.keys(localStorage).filter((key) => key.startsWith("clicks_"));
+      const countryClicks = allKeys.reduce((acc, key) => {
+        acc[key] = localStorage.getItem(key);
+        return acc;
+      }, {});
+  
+      console.log("Current Local Storage:", {
+        userCountry: localStorage.getItem("userCountry"),
+        clicks_Czech: localStorage.getItem("clicks_Czech Republic"),
+        clicks_Mauritius: localStorage.getItem("clicks_Mauritius"),
+      });
+    };
+  
+    logCountryClicks();
+  }, [imageStats]); // Logs whenever imageStats changes
+
   const updateCountryClicks = async () => {
     try {
-      // Retrieve the country from localStorage
       const userCountry = localStorage.getItem("userCountry") || "Unknown";
-
+  
       if (userCountry === "Unknown") {
-        console.error("Country not available in localStorage.");
+        console.error("User country not found in localStorage.");
         return;
       }
-
-      // Fetch the current clicks for the user's country
-      const { data: countryData, error: fetchError } = await supabase
-        .from("leaderboard") // Replace with your actual table name
-        .select("clicks")
-        .eq("country", userCountry)
-        .single(); // Fetch a single row
-
-      if (fetchError) {
-        console.error("Error fetching current clicks:", fetchError.message);
-        return;
-      }
-
+  
+      console.log(`Updating clicks for user country: ${userCountry}`);
+  
+      // Get the current clicks from local storage or the leaderboard state
+      const currentClicks =
+        parseInt(localStorage.getItem(`clicks_${userCountry}`) || "0", 10) ||
+        leaderboard.find((entry) => entry.country === userCountry)?.clicks ||
+        0;
+  
       // Increment the clicks
-      const newClicks = (countryData?.clicks || 0) + 1;
-
-      // Update the clicks in the database
+      const newClicks = currentClicks + 1;
+  
+      // Update the database
       const { error: updateError } = await supabase
-        .from("leaderboard") // Replace with your actual table name
+        .from("leaderboard")
         .update({ clicks: newClicks })
         .eq("country", userCountry);
-
+  
       if (updateError) {
-        console.error("Error updating clicks:", updateError.message);
-      } else {
-        console.log(`Successfully updated clicks for ${userCountry}: ${newClicks}`);
+        console.error("Error updating clicks in the database:", updateError.message);
       }
+  
+      // Update local storage with the new value
+      localStorage.setItem(`clicks_${userCountry}`, newClicks.toString());
+  
+      // Trigger a manual storage event
+      window.dispatchEvent(new Event("storage"));
+  
+      console.log(`LocalStorage updated for ${userCountry}: ${newClicks}`);
     } catch (error) {
       console.error("Unexpected error updating clicks:", error);
     }
