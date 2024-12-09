@@ -35,35 +35,35 @@ const garysRoadMapData = [
   {
     votes: 2000000,
     title: "NEW JOB FOR GARY",
-    description: "Gary will get new job in company and will be able to enforce at least 2 GARA airdrops.",
+    description: "Gary will get new job in company and will be able to enforce at least 2 $GARA airdrops.",
     img: "new_job.png",
   },
   {
     votes: 5000000,
     title: "GARY'S PROMOTION",
     description:
-      "Gary will gain more influence in the company and push listing of GARA coin on selected exchanges in the top 50.",
+      "Gary will gain more influence in the company and push listing of $GARA coin on selected exchanges in the top 50.",
     img: "promotion.png",
   },
   {
     votes: 10000000,
     title: "Seat on the board of directors",
     description:
-      "GARY will use his influence in the company and list GARA coin on some of the top 10 crypto exchanges.",
+      "GARY will use his influence in the company and list $GARA coin on some of the top 10 crypto exchanges.",
     img: "board-member.png",
   },
   {
     votes: 30000000,
     title: "Taking over",
     description:
-      "GARY will become king and gain control of the exchange Coingarage and rename it Coinguin. As the first act of his reign, he will burn 15% of the total supply of GARA coin.",
+      "GARY will become king and gain control of the exchange Coingarage and rename it Coinguin. As the first act of his reign, he will burn 15% of the total supply of $GARA coin.",
     img: "assumption.png",
   },
   {
     votes: 50000000,
     title: "SPREAD OF INFLUENCE",
     description:
-      "GARY gains a huge influx of power and quickly expands his influence worldwide. He will use money from the pre-sale for marketing and development of new products which will use GARA coin.",
+      "GARY gains a huge influx of power and quickly expands his influence worldwide. He will use money from the pre-sale for marketing and development of new products which will use $GARA coin.",
     img: "influence.png",
   },
 ]

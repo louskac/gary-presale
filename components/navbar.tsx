@@ -47,7 +47,7 @@ export const NavBar = () => {
       <div className="hidden lg:flex lg:items-center lg:justify-end">
         <AnchorLink anchor="help-gary">
           <Button className="my-2 h-14 border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:bg-white hover:text-gary-pink hover:border-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
-            Buy GARA coin
+            Buy $GARA coin
           </Button>
         </AnchorLink>
       </div>
@@ -102,7 +102,7 @@ export const NavBar = () => {
                 className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all hover:bg-white hover:text-gary-pink hover:border-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
                 onClick={() => setMenuOpen(false)} // Close menu on click
               >
-                Buy GARA coin
+                Buy $GARA coin
               </Button>
             </AnchorLink>
           </div>

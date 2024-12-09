@@ -6,12 +6,12 @@ import { ChevronDown, ChevronUp } from "lucide-react"
 
 const faqData = [
   {
-    title: "What is GARA coin?",
-    text: "GARA coin is a meme and utility token of the fast growing Coingarage exchange and has many uses. From paying a range of fees, to using the exchange's services and products, to fueling a trading bot, new uses will continue to emerge as the exchange's ecosystem grows.",
+    title: "What is $GARA coin?",
+    text: "$GARA coin is a meme and utility token of the fast growing Coingarage exchange and has many uses. From paying a range of fees, to using the exchange's services and products, to fueling a trading bot, new uses will continue to emerge as the exchange's ecosystem grows.",
   },
   {
-    title: "GARA Coin Burning Mechanism",
-    text: "In order to more smoothly evolve the value of the GARA coin, a burning mechanism has been implemented that will gradually burn GARA coins based on their increasing usage until only 200,000,000 of the original 900,000,000 remain.",
+    title: "$GARA Coin Burning Mechanism",
+    text: "In order to more smoothly evolve the value of the $GARA coin, a burning mechanism has been implemented that will gradually burn $GARA coins based on their increasing usage until only 200,000,000 of the original 900,000,000 remain.",
   },
   {
     title: "Tokenomics",

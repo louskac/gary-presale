@@ -26,12 +26,12 @@ export const HelpGary = () => {
         <Heading className="tetx-3xl text-center font-bold sm:text-6xl sm:text-[3.5rem]">
           Help Gary reach his goals
         </Heading>
-        <Heading className="mt-10 text-center text-2xl uppercase text-gary-light-blue">1 GARA sold = 1 vote</Heading>
+        <Heading className="mt-10 text-center text-2xl uppercase text-gary-light-blue">1 $GARA sold = 1 vote</Heading>
         <div className="my-6 overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 px-6 text-center">
           {/* Mobile Layout */}
           <div className="block lg:hidden">
             <div className="flex items-center justify-between">
-              <p className="font-bold text-gary-yellow mr-2">GARA Contract</p>
+              <p className="font-bold text-gary-yellow mr-2">$GARA Contract</p>
               <button
                 onClick={handleCopyClick}
                 className="font-bold text-gary-yellow hover:text-white"
@@ -53,7 +53,7 @@ export const HelpGary = () => {
 
           {/* Desktop Layout */}
           <div className="hidden lg:flex lg:items-center lg:justify-center">
-            <p className="font-bold text-gary-yellow">GARA Contract</p>
+            <p className="font-bold text-gary-yellow">$GARA Contract</p>
             <p className="overflow-x-auto truncate whitespace-nowrap font-normal text-white lg:ml-2">
               <a
                 href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
@@ -87,7 +87,7 @@ export const HelpGary = () => {
 
             {/* Gary Image */}
             <div className="absolute -left-[150px] top-0 -z-10 hidden h-[363px] w-[324px] lg:block">
-              <Image src="/images/help-gary/gary_buy_gara.png" fill alt="Gary Buy GARA" />
+              <Image src="/images/help-gary/gary_buy_gara.png" fill alt="Gary Buy $GARA" />
             </div>
           </div>
         </div>

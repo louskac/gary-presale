@@ -13,7 +13,7 @@ export const EarnWithGary = () => {
       <div className="flex flex-col items-center gap-6">
         <Heading className="text-center text-3xl font-bold sm:text-6xl">Earn with Gary</Heading>
         <p className="my-5 text-center text-xl font-bold text-gary-blue sm:text-3xl">
-          Stake your GARA coins and earn up to{" "}
+          Stake your $GARA coins and earn up to{" "}
           <span
             className="ml-2 inline text-xl text-[#19FB9B] sm:text-3xl"
             style={{
@@ -27,7 +27,7 @@ export const EarnWithGary = () => {
         </p>
         <p className="text-md max-w-[800px] text-center font-bold text-gary-blue sm:text-xl">
           Gary isn&apos;t just a cute penguin, but he&apos;s also smart and knows how to make the most money. Gary
-          stakes his GARA coins on the{" "}
+          stakes his $GARA coins on the{" "}
           <a href="https://coingarage.io/en" target="_blank" rel="noopener noreferrer">
             <span className="cursor-pointer text-gary-pink">Coingarage</span>{" "}
           </a>

@@ -57,7 +57,7 @@ const slides = [
   },
   {
     story: "The end.",
-    text: "I'll show them I'm important, sell enough GARA coin and take over the company",
+    text: "I'll show them I'm important, sell enough $GARA coin and take over the company",
     storyPosition: "absolute lg:top-1/2 lg:left-1/4 sm:top-[40%] sm:left-[20%] sm:w-[200px] sm:h-[100px]",
     textPosition:
       "absolute lg:top-[38%] lg:right-[18%] lg:w-[500px] lg:h-[280px] sm:top-[48%] sm:right-[15%] sm:w-[250px] sm:h-[100px]",

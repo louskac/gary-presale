@@ -111,7 +111,7 @@ export function Widget({ className }: { className?: string }) {
           const quantityLabel = labels[2]
           console.log("Third label found:", quantityLabel)
 
-          quantityLabel.childNodes[0].textContent = "Amount of GARA "
+          quantityLabel.childNodes[0].textContent = "Amount of $GARA "
 
           clearInterval(interval)
         }
@@ -127,17 +127,17 @@ export function Widget({ className }: { className?: string }) {
         showHelio ? "p-0" : "p-6"
       } px-1 shadow-md md:px-4 ${className}`}
     >
-      <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">Buy GARA</h3>
+      <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">Buy $GARA</h3>
 
       <Table className="text-base">
         <TableBody>
           <TableRow className="hover:bg-transparent">
-            <TableCell className="!p-1 font-bold">Total supply of GARA coins</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink">900M GARA</TableCell>
+            <TableCell className="!p-1 font-bold">Total supply of $GARA coins</TableCell>
+            <TableCell className="!p-1 text-end font-bold text-gary-pink">900M $GARA</TableCell>
           </TableRow>
           <TableRow className="hover:bg-transparent">
-            <TableCell className="!p-1 font-bold">Amount of GARA in pre-sale</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink">99M GARA</TableCell>
+            <TableCell className="!p-1 font-bold">Amount of $GARA in pre-sale</TableCell>
+            <TableCell className="!p-1 text-end font-bold text-gary-pink">99M $GARA</TableCell>
           </TableRow>
         </TableBody>
       </Table>
@@ -177,7 +177,7 @@ export function Widget({ className }: { className?: string }) {
             onClick={handlePayment}
             className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
           >
-            Buy GARA
+            Buy $GARA
           </Button>
         </div>
       ) : (
