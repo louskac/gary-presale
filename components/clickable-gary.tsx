@@ -130,7 +130,12 @@ export default function GarySection() {
     }
   };
   
-  const handleGaryClick = () => {
+  const handleGaryClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!event.isTrusted) {
+      console.warn("Blocked an untrusted (scripted) click!");
+      return;
+    }
+
     if (isEating) return;
     setIsEating(true);
   
@@ -207,7 +212,7 @@ export default function GarySection() {
                 Click to feed me
               </p>
             </div>
-            <button onClick={handleGaryClick} className="focus:outline-none">
+            <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
               <Image
                 src={garyImage}
                 alt="Gary"
@@ -226,7 +231,7 @@ export default function GarySection() {
         </>
       ) : (
         <>
-          <button onClick={handleGaryClick} className="focus:outline-none">
+          <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
             <Image src={garyImage} alt="Gary" width={250} height={300} className="relative lg:h-auto lg:w-auto" />
           </button>
           <div className="absolute -top-[45%] left-[40%] mb-4 h-[250px] w-[250px]">
