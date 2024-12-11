@@ -56,7 +56,7 @@ export default function AirdropWin({ onClose }: { onClose: () => void }) {
           🎉 Congratulations! 🎉
         </h3>
         <p className="mb-4 text-center font-bold">
-          You've won 10 USD worth of <span className="text-gary-pink">GARA</span> in an airdrop!
+          You have won 10 USD worth of <span className="text-gary-pink">GARA</span> in an airdrop!
         </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="walletAddress" className="block text-center font-bold mb-2">
