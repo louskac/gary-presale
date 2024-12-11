@@ -5,6 +5,7 @@ import Image from "next/image";
 import CountdownTimer from "@/components/countdown-timer";
 import Leaderboard from "@/components/country-clicker";
 import { supabase } from "@/lib/supabase";
+import AirdropWin from "@/components/airdrop-win";
 
 export default function GarySection() {
   const [garyImage, setGaryImage] = useState("/images/gary_happy.png");
@@ -16,10 +17,12 @@ export default function GarySection() {
     state_2: 0,
     state_3: 0,
     state_4: 0,
-    //state_5: 0,
+    state_5: 0,
   });
   const [showAirdropPopup, setShowAirdropPopup] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+  const [clickCount, setClickCount] = useState(0);
+  const [showAirdropWin, setShowAirdropWin] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -36,11 +39,11 @@ export default function GarySection() {
 
   const getRandomState = () => {
     const states = [
-      { state: "state_1", eatImage: "eat_1", weight: 50 },
-      { state: "state_2", eatImage: "eat_2", weight: 30 },
-      { state: "state_3", eatImage: "eat_3", weight: 15 },
-      { state: "state_4", eatImage: "eat_4", weight: 5 },
-      //{ state: "state_5", eatImage: "eat_5", weight: 100 },
+      { state: "state_1", eatImage: "eat_1", weight: 1000 },
+      { state: "state_2", eatImage: "eat_2", weight: 600 },
+      { state: "state_3", eatImage: "eat_3", weight: 300 },
+      { state: "state_4", eatImage: "eat_4", weight: 100 },
+      { state: "state_5", eatImage: "eat_5", weight: 1 },
     ];
 
     const totalWeight = states.reduce((sum, state) => sum + state.weight, 0);
@@ -105,6 +108,7 @@ export default function GarySection() {
       else if (state === "state_2") increment = 2;
       else if (state === "state_3") increment = 5;
       else if (state === "state_4") increment = 10;
+      else if (state === "state_4") increment = 20;
   
       const newClicks = currentClicks + increment;
   
@@ -135,14 +139,13 @@ export default function GarySection() {
       console.warn("Blocked an untrusted (scripted) click!");
       return;
     }
-
+  
     if (isEating) return;
     setIsEating(true);
   
     const audio = new Audio("/sounds/eat.mp3");
     audio.play();
   
-    // Get the random state
     const { state, eatImage } = getRandomState();
   
     // Update Gary's image based on the state
@@ -157,12 +160,21 @@ export default function GarySection() {
       return newStats;
     });
   
-    if (state === "state_5") {
-      setShowAirdropPopup(true); // Show the popup for GARA drops
-    }
-  
-    // Update clicks in Supabase with the actual state
+    // Update local storage and database
     updateCountryClicks(state);
+  
+    setClickCount((prevCount) => {
+      let increment = 0;
+      if (state === "state_1") increment = 1;
+      else if (state === "state_2") increment = 2;
+      else if (state === "state_3") increment = 5;
+      else if (state === "state_4") increment = 10;
+      else if (state === "state_5") {
+        setShowAirdropWin(true); // Show the popup for state_5
+        increment = 20; // Example value for state_5
+      }
+      return prevCount + increment;
+    });
   
     setTimeout(() => {
       setGaryImage("/images/gary_happy.png");
@@ -198,6 +210,7 @@ export default function GarySection() {
               </div>
             ))}
           </div>
+          <p className="text-xl font-bold text-white mt-4">Your score: {clickCount}</p>
           <Leaderboard />
           <div className="relative mt-8">
             <div className="absolute -top-0 left-1/2 left-[25%] h-[100px] w-[160px] -translate-x-1/2 transform">
@@ -232,9 +245,17 @@ export default function GarySection() {
       ) : (
         <>
           <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
-            <Image src={garyImage} alt="Gary" width={250} height={300} className="relative lg:h-auto lg:w-auto" />
+            <div className="relative w-[250px] h-[300px]">
+              <Image
+                src={garyImage}
+                alt="Gary"
+                layout="fill"
+                objectFit="contain"
+                className="absolute"
+              />
+            </div>
           </button>
-          <div className="absolute -top-[45%] left-[40%] mb-4 h-[250px] w-[250px]">
+          <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
             <p className="absolute left-[50%] top-[25%] -translate-x-1/2 -translate-y-1/2 transform text-center text-3xl font-bold text-gary-blue">
               Click to feed me
             </p>
@@ -259,32 +280,13 @@ export default function GarySection() {
               </div>
             ))}
           </div>
+          <p className="text-xl font-bold text-white mt-4">Your score: {clickCount}</p>
           <Leaderboard />
         </>
       )}
 
       {/* Airdrop Popup */}
-      {showAirdropPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded shadow-lg">
-            <h2 className="text-xl font-bold text-center mb-4">🎉 You won a $GARA Airdrop! 🎉</h2>
-            <p className="text-center mb-4">Enter your wallet address to receive your airdrop:</p>
-            <input
-              type="text"
-              value={walletAddress}
-              onChange={(e) => setWalletAddress(e.target.value)}
-              placeholder="Wallet Address"
-              className="w-full p-2 border rounded mb-4"
-            />
-            <button
-              onClick={handleAirdropSubmit}
-              className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      )}
+      {showAirdropWin && <AirdropWin onClose={() => setShowAirdropWin(false)} />}
     </div>
   );
 }
