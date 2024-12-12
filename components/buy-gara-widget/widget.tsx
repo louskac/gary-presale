@@ -64,6 +64,7 @@ const handleWalletConnect = () => {
     fbq("track", "Lead")
   }
 }
+
 const ethVaultAbi = [
   {
     anonymous: false,
@@ -1016,6 +1017,7 @@ export function BuyGara({ className }: { className?: string }) {
       console.error("Error reading contract function:", error)
     }
   }
+
   useEffect(() => {
     // Fetch data immediately when the component mounts
     readContractFunction()
@@ -1052,6 +1054,15 @@ export function BuyGara({ className }: { className?: string }) {
   //     return data
   //   },
   // })
+  useEffect(() => {
+    // Trigger analytics when a wallet is connected
+    console.log("wallet connected")
+
+    if (address) {
+      handleWalletConnect()
+    }
+  }, [address])
+
   useEffect(() => {
     const fetchPrice = async () => {
       // Default to Ethereum chain if no chain is connected
@@ -1452,7 +1463,7 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" name="chain" value={chain?.name} />
 
         <div className="mt-8 flex flex-col gap-4">
-          <ConnectButton label={t("btnConnectWallet")} showBalance={false} onClick={handleWalletConnect} />
+          <ConnectButton label={t("btnConnectWallet")} showBalance={false} />
           <Button
             type="submit"
             variant={address ? "default" : "outlinePrimary"}

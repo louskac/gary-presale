@@ -38,7 +38,7 @@ export default function Home() {
 
   return (
     <main className="h-screen overflow-y-scroll">
-      <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
+      <section id="home" className="relative z-0 flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
         <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill />
         <div className="flex h-full w-full flex-1 flex-col px-4 sm:px-6">
@@ -48,7 +48,7 @@ export default function Home() {
         {/* Add GarySection */}
         <GarySection />
 
-        <div className="z-1 mt-0 flex w-full flex-row justify-center sm:mt-6">
+        <div className="-z-10 mb-12 mt-0 flex w-full flex-row justify-center sm:mt-6">
           <ScrollToComicsButton />
         </div>
       </section>

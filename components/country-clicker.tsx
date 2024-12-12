@@ -1,188 +1,185 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
-import Image from "next/image";
-import { useRef } from "react";
+import { useState, useEffect } from "react"
+import { supabase } from "@/lib/supabase"
+import Image from "next/image"
+import { useRef } from "react"
 
 type LeaderboardEntry = {
-  id: number;
-  country: string;
-  flag: string;
-  clicks: number;
-};
+  id: number
+  country: string
+  flag: string
+  clicks: number
+}
 
 function incrementSmoothly(currentValue: number, targetValue: number, setValue: (val: number) => void) {
-  const difference = targetValue - currentValue;
-  const step = Math.ceil(difference / 10); // Adjust 10 for speed
+  const difference = targetValue - currentValue
+  const step = Math.ceil(difference / 10) // Adjust 10 for speed
 
-  if (difference === 0) return;
+  if (difference === 0) return
 
   const interval = setInterval(() => {
-    currentValue += step;
+    currentValue += step
     if ((step > 0 && currentValue >= targetValue) || (step < 0 && currentValue <= targetValue)) {
-      currentValue = targetValue;
-      clearInterval(interval);
+      currentValue = targetValue
+      clearInterval(interval)
     }
-    setValue(currentValue);
-  }, 50); // Adjust timing for smoothness
+    setValue(currentValue)
+  }, 50) // Adjust timing for smoothness
 }
 
 function formatNumber(value: number): string {
-  return value.toLocaleString(); // Display number with commas (e.g., 1,234,567)
+  return value.toLocaleString() // Display number with commas (e.g., 1,234,567)
 }
 
 export default function Leaderboard() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [userCountry, setUserCountry] = useState<string | null>(null);
-  const [userRank, setUserRank] = useState<number | null>(null);
-  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [secondCountry, setSecondCountry] = useState<string | null>(null);
-  const [secondCountryRank, setSecondCountryRank] = useState<number | null>(null);
+  const [isOpen, setIsOpen] = useState(false)
+  const [userCountry, setUserCountry] = useState<string | null>(null)
+  const [userRank, setUserRank] = useState<number | null>(null)
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
+  const [loading, setLoading] = useState(true)
+  const [secondCountry, setSecondCountry] = useState<string | null>(null)
+  const [secondCountryRank, setSecondCountryRank] = useState<number | null>(null)
 
-  const [isMobile, setIsMobile] = useState(false);
-  const leaderboardRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false)
+  const leaderboardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (leaderboardRef.current && !leaderboardRef.current.contains(event.target as Node)) {
-        setIsOpen(false); // Close the leaderboard
+        setIsOpen(false) // Close the leaderboard
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => document.removeEventListener("mousedown", handleClickOutside)
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
-    };
+      setIsMobile(window.innerWidth <= 768) // Adjust breakpoint as needed
+    }
 
-    handleResize(); // Check on component mount
-    window.addEventListener("resize", handleResize);
+    handleResize() // Check on component mount
+    window.addEventListener("resize", handleResize)
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-  
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
   useEffect(() => {
     const handleStorageChange = () => {
-      console.log("Local storage changed. Updating leaderboard...");
-  
+      console.log("Local storage changed. Updating leaderboard...")
+
       setLeaderboard((prevLeaderboard) => {
-        return prevLeaderboard.map((entry) => {
-          const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10);
-          return { ...entry, clicks: Math.max(entry.clicks, localClicks) };
-        }).sort((a, b) => b.clicks - a.clicks);
-      });
-    };
-  
+        return prevLeaderboard
+          .map((entry) => {
+            const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10)
+            return { ...entry, clicks: Math.max(entry.clicks, localClicks) }
+          })
+          .sort((a, b) => b.clicks - a.clicks)
+      })
+    }
+
     // Listen to storage changes
-    window.addEventListener("storage", handleStorageChange);
-  
+    window.addEventListener("storage", handleStorageChange)
+
     return () => {
       // Cleanup the event listener on component unmount
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
+      window.removeEventListener("storage", handleStorageChange)
+    }
+  }, [])
 
   useEffect(() => {
     async function fetchLeaderboard() {
-      setLoading(true);
+      setLoading(true)
       try {
-        const { data, error } = await supabase
-          .from("leaderboard")
-          .select("*")
-          .order("clicks", { ascending: false });
-  
+        const { data, error } = await supabase.from("leaderboard").select("*").order("clicks", { ascending: false })
+
         if (error) {
-          console.error("Error fetching leaderboard:", error);
-          return;
+          console.error("Error fetching leaderboard:", error)
+          return
         }
-  
+
         // Merge local storage data with Supabase data
         const mergedData = data.map((entry) => {
-          const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10);
-          return { ...entry, clicks: Math.max(entry.clicks, localClicks) };
-        });
-  
-        setLeaderboard(mergedData);
+          const localClicks = parseInt(localStorage.getItem(`clicks_${entry.country}`) || "0", 10)
+          return { ...entry, clicks: Math.max(entry.clicks, localClicks) }
+        })
+
+        setLeaderboard(mergedData)
       } catch (error) {
-        console.error("Unexpected error fetching leaderboard:", error);
+        console.error("Unexpected error fetching leaderboard:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
-  
-    fetchLeaderboard();
-  
+
+    fetchLeaderboard()
+
     const interval = setInterval(() => {
-      fetchLeaderboard();
-    }, 15000);
-  
-    return () => clearInterval(interval);
-  }, []);
+      fetchLeaderboard()
+    }, 15000)
+
+    return () => clearInterval(interval)
+  }, [])
 
   // Fetch user country
   useEffect(() => {
     async function fetchCountry() {
-      const storedCountry = localStorage.getItem("userCountry");
-  
+      const storedCountry = localStorage.getItem("userCountry")
+
       if (storedCountry) {
-        console.log(`User country found in localStorage: ${storedCountry}`);
-        setUserCountry(storedCountry);
+        console.log(`User country found in localStorage: ${storedCountry}`)
+        setUserCountry(storedCountry)
       } else {
         try {
-          console.log("Fetching country from IP geolocation API...");
-          const response = await fetch(
-            `https://api.ipgeolocation.io/ipgeo?apiKey=fc55acc2a2644a55a04cba6d4829803b`
-          );
-          const data = await response.json();
-  
-          const fetchedCountry = data.country_name || "Unknown";
-          console.log(`Fetched country: ${fetchedCountry}`);
-  
+          console.log("Fetching country from IP geolocation API...")
+          const response = await fetch(`https://api.ipgeolocation.io/ipgeo?apiKey=fc55acc2a2644a55a04cba6d4829803b`)
+          const data = await response.json()
+
+          const fetchedCountry = data.country_name || "Unknown"
+          console.log(`Fetched country: ${fetchedCountry}`)
+
           if (fetchedCountry !== "Unknown") {
-            localStorage.setItem("userCountry", fetchedCountry);
-            setUserCountry(fetchedCountry);
+            localStorage.setItem("userCountry", fetchedCountry)
+            setUserCountry(fetchedCountry)
           } else {
-            console.error("Could not fetch the user's country.");
+            console.error("Could not fetch the user's country.")
           }
         } catch (error) {
-          console.error("Error fetching user country:", error);
-          setUserCountry("Unknown");
+          console.error("Error fetching user country:", error)
+          setUserCountry("Unknown")
         }
       }
     }
-  
-    fetchCountry();
-  }, []);
+
+    fetchCountry()
+  }, [])
 
   // Calculate user rank and second country rank
   useEffect(() => {
     if (userCountry || secondCountry) {
-      const userCountryRank = leaderboard.findIndex((item) => item.country === userCountry);
-      const secondCountryRank = leaderboard.findIndex((item) => item.country === secondCountry);
-      setUserRank(userCountryRank !== -1 ? userCountryRank + 1 : null);
-      setSecondCountryRank(secondCountryRank !== -1 ? secondCountryRank + 1 : null);
+      const userCountryRank = leaderboard.findIndex((item) => item.country === userCountry)
+      const secondCountryRank = leaderboard.findIndex((item) => item.country === secondCountry)
+      setUserRank(userCountryRank !== -1 ? userCountryRank + 1 : null)
+      setSecondCountryRank(secondCountryRank !== -1 ? secondCountryRank + 1 : null)
     }
-  }, [userCountry, secondCountry, leaderboard]);
+  }, [userCountry, secondCountry, leaderboard])
 
-  const sortedLeaderboard = [...leaderboard].sort((a, b) => b.clicks - a.clicks);
+  const sortedLeaderboard = [...leaderboard].sort((a, b) => b.clicks - a.clicks)
 
   return (
-    <div ref={leaderboardRef} className="relative w-full max-w-3xl mx-auto mt-4">
+    <div ref={leaderboardRef} className="relative mx-auto mt-4 w-full max-w-3xl">
       {/* Leaderboard Button */}
       <button
         onClick={() => {
-          setIsOpen((prev) => !prev);
+          setIsOpen((prev) => !prev)
         }}
-        className="w-full flex items-center justify-between px-6 py-4 bg-gray-800 text-white rounded-lg hover:bg-gray-700 focus:outline-none"
+        className="flex w-full items-center justify-between rounded-lg bg-gray-800 px-6 py-4 text-white hover:bg-gray-700 focus:outline-none"
       >
         {loading ? (
-          <div className="flex justify-center items-center w-full">
-            <div className="w-6 h-6 border-4 border-t-transparent border-white rounded-full animate-spin"></div>
+          <div className="flex w-full items-center justify-center">
+            <div className="h-6 w-6 animate-spin rounded-full border-4 border-white border-t-transparent"></div>
           </div>
         ) : (
           <div className="flex items-center gap-6">
@@ -206,9 +203,7 @@ export default function Leaderboard() {
             {userRank && userCountry !== "Unknown" && (
               <div className="flex items-center gap-2">
                 <Image
-                  src={`https://flagcdn.com/w40/${
-                    sortedLeaderboard[userRank - 1]?.flag
-                  }.png`}
+                  src={`https://flagcdn.com/w40/${sortedLeaderboard[userRank - 1]?.flag}.png`}
                   alt={`${userCountry} flag`}
                   width={24}
                   height={16}
@@ -224,17 +219,15 @@ export default function Leaderboard() {
             {secondCountryRank && secondCountry !== "Unknown" && (
               <div className="flex items-center gap-2">
                 <Image
-                  src={`https://flagcdn.com/w40/${
-                    sortedLeaderboard[secondCountryRank - 1]?.flag
-                  }.png`}
+                  src={`https://flagcdn.com/w40/${sortedLeaderboard[secondCountryRank - 1]?.flag}.png`}
                   alt={`${secondCountry} flag`}
                   width={24}
                   height={16}
                   className="rounded"
                 />
                 <span className="text-sm font-bold">
-                  #{secondCountryRank} {secondCountry} (
-                  {formatNumber(sortedLeaderboard[secondCountryRank - 1]?.clicks)})
+                  #{secondCountryRank} {secondCountry} ({formatNumber(sortedLeaderboard[secondCountryRank - 1]?.clicks)}
+                  )
                 </span>
               </div>
             )}
@@ -247,33 +240,31 @@ export default function Leaderboard() {
       {/* Leaderboard Content */}
       {isOpen && (
         <div
-          className={`absolute left-0 w-full bg-white shadow-lg rounded-lg overflow-hidden z-50 ${
+          className={`absolute left-0 z-50 w-full overflow-hidden rounded-lg bg-white shadow-lg ${
             isMobile ? "top-full" : "bottom-full"
           }`}
         >
           <div className="max-h-[400px] overflow-y-auto">
             <table className="w-full table-fixed text-left">
-              <thead className="bg-gary-pink sticky top-0 z-10">
+              <thead className="sticky top-0 z-10 bg-gary-pink">
                 <tr>
-                  <th className="w-2/12 px-2 py-2 text-white font-bold">Rank</th>
-                  <th className="w-8/12 px-2 py-2 text-white font-bold">Country</th>
-                  <th className="w-4/12 px-4 py-2 text-white font-bold text-right">Clicks</th>
+                  <th className="w-2/12 px-2 py-2 font-bold text-white">Rank</th>
+                  <th className="w-8/12 px-2 py-2 font-bold text-white">Country</th>
+                  <th className="w-4/12 px-4 py-2 text-right font-bold text-white">Clicks</th>
                 </tr>
               </thead>
               <tbody>
                 {sortedLeaderboard.map((item, index) => (
                   <tr
                     key={item.country}
-                    className={`${
-                      index % 2 === 0 ? "bg-gray-50" : "bg-white"
-                    } hover:bg-gray-100 ${
+                    className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} hover:bg-gray-100 ${
                       item.country === userCountry || item.country === secondCountry
                         ? "font-bold text-gary-pink"
                         : "font-bold text-gray-700"
                     }`}
                   >
                     <td className="px-2 py-2 font-medium">#{index + 1}</td>
-                    <td className="px-2 py-2 flex items-center gap-2 truncate">
+                    <td className="flex items-center gap-2 truncate px-2 py-2">
                       <Image
                         src={`https://flagcdn.com/w40/${item.flag}.png`}
                         alt={`${item.country} flag`}
@@ -283,9 +274,7 @@ export default function Leaderboard() {
                       />
                       {item.country}
                     </td>
-                    <td className="px-4 py-2 text-right font-medium truncate">
-                      {item.clicks.toLocaleString()}
-                    </td>
+                    <td className="truncate px-4 py-2 text-right font-medium">{item.clicks.toLocaleString()}</td>
                   </tr>
                 ))}
               </tbody>
@@ -294,5 +283,5 @@ export default function Leaderboard() {
         </div>
       )}
     </div>
-  );
+  )
 }

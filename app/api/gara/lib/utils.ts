@@ -18,7 +18,7 @@ export const getGaraEstimate = (round: number, token: string, amount: number, to
   }
 
   if (!tokenValue) return 0
-  return (amount * tokenValue)
+  return amount * tokenValue
 }
 
 export const usdcToGara = (usdc: number) => usdc / 0.1 // 1 USDC = 0.1 GARA
@@ -62,9 +62,12 @@ function toLowerCase(address: string) {
   return address.toLowerCase()
 }
 
-export const ethereumRpcUrl = process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
-export const polygonRpcUrl = process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-mainnet.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
-export const bscRpcUrl = process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bnb-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
+export const ethereumRpcUrl =
+  process.env.NEXT_PUBLIC_ETHEREUM_RPC_URL || "https://eth-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
+export const polygonRpcUrl =
+  process.env.NEXT_PUBLIC_POLYGON_RPC_URL || "https://polygon-mainnet.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
+export const bscRpcUrl =
+  process.env.NEXT_PUBLIC_BSC_RPC_URL || "https://bnb-mainnet.g.alchemy.com/v2/dNMADuse_UiHTjTasg3_E2ezx8IpNcxF"
 
 export const getRpcNode = (chain: string) => {
   //monda

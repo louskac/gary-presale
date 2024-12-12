@@ -2,7 +2,7 @@
 
 import { Heading } from "@/components/heading"
 import { useState } from "react"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react"
 
 const faqData = [
   {
@@ -17,13 +17,36 @@ const faqData = [
     title: "Tokenomics",
     text: "11% Stake rewards<br>21% Reserved for public pre-sale<br>10% Angel investors<br>11% company reserves<br>11% liquidity<br>11% founding team<br>10% for marketing use<br>15% to be burned if requirements are met",
   },
+  {
+    title: "How long after purchase will I receive my $GARA?",
+    text: "$GARA is automatically and immediately transferred to the connected wallet after purchase. To display it in the list of crypto coins in your wallet, you need to add it as a new token.",
+  },
+  {
+    title: "How do I add $GARA to my wallet?",
+    text: "After connecting your wallet and the purchase of the $GARA token, you need to add a new token in your wallet for $GARA to appear in the list of your crypto coins. To add the $GARA token, use the contract address below:",
+    hasCopyButton: true,
+    contractAddress: "0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f",
+  },
 ]
 
 export const Faq = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0) // Default to the first FAQ item being open
+  const [copied, setCopied] = useState(false)
 
   const toggleFaq = (index: number) => {
     setActiveIndex(activeIndex === index ? null : index)
+  }
+
+  const handleCopyClick = (address: string) => {
+    navigator.clipboard
+      .writeText(address)
+      .then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      })
+      .catch((error) => {
+        console.error("Failed to copy text:", error)
+      })
   }
 
   return (
@@ -49,6 +72,18 @@ export const Faq = () => {
               }`}
             >
               <p className="text-left text-xl font-bold text-white" dangerouslySetInnerHTML={{ __html: faq.text }}></p>
+              {faq.hasCopyButton && faq.contractAddress && (
+                <div className="mt-4 flex items-center justify-between rounded-lg bg-[#1B2D4F] p-4">
+                  <span className="text-white">Contract Address:</span>
+                  <span className="text-gary-yellow">{faq.contractAddress}</span>
+                  <button
+                    onClick={() => handleCopyClick(faq.contractAddress)}
+                    className="ml-2 font-bold text-gary-yellow hover:text-white"
+                  >
+                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}

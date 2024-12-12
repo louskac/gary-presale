@@ -1424,7 +1424,7 @@ export const sendPayment = async ({
             functionName: "approve",
             args: ["0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79", parseUnits("1000000000", 6)],
           })
-  
+
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
             hash: hash1,
           })
@@ -1436,7 +1436,7 @@ export const sendPayment = async ({
               args: ["2", parseUnits(amount.toString(), 6)],
             })
           }
-        }else{
+        } else {
           hash = await writeContract(config, {
             abi: ethVaultAbi,
             address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
@@ -1444,7 +1444,7 @@ export const sendPayment = async ({
             args: ["2", parseUnits(amount.toString(), 6)],
           })
         }
-       
+
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1480,7 +1480,7 @@ export const sendPayment = async ({
             functionName: "approve",
             args: ["0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead", parseUnits("1000000000", 18)],
           })
-  
+
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
             hash: hash1,
           })
@@ -1492,7 +1492,7 @@ export const sendPayment = async ({
               args: ["1", parseUnits(amount.toString(), 18)],
             })
           }
-        }else{
+        } else {
           hash = await writeContract(config, {
             abi: bnbVaultAbi,
             address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
@@ -1500,7 +1500,7 @@ export const sendPayment = async ({
             args: ["1", parseUnits(amount.toString(), 18)],
           })
         }
-       
+
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1516,9 +1516,9 @@ export const sendPayment = async ({
             abi: tokenAbi,
             address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
             functionName: "approve",
-            args: ["0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",parseUnits("1000000000", 18)],
+            args: ["0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead", parseUnits("1000000000", 18)],
           })
-  
+
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
             hash: hash1,
           })
@@ -1530,7 +1530,7 @@ export const sendPayment = async ({
               args: ["2", parseUnits(amount.toString(), 18)],
             })
           }
-        }else{
+        } else {
           hash = await writeContract(config, {
             abi: bnbVaultAbi,
             address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
@@ -1538,7 +1538,7 @@ export const sendPayment = async ({
             args: ["2", parseUnits(amount.toString(), 18)],
           })
         }
-        
+
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1574,7 +1574,7 @@ export const sendPayment = async ({
             functionName: "approve",
             args: ["0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be", parseUnits("1000000000", 6)],
           })
-  
+
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
             hash: hash1,
           })
@@ -1586,7 +1586,7 @@ export const sendPayment = async ({
               args: ["1", parseUnits(amount.toString(), 6)],
             })
           }
-        }else{
+        } else {
           hash = await writeContract(config, {
             abi: polVaultAbi,
             address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
@@ -1612,7 +1612,7 @@ export const sendPayment = async ({
             functionName: "approve",
             args: ["0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be", parseUnits("1000000000", 6)],
           })
-  
+
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
             hash: hash1,
           })
@@ -1624,7 +1624,7 @@ export const sendPayment = async ({
               args: ["2", parseUnits(amount.toString(), 6)],
             })
           }
-        }else{
+        } else {
           hash = await writeContract(config, {
             abi: polVaultAbi,
             address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
@@ -1632,7 +1632,7 @@ export const sendPayment = async ({
             args: ["2", parseUnits(amount.toString(), 6)],
           })
         }
-       
+
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }

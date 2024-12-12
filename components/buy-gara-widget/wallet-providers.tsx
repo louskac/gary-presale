@@ -2,7 +2,14 @@
 
 import { ReactNode } from "react"
 import { getDefaultConfig, RainbowKitProvider, darkTheme, connectorsForWallets } from "@rainbow-me/rainbowkit"
-import { metaMaskWallet, coinbaseWallet, rainbowWallet, walletConnectWallet, trustWallet, phantomWallet } from "@rainbow-me/rainbowkit/wallets"
+import {
+  metaMaskWallet,
+  coinbaseWallet,
+  rainbowWallet,
+  walletConnectWallet,
+  trustWallet,
+  phantomWallet,
+} from "@rainbow-me/rainbowkit/wallets"
 import { WagmiProvider, cookieStorage, createConfig, createStorage, http, type Locale } from "wagmi"
 import { polygon, mainnet, bsc, sepolia, bscTestnet } from "wagmi/chains"
 import { GaraStoreProvider } from "@/lib/store/provider"

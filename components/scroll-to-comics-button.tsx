@@ -12,17 +12,17 @@ export const ScrollToComicsButton = () => {
   }
   return (
     <div className="m-auto block text-center">
-      <div className="mt-0 sm:mt-16 flex flex-col items-center">
+      <div className="z-100 mt-0 flex flex-col items-center sm:mt-16">
         <Button
           onClick={handleClick}
           size="lg"
-          className="mt-10 border-none bg-black/70 px-10 py-10 text-md md:text-xl text-center whitespace-normal break-words max-w-full sm:max-w-[90%] mx-auto hover:!bg-black/80 z-[100]"
+          className="text-md z-20 mx-auto mt-10 max-w-full whitespace-normal break-words border-none bg-black/70 px-10 py-10 text-center hover:!bg-black/80 sm:max-w-[90%] md:text-xl"
         >
           Find out how to help Gary
         </Button>
       </div>
       <button onClick={handleClick} className="animate-slow-bounce">
-        <ArrowDown className="z-10 mt-4 size-28 text-white" />
+        <ArrowDown className="z-100 mt-4 size-28 text-white" />
       </button>
     </div>
   )

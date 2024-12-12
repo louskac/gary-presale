@@ -31,7 +31,7 @@ export const HelpGary = () => {
           {/* Mobile Layout */}
           <div className="block lg:hidden">
             <div className="flex items-center justify-between">
-              <p className="font-bold text-gary-yellow mr-2">$GARA Contract</p>
+              <p className="mr-2 font-bold text-gary-yellow">$GARA Contract</p>
               <button
                 onClick={handleCopyClick}
                 className="font-bold text-gary-yellow hover:text-white"

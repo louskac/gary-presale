@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin()
 
 const nextConfig = {
   images: {
-    domains: ['flagcdn.com'],
+    domains: ["flagcdn.com"],
     remotePatterns: [
       {
         protocol: "http",

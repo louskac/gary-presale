@@ -4,11 +4,10 @@ import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 
-
 //monda
-const endDate = 1740787199;
-const firstRoundEndDate = 1735689599 ;
-const secondRoundEndDate = 1738367999;
+const endDate = 1740787199
+const firstRoundEndDate = 1735689599
+const secondRoundEndDate = 1738367999
 // import { sepolia} from "wagmi/chains"
 // const sepoliaRpcUrl = "https://eth-sepolia.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
 // const sepoliaProvider = new ethers.providers.JsonRpcProvider(sepoliaRpcUrl);
@@ -67,12 +66,12 @@ const CountdownTimer = ({ className }: { className?: string }) => {
   const currentTime = new Date().getTime()
   let targetDate = new Date().getTime()
   // Set the target date/time
-  if(firstRoundEndDate * 1000 > Number(currentTime)){
-    targetDate = firstRoundEndDate;
-  } else if(secondRoundEndDate * 1000 > Number(currentTime)){
-    targetDate = secondRoundEndDate;
-  }else if(endDate * 1000 > Number(currentTime)){
-    targetDate = endDate;
+  if (firstRoundEndDate * 1000 > Number(currentTime)) {
+    targetDate = firstRoundEndDate
+  } else if (secondRoundEndDate * 1000 > Number(currentTime)) {
+    targetDate = secondRoundEndDate
+  } else if (endDate * 1000 > Number(currentTime)) {
+    targetDate = endDate
   }
   // const targetDate = new Date("2024-12-31T23:59").getTime()
 
@@ -87,7 +86,7 @@ const CountdownTimer = ({ className }: { className?: string }) => {
   // Function to calculate the time difference
   const calculateTimeLeft = () => {
     const now = new Date().getTime()
-    const difference = targetDate*1000 - now
+    const difference = targetDate * 1000 - now
 
     const days = Math.floor(Number(difference) / (1000 * 60 * 60 * 24))
     const hours = Math.floor((Number(difference) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))

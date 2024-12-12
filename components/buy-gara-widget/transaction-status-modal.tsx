@@ -82,7 +82,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
                 <div className="flex items-center gap-2">
                   {!outcomingTransaction.done ? (
                     <>
-                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500  dark:text-white">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 dark:text-white">
                         <X className="h-4 w-4" />
                       </div>
                       <p className="text-sm font-medium text-yellow-500">Transaction Pending</p>
