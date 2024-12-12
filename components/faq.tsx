@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Heading } from "@/components/heading"
-import { useState } from "react"
-import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react"
+import { Heading } from "@/components/heading";
+import { useState } from "react";
+import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
 
 const faqData = [
   {
     title: "What is $GARA coin?",
-    text: "$GARA coin is a meme and utility token of the fast growing Coingarage exchange and has many uses. From paying a range of fees, to using the exchange's services and products, to fueling a trading bot, new uses will continue to emerge as the exchange's ecosystem grows.",
+    text: "$GARA coin is a meme and utility token of the fast-growing Coingarage exchange and has many uses. From paying a range of fees, to using the exchange's services and products, to fueling a trading bot, new uses will continue to emerge as the exchange's ecosystem grows.",
   },
   {
     title: "$GARA Coin Burning Mechanism",
@@ -27,43 +27,39 @@ const faqData = [
     hasCopyButton: true,
     contractAddress: "0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f",
   },
-]
+];
 
 export const Faq = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0) // Default to the first FAQ item being open
-  const [copied, setCopied] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+  const [copied, setCopied] = useState(false);
 
   const toggleFaq = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index)
-  }
+    setActiveIndex(activeIndex === index ? null : index);
+  };
 
   const handleCopyClick = (address: string) => {
-    navigator.clipboard
-      .writeText(address)
-      .then(() => {
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      })
-      .catch((error) => {
-        console.error("Failed to copy text:", error)
-      })
-  }
+    navigator.clipboard.writeText(address).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
 
   return (
-    <div className="container mx-auto mt-20 flex flex-col items-center justify-center">
-      <Heading className="text-left text-6xl font-bold leading-none tracking-normal">FAQ</Heading>
-      <div className="mb-20 mt-16 flex flex-col gap-10">
+    <div className="container mx-auto mt-12 px-4 lg:px-0">
+      <Heading className="text-center text-3xl font-bold sm:text-5xl">FAQ</Heading>
+      <div className="my-8 flex flex-col gap-6 lg:mt-12 lg:gap-8">
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="mx-auto flex w-full flex-col rounded-3xl bg-[#0D1E35] px-6 py-8 lg:w-3/5 lg:px-16 lg:py-12"
+            className="flex flex-col rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
           >
             <div className="flex items-center justify-between">
-              <Heading className="text-left text-2xl font-bold" stroke={false}>
-                {faq.title}
-              </Heading>
-              <button onClick={() => toggleFaq(index)} className="text-white focus:outline-none">
-                {activeIndex === index ? <ChevronUp size={32} /> : <ChevronDown size={32} />}
+              <Heading className="text-left text-xl font-bold sm:text-2xl">{faq.title}</Heading>
+              <button
+                onClick={() => toggleFaq(index)}
+                className="text-white hover:text-gary-yellow focus:outline-none"
+              >
+                {activeIndex === index ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
               </button>
             </div>
             <div
@@ -71,16 +67,21 @@ export const Faq = () => {
                 activeIndex === index ? "mt-4 max-h-screen" : "max-h-0"
               }`}
             >
-              <p className="text-left text-xl font-bold text-white" dangerouslySetInnerHTML={{ __html: faq.text }}></p>
+              <p
+                className="text-sm font-normal text-white sm:text-base"
+                dangerouslySetInnerHTML={{ __html: faq.text }}
+              ></p>
               {faq.hasCopyButton && faq.contractAddress && (
-                <div className="mt-4 flex items-center justify-between rounded-lg bg-[#1B2D4F] p-4">
-                  <span className="text-white">Contract Address:</span>
-                  <span className="text-gary-yellow">{faq.contractAddress}</span>
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg bg-[#1B2D4F] p-4">
+                  <p className="text-xs text-gray-400 sm:text-sm">Contract Address:</p>
+                  <span className="overflow-hidden truncate text-gary-yellow sm:ml-2 sm:text-base">
+                    {faq.contractAddress}
+                  </span>
                   <button
                     onClick={() => handleCopyClick(faq.contractAddress)}
-                    className="ml-2 font-bold text-gary-yellow hover:text-white"
+                    className="mt-2 text-xs font-bold text-gary-yellow hover:text-white focus:outline-none sm:mt-0 sm:ml-4"
                   >
-                    {copied ? <Check size={18} /> : <Copy size={18} />}
+                    {copied ? <Check size={16} /> : <Copy size={16} />}
                   </button>
                 </div>
               )}
@@ -89,5 +90,5 @@ export const Faq = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
