@@ -225,8 +225,8 @@ export default function GarySection() {
                 height={100}
                 className="object-contain"
               />
-              <p className="absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center text-lg font-bold text-black">
-                Click to feed me
+              <p className="absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center text-md font-bold text-black">
+                Click to feed me and get free $GARA
               </p>
             </div>
             <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
@@ -254,8 +254,8 @@ export default function GarySection() {
             </div>
           </button>
           <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
-            <p className="absolute left-[50%] top-[25%] -translate-x-1/2 -translate-y-1/2 transform text-center text-3xl font-bold text-gary-blue">
-              Click to feed me
+            <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
+              Click to feed me get free $GARA
             </p>
             <Image
               src="/images/story/slide1/bubble.png"
