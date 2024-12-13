@@ -210,10 +210,11 @@ export default function GarySection() {
                 <div className="text-lg font-bold text-black">{count}</div>
               </div>
             ))}
-            {/* Add Click Info Popup */}
-            <ClickInfoPopup />
           </div>
-          <p className="mt-4 text-xl font-bold text-white sm:text-black">Your score: {clickCount}</p>
+          <div className="flex items-center justify-between gap-4 mt-4">
+            <ClickInfoPopup />
+            <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
+          </div>
           <Leaderboard />
           <div className="relative mt-8">
             <div className="absolute -top-0 left-1/2 left-[25%] h-[100px] w-[160px] -translate-x-1/2 transform">
@@ -276,10 +277,11 @@ export default function GarySection() {
                 <div className="text-lg font-bold text-black">{count}</div>
               </div>
             ))}
-            {/* Add Click Info Popup */}
-            <ClickInfoPopup />
           </div>
-          <p className="mt-4 text-xl font-bold text-white">Your score: {clickCount}</p>
+          <div className="flex items-center justify-between gap-4 mt-4">
+            <ClickInfoPopup />
+            <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
+          </div>
           <Leaderboard />
         </>
       )}

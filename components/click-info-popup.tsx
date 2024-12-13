@@ -7,27 +7,27 @@ const clickInfoData = [
   {
     state: "state_1",
     image: "/images/state_1.png",
-    clicks: "+1 Click",
+    clicks: "+1 Point",
   },
   {
     state: "state_2",
     image: "/images/state_2.png",
-    clicks: "+2 Clicks",
+    clicks: "+2 Points",
   },
   {
     state: "state_3",
     image: "/images/state_3.png",
-    clicks: "+5 Clicks",
+    clicks: "+5 Points",
   },
   {
     state: "state_4",
     image: "/images/state_4.png",
-    clicks: "+10 Clicks",
+    clicks: "+10 Points",
   },
   {
     state: "state_5",
     image: "/images/state_5.png",
-    clicks: <strong>Airdrop</strong>, // Bold the "Airdrop" text
+    clicks: <strong>$GARA reward</strong>, // Bold the "Airdrop" text
   },
 ]
 
@@ -55,7 +55,7 @@ export default function ClickInfoPopup() {
     <div className="relative flex flex-col items-center">
       {/* Styled Info Icon */}
       <button
-        className="flex h-6 w-6 items-center justify-center rounded-full bg-gary-pink text-white hover:bg-gary-blue focus:outline-none"
+        className="flex h-6 w-6 items-center justify-center rounded-full bg-black/70 text-white hover:bg-gary-blue focus:outline-none"
         onClick={() => setIsPopupOpen(!isPopupOpen)}
         aria-label="Click info"
       >
@@ -66,23 +66,26 @@ export default function ClickInfoPopup() {
       {isPopupOpen && (
         <div
           ref={popupRef}
-          className="absolute right-10 z-50 w-72 rounded-lg bg-white p-4 shadow-lg lg:bottom-[40px] lg:right-0"
+          className="absolute -left-10 z-50 w-72 rounded-lg bg-white p-4 shadow-lg lg:bottom-[40px] lg:left-0"
         >
-          <h3 className="mb-2 text-center text-lg font-bold text-gary-blue">Click Rewards</h3>
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-bold text-gary-blue">Click Rewards</h3>
+            <button
+              onClick={() => setIsPopupOpen(false)}
+              className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none"
+              aria-label="Close"
+            >
+              ×
+            </button>
+          </div>
           <table className="w-full table-auto border-collapse border border-gray-200 text-left text-sm">
-            <thead>
-              <tr className="bg-gary-pink text-white">
-                <th className="p-2">Image</th>
-                <th className="p-2">Reward</th>
-              </tr>
-            </thead>
             <tbody>
               {clickInfoData.map((info, index) => (
                 <tr key={info.state} className={`${index % 2 === 0 ? "bg-gray-50" : "bg-white"} text-gray-700`}>
-                  <td className="p-2">
+                  <td className="p-2 pl-6">
                     <Image src={info.image} alt={info.state} width={24} height={24} className="rounded" />
                   </td>
-                  <td className="p-2 font-medium">{info.clicks}</td>
+                  <td className="p-2 font-medium text-center">{info.clicks}</td>
                 </tr>
               ))}
             </tbody>
