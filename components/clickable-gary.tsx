@@ -255,7 +255,7 @@ export default function GarySection() {
           </button>
           <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
             <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
-              Click to feed me get free $GARA
+              Click to feed me and get free $GARA
             </p>
             <Image
               src="/images/story/slide1/bubble.png"
