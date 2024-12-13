@@ -8,31 +8,26 @@ const clickInfoData = [
     state: "state_1",
     image: "/images/state_1.png",
     clicks: "+1 Click",
-    weight: "50%",
   },
   {
     state: "state_2",
     image: "/images/state_2.png",
     clicks: "+2 Clicks",
-    weight: "30%",
   },
   {
     state: "state_3",
     image: "/images/state_3.png",
     clicks: "+5 Clicks",
-    weight: "15%",
   },
   {
     state: "state_4",
     image: "/images/state_4.png",
     clicks: "+10 Clicks",
-    weight: "5%",
   },
   {
     state: "state_5",
     image: "/images/state_5.png",
     clicks: <strong>Airdrop</strong>, // Bold the "Airdrop" text
-    weight: <strong>0.1%</strong>,
   },
 ]
 
@@ -78,8 +73,7 @@ export default function ClickInfoPopup() {
             <thead>
               <tr className="bg-gary-pink text-white">
                 <th className="p-2">Image</th>
-                <th className="p-2">Clicks</th>
-                <th className="p-2">Chance</th>
+                <th className="p-2">Reward</th>
               </tr>
             </thead>
             <tbody>
@@ -89,7 +83,6 @@ export default function ClickInfoPopup() {
                     <Image src={info.image} alt={info.state} width={24} height={24} className="rounded" />
                   </td>
                   <td className="p-2 font-medium">{info.clicks}</td>
-                  <td className="p-2">{info.weight}</td>
                 </tr>
               ))}
             </tbody>
