@@ -1,4 +1,5 @@
 import createNextIntlPlugin from "next-intl/plugin"
+
 const redeploy = 0.1
 
 const withNextIntl = createNextIntlPlugin()
@@ -37,13 +38,19 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    // Add SVG loader
     config.module.rules.push({
       test: /\.svg$/i,
       use: ["@svgr/webpack"],
     })
+
+    // Resolve fallbacks
     config.resolve.fallback = { fs: false, net: false, tls: false }
+
+    // Exclude specific packages from the build
     config.externals.push("pino-pretty", "lokijs", "encoding")
+
     return config
   },
 }

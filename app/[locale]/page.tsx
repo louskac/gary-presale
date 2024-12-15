@@ -14,7 +14,7 @@ import { ScrollToComicsButton } from "@/components/scroll-to-comics-button"
 import GarySection from "@/components/clickable-gary"
 import Roadmap from "@/components/roadmap"
 import Tokenomics from "@/components/tokenomics"
-import StickyButton from "@/components/sticky-button";
+import StickyButton from "@/components/sticky-button"
 
 export default function Home() {
   const [backgroundSrc, setBackgroundSrc] = useState("/backgrounds/0.jpg")
@@ -86,7 +86,7 @@ export default function Home() {
       <section id="save" className="bg-[#0D1E35] px-4 sm:px-6">
         <Footer />
       </section>
-      <div className="relative z-100">
+      <div className="z-100 relative">
         <StickyButton />
       </div>
     </main>

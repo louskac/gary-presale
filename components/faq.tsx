@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Heading } from "@/components/heading";
-import { useState } from "react";
-import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react";
+import { Heading } from "@/components/heading"
+import { useState } from "react"
+import { ChevronDown, ChevronUp, Copy, Check } from "lucide-react"
 
 const faqData = [
   {
@@ -27,22 +27,22 @@ const faqData = [
     hasCopyButton: true,
     contractAddress: "0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f",
   },
-];
+]
 
 export const Faq = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(0);
-  const [copied, setCopied] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0)
+  const [copied, setCopied] = useState(false)
 
   const toggleFaq = (index: number) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+    setActiveIndex(activeIndex === index ? null : index)
+  }
 
   const handleCopyClick = (address: string) => {
     navigator.clipboard.writeText(address).then(() => {
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    })
+  }
 
   return (
     <div className="container mx-auto mt-12 px-4 lg:px-0">
@@ -55,10 +55,7 @@ export const Faq = () => {
           >
             <div className="flex items-center justify-between">
               <Heading className="text-left text-xl font-bold sm:text-2xl">{faq.title}</Heading>
-              <button
-                onClick={() => toggleFaq(index)}
-                className="text-white hover:text-gary-yellow focus:outline-none"
-              >
+              <button onClick={() => toggleFaq(index)} className="text-white hover:text-gary-yellow focus:outline-none">
                 {activeIndex === index ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
               </button>
             </div>
@@ -72,14 +69,14 @@ export const Faq = () => {
                 dangerouslySetInnerHTML={{ __html: faq.text }}
               ></p>
               {faq.hasCopyButton && faq.contractAddress && (
-                <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between rounded-lg bg-[#1B2D4F] p-4">
+                <div className="mt-4 flex flex-col rounded-lg bg-[#1B2D4F] p-4 sm:flex-row sm:items-center sm:justify-between">
                   <p className="text-xs text-gray-400 sm:text-sm">Contract Address:</p>
                   <span className="overflow-hidden truncate text-gary-yellow sm:ml-2 sm:text-base">
                     {faq.contractAddress}
                   </span>
                   <button
                     onClick={() => handleCopyClick(faq.contractAddress)}
-                    className="mt-2 text-xs font-bold text-gary-yellow hover:text-white focus:outline-none sm:mt-0 sm:ml-4"
+                    className="mt-2 text-xs font-bold text-gary-yellow hover:text-white focus:outline-none sm:ml-4 sm:mt-0"
                   >
                     {copied ? <Check size={16} /> : <Copy size={16} />}
                   </button>
@@ -90,5 +87,5 @@ export const Faq = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

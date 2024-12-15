@@ -11,6 +11,7 @@
   "dependencies": {
     "@depay/web3-wallets": "^17.5.0",
     "@depay/widgets": "^12.16.5",
+    "@fingerprintjs/fingerprintjs": "^4.5.1",
     "@heliofi/checkout-react": "^2.3.1",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -43,6 +44,7 @@
     "swiper": "^11.1.15",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^11.0.3",
     "viem": "^2.21.27",
     "wagmi": "^2.12.19",
     "web3": "^4.15.0",

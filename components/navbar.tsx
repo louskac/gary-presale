@@ -52,7 +52,10 @@ export const NavBar = () => {
         </AnchorLink>
       </div>
       {/* Burger Menu Button */}
-      <button className="fixed right-4 top-4 z-50 focus:outline-none lg:hidden z-[9999]" onClick={() => setMenuOpen(!menuOpen)}>
+      <button
+        className="fixed right-4 top-4 z-50 z-[9999] focus:outline-none lg:hidden"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#061022]">
           {menuOpen ? (
             <Image src="/icons/close.svg" alt="Close" width={24} height={24} />

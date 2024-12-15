@@ -1,15 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { v4 as uuidv4 } from "uuid" // Import uuid
 import Image from "next/image"
 import CountdownTimer from "@/components/countdown-timer"
 import Leaderboard from "@/components/country-clicker"
 import { supabase } from "@/lib/supabase"
 import AirdropWin from "@/components/airdrop-win"
 import ClickInfoPopup from "@/components/click-info-popup"
+import FingerprintJS from "@fingerprintjs/fingerprintjs"
 
 export default function GarySection() {
   const [garyImage, setGaryImage] = useState("/images/gary_happy.png")
+  const [nonce, setNonce] = useState<string>("")
   const [isEating, setIsEating] = useState(false)
   const [highlightedBox, setHighlightedBox] = useState<string | null>(null)
   const [isMobile, setIsMobile] = useState(false)
@@ -24,6 +27,41 @@ export default function GarySection() {
   const [walletAddress, setWalletAddress] = useState("")
   const [clickCount, setClickCount] = useState(0)
   const [showAirdropWin, setShowAirdropWin] = useState(false)
+  const [botDetected, setBotDetected] = useState(false)
+
+  useEffect(() => {
+    // Generate a secure nonce when the page loads
+    const generateNonce = () => uuidv4() // Use uuid instead of crypto.randomUUID
+    const newNonce = generateNonce()
+    setNonce(newNonce)
+    localStorage.setItem("gary_nonce", newNonce)
+  }, [])
+
+  const validateNonce = () => {
+    const storedNonce = localStorage.getItem("gary_nonce")
+    if (storedNonce === nonce) {
+      const newNonce = uuidv4() // Use uuid instead of crypto.randomUUID
+      setNonce(newNonce)
+      localStorage.setItem("gary_nonce", newNonce)
+      return true
+    }
+    return false
+  }
+
+  useEffect(() => {
+    const detectBot = async () => {
+      const fp = await FingerprintJS.load()
+      const result = await fp.get()
+      if (result.botProbability > 0.8) {
+        console.warn("Bot detected. Blocking interaction.")
+        setBotDetected(true)
+      } else {
+        setBotDetected(false)
+      }
+    }
+
+    detectBot()
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -109,7 +147,7 @@ export default function GarySection() {
       else if (state === "state_2") increment = 2
       else if (state === "state_3") increment = 5
       else if (state === "state_4") increment = 10
-      else if (state === "state_4") increment = 20
+      else if (state === "state_5") increment = 20
 
       const newClicks = currentClicks + increment
 
@@ -141,6 +179,18 @@ export default function GarySection() {
       return
     }
 
+    if (botDetected) {
+      console.warn("Bot activity detected. Click blocked.")
+      return
+    }
+
+    if (!validateNonce()) {
+      console.warn("Invalid or missing nonce. Blocking click.")
+      return
+    }
+
+    console.log("Nonce validated, proceeding...")
+
     if (isEating) return
     setIsEating(true)
 
@@ -149,10 +199,8 @@ export default function GarySection() {
 
     const { state, eatImage } = getRandomState()
 
-    // Update Gary's image based on the state
     setGaryImage(`/images/${eatImage}.png`)
 
-    // Update the stats for the corresponding state
     setImageStats((prevStats) => {
       const key = state as keyof typeof prevStats
       const newStats = { ...prevStats, [key]: prevStats[key] + 1 }
@@ -161,7 +209,6 @@ export default function GarySection() {
       return newStats
     })
 
-    // Update local storage and database
     updateCountryClicks(state)
 
     setClickCount((prevCount) => {
@@ -171,8 +218,8 @@ export default function GarySection() {
       else if (state === "state_3") increment = 5
       else if (state === "state_4") increment = 10
       else if (state === "state_5") {
-        setShowAirdropWin(true) // Show the popup for state_5
-        increment = 20 // Example value for state_5
+        setShowAirdropWin(true)
+        increment = 20
       }
       return prevCount + increment
     })
@@ -181,17 +228,6 @@ export default function GarySection() {
       setGaryImage("/images/gary_happy.png")
       setIsEating(false)
     }, 500)
-  }
-
-  const handleAirdropSubmit = () => {
-    if (!walletAddress) {
-      alert("Please enter a valid wallet address.")
-      return
-    }
-
-    // Logic to handle the wallet address submission, e.g., send it to the database or API
-    console.log("Wallet Address Submitted:", walletAddress)
-    setShowAirdropPopup(false)
   }
 
   return (
@@ -211,7 +247,7 @@ export default function GarySection() {
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-between gap-4 mt-4">
+          <div className="mt-4 flex items-center justify-between gap-4">
             <ClickInfoPopup />
             <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
           </div>
@@ -225,7 +261,7 @@ export default function GarySection() {
                 height={100}
                 className="object-contain"
               />
-              <p className="absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center text-md font-bold text-black">
+              <p className="text-md absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center font-bold text-black">
                 Click to feed me and get free $GARA
               </p>
             </div>
@@ -278,7 +314,7 @@ export default function GarySection() {
               </div>
             ))}
           </div>
-          <div className="flex items-center justify-between gap-4 mt-4">
+          <div className="mt-4 flex items-center justify-between gap-4">
             <ClickInfoPopup />
             <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
           </div>

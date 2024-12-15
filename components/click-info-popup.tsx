@@ -68,7 +68,7 @@ export default function ClickInfoPopup() {
           ref={popupRef}
           className="absolute -left-10 z-50 w-72 rounded-lg bg-white p-4 shadow-lg lg:bottom-[40px] lg:left-0"
         >
-          <div className="flex justify-between items-center mb-2">
+          <div className="mb-2 flex items-center justify-between">
             <h3 className="text-lg font-bold text-gary-blue">Click Rewards</h3>
             <button
               onClick={() => setIsPopupOpen(false)}
@@ -85,7 +85,7 @@ export default function ClickInfoPopup() {
                   <td className="p-2 pl-6">
                     <Image src={info.image} alt={info.state} width={24} height={24} className="rounded" />
                   </td>
-                  <td className="p-2 font-medium text-center">{info.clicks}</td>
+                  <td className="p-2 text-center font-medium">{info.clicks}</td>
                 </tr>
               ))}
             </tbody>

@@ -1,14 +1,14 @@
-import React from "react";
+import React from "react"
 
 const StickyButton = () => {
   return (
     <a
       href="#help-gary"
-      className="fixed bottom-0 left-0 w-full bg-gary-pink text-white text-center text-lg font-semibold py-4 shadow-lg hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 transition md:hidden rounded-t-full z-[9999]"
+      className="fixed bottom-0 left-0 z-[9999] w-full rounded-t-full bg-gary-pink py-4 text-center text-lg font-semibold text-white shadow-lg transition hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-300 md:hidden"
     >
       Buy $GARA
     </a>
-  );
-};
+  )
+}
 
-export default StickyButton;
+export default StickyButton

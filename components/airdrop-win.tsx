@@ -58,7 +58,8 @@ export default function AirdropWin({ onClose }: { onClose: () => void }) {
         </p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="walletAddress" className="mb-2 block text-center font-bold">
-            Enter your EVM wallet address and share on X.com to claim the airdrop:
+            We give out the airdrop once to each wallet! Enter your EVM wallet address and share on X.com to claim the
+            airdrop.:
           </label>
           <input
             type="text"
