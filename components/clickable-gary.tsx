@@ -44,7 +44,7 @@ export default function GarySection() {
       { state: "state_2", eatImage: "eat_2", weight: 600 },
       { state: "state_3", eatImage: "eat_3", weight: 300 },
       { state: "state_4", eatImage: "eat_4", weight: 100 },
-      { state: "state_5", eatImage: "eat_5", weight: 1 },
+      { state: "state_5", eatImage: "eat_5", weight: 0.05 },
     ]
 
     const totalWeight = states.reduce((sum, state) => sum + state.weight, 0)
