@@ -107,7 +107,7 @@ export default function GarySection() {
       { state: "state_2", eatImage: "eat_2", weight: 600 },
       { state: "state_3", eatImage: "eat_3", weight: 300 },
       { state: "state_4", eatImage: "eat_4", weight: 100 },
-      { state: "state_5", eatImage: "eat_5", weight: 0.05 },
+      { state: "state_5", eatImage: "eat_5", weight: 0.1 },
     ]
 
     const totalWeight = states.reduce((sum, state) => sum + state.weight, 0)
@@ -220,16 +220,13 @@ export default function GarySection() {
       setCaptchaVisible(true)
       return
     }
-
+  
     if (captchaResetCount >= 200) {
       setCaptchaVisible(true)
       setCaptchaVerified(false)
       console.warn("CAPTCHA required. Displaying CAPTCHA.")
       return
     }
-
-    setClickCount((prev) => prev + 1)
-    setCaptchaResetCount((prev) => prev + 1)
   
     console.log("Nonce validated, proceeding...")
   
@@ -253,23 +250,28 @@ export default function GarySection() {
   
     updateCountryClicks(state)
   
-    setClickCount((prevCount) => {
-      let increment = 0
-      if (state === "state_1") increment = 1
-      else if (state === "state_2") increment = 2
-      else if (state === "state_3") increment = 5
-      else if (state === "state_4") increment = 10
-      else if (state === "state_5") {
-        setShowAirdropWin(true)
-        increment = 20
-      }
-      return prevCount + increment
-    })
-  
+    // Only increment click counts after animation delay
     setTimeout(() => {
       setGaryImage("/images/gary_happy.png")
       setIsEating(false)
-    }, 500)
+  
+      setClickCount((prevCount) => {
+        let increment = 0
+        if (state === "state_1") increment = 1
+        else if (state === "state_2") increment = 2
+        else if (state === "state_3") increment = 5
+        else if (state === "state_4") increment = 10
+        else if (state === "state_5") {
+          setShowAirdropWin(true)
+          increment = 20
+        }
+        console.log(`Incrementing by ${increment}`)
+        return prevCount + increment
+      })
+  
+      setCaptchaResetCount((prev) => prev + 1)
+      console.log("Click registered after animation.")
+    }, 500) // Syncs with animation duration
   }
 
   return (
@@ -283,7 +285,7 @@ export default function GarySection() {
           <div className="mb-4">
             <ReCAPTCHA
               sitekey={CAPTCHA_SITE_KEY}
-              onChange={() => setCaptchaVerified(true)} // Mark CAPTCHA as verified
+              onChange={handleCaptchaSuccess}
             />
           </div>
           <button
