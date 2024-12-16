@@ -9,6 +9,7 @@ import { supabase } from "@/lib/supabase"
 import AirdropWin from "@/components/airdrop-win"
 import ClickInfoPopup from "@/components/click-info-popup"
 import FingerprintJS from "@fingerprintjs/fingerprintjs"
+import ReCAPTCHA from "react-google-recaptcha"
 
 export default function GarySection() {
   const [garyImage, setGaryImage] = useState("/images/gary_happy.png")
@@ -28,23 +29,38 @@ export default function GarySection() {
   const [clickCount, setClickCount] = useState(0)
   const [showAirdropWin, setShowAirdropWin] = useState(false)
   const [botDetected, setBotDetected] = useState(false)
+  const [captchaVisible, setCaptchaVisible] = useState(false)
+  const [captchaVerified, setCaptchaVerified] = useState(false)
+
+  const CAPTCHA_SITE_KEY = "6LfiEp0qAAAAAAKwr3XEAGNaloI3-iuXnyDj8aPm"
 
   useEffect(() => {
     // Generate a secure nonce when the page loads
-    const generateNonce = () => uuidv4() // Use uuid instead of crypto.randomUUID
-    const newNonce = generateNonce()
-    setNonce(newNonce)
-    localStorage.setItem("gary_nonce", newNonce)
+    const generateNonce = () => {
+      const storedNonce = localStorage.getItem("gary_nonce")
+      if (!storedNonce) {
+        const newNonce = uuidv4() // Generate a new nonce if not already set
+        setNonce(newNonce)
+        localStorage.setItem("gary_nonce", newNonce)
+      } else {
+        setNonce(storedNonce) // Use the existing nonce if already set
+      }
+    }
+  
+    generateNonce()
   }, [])
 
   const validateNonce = () => {
     const storedNonce = localStorage.getItem("gary_nonce")
     if (storedNonce === nonce) {
-      const newNonce = uuidv4() // Use uuid instead of crypto.randomUUID
+      const newNonce = uuidv4() // Generate a new nonce after successful validation
       setNonce(newNonce)
       localStorage.setItem("gary_nonce", newNonce)
       return true
-    }
+    } 
+  
+    // If nonce is invalid or missing, log a warning and return false
+    console.warn("Invalid or missing nonce.")
     return false
   }
 
@@ -178,29 +194,36 @@ export default function GarySection() {
       console.warn("Blocked an untrusted (scripted) click!")
       return
     }
-
+  
     if (botDetected) {
       console.warn("Bot activity detected. Click blocked.")
       return
     }
-
+  
     if (!validateNonce()) {
       console.warn("Invalid or missing nonce. Blocking click.")
       return
     }
-
+  
+    // Show CAPTCHA if it's not verified and the click count reaches 20
+    if (!captchaVerified && clickCount >= 20) {
+      console.warn("CAPTCHA required. Displaying CAPTCHA.")
+      setCaptchaVisible(true)
+      return
+    }
+  
     console.log("Nonce validated, proceeding...")
-
+  
     if (isEating) return
     setIsEating(true)
-
+  
     const audio = new Audio("/sounds/eat.mp3")
     audio.play()
-
+  
     const { state, eatImage } = getRandomState()
-
+  
     setGaryImage(`/images/${eatImage}.png`)
-
+  
     setImageStats((prevStats) => {
       const key = state as keyof typeof prevStats
       const newStats = { ...prevStats, [key]: prevStats[key] + 1 }
@@ -208,9 +231,9 @@ export default function GarySection() {
       setTimeout(() => setHighlightedBox(null), 300)
       return newStats
     })
-
+  
     updateCountryClicks(state)
-
+  
     setClickCount((prevCount) => {
       let increment = 0
       if (state === "state_1") increment = 1
@@ -223,7 +246,7 @@ export default function GarySection() {
       }
       return prevCount + increment
     })
-
+  
     setTimeout(() => {
       setGaryImage("/images/gary_happy.png")
       setIsEating(false)
@@ -232,98 +255,152 @@ export default function GarySection() {
 
   return (
     <div className="relative mt-6 flex flex-col items-center justify-center lg:absolute lg:left-[80%] lg:top-[67%] lg:mt-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform">
-      {isMobile ? (
-        <>
-          <div className="mb-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4">
-            {Object.entries(imageStats).map(([state, count]) => (
-              <div
-                key={state}
-                className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                  highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
-                }`}
-              >
-                <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
-                <div className="text-lg font-bold text-black">{count}</div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-between gap-4">
-            <ClickInfoPopup />
-            <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
-          </div>
-          <Leaderboard />
-          <div className="relative mt-8">
-            <div className="absolute -top-0 left-1/2 left-[25%] h-[100px] w-[160px] -translate-x-1/2 transform">
-              <Image
-                src={`/images/story/slide2/bubble_m.png`}
-                alt="Speech Bubble"
-                width={160}
-                height={100}
-                className="object-contain"
-              />
-              <p className="text-md absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center font-bold text-black">
-                Click to feed me and get free $GARA
-              </p>
-            </div>
-            <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
-              <Image
-                src={garyImage}
-                alt="Gary"
-                width={200}
-                height={260}
-                className="ml-[180px] h-[260px] w-[200px] object-contain"
-              />
-            </button>
-          </div>
-          <div className="mt-6">
-            <p className="mb-4 text-center text-xl font-bold text-white lg:text-2xl">
-              Gary doesn&apos;t have much time left
-            </p>
-            <CountdownTimer />
-          </div>
-        </>
-      ) : (
-        <>
-          <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
-            <div className="relative h-[300px] w-[250px]">
-              <Image src={garyImage} alt="Gary" layout="fill" objectFit="contain" className="absolute" />
-            </div>
-          </button>
-          <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
-            <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
-              Click to feed me and get free $GARA
-            </p>
-            <Image
-              src="/images/story/slide1/bubble.png"
-              alt="Speech Bubble"
-              width={256}
-              height={148}
-              className="object-contain"
+      {captchaVisible && !captchaVerified ? (
+        // Render the CAPTCHA when it's visible and not verified
+        <div className="captcha-container flex flex-col items-center justify-center p-4 bg-gray-800 rounded-lg shadow-md">
+          <p className="mb-4 text-lg font-bold text-white">
+            Please verify that you are human to continue!
+          </p>
+          <div className="mb-4">
+            <ReCAPTCHA
+              sitekey={CAPTCHA_SITE_KEY}
+              onChange={() => setCaptchaVerified(true)} // Mark CAPTCHA as verified
             />
           </div>
-          <div className="mt-4 flex flex-nowrap items-center justify-center gap-2 lg:gap-4">
-            {Object.entries(imageStats).map(([state, count]) => (
-              <div
-                key={state}
-                className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                  highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
-                }`}
-              >
-                <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
-                <div className="text-lg font-bold text-black">{count}</div>
+          <button
+            onClick={() => {
+              if (captchaVerified) setCaptchaVisible(false) // Hide CAPTCHA if verified
+            }}
+            className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none"
+          >
+            Continue
+          </button>
+        </div>
+      ) : (
+        // Render the rest of the UI if CAPTCHA is either not visible or already verified
+        <>
+          {isMobile ? (
+            <>
+              <div className="mb-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4">
+                {Object.entries(imageStats).map(([state, count]) => (
+                  <div
+                    key={state}
+                    className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
+                      highlightedBox === state
+                        ? "bg-yellow-300"
+                        : "bg-gradient-to-t from-blue-100 via-white to-white"
+                    }`}
+                  >
+                    <Image
+                      src={`/images/${state}.png`}
+                      alt={state}
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <div className="text-lg font-bold text-black">{count}</div>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <div className="mt-4 flex items-center justify-between gap-4">
-            <ClickInfoPopup />
-            <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
-          </div>
-          <Leaderboard />
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <ClickInfoPopup />
+                <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
+              </div>
+              <Leaderboard />
+              <div className="relative mt-8">
+                <div className="absolute -top-0 left-1/2 left-[25%] h-[100px] w-[160px] -translate-x-1/2 transform">
+                  <Image
+                    src={`/images/story/slide2/bubble_m.png`}
+                    alt="Speech Bubble"
+                    width={160}
+                    height={100}
+                    className="object-contain"
+                  />
+                  <p className="text-md absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center font-bold text-black">
+                    Click to feed me and get free $GARA
+                  </p>
+                </div>
+                <button
+                  onClick={(event) => handleGaryClick(event)}
+                  className="focus:outline-none"
+                >
+                  <Image
+                    src={garyImage}
+                    alt="Gary"
+                    width={200}
+                    height={260}
+                    className="ml-[180px] h-[260px] w-[200px] object-contain"
+                  />
+                </button>
+              </div>
+              <div className="mt-6">
+                <p className="mb-4 text-center text-xl font-bold text-white lg:text-2xl">
+                  Gary doesn&apos;t have much time left
+                </p>
+                <CountdownTimer />
+              </div>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={(event) => handleGaryClick(event)}
+                className="focus:outline-none"
+              >
+                <div className="relative h-[300px] w-[250px]">
+                  <Image
+                    src={garyImage}
+                    alt="Gary"
+                    layout="fill"
+                    objectFit="contain"
+                    className="absolute"
+                  />
+                </div>
+              </button>
+              <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
+                <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
+                  Click to feed me and get free $GARA
+                </p>
+                <Image
+                  src="/images/story/slide1/bubble.png"
+                  alt="Speech Bubble"
+                  width={256}
+                  height={148}
+                  className="object-contain"
+                />
+              </div>
+              <div className="mt-4 flex flex-nowrap items-center justify-center gap-2 lg:gap-4">
+                {Object.entries(imageStats).map(([state, count]) => (
+                  <div
+                    key={state}
+                    className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
+                      highlightedBox === state
+                        ? "bg-yellow-300"
+                        : "bg-gradient-to-t from-blue-100 via-white to-white"
+                    }`}
+                  >
+                    <Image
+                      src={`/images/${state}.png`}
+                      alt={state}
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <div className="text-lg font-bold text-black">{count}</div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center justify-between gap-4">
+                <ClickInfoPopup />
+                <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
+              </div>
+              <Leaderboard />
+            </>
+          )}
+  
+          {/* Airdrop Popup */}
+          {showAirdropWin && <AirdropWin onClose={() => setShowAirdropWin(false)} />}
         </>
       )}
-
-      {/* Airdrop Popup */}
-      {showAirdropWin && <AirdropWin onClose={() => setShowAirdropWin(false)} />}
     </div>
   )
 }
