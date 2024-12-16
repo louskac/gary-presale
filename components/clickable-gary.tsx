@@ -31,6 +31,7 @@ export default function GarySection() {
   const [botDetected, setBotDetected] = useState(false)
   const [captchaVisible, setCaptchaVisible] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
+  const [captchaResetCount, setCaptchaResetCount] = useState(0)
 
   const CAPTCHA_SITE_KEY = "6LfiEp0qAAAAAAKwr3XEAGNaloI3-iuXnyDj8aPm"
 
@@ -63,6 +64,14 @@ export default function GarySection() {
     console.warn("Invalid or missing nonce.")
     return false
   }
+
+  const handleCaptchaSuccess = () => {
+    setCaptchaVerified(true)
+    setCaptchaVisible(false)
+    setCaptchaResetCount(0) // Reset the click counter after CAPTCHA verification
+    console.log("CAPTCHA verified. Continuing clicks.")
+  }
+
 
   useEffect(() => {
     const detectBot = async () => {
@@ -211,6 +220,16 @@ export default function GarySection() {
       setCaptchaVisible(true)
       return
     }
+
+    if (captchaResetCount >= 200) {
+      setCaptchaVisible(true)
+      setCaptchaVerified(false)
+      console.warn("CAPTCHA required. Displaying CAPTCHA.")
+      return
+    }
+
+    setClickCount((prev) => prev + 1)
+    setCaptchaResetCount((prev) => prev + 1)
   
     console.log("Nonce validated, proceeding...")
   
