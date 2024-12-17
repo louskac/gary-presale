@@ -244,7 +244,7 @@ export default function Leaderboard() {
             isMobile ? "top-full" : "bottom-full"
           }`}
         >
-          <div className="max-h-[400px] overflow-visible">
+          <div className="max-h-[400px] overflow-y-scroll">
             <table className="w-full table-fixed text-left">
               <thead className="sticky top-0 z-10 bg-gary-pink">
                 <tr>
