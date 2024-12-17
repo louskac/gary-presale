@@ -24,7 +24,7 @@ function Tokenomics() {
         <Heading stroke={false} className="text-center text-3xl lg:text-6xl">
           $GARA tokenomics
         </Heading>
-        <div className="m-auto mt-10 flex items-center justify-center">
+        <div className="m-auto mt-10 flex items-center justify-center p-4">
           <img src={isMobile ? tokenomicsPie : tokenomicsGARY} alt="tokenomics" />
         </div>
       </div>

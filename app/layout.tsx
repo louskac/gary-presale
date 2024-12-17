@@ -23,7 +23,7 @@ export default function RootLayout({ children, params }: { children: React.React
   const messages = useMessages("en")
 
   return (
-    <html lang="en" className="overflow-hidden">
+    <html lang="en" className="">
       <head>
         {/* Google Analytics */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-SK1L5K78GF" />
@@ -52,7 +52,7 @@ export default function RootLayout({ children, params }: { children: React.React
           }}
         />
       </head>
-      <body className={`${balooBhai.variable} overflow-hidden antialiased`} suppressHydrationWarning>
+      <body className={`${balooBhai.variable} antialiased`} suppressHydrationWarning>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-NBHQJ87K"

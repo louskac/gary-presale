@@ -4,88 +4,112 @@ import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { AnchorLink } from "./anchor-link"
+import { useEffect } from "react"
 
 const links = [
   { name: "Gary's story", anchor: "about" },
   { name: "Help Gary", anchor: "help-gary" },
   { name: "Earn with Gary", anchor: "earn" },
-  { name: "Join us!", anchor: "save" },
   { name: "FAQ", anchor: "faq" },
+  { name: "Join us!", anchor: "save" },
+  { name: "Tokenomics", anchor: "tokenomics" },
+  { name: "Roadmap", anchor: "roadmap" },
   { name: "WhitePaper", href: "/whitepaper/WhitepaperCG.pdf" },
 ]
 
 export const NavBar = () => {
+  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
+  const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent"
   return (
-    <div className="container mx-auto w-full py-4 lg:grid lg:grid-cols-[200px_1fr_200px] lg:items-center lg:justify-between lg:gap-8">
-      <div className="hidden h-14 w-14 rounded-full lg:block">
-        <Image src="/logo.png" alt="Gary" width={60} height={60} />
+    <>
+      <div
+        className={`z-[999] hidden w-full transform items-center justify-around py-4 transition-all lg:fixed lg:flex ${navbarHandlerScroll}`}
+      >
+        <div className="hidden h-14 w-14 flex-shrink-0 rounded-full lg:block">
+          <Image src="/logo.png" alt="Gary" width={60} height={60} />
+        </div>
+
+        <nav className="hidden lg:flex">
+          <ul className="flex flex-row gap-2">
+            {links.map((link) => (
+              <li key={link.name}>
+                {link.href ? (
+                  <a href={link.href} target="_blank">
+                    <Button variant="ghost" className="text-lg font-bold text-white">
+                      {link.name}
+                    </Button>
+                  </a>
+                ) : (
+                  <AnchorLink anchor={link.anchor}>
+                    <Button variant="ghost" className="text-lg font-bold text-white">
+                      {link.name}
+                    </Button>
+                  </AnchorLink>
+                )}
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="hidden flex-shrink-0 lg:flex lg:items-center lg:justify-end">
+          <AnchorLink anchor="help-gary">
+            <Button className="my-2 h-14 border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
+              Buy $GARA coin
+            </Button>
+          </AnchorLink>
+        </div>
       </div>
 
-      <nav className="hidden lg:flex lg:justify-center">
-        <ul className="flex flex-row gap-2">
-          {links.map((link) => (
-            <li key={link.name}>
-              {link.href ? (
-                <a href={link.href} target="_blank">
-                  <Button variant="ghost" className="text-xl font-bold text-white">
-                    {link.name}
-                  </Button>
-                </a>
-              ) : (
-                <AnchorLink anchor={link.anchor}>
-                  <Button variant="ghost" className="text-xl font-bold text-white">
-                    {link.name}
-                  </Button>
-                </AnchorLink>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-      <div className="hidden lg:flex lg:items-center lg:justify-end">
-        <AnchorLink anchor="help-gary">
-          <Button className="my-2 h-14 border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
-            Buy $GARA coin
-          </Button>
-        </AnchorLink>
-      </div>
       {/* Burger Menu Button */}
-      <button
-        className="fixed right-4 top-4 z-50 z-[9999] focus:outline-none lg:hidden"
-        onClick={() => setMenuOpen(!menuOpen)}
-      >
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#061022]">
-          {menuOpen ? (
-            <Image src="/icons/close.svg" alt="Close" width={24} height={24} />
-          ) : (
-            <Image src="/icons/burger-menu.svg" alt="Menu" width={24} height={24} />
-          )}
-        </div>
-      </button>
+      <div className="fixed right-4 top-4 z-[9999]">
+        <button className="focus:outline-none lg:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#061022]">
+            {menuOpen ? (
+              <Image src="/icons/close.svg" alt="Close" width={24} height={24} />
+            ) : (
+              <Image src="/icons/burger-menu.svg" alt="Menu" width={24} height={24} />
+            )}
+          </div>
+        </button>
+      </div>
 
       {menuOpen && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-black bg-opacity-90">
-          <div className="mb-8">
-            <Image src="/logo.png" alt="Gary" width={100} height={100} />
+        <div className="fixed inset-0 z-[9998] flex h-full w-full flex-col items-center justify-center overflow-y-auto bg-black bg-opacity-90 pb-10 pt-10">
+          <div className="my-8">
+            <Image src="/logo.png" alt="Gary" width={75} height={75} />
           </div>
 
-          <ul className="flex flex-col gap-6 text-center">
+          <ul className="flex flex-col gap-4 text-center">
             {links.map((link) => (
               <li key={link.name}>
                 {link.href ? (
                   <a
                     href={link.href}
                     target="_blank"
-                    className="text-2xl font-bold text-white"
+                    className="text-lg font-bold text-white"
                     onClick={() => setMenuOpen(false)}
                   >
                     {link.name}
                   </a>
                 ) : (
                   <AnchorLink anchor={link.anchor}>
-                    <span className="text-2xl font-bold text-white" onClick={() => setMenuOpen(false)}>
+                    <span className="text-lg font-bold text-white" onClick={() => setMenuOpen(false)}>
                       {link.name}
                     </span>
                   </AnchorLink>
@@ -93,10 +117,10 @@ export const NavBar = () => {
               </li>
             ))}
           </ul>
-          <div className="mt-8">
+          <div className="mt-4">
             <AnchorLink anchor="help-gary">
               <Button
-                className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
+                className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
                 onClick={() => setMenuOpen(false)} // Close menu on click
               >
                 Buy $GARA coin
@@ -122,6 +146,6 @@ export const NavBar = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

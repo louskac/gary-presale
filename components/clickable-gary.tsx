@@ -47,7 +47,7 @@ export default function GarySection() {
         setNonce(storedNonce) // Use the existing nonce if already set
       }
     }
-  
+
     generateNonce()
   }, [])
 
@@ -58,8 +58,8 @@ export default function GarySection() {
       setNonce(newNonce)
       localStorage.setItem("gary_nonce", newNonce)
       return true
-    } 
-  
+    }
+
     // If nonce is invalid or missing, log a warning and return false
     console.warn("Invalid or missing nonce.")
     return false
@@ -71,7 +71,6 @@ export default function GarySection() {
     setCaptchaResetCount(0) // Reset the click counter after CAPTCHA verification
     console.log("CAPTCHA verified. Continuing clicks.")
   }
-
 
   useEffect(() => {
     const detectBot = async () => {
@@ -203,43 +202,43 @@ export default function GarySection() {
       console.warn("Blocked an untrusted (scripted) click!")
       return
     }
-  
+
     if (botDetected) {
       console.warn("Bot activity detected. Click blocked.")
       return
     }
-  
+
     if (!validateNonce()) {
       console.warn("Invalid or missing nonce. Blocking click.")
       return
     }
-  
+
     // Show CAPTCHA if it's not verified and the click count reaches 20
     if (!captchaVerified && clickCount >= 20) {
       console.warn("CAPTCHA required. Displaying CAPTCHA.")
       setCaptchaVisible(true)
       return
     }
-  
+
     if (captchaResetCount >= 200) {
       setCaptchaVisible(true)
       setCaptchaVerified(false)
       console.warn("CAPTCHA required. Displaying CAPTCHA.")
       return
     }
-  
+
     console.log("Nonce validated, proceeding...")
-  
+
     if (isEating) return
     setIsEating(true)
-  
+
     const audio = new Audio("/sounds/eat.mp3")
     audio.play()
-  
+
     const { state, eatImage } = getRandomState()
-  
+
     setGaryImage(`/images/${eatImage}.png`)
-  
+
     setImageStats((prevStats) => {
       const key = state as keyof typeof prevStats
       const newStats = { ...prevStats, [key]: prevStats[key] + 1 }
@@ -247,14 +246,14 @@ export default function GarySection() {
       setTimeout(() => setHighlightedBox(null), 300)
       return newStats
     })
-  
+
     updateCountryClicks(state)
-  
+
     // Only increment click counts after animation delay
     setTimeout(() => {
       setGaryImage("/images/gary_happy.png")
       setIsEating(false)
-  
+
       setClickCount((prevCount) => {
         let increment = 0
         if (state === "state_1") increment = 1
@@ -268,7 +267,7 @@ export default function GarySection() {
         console.log(`Incrementing by ${increment}`)
         return prevCount + increment
       })
-  
+
       setCaptchaResetCount((prev) => prev + 1)
       console.log("Click registered after animation.")
     }, 500) // Syncs with animation duration
@@ -278,21 +277,16 @@ export default function GarySection() {
     <div className="relative mt-6 flex flex-col items-center justify-center lg:absolute lg:left-[80%] lg:top-[67%] lg:mt-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform">
       {captchaVisible && !captchaVerified ? (
         // Render the CAPTCHA when it's visible and not verified
-        <div className="captcha-container flex flex-col items-center justify-center p-4 bg-gray-800 rounded-lg shadow-md">
-          <p className="mb-4 text-lg font-bold text-white">
-            Please verify that you are human to continue!
-          </p>
+        <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
+          <p className="mb-4 text-lg font-bold text-white">Please verify that you are human to continue!</p>
           <div className="mb-4">
-            <ReCAPTCHA
-              sitekey={CAPTCHA_SITE_KEY}
-              onChange={handleCaptchaSuccess}
-            />
+            <ReCAPTCHA sitekey={CAPTCHA_SITE_KEY} onChange={handleCaptchaSuccess} />
           </div>
           <button
             onClick={() => {
               if (captchaVerified) setCaptchaVisible(false) // Hide CAPTCHA if verified
             }}
-            className="px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 focus:outline-none"
+            className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none"
           >
             Continue
           </button>
@@ -307,18 +301,10 @@ export default function GarySection() {
                   <div
                     key={state}
                     className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                      highlightedBox === state
-                        ? "bg-yellow-300"
-                        : "bg-gradient-to-t from-blue-100 via-white to-white"
+                      highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
                     }`}
                   >
-                    <Image
-                      src={`/images/${state}.png`}
-                      alt={state}
-                      width={32}
-                      height={32}
-                      className="rounded"
-                    />
+                    <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
                     <div className="text-lg font-bold text-black">{count}</div>
                   </div>
                 ))}
@@ -341,16 +327,13 @@ export default function GarySection() {
                     Click to feed me and get free $GARA
                   </p>
                 </div>
-                <button
-                  onClick={(event) => handleGaryClick(event)}
-                  className="focus:outline-none"
-                >
+                <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
                   <Image
                     src={garyImage}
                     alt="Gary"
                     width={200}
                     height={260}
-                    className="ml-[180px] h-[260px] w-[200px] object-contain"
+                    className="ml-[180px] h-[240px] w-[180px] object-contain"
                   />
                 </button>
               </div>
@@ -363,18 +346,9 @@ export default function GarySection() {
             </>
           ) : (
             <>
-              <button
-                onClick={(event) => handleGaryClick(event)}
-                className="focus:outline-none"
-              >
+              <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
                 <div className="relative h-[300px] w-[250px]">
-                  <Image
-                    src={garyImage}
-                    alt="Gary"
-                    layout="fill"
-                    objectFit="contain"
-                    className="absolute"
-                  />
+                  <Image src={garyImage} alt="Gary" layout="fill" objectFit="contain" className="absolute" />
                 </div>
               </button>
               <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
@@ -394,18 +368,10 @@ export default function GarySection() {
                   <div
                     key={state}
                     className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                      highlightedBox === state
-                        ? "bg-yellow-300"
-                        : "bg-gradient-to-t from-blue-100 via-white to-white"
+                      highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
                     }`}
                   >
-                    <Image
-                      src={`/images/${state}.png`}
-                      alt={state}
-                      width={32}
-                      height={32}
-                      className="rounded"
-                    />
+                    <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
                     <div className="text-lg font-bold text-black">{count}</div>
                   </div>
                 ))}
@@ -417,7 +383,7 @@ export default function GarySection() {
               <Leaderboard />
             </>
           )}
-  
+
           {/* Airdrop Popup */}
           {showAirdropWin && <AirdropWin onClose={() => setShowAirdropWin(false)} />}
         </>
