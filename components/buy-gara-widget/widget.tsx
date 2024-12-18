@@ -1383,7 +1383,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     <section
       id="buy-gara"
       className={cn(
-        "relative w-full max-w-full flex-1 rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
+        "relative w-full max-w-full flex-1 rounded-2xl lg:rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
         className
       )}
     >
@@ -1460,7 +1460,12 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
 
-        <div className="mt-8 flex flex-col gap-4 lg:flex-row mb-4">
+        <div
+          className={cn(
+            "mt-8 gap-4",
+            address ? "flex flex-col" : "flex flex-col lg:flex-row"
+          )}
+        >
           <div className="flex-1">
             <ConnectButton
               label={t("btnConnectWallet")}
