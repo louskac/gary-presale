@@ -1458,7 +1458,7 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex flex-col gap-4 lg:flex-row">
           <div className="flex-1">
             <ConnectButton
               label={t("btnConnectWallet")}

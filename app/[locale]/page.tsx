@@ -43,7 +43,7 @@ export default function Home() {
       <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
         <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill />
-        <div className="flex h-full w-full lg:w-[550px] flex-1 flex-col px-4 sm:px-6">
+        <div className="flex h-full w-full lg:w-[550px] flex-1 flex-col px-4 sm:px-6 mt-10 lg:mt-32">
           <SaveGary />
           <BuyGara />
           <div className="absolute -bottom-[52px] -left-0 hidden h-[160px] w-full lg:block z-[9999]">
@@ -53,7 +53,7 @@ export default function Home() {
         
 
         {/* Add GarySection */}
-        <div className="max-w-[300px]">
+        <div className="max-w-full lg:max-w-[300px]">
           <GarySection />
         </div>
       </section>

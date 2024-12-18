@@ -315,7 +315,7 @@ export default function GarySection() {
               </div>
               <Leaderboard />
               <div className="relative mt-8">
-                <div className="absolute -top-0 left-1/2 left-[25%] h-[100px] w-[160px] -translate-x-1/2 transform">
+                <div className="absolute -top-0 left-1/2 left-[15%] h-[100px] w-[160px] -translate-x-1/2 transform">
                   <Image
                     src={`/images/story/slide2/bubble_m.png`}
                     alt="Speech Bubble"
@@ -333,11 +333,11 @@ export default function GarySection() {
                     alt="Gary"
                     width={200}
                     height={260}
-                    className="ml-[180px] h-[240px] w-[180px] object-contain"
+                    className="ml-[150px] h-[240px] w-[180px] object-contain"
                   />
                 </button>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 mb-20">
                 <p className="mb-4 text-center text-xl font-bold text-white lg:text-2xl">
                   Gary doesn&apos;t have much time left
                 </p>
