@@ -995,7 +995,7 @@ const calculateRound = () => {
   }
 }
 
-export function BuyGara({ className }: { className?: string }) {
+export function BuyGara({ className, hideHeader = false }: { className?: string; hideHeader?: boolean }) {
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
 
   const t = useTranslations("GARA.main.buyGARA")
@@ -1387,7 +1387,9 @@ export function BuyGara({ className }: { className?: string }) {
         className
       )}
     >
-      <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">{t("header")}</h3>
+      {!hideHeader && (
+        <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">{t("header")}</h3>
+      )}
       <Table className="text-base">
         <TableBody className="text-base">
           <TableRow className="!border-none hover:bg-transparent">
