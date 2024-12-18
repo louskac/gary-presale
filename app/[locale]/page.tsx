@@ -46,14 +46,13 @@ export default function Home() {
         <div className="flex h-full w-full lg:w-[550px] flex-1 flex-col px-4 sm:px-6 mt-10 lg:mt-32">
           <SaveGary />
           <BuyGara />
-          <div className="absolute -bottom-[52px] -left-0 hidden h-[160px] w-full lg:block z-[9999]">
+          <div className="absolute -bottom-[12px] -left-0 hidden h-[160px] w-full lg:block z-[9999]">
             <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
           </div>
         </div>
         
-
         {/* Add GarySection */}
-        <div className="max-w-full lg:max-w-[300px]">
+        <div className="max-w-full lg:max-w-[300px] mb-10">
           <GarySection />
         </div>
       </section>
