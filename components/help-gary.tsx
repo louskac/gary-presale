@@ -81,7 +81,7 @@ export const HelpGary = () => {
             <BuyGara />
             {/* monda */}
             {/* Ice Image */}
-            <div className="absolute -bottom-[7.5rem] -left-3 hidden h-[160px] w-[106%] lg:block">
+            <div className="absolute -bottom-[8rem] -left-3 hidden h-[160px] w-[106%] lg:block">
               <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
             </div>
 

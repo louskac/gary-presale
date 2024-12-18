@@ -1383,17 +1383,13 @@ export function BuyGara({ className }: { className?: string }) {
     <section
       id="buy-gara"
       className={cn(
-        "relative mt-4 w-full max-w-full flex-1 rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md",
+        "relative w-full max-w-full flex-1 rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
         className
       )}
     >
       <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">{t("header")}</h3>
       <Table className="text-base">
         <TableBody className="text-base">
-          <TableRow className="!border-none hover:bg-transparent">
-            <TableCell className="max-w-[80px] !p-1 font-heading font-bold">{t("totalTokens")}</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink">900M GARA</TableCell>
-          </TableRow>
           <TableRow className="!border-none hover:bg-transparent">
             <TableCell className="!p-1 font-bold">{t("distributedTokens")}</TableCell>
             <TableCell className="!p-1 text-end font-bold text-gary-pink">99M GARA</TableCell>
@@ -1462,16 +1458,24 @@ export function BuyGara({ className }: { className?: string }) {
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
 
-        <div className="mt-8 flex flex-col gap-4">
-          <ConnectButton label={t("btnConnectWallet")} showBalance={false} />
-          <Button
-            type="submit"
-            variant={address ? "default" : "outlinePrimary"}
-            disabled={!address || hasUnsufficientBalance || hasLowerInputBalance || isCalculatingMinBalance}
-            className="h-12 rounded-full bg-[#061022] text-xl font-bold text-[#FFAE17]"
-          >
-            {t("btnBuyGARA")}
-          </Button>
+        <div className="mt-8 flex gap-4">
+          <div className="flex-1">
+            <ConnectButton
+              label={t("btnConnectWallet")}
+              showBalance={false}
+              className="h-12 w-full rounded-full bg-[#FF4473] text-xl font-bold text-white text-center"
+            />
+          </div>
+          <div className="flex-1">
+            <Button
+              type="submit"
+              variant={address ? "default" : "outlinePrimary"}
+              disabled={!address || hasUnsufficientBalance || hasLowerInputBalance || isCalculatingMinBalance}
+              className="h-12 w-full rounded-full bg-[#061022] text-xl font-bold text-[#FFAE17] text-center"
+            >
+              {t("btnBuyGARA")}
+            </Button>
+          </div>
         </div>
         <TransactionStatusModal
           open={open}
@@ -1505,15 +1509,6 @@ export function BuyGara({ className }: { className?: string }) {
         </Button>
       </div>
       */}
-      <p className="my-4 flex items-center justify-center space-x-2 text-nowrap">
-        Supported Chains <b className="ml-1"> ETH, BNB, POL</b>
-      </p>
-      <p className="my-4 flex items-center justify-center space-x-2">
-        <span className="text-xl leading-none">{t("poweredBy")}</span>
-        <span className="inline-flex items-center">
-          <Image src={Polygon} alt="Polygon" width={80} height={40} />
-        </span>
-      </p>
     </section>
   )
 }

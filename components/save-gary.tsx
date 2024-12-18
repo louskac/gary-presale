@@ -31,16 +31,6 @@ export const SaveGary = () => {
           The cutest and most determined penguin in the crypto world
         </p>
       </div>
-
-      {/* <p className="font-bold text-gary-yellow">
-    Contract presale: <span className="font-normal text-white">0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79</span>
-  </p> */}
-      <div className="mt-6 hidden sm:block">
-        <p className="mb-4 text-center text-xl font-bold text-gary-blue lg:text-2xl">
-          Gary doesn&apos;t have much time left
-        </p>
-        <CountdownTimer />
-      </div>
     </div>
   )
 }

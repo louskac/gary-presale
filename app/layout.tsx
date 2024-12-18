@@ -51,6 +51,20 @@ export default function RootLayout({ children, params }: { children: React.React
             `,
           }}
         />
+        {/* Smartlook */}
+        <Script
+          id="smartlook-script"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.smartlook||(function(d) {
+                var o=smartlook=function(){ o.api.push(arguments)},h=d.getElementsByTagName('head')[0];
+                var c=d.createElement('script');o.api=new Array();c.async=true;c.type='text/javascript';
+                c.charset='utf-8';c.src='https://web-sdk.smartlook.com/recorder.js';h.appendChild(c);
+              })(document);
+              smartlook('init', '93d6b3147b56a59130397d2b41538ff0d6f8b009', { region: 'eu' });
+            `,
+          }}
+        />
       </head>
       <body className={`${balooBhai.variable} antialiased`} suppressHydrationWarning>
         <noscript>

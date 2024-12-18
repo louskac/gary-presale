@@ -15,6 +15,7 @@ import GarySection from "@/components/clickable-gary"
 import Roadmap from "@/components/roadmap"
 import Tokenomics from "@/components/tokenomics"
 import StickyButton from "@/components/sticky-button"
+import { BuyGara } from "@/components/buy-gara-widget/widget"
 
 export default function Home() {
   const [backgroundSrc, setBackgroundSrc] = useState("/backgrounds/0.jpg")
@@ -42,15 +43,18 @@ export default function Home() {
       <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
         <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill />
-        <div className="flex h-full w-full flex-1 flex-col px-4 sm:px-6">
+        <div className="flex h-full w-full lg:w-[550px] flex-1 flex-col px-4 sm:px-6">
           <SaveGary />
+          <BuyGara />
+          <div className="absolute -bottom-[52px] -left-0 hidden h-[160px] w-full lg:block z-[9999]">
+            <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
+          </div>
         </div>
+        
 
         {/* Add GarySection */}
-        <GarySection />
-
-        <div className="-z-800 mb-12 mt-0 flex w-full flex-row justify-center sm:mt-6">
-          <ScrollToComicsButton />
+        <div className="max-w-[300px]">
+          <GarySection />
         </div>
       </section>
 

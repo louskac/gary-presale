@@ -90,6 +90,7 @@ export default function ClickInfoPopup() {
               ))}
             </tbody>
           </table>
+          <p className="text-center text-xs mt-4">Every click has a chance to earn 100 $GARA! You can win maximum 3 times per day (300 $GARA in total). To receive the $GARA tokens, you need to enter your wallet in the winning pop-up window, and the earned $GARA from the clicks will be credited at the end of each pre-sale round.</p>
         </div>
       )}
     </div>
