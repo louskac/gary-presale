@@ -1383,7 +1383,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     <section
       id="buy-gara"
       className={cn(
-        "relative w-full max-w-full flex-1 rounded-2xl lg:rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
+        "relative w-full max-w-[420px] mx-auto flex-1 rounded-2xl lg:rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
         className
       )}
     >
@@ -1430,16 +1430,19 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       </div>
       <Rounds />
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
-        <div className="mt-4 grid w-full grid-cols-2 gap-2 md:grid-cols-[1fr_150px]">
-          <CoinInput
-            coin="USDC"
-            type="number"
-            placeholder="0.000"
-            {...register("amount", { required: "Amount is required" })}
-            showIcon={false}
-          />
+      <div className="mt-4 grid w-full grid-cols-1 gap-2 md:grid-cols-[1fr_auto]">
+        <CoinInput
+          coin="USDC"
+          type="number"
+          placeholder="0.000"
+          {...register("amount", { required: "Amount is required" })}
+          showIcon={false}
+          className="w-full"
+        />
+        <div className="flex items-center">
           <CurrencySelect name="token" form={form} />
         </div>
+      </div>
         {hasLowerInputBalance && (
           <p className="mt-2 pl-4 text-sm text-red-500">
             Amount must be greater than {minTokenBalance} {token}

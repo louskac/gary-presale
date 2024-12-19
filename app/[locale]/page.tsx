@@ -46,7 +46,7 @@ export default function Home() {
         <div className="flex h-full w-full lg:w-[420px] flex-1 flex-col mt-10 lg:mt-32">
           <SaveGary />
           {/* Wrapper to remove parent padding */}
-          <div className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] -mx-4 sm:-mx-6">
+          <div className="w-full px-0 sm:px-2">
             <BuyGara hideHeader />
           </div>
           <div className="absolute -bottom-[12px] -left-0 hidden h-[160px] w-full lg:block z-[9990]">
