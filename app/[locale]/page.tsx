@@ -42,8 +42,8 @@ export default function Home() {
     <main className="z-50 h-screen">
       <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
-        <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill />
-        <div className="flex h-full w-full lg:w-[550px] flex-1 flex-col mt-10 lg:mt-32">
+        <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill /> 
+        <div className="flex h-full w-full lg:w-[420px] flex-1 flex-col mt-10 lg:mt-32">
           <SaveGary />
           {/* Wrapper to remove parent padding */}
           <div className="w-[calc(100%+2rem)] sm:w-[calc(100%+3rem)] -mx-4 sm:-mx-6">
