@@ -1430,19 +1430,19 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       </div>
       <Rounds />
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
-      <div className="mt-4 grid w-full grid-cols-1 gap-2 md:grid-cols-[1fr_auto]">
-        <CoinInput
-          coin="USDC"
-          type="number"
-          placeholder="0.000"
-          {...register("amount", { required: "Amount is required" })}
-          showIcon={false}
-          className="w-full"
-        />
-        <div className="flex items-center">
-          <CurrencySelect name="token" form={form} />
+        <div className="mt-4 grid w-full grid-cols-[1fr_auto] gap-2">
+          <CoinInput
+            coin="USDC"
+            type="number"
+            placeholder="0.000"
+            {...register("amount", { required: "Amount is required" })}
+            showIcon={false}
+            className="w-full"
+          />
+          <div className="flex items-center">
+            <CurrencySelect name="token" form={form} />
+          </div>
         </div>
-      </div>
         {hasLowerInputBalance && (
           <p className="mt-2 pl-4 text-sm text-red-500">
             Amount must be greater than {minTokenBalance} {token}

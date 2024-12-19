@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleResize = () => {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches
+      const isMobile = window.matchMedia("(max-width: 1750px)").matches
       setBackgroundSrc(isMobile ? "/backgrounds/mobile.png" : "/backgrounds/0.jpg")
     }
 
@@ -43,18 +43,7 @@ export default function Home() {
       <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
         <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill /> 
-        <div className="flex h-full w-full lg:w-[420px] flex-1 flex-col mt-10 lg:mt-32">
-          <SaveGary />
-          {/* Wrapper to remove parent padding */}
-          <div className="w-full px-0 sm:px-2">
-            <BuyGara hideHeader />
-          </div>
-          <div className="absolute -bottom-[12px] -left-0 hidden h-[160px] w-full lg:block z-[9990]">
-            <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
-          </div>
-        </div>
-        
-        {/* Add GarySection */}
+        <SaveGary />
         <div className="max-w-full w-full lg:max-w-[280px] mb-10">
           <GarySection />
         </div>
