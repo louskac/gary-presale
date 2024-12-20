@@ -75,13 +75,13 @@ export const HelpGary = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto grid justify-center gap-8 lg:grid-cols-[1fr_auto] lg:justify-between">
+      <div className="container mx-auto grid justify-center gap-8 lg:grid-cols-[1fr_auto] lg:justify-between px-4">
         {/* Widget First on Mobile */}
-        <div className="order-1 mt-0 lg:order-2">
-          <div className="sticky top-40"> {/* Restoring sticky class */}
+        <div className="order-1 mt-0 lg:order-2 w-full max-w-[340px] sm:max-w-[100%]">
+          <div className="sticky top-40">
             <BuyGara />
             {/* Ice Image */}
-            <div className="absolute -bottom-[7.5rem] -left-3 hidden h-[160px] w-[106%] lg:block">
+            <div className="absolute -bottom-[7.5rem] hidden h-[160px] w-[106%] lg:block">
               <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
             </div>
 

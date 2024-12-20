@@ -99,7 +99,7 @@ export default function Home() {
       </section>
       <section
         id="earn"
-        className="relative flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-24"
+        className="relative flex flex-col justify-center"
       >
         <Image
           src={`/backgrounds/2.jpg`}
