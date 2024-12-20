@@ -105,37 +105,37 @@ const CountdownTimer = ({ className }: { className?: string }) => {
   return (
     <div className={cn("flex items-center justify-center space-x-2", className)}>
       {/* Days */}
-      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md md:min-w-[80px] lg:w-[74px]">
-        <div className="text-lg font-bold text-gary-yellow md:text-xl">{String(timeLeft.days).padStart(2, "0")}</div>
-        <div className="text-xs font-bold text-white md:text-sm">{t("day")}</div>
+      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
+        <div className="text-lg font-bold text-gary-yellow">{String(timeLeft.days).padStart(2, "0")}</div>
+        <div className="text-xs font-bold text-white">{t("day")}</div>
       </div>
 
       {/* Hours */}
       <div className="text-xl font-bold text-secondary">:</div>
 
-      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md md:min-w-[80px] lg:w-[74px]">
-        <div className="text-lg font-bold text-gary-yellow md:text-xl">{String(timeLeft.hours).padStart(2, "0")}</div>
-        <div className="text-xs font-bold text-white md:text-sm">{t("hours")}</div>
+      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
+        <div className="text-lg font-bold text-gary-yellow">{String(timeLeft.hours).padStart(2, "0")}</div>
+        <div className="text-xs font-bold text-white">{t("hours")}</div>
       </div>
 
       {/* Minutes */}
       <div className="text-xl font-bold text-secondary">:</div>
 
-      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md md:min-w-[80px] lg:w-[74px]">
-        <div className="text-lg font-bold text-gary-yellow md:text-xl">
+      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
+        <div className="text-lg font-bold text-gary-yellow">
           {String(timeLeft.minutes).padStart(2, "0")}
         </div>
-        <div className="text-xs font-bold text-white md:text-sm">{t("minutes")}</div>
+        <div className="text-xs font-bold text-white">{t("minutes")}</div>
       </div>
 
       {/* Seconds */}
       <div className="text-xl font-bold text-secondary">:</div>
 
-      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md md:min-w-[80px] lg:w-[74px]">
-        <div className="text-lg font-bold text-gary-yellow md:text-xl">
+      <div className="flex w-[64px] flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
+        <div className="text-lg font-bold text-gary-yellow">
           {String(timeLeft.seconds).padStart(2, "0")}
         </div>
-        <div className="text-xs font-bold text-white md:text-sm">{t("seconds")}</div>
+        <div className="text-xs font-bold text-white">{t("seconds")}</div>
       </div>
     </div>
   )

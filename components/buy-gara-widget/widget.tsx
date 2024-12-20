@@ -1419,7 +1419,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="my-4 flex flex-row justify-center">
         <CountdownTimer />
       </div>
-      <div className="mt-8 grid grid-cols-[1fr_120px_1fr] gap-2">
+      <div className="mt-4 grid grid-cols-[1fr_120px_1fr] gap-2">
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
