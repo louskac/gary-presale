@@ -37,14 +37,13 @@ export default function AirdropWin({ onClose }: { onClose: () => void }) {
       setIsSubmitting(false)
     }
   }
-
+  
   const handleShare = () => {
-    const text = encodeURIComponent("I just won 10 USD worth of GARA in an airdrop! 🎉")
-    const url = encodeURIComponent(window.location.href) // Replace with your app URL if needed
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`
-
-    window.open(twitterUrl, "_blank")
-  }
+    const text = encodeURIComponent("I just won 10 USD worth of GARA in an airdrop! 🎉");
+    const url = encodeURIComponent("https://www.helpgary.com");
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+    window.open(twitterUrl, "_blank");
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">

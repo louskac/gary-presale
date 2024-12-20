@@ -25,6 +25,22 @@ export default function RootLayout({ children, params }: { children: React.React
   return (
     <html lang="en" className="">
       <head>
+        {/* Page Metadata */}
+        <title>Save Penguin Gary!</title>
+        <meta name="description" content="Help to save Gary and his job" />
+
+        {/* OpenGraph Metadata */}
+        <meta property="og:title" content="Save Penguin Gary!" />
+        <meta property="og:description" content="Help to save Gary and his job" />
+        <meta property="og:image" content="https://www.helpgary.com/images/tokenomics/tokenomicsGARY.png" /> {/* Full URL */}
+        <meta property="og:url" content="https://www.helpgary.com" />
+        <meta property="og:type" content="website" />
+
+        {/* Twitter Card Metadata */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Save Penguin Gary!" />
+        <meta name="twitter:description" content="Help to save Gary and his job" />
+        <meta name="twitter:image" content="https://www.helpgary.com/images/tokenomics/tokenomicsGARY.png" /> {/* Full URL */}
         {/* Google Analytics */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-SK1L5K78GF" />
         <Script
