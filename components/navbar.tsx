@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { AnchorLink } from "./anchor-link"
-import { useEffect } from "react"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { AnchorLink } from "./anchor-link";
 
 const links = [
   { name: "Gary's story", anchor: "about" },
@@ -15,27 +14,57 @@ const links = [
   { name: "Tokenomics", anchor: "tokenomics" },
   { name: "Roadmap", anchor: "roadmap" },
   { name: "WhitePaper", href: "/whitepaper/WhitepaperCG.pdf" },
-]
+];
 
 export const NavBar = () => {
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
-        setScrolled(true)
+        setScrolled(true);
       } else {
-        setScrolled(false)
+        setScrolled(false);
       }
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+    };
 
-  const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent"
+    // Add scroll listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Hide the sticky-button when menu is open
+  useEffect(() => {
+    const stickyButton = document.getElementById("sticky-button");
+    if (stickyButton) {
+      const handleResize = () => {
+        if (window.innerWidth > 756 || menuOpen) {
+          stickyButton.style.display = "none";
+        } else {
+          stickyButton.style.display = "block";
+        }
+      };
+  
+      // Initial check on mount
+      handleResize();
+  
+      // Add resize event listener
+      window.addEventListener("resize", handleResize);
+  
+      // Cleanup event listener on unmount
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+  }, [menuOpen]);
+
+  const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent";
+
   return (
     <>
       <div
@@ -121,7 +150,7 @@ export const NavBar = () => {
             <AnchorLink anchor="help-gary">
               <Button
                 className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
-                onClick={() => setMenuOpen(false)} // Close menu on click
+                onClick={() => setMenuOpen(false)}
               >
                 Buy $GARA coin
               </Button>
@@ -147,5 +176,5 @@ export const NavBar = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};

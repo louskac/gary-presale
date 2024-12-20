@@ -43,13 +43,15 @@ export default function Home() {
       <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
         <NavBar />
         <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill /> 
-        <div className="flex h-full w-full lg:w-[420px] flex-1 flex-col mt-10 lg:mt-32">
-          <SaveGary />
+        <div className="flex h-full w-full lg:w-[450px] flex-1 flex-col mt-10 lg:mt-32">
+          <div className="sm:mx-0 lg:-mx-20">
+            <SaveGary />
+          </div>
           {/* Wrapper to remove parent padding */}
           <div className="w-full px-0 sm:px-2">
             <BuyGara hideHeader />
           </div>
-          <div className="absolute -bottom-[12px] -left-0 hidden h-[160px] w-full lg:block z-[9990]">
+          <div className="absolute -bottom-[20px] -left-0 hidden h-[160px] w-full lg:block z-[9990]">
             <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
           </div>
         </div>
@@ -66,7 +68,7 @@ export default function Home() {
       <section id="about" className="relative -mt-20 h-screen w-full md:snap-y md:snap-mandatory">
         <GarysStoryCarousel />
       </section>
-      <section id="help-gary" className="bg-background px-4 py-12 sm:px-6 sm:pb-24">
+      <section id="help-gary" className="bg-background py-12 sm:px-6 sm:pb-24">
         <HelpGary />
       </section>
       <section id="earn" className="relative flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-24">
