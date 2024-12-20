@@ -125,7 +125,7 @@ export default function GarySection() {
   const getState5Weight = () => {
     const clickCount = localStorage.getItem("clickCount") || 0;
     if (clickCount < 5000) {
-      return 1;
+      return 1000;
     } else if (clickCount < 10000) {
       return 0.2;
     } else {
