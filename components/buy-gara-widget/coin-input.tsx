@@ -28,7 +28,7 @@ export const CoinInput = forwardRef<
     <div className="flex flex-col">
       <div
         className={cn(
-          "flex w-full flex-row justify-between gap-4 rounded-full bg-gary-input-blue px-6 py-2 font-bold text-gary-blue hover:bg-gary-light-blue"
+          "flex w-full flex-row items-center justify-start gap-2 sm:gap-4 rounded-full bg-gary-input-blue px-4 sm:px-6 py-2 font-bold text-gary-blue hover:bg-gary-light-blue"
         )}
       >
         <input
@@ -36,17 +36,17 @@ export const CoinInput = forwardRef<
           lang="en"
           min="0"
           step="0.0001"
-          className={cn("flex-1 bg-transparent font-heading text-lg text-gary-blue outline-none", className)}
+          className={cn("w-2/3 bg-transparent font-heading text-base sm:text-lg text-gary-blue outline-none", className)}
           onChange={(e) => {
-            const formattedValue = formatToLocale(e.target.value)
-            e.target.value = formattedValue
+            const formattedValue = formatToLocale(e.target.value);
+            e.target.value = formattedValue;
           }}
           {...rest}
         />
         {showIcon ? (
-          <div className="flex flex-row items-center justify-end gap-4 font-heading text-base font-semibold text-gary-blue">
-            <Image src={`/icons/coins/${coin?.toLowerCase()}.png`} alt={coin} width={32} height={32} />
-            <span className="w-[46px]">{coin}</span>
+          <div className="flex flex-row items-center justify-start gap-2 sm:gap-4 font-heading text-sm sm:text-base font-semibold text-gary-blue">
+            <Image src={`/icons/coins/${coin?.toLowerCase()}.png`} alt={coin} width={24} height={24} />
+            <span className="truncate">{coin}</span>
           </div>
         ) : null}
       </div>

@@ -60,7 +60,7 @@ export default function Home() {
           {/* Wrapper to remove parent padding */}
           <div className="w-full px-0 sm:px-2 relative">
             <BuyGara hideHeader />
-            <div className="absolute -bottom-8 left-0 h-[140px] w-full lg:block z-[9990]">
+            <div className="hidden lg:block absolute -bottom-8 left-0 h-[140px] w-full lg:block z-[9990]">
               <Image
                 src="/images/ice_buy_gara.svg"
                 fill
@@ -99,7 +99,7 @@ export default function Home() {
       </section>
       <section
         id="earn"
-        className="relative flex flex-col justify-center"
+        className="relative flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-24"
       >
         <Image
           src={`/backgrounds/2.jpg`}
