@@ -22,7 +22,7 @@ export const EarnWithGary = () => {
               paintOrder: "stroke fill",
             }}
           >
-            35% p.a.
+            30% p.a.
           </span>
         </p>
         <p className="text-md max-w-[800px] text-center font-bold text-gary-blue sm:text-xl">
@@ -31,7 +31,7 @@ export const EarnWithGary = () => {
           <a href="https://coingarage.io/en" target="_blank" rel="noopener noreferrer">
             <span className="cursor-pointer text-gary-pink">Coingarage</span>{" "}
           </a>
-          exchange with returns of up to 35% annually, and you can too!
+          exchange with returns of up to 30% annually, and you can too!
         </p>
         <Button
           variant="default"

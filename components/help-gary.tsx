@@ -81,7 +81,7 @@ export const HelpGary = () => {
           <div className="sticky top-40">
             <BuyGara />
             {/* Ice Image */}
-            <div className="absolute -bottom-[7.5rem] hidden h-[160px] w-[106%] lg:block">
+            <div className="absolute -bottom-[7.5rem] -left-[0.75rem] hidden h-[160px] w-[106%] lg:block">
               <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
             </div>
 

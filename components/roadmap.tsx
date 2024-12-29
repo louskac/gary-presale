@@ -25,7 +25,7 @@ const roadData = [
     period: "2024",
     events: [
       { quarter: "Q1", description: "Launching trading app on Coingarage exchange." },
-      { quarter: "Q3", description: "Stake $GARA Program with annual returns up to 35%." },
+      { quarter: "Q3", description: "Stake $GARA Program with annual returns up to 30%." },
       { quarter: "Q4", description: "Start of the first round of $GARA Pre-sale." },
       { quarter: "Q4", description: "Launch of crypto academy on Coingarage platform." },
     ],
