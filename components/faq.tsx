@@ -14,10 +14,6 @@ const faqData = [
     text: "In order to more smoothly evolve the value of the $GARA coin, a burning mechanism has been implemented that will gradually burn $GARA coins based on their increasing usage until only 200,000,000 of the original 900,000,000 remain.",
   },
   {
-    title: "Tokenomics",
-    text: "11% Stake rewards<br>21% Reserved for public pre-sale<br>10% Angel investors<br>11% company reserves<br>11% liquidity<br>11% founding team<br>10% for marketing use<br>15% to be burned if requirements are met",
-  },
-  {
     title: "How long after purchase will I receive my $GARA?",
     text: "$GARA is automatically and immediately transferred to the connected wallet after purchase. To display it in the list of crypto coins in your wallet, you need to add it as a new token.",
   },
