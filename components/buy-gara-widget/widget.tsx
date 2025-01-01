@@ -1468,56 +1468,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         </div>
       </div>
       <Rounds />
-      <div className="mt-8 gap-4 flex flex-row justify-between items-center">
-        <button
-          onClick={() => handleNetworkSwitch("ethereum")}
-          className={`group flex-1 h-12 rounded-full border-2 ${
-            activeButton === "ethereum"
-              ? "bg-[#627EEA] border-[#627EEA]"
-              : "bg-white border-[#627EEA] hover:bg-[#627EEA]"
-          } flex items-center justify-center p-4`}
-        >
-          <img
-            src="/images/gara-coin/ethereum.svg"
-            alt="Ethereum"
-            className={`w-full h-auto ${
-              activeButton === "ethereum" ? "brightness-0 invert" : "group-hover:brightness-0 group-hover:invert"
-            }`}
-          />
-        </button>
-        <button
-          onClick={() => handleNetworkSwitch("polygon")}
-          className={`group flex-1 h-12 rounded-full border-2 ${
-            activeButton === "polygon"
-              ? "bg-[#8247E5] border-[#8247E5]"
-              : "bg-white border-[#8247E5] hover:bg-[#8247E5]"
-          } flex items-center justify-center p-4`}
-        >
-          <img
-            src="/images/gara-coin/polygon.svg"
-            alt="Polygon"
-            className={`w-full h-auto ${
-              activeButton === "polygon" ? "brightness-0 invert" : "group-hover:brightness-0 group-hover:invert"
-            }`}
-          />
-        </button>
-        <button
-          onClick={() => handleNetworkSwitch("bsc")}
-          className={`group flex-1 h-12 rounded-full border-2 ${
-            activeButton === "bsc"
-              ? "bg-[#F3BA2F] border-[#F3BA2F]"
-              : "bg-white border-[#F3BA2F] hover:bg-[#F3BA2F]"
-          } flex items-center justify-center`}
-        >
-          <img
-            src="/images/gara-coin/bsc.svg"
-            alt="BSC"
-            className={`w-full h-auto ${
-              activeButton === "bsc" ? "brightness-0 invert" : "group-hover:brightness-0 group-hover:invert"
-            }`}
-          />
-        </button>
-      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
         <div className="mt-4 grid w-full grid-cols-[1fr_auto] gap-2">
           <CoinInput

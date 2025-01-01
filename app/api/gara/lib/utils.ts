@@ -21,7 +21,7 @@ export const getGaraEstimate = (round: number, token: string, amount: number, to
   return amount * tokenValue
 }
 
-export const usdcToGara = (usdc: number) => usdc / 0.1 // 1 USDC = 0.1 GARA
+export const usdcToGara = (usdc: number) => usdc / 0.12 // 1 USDC = 0.1 GARA round 2
 
 export const getChainByName = (chain: string): Chain => {
   switch (chain) {
