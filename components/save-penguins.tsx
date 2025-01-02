@@ -21,7 +21,7 @@ export const SavePenguins = () => {
   return (
     <div className="container relative mx-auto flex min-h-screen flex-col items-center py-10">
       {/* Section 2 */}
-      <div className={`mt-40 flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:gap-16`}>
+      <div className={`mt-16 flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:gap-16`}>
         <div className="flex flex-col justify-center lg:w-[55%] lg:max-w-[700px]">
           <Heading className="text-center text-6xl font-bold tracking-wider text-gary-yellow lg:text-left">
             Gary got adopted

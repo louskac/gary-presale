@@ -15,6 +15,7 @@ import GarySection from "@/components/clickable-gary";
 import Roadmap from "@/components/roadmap";
 import Tokenomics from "@/components/tokenomics";
 import StickyButton from "@/components/sticky-button";
+import OurTeam from "@/components/our-team";
 import { BuyGara } from "@/components/buy-gara-widget/widget";
 
 export default function Home() {
@@ -123,8 +124,10 @@ export default function Home() {
       <section id="tokenomics">
         <Tokenomics />
       </section>
-      <section id="roadmap"></section>
-      <section className="-mt-32 flex bg-background px-4 sm:-mt-44 sm:px-6">
+      <section id="ourteam" className="my-28">
+        <OurTeam />
+      </section>
+      <section className="-mt-20 flex bg-background px-4 sm:-mt-44 sm:px-6">
         <SavePenguins />
       </section>
       <section id="faq" className="bg-background px-4 sm:px-6">

@@ -1449,7 +1449,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         </div>
         <p className="text-center font-heading font-bold">
           Time Left - {calculateRound()}
-          <sup>st</sup> round
+          <sup>nd</sup> round
         </p>
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
