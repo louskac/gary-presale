@@ -169,7 +169,7 @@ export default function Leaderboard() {
   const sortedLeaderboard = [...leaderboard].sort((a, b) => b.clicks - a.clicks)
 
   return (
-    <div ref={leaderboardRef} className="relative mx-auto mt-4 lg:w-[400px] w-[370px]">
+    <div ref={leaderboardRef} className="relative mx-auto mt-4 w-[370px] lg:w-[400px]">
       {/* Leaderboard Button */}
       <button
         onClick={() => {

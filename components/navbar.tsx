@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { AnchorLink } from "./anchor-link";
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { AnchorLink } from "./anchor-link"
 
 const links = [
   { name: "Gary's story", anchor: "about" },
@@ -14,31 +14,31 @@ const links = [
   { name: "Tokenomics", anchor: "tokenomics" },
   { name: "Roadmap", anchor: "roadmap" },
   { name: "WhitePaper", href: "/whitepaper/WhitepaperCG.pdf" },
-];
+]
 
 export const NavBar = () => {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 10) {
-        setScrolled(true);
+        setScrolled(true)
       } else {
-        setScrolled(false);
+        setScrolled(false)
       }
-    };
+    }
 
     // Add scroll listener
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll)
 
     // Cleanup on component unmount
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
-  const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent";
+  const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent"
 
   return (
     <>
@@ -72,24 +72,42 @@ export const NavBar = () => {
         </nav>
 
         <div className="hidden flex-shrink-0 lg:flex lg:items-center lg:justify-end">
-          <div className="lg:justify-left m-auto flex flex-row justify-center gap-2 md:gap-4 mr-4 lg:justify-normal">
-            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+          <div className="lg:justify-left m-auto mr-4 flex flex-row justify-center gap-2 md:gap-4 lg:justify-normal">
+            <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
               <a href="https://x.com/Help_Gary_" target="_blank" rel="noopener noreferrer">
-                <Image src={`/images/save-penguins/twitter.svg`} width={32} height={32} alt="Twitter" className="scale-[2]" />
+                <Image
+                  src={`/images/save-penguins/twitter.svg`}
+                  width={32}
+                  height={32}
+                  alt="Twitter"
+                  className="scale-[2]"
+                />
               </a>
             </Button>
-            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+            <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
               <a
                 href="https://www.facebook.com/profile.php?id=61568221981440"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Image src={`/images/save-penguins/facebook.svg`} width={32} height={32} alt="Facebook" className="scale-[3]" />
+                <Image
+                  src={`/images/save-penguins/facebook.svg`}
+                  width={32}
+                  height={32}
+                  alt="Facebook"
+                  className="scale-[3]"
+                />
               </a>
             </Button>
-            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+            <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
               <a href="https://t.me/helpgary" target="_blank" rel="noopener noreferrer">
-                <Image src={`/images/save-penguins/telegram.svg`} width={32} height={32} alt="Telegram" className="scale-[2.5]" />
+                <Image
+                  src={`/images/save-penguins/telegram.svg`}
+                  width={32}
+                  height={32}
+                  alt="Telegram"
+                  className="scale-[2.5]"
+                />
               </a>
             </Button>
           </div>
@@ -172,5 +190,5 @@ export const NavBar = () => {
         </div>
       )}
     </>
-  );
-};
+  )
+}

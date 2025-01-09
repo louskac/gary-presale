@@ -20,8 +20,7 @@ export const SavePenguins = () => {
 
   return (
     <div className="container relative mx-auto flex min-h-screen flex-col items-center py-10">
-
-<div
+      <div
         className={`flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:justify-center lg:gap-16`}
       >
         {!isMobile && (

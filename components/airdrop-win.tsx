@@ -41,11 +41,11 @@ export default function AirdropWin({ onClose }: { onClose: () => void }) {
   const handleShare = () => {
     const text = encodeURIComponent(
       "I just won 10 USD worth of $GARA coin on https://www.helpgary.com, try your luck too!"
-    );
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}`;
-    window.open(twitterUrl, "_blank");
-  };
-  
+    )
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${text}`
+    window.open(twitterUrl, "_blank")
+  }
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <section

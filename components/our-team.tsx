@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { Heading } from "@/components/heading";
+import Image from "next/image"
+import { Heading } from "@/components/heading"
 
 interface TeamMember {
-  name: string;
-  role: string;
-  image: string;
-  linkedin: string;
+  name: string
+  role: string
+  image: string
+  linkedin: string
 }
 
 const teamMembers: TeamMember[] = [
@@ -33,46 +33,37 @@ const teamMembers: TeamMember[] = [
     image: "/images/team/ankit_singhal.png",
     linkedin: "https://www.linkedin.com/in/ankit9999/",
   },
-];
+]
 
 export default function OurTeam() {
   return (
     <section className="py-12 text-white">
-      <Heading className="text-center text-4xl lg:text-6xl font-bold mb-8">Our Team</Heading>
-      <p className="text-center max-w-5xl mx-auto mb-12">
-        Help Gary is a project of the European crypto exchange Coingarage, and
-        this is our team. We are driven by passion and a shared vision to make
-        a meaningful impact in the crypto space. Together, we combine
-        creativity, dedication, and expertise to bring HelpGary.com to the top.
+      <Heading className="mb-8 text-center text-4xl font-bold lg:text-6xl">Our Team</Heading>
+      <p className="mx-auto mb-12 max-w-5xl text-center">
+        Help Gary is a project of the European crypto exchange Coingarage, and this is our team. We are driven by
+        passion and a shared vision to make a meaningful impact in the crypto space. Together, we combine creativity,
+        dedication, and expertise to bring HelpGary.com to the top.
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 px-4 lg:max-w-5xl mx-auto">
+      <div className="mx-auto grid grid-cols-2 gap-x-6 gap-y-8 px-4 sm:grid-cols-2 lg:max-w-5xl lg:grid-cols-4">
         {teamMembers.map((member) => (
           <div
             key={member.name}
-            className="bg-[#0D1E35] p-6 rounded-3xl lg:rounded-lg text-center shadow-lg w-full max-w-[300px]"
+            className="w-full max-w-[300px] rounded-3xl bg-[#0D1E35] p-6 text-center shadow-lg lg:rounded-lg"
           >
-            <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 relative">
-              <Image
-                src={member.image}
-                alt={member.name}
-                className="rounded-full"
-                fill
-              />
+            <div className="relative mx-auto mb-4 h-24 w-24 md:h-32 md:w-32">
+              <Image src={member.image} alt={member.name} className="rounded-full" fill />
             </div>
-            <Heading className="text-xl font-bold mb-2"><span style={{WebkitTextStroke: "0px hsl(var(--gary-blue))", paintOrder: "fill",}}>{member.name}</span></Heading>
-            <p className="text-gary-pink font-bold">{member.role}</p>
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex justify-center mt-4"
-            >
+            <Heading className="mb-2 text-xl font-bold">
+              <span style={{ WebkitTextStroke: "0px hsl(var(--gary-blue))", paintOrder: "fill" }}>{member.name}</span>
+            </Heading>
+            <p className="font-bold text-gary-pink">{member.role}</p>
+            <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 flex justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
                 viewBox="0 0 30 30"
-                className="fill-[#ffffff] text-white hover:text-blue-700 transition-colors"
+                className="fill-[#ffffff] text-white transition-colors hover:text-blue-700"
               >
                 <path d="M9,25H4V10h5V25z M6.501,8C5.118,8,4,6.879,4,5.499S5.12,3,6.501,3C7.879,3,9,4.121,9,5.499C9,6.879,7.879,8,6.501,8z M27,25h-4.807v-7.3c0-1.741-0.033-3.98-2.499-3.98c-2.503,0-2.888,1.896-2.888,3.854V25H12V9.989h4.614v2.051h0.065 c0.642-1.18,2.211-2.424,4.551-2.424c4.87,0,5.77,3.109,5.77,7.151C27,16.767,27,25,27,25z"></path>
               </svg>
@@ -81,5 +72,5 @@ export default function OurTeam() {
         ))}
       </div>
     </section>
-  );
+  )
 }

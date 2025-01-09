@@ -45,7 +45,7 @@ export function CurrencySelect({ form }: { form: any }) {
                     variant="outline"
                     role="combobox"
                     className={cn(
-                      "!mt-0 h-[24px] w-full justify-between rounded-full border-none bg-transparent font-bold text-gary-blue !p-0",
+                      "!mt-0 h-[24px] w-full justify-between rounded-full border-none bg-transparent !p-0 font-bold text-gary-blue",
                       !field.value && "text-muted-foreground"
                     )}
                   >
@@ -56,7 +56,7 @@ export function CurrencySelect({ form }: { form: any }) {
                       height={32}
                       className="mr-2"
                     />
-                    <ChevronDown className="h-8 w-8 shrink-0 opacity-50 mr-4" />
+                    <ChevronDown className="mr-4 h-8 w-8 shrink-0 opacity-50" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>

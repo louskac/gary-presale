@@ -1,32 +1,32 @@
-import { Heading } from "@/components/heading";
-import { GarysRoadmap } from "@/components/garys-roadmap";
-import { BuyGara } from "@/components/buy-gara-widget/widget";
-import Image from "next/image";
-import { useState } from "react";
-import { Copy, Check } from "lucide-react";
+import { Heading } from "@/components/heading"
+import { GarysRoadmap } from "@/components/garys-roadmap"
+import { BuyGara } from "@/components/buy-gara-widget/widget"
+import Image from "next/image"
+import { useState } from "react"
+import { Copy, Check } from "lucide-react"
 
 export const HelpGary = () => {
-  const [copied, setCopied] = useState(false);
+  const [copied, setCopied] = useState(false)
 
   const handleCopyClick = () => {
     navigator.clipboard
       .writeText("0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead")
       .then(() => {
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
       })
       .catch((error) => {
-        console.error("Failed to copy text:", error);
-      });
-  };
+        console.error("Failed to copy text:", error)
+      })
+  }
 
   return (
     <div className="flex flex-col justify-center">
-      <div className="container mx-auto mt-10 flex flex-col items-center lg:mt-20 px-4">
-        <Heading className="text-3xl text-center font-bold sm:text-6xl sm:text-[3.5rem]">
+      <div className="container mx-auto mt-10 flex flex-col items-center px-4 lg:mt-20">
+        <Heading className="text-center text-3xl font-bold sm:text-6xl sm:text-[3.5rem]">
           Help Gary reach his goals
         </Heading>
-        <div className="my-6 overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 text-center w-full max-w-[420px] lg:max-w-[40%]">
+        <div className="my-6 w-full max-w-[420px] overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 text-center lg:max-w-[40%]">
           {/* Mobile Layout */}
           <div className="block lg:hidden">
             <div className="flex items-center justify-between">
@@ -39,7 +39,7 @@ export const HelpGary = () => {
                 {copied ? <Check size={18} /> : <Copy size={18} />}
               </button>
             </div>
-            <p className="mt-2 overflow-hidden text-ellipsis font-normal text-white max-w-full">
+            <p className="mt-2 max-w-full overflow-hidden text-ellipsis font-normal text-white">
               <a
                 href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
                 target="_blank"
@@ -53,7 +53,7 @@ export const HelpGary = () => {
           {/* Desktop Layout */}
           <div className="hidden lg:flex lg:items-center lg:justify-center">
             <p className="font-bold text-gary-yellow">$GARA Contract</p>
-            <p className="overflow-hidden text-ellipsis font-normal text-white lg:ml-2 max-w-full">
+            <p className="max-w-full overflow-hidden text-ellipsis font-normal text-white lg:ml-2">
               <a
                 href="https://polygonscan.com/token/0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f"
                 target="_blank"
@@ -72,9 +72,9 @@ export const HelpGary = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto grid justify-center gap-8 lg:grid-cols-[1fr_auto] lg:justify-between px-4">
+      <div className="container mx-auto grid justify-center gap-8 px-4 lg:grid-cols-[1fr_auto] lg:justify-between">
         {/* Widget First on Mobile */}
-        <div className="order-1 mt-0 lg:order-2 w-full max-w-[400px] hidden lg:block">
+        <div className="order-1 mt-0 hidden w-full max-w-[400px] lg:order-2 lg:block">
           <div className="sticky top-40">
             <BuyGara />
             {/* Ice Image */}
@@ -90,10 +90,10 @@ export const HelpGary = () => {
         </div>
 
         {/* Roadmap Second on Mobile */}
-        <div className="order-2 lg:order-1 w-full">
+        <div className="order-2 w-full lg:order-1">
           <GarysRoadmap />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

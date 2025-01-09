@@ -13,7 +13,11 @@ const roadData = [
     period: "2021-23",
     events: [
       { quarter: "2021 Q3", description: "Founding the company and forming the team." },
-      { quarter: "2023 Q1", description: "Successful launch of Coingarage platform including FIAT/Crypto payment gateways. Creation of $GARA." },
+      {
+        quarter: "2023 Q1",
+        description:
+          "Successful launch of Coingarage platform including FIAT/Crypto payment gateways. Creation of $GARA.",
+      },
       { quarter: "2023 Q2", description: "Launch of mobile applications." },
       { quarter: "2023 Q4", description: "Listing of more than 100 coins on Coingarage exchange." },
     ],
@@ -64,65 +68,71 @@ const Roadmap = () => {
 
   return (
     <div className="roadmap relative m-auto">
-      <Heading className="!mt-0 text-center text-4xl lg:text-6xl font-bold tracking-wider text-gary-yellow">$GARA Roadmap</Heading>
+      <Heading className="!mt-0 text-center text-4xl font-bold tracking-wider text-gary-yellow lg:text-6xl">
+        $GARA Roadmap
+      </Heading>
 
-      <div className="absolute left-0 top-[126px] hidden h-2 2xl:w-[72%] xl:w-[77%] w-[83%] bg-gary-light-blue lg:block"></div>
-      <div className="absolute right-0 top-[126px] hidden h-2 2xl:w-[28%] xl:w-[23%] w-[17%] bg-[#0D1E35] lg:block"></div>
+      <div className="absolute left-0 top-[126px] hidden h-2 w-[83%] bg-gary-light-blue lg:block xl:w-[77%] 2xl:w-[72%]"></div>
+      <div className="absolute right-0 top-[126px] hidden h-2 w-[17%] bg-[#0D1E35] lg:block xl:w-[23%] 2xl:w-[28%]"></div>
 
       <div className="m-auto mt-10 w-[90%] lg:mt-36">
         {isMobile ? (
           <Swiper
-          className="mySwiper flex justify-center"
-          spaceBetween={70}
-          slidesPerView="auto"
-          centeredSlides={true}
-          onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          navigation={{
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          }}
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
-          breakpoints={{
-            1147: {
-              slidesPerView: 3,
-            },
-          }}
-        >
-          {/* Navigation Arrows */}
-          <button
-            className="flex swiper-button-prev absolute left-4 top-8 z-20 -translate-y-1/2 transform rounded-full bg-[#0D1E35] px-8 py-4 text-xl text-white hover:bg-white hover:text-[#0D1E35]"
-            onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
+            className="mySwiper flex justify-center"
+            spaceBetween={70}
+            slidesPerView="auto"
+            centeredSlides={true}
+            onSlideChange={(swiper) => setActiveIndex(swiper.activeIndex)}
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            navigation={{
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            }}
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            breakpoints={{
+              1147: {
+                slidesPerView: 3,
+              },
+            }}
           >
-            <ChevronLeft/>{activeIndex > 0 ? roadData[activeIndex - 1].period : roadData[0].period}
-          </button>
-          <button
-            className="flex swiper-button-next absolute right-4 top-8 z-20 -translate-y-1/2 transform rounded-full bg-[#0D1E35] px-8 py-4 text-xl text-white hover:bg-white hover:text-[#0D1E35]"
-            onClick={() => setActiveIndex((prev) => Math.min(prev + 1, roadData.length - 1))}
-          >
-            {activeIndex < roadData.length - 1 ? roadData[activeIndex + 1].period : roadData[roadData.length - 1].period}<ChevronRight/>
-          </button>
-  
-          {/* Roadmap Content */}
-          {roadData.map((section, index) => (
-            <SwiperSlide
-              key={index}
-              className={`roadmap-section relative z-10 flex !h-[650px] !w-[90%] justify-center rounded-[30px] border-8 bg-[#0D1E35] px-10 pb-10 sm:!h-[400px] lg:mx-5 mt-20 ${
-                index !== 3 ? "border-gary-light-blue" : "border-[#0D1E35]"
-              }`}
+            {/* Navigation Arrows */}
+            <button
+              className="swiper-button-prev absolute left-4 top-8 z-20 flex -translate-y-1/2 transform rounded-full bg-[#0D1E35] px-8 py-4 text-xl text-white hover:bg-white hover:text-[#0D1E35]"
+              onClick={() => setActiveIndex((prev) => Math.max(prev - 1, 0))}
             >
-              <h2 className="mt-10 text-center text-6xl text-gary-yellow">{section.period}</h2>
-              <ul>
-                {section.events.map((event, idx) => (
-                  <li key={idx} className="mt-4 font-bold text-white lg:w-[241px]">
-                    <strong className="text-[18px] text-gary-light-blue">{event.quarter}:</strong> {event.description}
-                  </li>
-                ))}
-              </ul>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              <ChevronLeft />
+              {activeIndex > 0 ? roadData[activeIndex - 1].period : roadData[0].period}
+            </button>
+            <button
+              className="swiper-button-next absolute right-4 top-8 z-20 flex -translate-y-1/2 transform rounded-full bg-[#0D1E35] px-8 py-4 text-xl text-white hover:bg-white hover:text-[#0D1E35]"
+              onClick={() => setActiveIndex((prev) => Math.min(prev + 1, roadData.length - 1))}
+            >
+              {activeIndex < roadData.length - 1
+                ? roadData[activeIndex + 1].period
+                : roadData[roadData.length - 1].period}
+              <ChevronRight />
+            </button>
+
+            {/* Roadmap Content */}
+            {roadData.map((section, index) => (
+              <SwiperSlide
+                key={index}
+                className={`roadmap-section relative z-10 mt-20 flex !h-[650px] !w-[90%] justify-center rounded-[30px] border-8 bg-[#0D1E35] px-10 pb-10 sm:!h-[400px] lg:mx-5 ${
+                  index !== 3 ? "border-gary-light-blue" : "border-[#0D1E35]"
+                }`}
+              >
+                <h2 className="mt-10 text-center text-6xl text-gary-yellow">{section.period}</h2>
+                <ul>
+                  {section.events.map((event, idx) => (
+                    <li key={idx} className="mt-4 font-bold text-white lg:w-[241px]">
+                      <strong className="text-[18px] text-gary-light-blue">{event.quarter}:</strong> {event.description}
+                    </li>
+                  ))}
+                </ul>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         ) : (
           <div className="m-auto flex justify-center">
             {roadData.map((section, index) => (
@@ -159,7 +169,8 @@ const Roadmap = () => {
                 <ul>
                   {section.events.map((event, idx) => (
                     <li key={idx} className="mt-4 w-[241px] text-white">
-                      <strong className="text-[18px] text-gary-light-blue">{event.quarter} -</strong> {event.description}
+                      <strong className="text-[18px] text-gary-light-blue">{event.quarter} -</strong>{" "}
+                      {event.description}
                     </li>
                   ))}
                 </ul>

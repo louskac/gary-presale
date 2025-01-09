@@ -998,44 +998,44 @@ const calculateRound = () => {
 //L: Here implement the functions
 //L: After wallet connect this entire logic and the 3 frontend buttons can be hidden so it won't confuse users (once wallet is connected only way to switch networks is the current way thru the connect button)
 const switchToEthereum = () => {
-  console.log("Switching to Ethereum");
+  console.log("Switching to Ethereum")
   //L: Switch the network to etheruem (the default state)
   //L: Currency select will have USDT, USDC and ETH currencies
   //L: Please fix the minimum amount check to work here as well (before the wallet connect)
-};
+}
 
 const switchToPolygon = () => {
-  console.log("Switching to Polygon");
+  console.log("Switching to Polygon")
   //L: Switch the network to polygon
   //L: Currency select will have USDT, USDC and POL currencies
-};
+}
 
 const switchToBSC = () => {
-  console.log("Switching to Binance Smart Chain");
+  console.log("Switching to Binance Smart Chain")
   //L: Switch the network to polygon
   //L: Currency select will have USDT, USDC and BSC currencies
-};
+}
 
 export function BuyGara({ className, hideHeader = false }: { className?: string; hideHeader?: boolean }) {
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
-  const [activeButton, setActiveButton] = useState("ethereum"); // Default active button
+  const [activeButton, setActiveButton] = useState("ethereum") // Default active button
 
   const handleNetworkSwitch = (network) => {
-    setActiveButton(network);
+    setActiveButton(network)
     switch (network) {
       case "ethereum":
-        switchToEthereum();
-        break;
+        switchToEthereum()
+        break
       case "polygon":
-        switchToPolygon();
-        break;
+        switchToPolygon()
+        break
       case "bsc":
-        switchToBSC();
-        break;
+        switchToBSC()
+        break
       default:
-        console.error("Unknown network:", network);
+        console.error("Unknown network:", network)
     }
-  };
+  }
 
   const t = useTranslations("GARA.main.buyGARA")
   const [tokenSold, setTokenSold] = useState(0)
@@ -1419,34 +1419,33 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   }
 
   useEffect(() => {
-    const progressBarFillers = document.querySelectorAll("#progress-bar-filler");
+    const progressBarFillers = document.querySelectorAll("#progress-bar-filler")
 
     if (progressBarFillers.length > 0) {
       // Ensure each progress bar has the animation
       progressBarFillers.forEach((progressBarFiller) => {
         // Ensure the progress bar has relative positioning
-        progressBarFiller.style.position = "relative";
-  
+        progressBarFiller.style.position = "relative"
+
         // Create arrow container
-        const arrowContainer = document.createElement("div");
-        arrowContainer.className =
-          "absolute inset-0 flex items-center justify-start pointer-events-none arrow";
-  
+        const arrowContainer = document.createElement("div")
+        arrowContainer.className = "absolute inset-0 flex items-center justify-start pointer-events-none arrow"
+
         // Add spans for the arrows
         for (let i = 0; i < 3; i++) {
-          const arrow = document.createElement("span");
+          const arrow = document.createElement("span")
           arrow.className =
-            "block w-[3vw] h-[3vw] border-b-[25px] border-r-[25px] lg:w-[1.5vw] lg:h-[1.5vw] lg:border-b-[5px] lg:border-r-[5px] border-white transform rotate-45";
-          if (i === 1) arrow.style.animationDelay = "-0.2s";
-          if (i === 2) arrow.style.animationDelay = "-0.4s";
-          arrowContainer.appendChild(arrow);
+            "block w-[3vw] h-[3vw] border-b-[25px] border-r-[25px] lg:w-[1.5vw] lg:h-[1.5vw] lg:border-b-[5px] lg:border-r-[5px] border-white transform rotate-45"
+          if (i === 1) arrow.style.animationDelay = "-0.2s"
+          if (i === 2) arrow.style.animationDelay = "-0.4s"
+          arrowContainer.appendChild(arrow)
         }
-  
-        // Append arrow container to the progress bar filler
-        progressBarFiller.appendChild(arrowContainer);
-      });
 
-      const style = document.createElement("style");
+        // Append arrow container to the progress bar filler
+        progressBarFiller.appendChild(arrowContainer)
+      })
+
+      const style = document.createElement("style")
       style.textContent = `
         @keyframes animate {
           0% {
@@ -1466,50 +1465,50 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           animation: animate 2s infinite;
           margin: -10px;
         }
-      `;
-      document.head.appendChild(style);
+      `
+      document.head.appendChild(style)
     }
-  }, []);
+  }, [])
 
   const setAmountValue = (value: string) => {
-    form.setValue("amount", value);
-  };
+    form.setValue("amount", value)
+  }
 
   return (
     <section
       id="buy-gara"
       className={cn(
-        "relative w-full max-w-[420px] mx-auto flex-1 rounded-2xl lg:rounded-t-2xl bg-white p-6 px-5 shadow-md mb-20",
+        "relative mx-auto mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-white p-6 px-5 shadow-md lg:rounded-t-2xl",
         className
       )}
     >
-      <div className="relative flex overflow-x-hidden bg-[#222222] text-white -mx-5">
-        <div className="py-2 animate-marquee whitespace-nowrap flex items-center">
+      <div className="relative -mx-5 flex overflow-x-hidden bg-[#222222] text-white">
+        <div className="flex animate-marquee items-center whitespace-nowrap py-2">
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
         </div>
 
-        <div className="absolute top-0 py-2 animate-marquee2 whitespace-nowrap flex items-center">
+        <div className="absolute top-0 flex animate-marquee2 items-center whitespace-nowrap py-2">
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
           <div className="flex items-center space-x-4">
-            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
             <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
           </div>
         </div>
@@ -1518,9 +1517,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
-        <p className="text-center font-heading font-black text-xl">
-          Countdown to Price Increase
-        </p>
+        <p className="text-center font-heading text-xl font-black">Countdown to Price Increase</p>
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
@@ -1528,13 +1525,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="my-4 flex flex-row justify-center">
         <CountdownTimer />
       </div>
-      <div className="p-4 rounded-md flex flex-col justify-between items-center">
-        <div className="w-full flex justify-between text-lg text-gray-800">
+      <div className="flex flex-col items-center justify-between rounded-md p-4">
+        <div className="flex w-full justify-between text-lg text-gray-800">
           <span>
-            Current Price: <span className="text-gary-pink font-bold">$0.12</span>
+            Current Price: <span className="font-bold text-gary-pink">$0.12</span>
           </span>
           <span>
-            Listing price: <span className="text-gray-900 font-bold">$0.36</span>
+            Listing price: <span className="font-bold text-gray-900">$0.36</span>
           </span>
         </div>
         <div className="relative my-2 w-full">
@@ -1549,40 +1546,35 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             className="shadow-md"
           />
         </div>
-        <p className="text-lg text-gray-800 text-center">
-          Raised: <span className="font-black text-gray-900">${new Intl.NumberFormat("en-US").format(tokenSold)}</span> / $4,000,000
+        <p className="text-center text-lg text-gray-800">
+          Raised: <span className="font-black text-gray-900">${new Intl.NumberFormat("en-US").format(tokenSold)}</span>{" "}
+          / $4,000,000
         </p>
       </div>
       <div className="mt-4 grid grid-cols-[1fr_220px_1fr] gap-2 lg:hidden">
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
-        <p className="text-center font-heading text-lg">
-          Presale payment methods
-        </p>
+        <p className="text-center font-heading text-lg">Presale payment methods</p>
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
-      <div className="mt-4 gap-2 flex flex-row justify-between items-center">
+      <div className="mt-4 flex flex-row items-center justify-between gap-2">
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
           className={`group flex-1 rounded-3xl border-0 ${
             activeButton === "ethereum" ? "bg-[#024365]" : "bg-[#FFEEDC]"
-          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
+          } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img
-            src="/images/gara-coin/ethereum.png"
-            alt="Ethereum"
-            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
-          />
+          <img src="/images/gara-coin/ethereum.png" alt="Ethereum" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
           <span
             className={`font-black ${
               activeButton === "ethereum" ? "text-white" : "text-black"
             } text-[10px] sm:text-base`}
           >
             <span className="hidden sm:inline">Ethereum</span>
-            <span className="inline sm:hidden text-2xl">ETH</span>
+            <span className="inline text-2xl sm:hidden">ETH</span>
           </span>
         </button>
 
@@ -1590,20 +1582,16 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           onClick={() => handleNetworkSwitch("polygon")}
           className={`group flex-1 rounded-3xl border-0 ${
             activeButton === "polygon" ? "bg-[#024365]" : "bg-[#FFEEDC]"
-          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
+          } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img
-            src="/images/gara-coin/polygon.png"
-            alt="Polygon"
-            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
-          />
+          <img src="/images/gara-coin/polygon.png" alt="Polygon" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
           <span
             className={`font-black ${
               activeButton === "polygon" ? "text-white" : "text-black"
             } text-[10px] sm:text-base`}
           >
             <span className="hidden sm:inline">Polygon</span>
-            <span className="inline sm:hidden text-2xl">POL</span>
+            <span className="inline text-2xl sm:hidden">POL</span>
           </span>
         </button>
 
@@ -1611,25 +1599,19 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           onClick={() => handleNetworkSwitch("bsc")}
           className={`group flex-1 rounded-3xl border-0 ${
             activeButton === "bsc" ? "bg-[#024365]" : "bg-[#FFEEDC]"
-          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
+          } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img
-            src="/images/gara-coin/bsc.png"
-            alt="BSC"
-            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
-          />
+          <img src="/images/gara-coin/bsc.png" alt="BSC" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
           <span
-            className={`font-black ${
-              activeButton === "bsc" ? "text-white" : "text-black"
-            } text-[10px] sm:text-base`}
+            className={`font-black ${activeButton === "bsc" ? "text-white" : "text-black"} text-[10px] sm:text-base`}
           >
             <span className="hidden sm:inline">BSC</span>
-            <span className="inline sm:hidden text-2xl">BSC</span>
+            <span className="inline text-2xl sm:hidden">BSC</span>
           </span>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
-        <div className="grid grid-cols-2 gap-4 mt-8">
+        <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <p className="font-black">Pay with eth</p>
             <CoinInput
@@ -1646,9 +1628,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
                 Amount must be greater than {minTokenBalance} {token}
               </p>
             )}
-            {hasUnsufficientBalance && (
-              <p className="mt-2 text-sm text-red-500">Insufficient balance</p>
-            )}
+            {hasUnsufficientBalance && <p className="mt-2 text-sm text-red-500">Insufficient balance</p>}
           </div>
           <div>
             <p className="font-black">Receive $GARA</p>
@@ -1669,28 +1649,23 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           {[50, 100, 500, 1000, 5000].map((value) => (
             <button
               key={value}
-              className="group font-black flex-1 rounded-full border-0 bg-[#FFEEDC] hover:bg-[#024365] hover:text-white flex items-center justify-center p-2"
+              className="group flex flex-1 items-center justify-center rounded-full border-0 bg-[#FFEEDC] p-2 font-black hover:bg-[#024365] hover:text-white"
               onClick={(e) => {
-                e.preventDefault();
-                setAmountValue(value.toString());
+                e.preventDefault()
+                setAmountValue(value.toString())
               }}
             >
               {`$${value}`}
             </button>
           ))}
         </div>
-        <div
-          className={cn(
-            "mt-8 gap-4",
-            address ? "flex flex-col" : "flex flex-col lg:flex-row"
-          )}
-        >
-          <div className={cn("flex-1", !address && "hidden")}> 
+        <div className={cn("mt-8 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
+          <div className={cn("flex-1", !address && "hidden")}>
             <Button
               type="submit"
               variant={address ? "default" : "outlinePrimary"}
               disabled={!address || hasUnsufficientBalance || hasLowerInputBalance || isCalculatingMinBalance}
-              className="h-12 w-full rounded-full bg-[#061022] text-xl font-bold text-[#FFAE17] text-center"
+              className="h-12 w-full rounded-full bg-[#061022] text-center text-xl font-bold text-[#FFAE17]"
             >
               {t("btnBuyGARA")}
             </Button>
@@ -1699,7 +1674,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             <ConnectButton
               label={t("btnConnectWallet")}
               showBalance={false}
-              className="h-12 w-full rounded-full bg-[#FF4473] text-xl font-bold text-white text-center"
+              className="h-12 w-full rounded-full bg-[#FF4473] text-center text-xl font-bold text-white"
             />
           </div>
         </div>

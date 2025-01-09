@@ -21,7 +21,27 @@ export const getGaraEstimate = (round: number, token: string, amount: number, to
   return amount * tokenValue
 }
 
-export const usdcToGara = (usdc: number) => usdc / 0.12 // 1 USDC = 0.1 GARA round 2
+export const calculateCurrentPrice = () => {
+  const startDate = Date.UTC(2025, 0, 7, 0, 0, 0) // Fixed start date (January 1, 2025)
+  const now = new Date().getTime() // Current timestamp
+
+  // Calculate the number of full weeks (Sunday-Monday midnights) that have passed
+  const millisecondsInAWeek = 7 * 24 * 60 * 60 * 1000
+  const weeksElapsed = Math.floor((now - startDate) / millisecondsInAWeek)
+
+  // Base price and weekly increment
+  const basePrice = 0.1
+  const weeklyIncrement = 0.01
+
+  // Calculate the current price
+  const currentPrice = basePrice + weeksElapsed * weeklyIncrement
+  return parseFloat(currentPrice.toFixed(2)) // Round to 2 decimal places
+}
+
+export const usdcToGara = (usdc: number) => {
+  const currentPrice = calculateCurrentPrice() // Ensure calculateCurrentPrice is also defined
+  return usdc / currentPrice
+}
 
 export const getChainByName = (chain: string): Chain => {
   switch (chain) {

@@ -1,116 +1,83 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
 
-//monda
-const endDate = 1740787199
-const firstRoundEndDate = 1735689599
-const secondRoundEndDate = 1738367999
-// import { sepolia} from "wagmi/chains"
-// const sepoliaRpcUrl = "https://eth-sepolia.g.alchemy.com/v2/vbBKw_KLTIW6P9CvewSXZrgbaAlhcg9r"
-// const sepoliaProvider = new ethers.providers.JsonRpcProvider(sepoliaRpcUrl);
-// const contractAddress = '0x20bc0Bf18ea3BCEb49c84c16655b5850eCAcf2ab';
-// const contractAbi = [
-//   {
-//     "inputs": [{ "internalType": "address", "name": "_tokenAddress", "type": "address" },
-//     { "internalType": "uint256", "name": "_startSaleDate", "type": "uint256" },
-//     { "internalType": "uint256", "name": "_endSaleDate", "type": "uint256" },
-//     { "internalType": "uint256", "name": "_firstRoundEndDate", "type": "uint256" }, { "internalType": "uint256", "name": "_secondRoundEndDate", "type": "uint256" }], "stateMutability": "nonpayable", "type": "constructor"
-//   },
-//   {
-//     "anonymous": false,
-//     "inputs": [{ "indexed": false, "internalType": "uint256", "name": "startSaleDate", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "endSaleDate", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "firstRoundEndDate", "type": "uint256" }, { "indexed": false, "internalType": "uint256", "name": "secondRoundEndDate", "type": "uint256" }], "name": "SaleDateUpdated", "type": "event"
-//   },
-//   {
-//     "anonymous": false,
-//     "inputs": [{ "indexed": false, "internalType": "uint256", "name": "newBalance", "type": "uint256" }], "name": "TokenBalanceUpdated", "type": "event"
-//   },
-//   {
-//     "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "buyer", "type": "address" },
-//     { "indexed": false, "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "TokensSoldUpdated", "type": "event"
-//   },
-//   { "inputs": [], "name": "endSaleDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "firstRoundEndDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "getEndSaleDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "getStartSaleDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "getTokenBalance", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "getfirstRoundEndDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [], "name": "getsecondRoundEndDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-//   { "inputs": [{ "internalType": "address", "name": "buyer", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "handleTokenPurchase", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
-//   { "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "secondRoundEndDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_newOwner", "type": "address" }], "name": "setOwner", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "_startSaleDate", "type": "uint256" }, { "internalType": "uint256", "name": "_endSaleDate", "type": "uint256" }, { "internalType": "uint256", "name": "_firstRoundEndDate", "type": "uint256" }, { "internalType": "uint256", "name": "_secondRoundEndDate", "type": "uint256" }], "name": "setSaleDate", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "_token", "type": "address" }], "name": "setToken", "outputs": [], "stateMutability": "nonpayable", "type": "function" }, { "inputs": [], "name": "startSaleDate", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "token", "outputs": [{ "internalType": "contract IERC20", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "address", "name": "", "type": "address" }], "name": "tokensSoldPerUser", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "totalTokensSold", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [], "name": "vaultContractAddress", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "contract IERC20", "name": "_token", "type": "address" }, { "internalType": "address", "name": "to", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "withdrawToken", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
-// ]
-// async function readContractFunction() {
-//   const contract = new ethers.Contract(contractAddress, contractAbi, sepoliaProvider);
-
-//   try {
-//     const endDate = await contract.getEndSaleDate();
-//     const firstRoundEndDate = await contract.firstRoundEndDate();
-//     const secondRoundEndDate = await contract.secondRoundEndDate();
-//     if( Number(Number(new Date().getTime()/1000).toFixed(0)) < Number(firstRoundEndDate.toString())){
-//       return Number(firstRoundEndDate.toString())
-//     }else if(Number(Number(new Date().getTime()/1000).toFixed(0)) < Number(secondRoundEndDate.toString())){
-//       return Number(secondRoundEndDate.toString())
-//     }else if(Number(Number(new Date().getTime()/1000).toFixed(0)) < Number(endDate.toString())){
-//       return Number(endDate.toString())
-//     }else{
-//       return 0
-//     }
-//   } catch (error) {
-//     console.error('Error reading contract function:', error);
-//   }
-// }
 const CountdownTimer = ({ className }: { className?: string }) => {
   const t = useTranslations("GARA.garaDepo.timer")
-  const currentTime = new Date().getTime()
-  let targetDate = new Date().getTime()
-  // Set the target date/time
-  if (firstRoundEndDate * 1000 > Number(currentTime)) {
-    targetDate = firstRoundEndDate
-  } else if (secondRoundEndDate * 1000 > Number(currentTime)) {
-    targetDate = secondRoundEndDate
-  } else if (endDate * 1000 > Number(currentTime)) {
-    targetDate = endDate
-  }
-  // const targetDate = new Date("2024-12-31T23:59").getTime()
 
-  // State to hold remaining time
+  // Initial token price
+  const initialPrice = 0.12
+
+  // State for time and price
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
     seconds: 0,
   })
+  const [price, setPrice] = useState<number>(initialPrice)
 
-  // Function to calculate the time difference
-  const calculateTimeLeft = () => {
-    const now = new Date().getTime()
-    const difference = targetDate * 1000 - now
-
-    const days = Math.floor(Number(difference) / (1000 * 60 * 60 * 24))
-    const hours = Math.floor((Number(difference) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-    const minutes = Math.floor((Number(difference) % (1000 * 60 * 60)) / (1000 * 60))
-    const seconds = Math.floor((Number(difference) % (1000 * 60)) / 1000)
-
-    setTimeLeft({ days, hours, minutes, seconds })
-  }
-
-  // Update the time every second
   useEffect(() => {
-    const timer = setInterval(() => calculateTimeLeft(), 1000)
-    return () => clearInterval(timer) // Cleanup timer
+    // Load price from localStorage in the browser
+    if (typeof window !== "undefined") {
+      const savedPrice = localStorage.getItem("garaPrice")
+      setPrice(savedPrice ? parseFloat(savedPrice) : initialPrice)
+    }
   }, [])
 
+  // Calculate the next Sunday midnight
+  const getNextSundayMidnight = () => {
+    const now = new Date()
+    const nextSunday = new Date()
+    nextSunday.setDate(now.getDate() + (7 - now.getDay())) // Days until Sunday
+    nextSunday.setHours(0, 0, 0, 0) // Set time to midnight
+    return nextSunday.getTime()
+  }
+
+  const calculateTimeLeft = () => {
+    const now = new Date().getTime()
+    const targetDate = getNextSundayMidnight()
+    const difference = targetDate - now
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000)
+
+    setTimeLeft({ days, hours, minutes, seconds })
+
+    // Reset the timer and increment price if timeLeft reaches 0
+    if (difference <= 0) {
+      handleReset()
+    }
+  }
+
+  const handleReset = () => {
+    // Increment the price by 0.01
+    const newPrice = price + 0.01
+    setPrice(newPrice)
+    if (typeof window !== "undefined") {
+      localStorage.setItem("garaPrice", newPrice.toFixed(2))
+    }
+
+    // Reset the timer to the next Sunday midnight
+    calculateTimeLeft()
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => calculateTimeLeft(), 1000)
+    return () => clearInterval(timer)
+  }, [price])
+
   return (
-    <div className={cn("flex items-center justify-center space-x-2 w-full", className)}>
-      {/* Days */}
+    <div className={cn("flex w-full items-center justify-center space-x-2", className)}>
       <div className="flex w-full flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
         <div className="text-3xl font-bold text-gary-yellow">{String(timeLeft.days).padStart(2, "0")}</div>
         <div className="text-xs text-white">{t("day")}</div>
       </div>
 
-      {/* Hours */}
       <div className="text-xl font-bold text-secondary">:</div>
 
       <div className="flex w-full flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
@@ -118,23 +85,17 @@ const CountdownTimer = ({ className }: { className?: string }) => {
         <div className="text-xs text-white">{t("hours")}</div>
       </div>
 
-      {/* Minutes */}
       <div className="text-xl font-bold text-secondary">:</div>
 
       <div className="flex w-full flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
-        <div className="text-3xl font-bold text-gary-yellow">
-          {String(timeLeft.minutes).padStart(2, "0")}
-        </div>
+        <div className="text-3xl font-bold text-gary-yellow">{String(timeLeft.minutes).padStart(2, "0")}</div>
         <div className="text-xs text-white">{t("minutes")}</div>
       </div>
 
-      {/* Seconds */}
       <div className="text-xl font-bold text-secondary">:</div>
 
       <div className="flex w-full flex-col items-center rounded-xl bg-gary-blue p-2 font-heading shadow-md">
-        <div className="text-3xl font-bold text-gary-yellow">
-          {String(timeLeft.seconds).padStart(2, "0")}
-        </div>
+        <div className="text-3xl font-bold text-gary-yellow">{String(timeLeft.seconds).padStart(2, "0")}</div>
         <div className="text-xs text-white">{t("seconds")}</div>
       </div>
     </div>

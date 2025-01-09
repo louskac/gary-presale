@@ -102,13 +102,13 @@ const config: Config = {
           "50%": { transform: "translateY(-10px)" },
           "100%": { transform: "translateY(0)" },
         },
-        "marquee": {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
+        marquee: {
+          "0%": { transform: "translateX(0%)" },
+          "100%": { transform: "translateX(-100%)" },
         },
-        "marquee2": {
-          '0%': { transform: 'translateX(100%)' },
-          '100%': { transform: 'translateX(0%)' },
+        marquee2: {
+          "0%": { transform: "translateX(100%)" },
+          "100%": { transform: "translateX(0%)" },
         },
       },
       animation: {
@@ -117,8 +117,8 @@ const config: Config = {
         "slide-in": "slide-in 1s ease-in-out",
         "slide-in-left": "slide-in-left 1s ease-in-out",
         "slow-bounce": "slow-bounce 2s infinite",
-        "marquee": "marquee 25s linear infinite",
-        "marquee2": 'marquee2 25s linear infinite',
+        marquee: "marquee 25s linear infinite",
+        marquee2: "marquee2 25s linear infinite",
       },
     },
   },

@@ -48,7 +48,7 @@ export const Faq = () => {
           <div
             key={index}
             onClick={() => toggleFaq(index)}
-            className="flex flex-col cursor-pointer rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
+            className="flex cursor-pointer flex-col rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
           >
             <div className="flex items-center justify-between">
               <Heading className="text-left text-xl font-bold sm:text-2xl">
@@ -63,8 +63,8 @@ export const Faq = () => {
               </Heading>
               <button
                 onClick={(e) => {
-                  e.stopPropagation();
-                  toggleFaq(index);
+                  e.stopPropagation()
+                  toggleFaq(index)
                 }}
                 className="text-white hover:text-gary-yellow focus:outline-none"
               >
@@ -88,8 +88,8 @@ export const Faq = () => {
                   </span>
                   <button
                     onClick={(e) => {
-                      e.stopPropagation(); // Prevent the parent's onClick from triggering
-                      handleCopyClick(faq.contractAddress);
+                      e.stopPropagation() // Prevent the parent's onClick from triggering
+                      handleCopyClick(faq.contractAddress)
                     }}
                     className="mt-2 text-xs font-bold text-gary-yellow hover:text-white focus:outline-none sm:ml-4 sm:mt-0"
                   >
