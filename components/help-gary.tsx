@@ -74,7 +74,7 @@ export const HelpGary = () => {
       </div>
       <div className="container mx-auto grid justify-center gap-8 lg:grid-cols-[1fr_auto] lg:justify-between px-4">
         {/* Widget First on Mobile */}
-        <div className="order-1 mt-0 lg:order-2 w-full max-w-[340px] sm:max-w-[100%]">
+        <div className="order-1 mt-0 lg:order-2 w-full max-w-[400px] hidden lg:block">
           <div className="sticky top-40">
             <BuyGara />
             {/* Ice Image */}
@@ -83,7 +83,7 @@ export const HelpGary = () => {
             </div>
 
             {/* Gary Image */}
-            <div className="absolute -left-[150px] top-0 -z-10 hidden h-[363px] w-[324px] lg:block">
+            <div className="absolute -left-[150px] top-0 -z-10 hidden h-[363px] w-[324px] xl:block">
               <Image src="/images/help-gary/gary_buy_gara.png" fill alt="Gary Buy $GARA" />
             </div>
           </div>

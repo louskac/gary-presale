@@ -1419,31 +1419,33 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   }
 
   useEffect(() => {
-    const progressBarFiller = document.getElementById("progress-bar-filler");
+    const progressBarFillers = document.querySelectorAll("#progress-bar-filler");
+
+    if (progressBarFillers.length > 0) {
+      // Ensure each progress bar has the animation
+      progressBarFillers.forEach((progressBarFiller) => {
+        // Ensure the progress bar has relative positioning
+        progressBarFiller.style.position = "relative";
   
-    if (progressBarFiller) {
-      // Ensure the progress bar has relative positioning
-      progressBarFiller.style.position = "relative";
+        // Create arrow container
+        const arrowContainer = document.createElement("div");
+        arrowContainer.className =
+          "absolute inset-0 flex items-center justify-start pointer-events-none arrow";
   
-      // Create arrow container
-      const arrowContainer = document.createElement("div");
-      arrowContainer.className =
-        "absolute inset-0 flex items-center justify-start pointer-events-none arrow";
+        // Add spans for the arrows
+        for (let i = 0; i < 3; i++) {
+          const arrow = document.createElement("span");
+          arrow.className =
+            "block w-[3vw] h-[3vw] border-b-[25px] border-r-[25px] lg:w-[1.5vw] lg:h-[1.5vw] lg:border-b-[5px] lg:border-r-[5px] border-white transform rotate-45";
+          if (i === 1) arrow.style.animationDelay = "-0.2s";
+          if (i === 2) arrow.style.animationDelay = "-0.4s";
+          arrowContainer.appendChild(arrow);
+        }
   
-      // Add spans for the arrows
-      for (let i = 0; i < 3; i++) {
-        const arrow = document.createElement("span");
-        arrow.className =
-          "block w-[1.5vw] h-[1.5vw] border-b-[5px] border-r-[5px] border-white transform rotate-45";
-        if (i === 1) arrow.style.animationDelay = "-0.2s";
-        if (i === 2) arrow.style.animationDelay = "-0.4s";
-        arrowContainer.appendChild(arrow);
-      }
-  
-      // Append arrow container to the progress bar filler
-      progressBarFiller.appendChild(arrowContainer);
-  
-      // Inject animation keyframes and styles dynamically
+        // Append arrow container to the progress bar filler
+        progressBarFiller.appendChild(arrowContainer);
+      });
+
       const style = document.createElement("style");
       style.textContent = `
         @keyframes animate {
@@ -1548,9 +1550,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           />
         </div>
         <p className="text-lg text-gray-800 text-center">
-          Raised: <span className="font-black text-gray-900">
-            ${new Intl.NumberFormat("en-US").format(tokenSold)} / $4,000,000
-          </span>
+          Raised: <span className="font-black text-gray-900">${new Intl.NumberFormat("en-US").format(tokenSold)}</span> / $4,000,000
         </p>
       </div>
       <div className="mt-4 grid grid-cols-[1fr_220px_1fr] gap-2 lg:hidden">
@@ -1567,45 +1567,65 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="mt-4 gap-2 flex flex-row justify-between items-center">
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
-          className={`group flex-1 h-10 rounded-full border-0 ${
-            activeButton === "ethereum"
-              ? "bg-[#024365]"
-              : "bg-[#FFEEDC]"
-          } flex items-center justify-center p-4`}
+          className={`group flex-1 rounded-3xl border-0 ${
+            activeButton === "ethereum" ? "bg-[#024365]" : "bg-[#FFEEDC]"
+          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
         >
           <img
             src="/images/gara-coin/ethereum.png"
             alt="Ethereum"
-            className="w-[24px] h-[24px] mr-2"
-          /><span className={`font-black ${activeButton === "ethereum" ? "text-white" : "text-black"}`}>Ethereum</span>
+            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
+          />
+          <span
+            className={`font-black ${
+              activeButton === "ethereum" ? "text-white" : "text-black"
+            } text-[10px] sm:text-base`}
+          >
+            <span className="hidden sm:inline">Ethereum</span>
+            <span className="inline sm:hidden text-2xl">ETH</span>
+          </span>
         </button>
+
         <button
           onClick={() => handleNetworkSwitch("polygon")}
-          className={`group flex-1 h-10 rounded-full border-0 ${
-            activeButton === "polygon"
-              ? "bg-[#024365]"
-              : "bg-[#FFEEDC]"
-          } flex items-center justify-center p-4`}
+          className={`group flex-1 rounded-3xl border-0 ${
+            activeButton === "polygon" ? "bg-[#024365]" : "bg-[#FFEEDC]"
+          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
         >
           <img
             src="/images/gara-coin/polygon.png"
             alt="Polygon"
-            className="w-[24px] h-[24px] mr-2"
-          /><span className={`font-black ${activeButton === "polygon" ? "text-white" : "text-black"}`}>Polygon</span>
+            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
+          />
+          <span
+            className={`font-black ${
+              activeButton === "polygon" ? "text-white" : "text-black"
+            } text-[10px] sm:text-base`}
+          >
+            <span className="hidden sm:inline">Polygon</span>
+            <span className="inline sm:hidden text-2xl">POL</span>
+          </span>
         </button>
+
         <button
           onClick={() => handleNetworkSwitch("bsc")}
-          className={`group flex-1 h-10 rounded-full border-0 ${
-            activeButton === "bsc"
-              ? "bg-[#024365]"
-              : "bg-[#FFEEDC]"
-          } flex items-center justify-center p-4`}
+          className={`group flex-1 rounded-3xl border-0 ${
+            activeButton === "bsc" ? "bg-[#024365]" : "bg-[#FFEEDC]"
+          } flex items-center justify-center px-4 py-4 sm:px-6 sm:py-2 sm:h-12 h-[80px] w-[80px] sm:w-auto sm:flex-row flex-col`}
         >
           <img
             src="/images/gara-coin/bsc.png"
             alt="BSC"
-            className="w-[24px] h-[24px] mr-2"
-          /><span className={`font-black ${activeButton === "bsc" ? "text-white" : "text-black"}`}>BSC</span>
+            className="w-[24px] h-[24px] sm:mr-2 mb-1 sm:mb-0"
+          />
+          <span
+            className={`font-black ${
+              activeButton === "bsc" ? "text-white" : "text-black"
+            } text-[10px] sm:text-base`}
+          >
+            <span className="hidden sm:inline">BSC</span>
+            <span className="inline sm:hidden text-2xl">BSC</span>
+          </span>
         </button>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
@@ -1649,7 +1669,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           {[50, 100, 500, 1000, 5000].map((value) => (
             <button
               key={value}
-              className="group font-black flex-1 rounded-full border-0 bg-[#FFEEDC] flex items-center justify-center p-2"
+              className="group font-black flex-1 rounded-full border-0 bg-[#FFEEDC] hover:bg-[#024365] hover:text-white flex items-center justify-center p-2"
               onClick={(e) => {
                 e.preventDefault();
                 setAmountValue(value.toString());

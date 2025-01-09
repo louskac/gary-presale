@@ -66,8 +66,8 @@ const Roadmap = () => {
     <div className="roadmap relative m-auto">
       <Heading className="!mt-0 text-center text-4xl lg:text-6xl font-bold tracking-wider text-gary-yellow">$GARA Roadmap</Heading>
 
-      <div className="absolute left-0 top-[126px] hidden h-2 w-[70%] bg-gary-light-blue lg:block"></div>
-      <div className="absolute right-0 top-[126px] hidden h-2 w-[30%] bg-[#0D1E35] lg:block"></div>
+      <div className="absolute left-0 top-[126px] hidden h-2 2xl:w-[72%] xl:w-[77%] w-[83%] bg-gary-light-blue lg:block"></div>
+      <div className="absolute right-0 top-[126px] hidden h-2 2xl:w-[28%] xl:w-[23%] w-[17%] bg-[#0D1E35] lg:block"></div>
 
       <div className="m-auto mt-10 w-[90%] lg:mt-36">
         {isMobile ? (

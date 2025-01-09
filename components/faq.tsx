@@ -47,11 +47,27 @@ export const Faq = () => {
         {faqData.map((faq, index) => (
           <div
             key={index}
-            className="flex flex-col rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
+            onClick={() => toggleFaq(index)}
+            className="flex flex-col cursor-pointer rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
           >
             <div className="flex items-center justify-between">
-              <Heading className="text-left text-xl font-bold sm:text-2xl"><span  style={{WebkitTextStroke: "0px hsl(var(--gary-blue))", paintOrder: "fill",}}>{faq.title}</span></Heading>
-              <button onClick={() => toggleFaq(index)} className="text-white hover:text-gary-yellow focus:outline-none">
+              <Heading className="text-left text-xl font-bold sm:text-2xl">
+                <span
+                  style={{
+                    WebkitTextStroke: "0px hsl(var(--gary-blue))",
+                    paintOrder: "fill",
+                  }}
+                >
+                  {faq.title}
+                </span>
+              </Heading>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleFaq(index);
+                }}
+                className="text-white hover:text-gary-yellow focus:outline-none"
+              >
                 {activeIndex === index ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
               </button>
             </div>
@@ -71,7 +87,10 @@ export const Faq = () => {
                     {faq.contractAddress}
                   </span>
                   <button
-                    onClick={() => handleCopyClick(faq.contractAddress)}
+                    onClick={(e) => {
+                      e.stopPropagation(); // Prevent the parent's onClick from triggering
+                      handleCopyClick(faq.contractAddress);
+                    }}
                     className="mt-2 text-xs font-bold text-gary-yellow hover:text-white focus:outline-none sm:ml-4 sm:mt-0"
                   >
                     {copied ? <Check size={16} /> : <Copy size={16} />}

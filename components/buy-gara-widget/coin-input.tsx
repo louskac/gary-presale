@@ -30,16 +30,15 @@ export const CoinInput = forwardRef<
     <div className="flex flex-col gap-2">
       <div
         className={cn(
-          "flex w-full items-center gap-3 sm:gap-4 rounded-full bg-gary-input-blue/40 px-4 sm:px-6 py-3 border border-gray-300 shadow-sm focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500"
+          "flex w-full items-center gap-3 sm:gap-4 rounded-full bg-gary-input-blue/40 px-4 sm:px-6 py-3 border border-gray-300 shadow-sm"
         )}
       >
         <input
           ref={ref}
           lang="en"
           min="0"
-          step="0.0001"
           className={cn(
-            "flex-grow bg-transparent font-medium text-base sm:text-lg text-gray-800 outline-none placeholder-gray-400",
+            "flex-grow bg-transparent font-medium text-base sm:text-lg text-gray-800 outline-none placeholder-gray-400 appearance-none",
             className
           )}
           onChange={(e) => {

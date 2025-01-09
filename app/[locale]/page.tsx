@@ -103,7 +103,7 @@ export default function Home() {
           <div className="flex flex-col items-center lg:items-start justify-start flex-1 w-full lg:w-[500px]">
             <div className="w-full px-0 sm:px-2 relative">
               <BuyGara hideHeader />
-              <div className="hidden lg:block absolute -bottom-8 left-0 h-[140px] w-full z-[9990]">
+              <div className="hidden lg:block absolute -bottom-10 left-0 h-[140px] w-full z-[9990]">
                 <Image
                   src="/images/ice_buy_gara.svg"
                   fill

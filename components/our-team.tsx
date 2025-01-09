@@ -45,13 +45,13 @@ export default function OurTeam() {
         a meaningful impact in the crypto space. Together, we combine
         creativity, dedication, and expertise to bring HelpGary.com to the top.
       </p>
-      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 justify-center px-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 px-4 lg:max-w-5xl mx-auto">
         {teamMembers.map((member) => (
           <div
             key={member.name}
             className="bg-[#0D1E35] p-6 rounded-3xl lg:rounded-lg text-center shadow-lg w-full max-w-[300px]"
           >
-            <div className="w-32 h-32 mx-auto mb-4 relative">
+            <div className="w-24 h-24 md:w-32 md:h-32 mx-auto mb-4 relative">
               <Image
                 src={member.image}
                 alt={member.name}
@@ -59,7 +59,7 @@ export default function OurTeam() {
                 fill
               />
             </div>
-            <Heading className="text-xl font-bold mb-2">{member.name}</Heading>
+            <Heading className="text-xl font-bold mb-2"><span style={{WebkitTextStroke: "0px hsl(var(--gary-blue))", paintOrder: "fill",}}>{member.name}</span></Heading>
             <p className="text-gary-pink font-bold">{member.role}</p>
             <a
               href={member.linkedin}
