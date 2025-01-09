@@ -26,9 +26,6 @@ export const HelpGary = () => {
         <Heading className="text-3xl text-center font-bold sm:text-6xl sm:text-[3.5rem]">
           Help Gary reach his goals
         </Heading>
-        <Heading className="mt-10 text-center text-2xl uppercase text-gary-light-blue">
-          1 $GARA sold = 1 vote
-        </Heading>
         <div className="my-6 overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 text-center w-full max-w-[420px] lg:max-w-[40%]">
           {/* Mobile Layout */}
           <div className="block lg:hidden">

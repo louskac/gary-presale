@@ -7,9 +7,9 @@ import CountdownTimer from "@/components/countdown-timer"
 import Leaderboard from "@/components/country-clicker"
 import { supabase } from "@/lib/supabase"
 import AirdropWin from "@/components/airdrop-win"
-import ClickInfoPopup from "@/components/click-info-popup"
 import FingerprintJS from "@fingerprintjs/fingerprintjs"
 import ReCAPTCHA from "react-google-recaptcha"
+import { Heading } from "@/components/heading"
 
 export default function GarySection() {
   const [garyImage, setGaryImage] = useState("/images/gary_happy.png")
@@ -285,9 +285,9 @@ export default function GarySection() {
   }
 
   return (
-    <div className="relative mt-6 flex flex-col items-center justify-center lg:absolute lg:left-[80%] lg:top-[67%] lg:mt-0 lg:-translate-x-1/2 lg:-translate-y-1/2 lg:transform">
+    <div className="relative mt-6 flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between lg:gap-12 mx-4 lg:mx-40 mt-40">
       {captchaVisible && !captchaVerified ? (
-        // Render the CAPTCHA when it's visible and not verified
+        // CAPTCHA Section
         <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
           <p className="mb-4 text-lg font-bold text-white">Please verify that you are human to continue!</p>
           <div className="mb-4">
@@ -295,7 +295,7 @@ export default function GarySection() {
           </div>
           <button
             onClick={() => {
-              if (captchaVerified) setCaptchaVisible(false) // Hide CAPTCHA if verified
+              if (captchaVerified) setCaptchaVisible(false);
             }}
             className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none"
           >
@@ -303,68 +303,33 @@ export default function GarySection() {
           </button>
         </div>
       ) : (
-        // Render the rest of the UI if CAPTCHA is either not visible or already verified
         <>
-          {isMobile ? (
-            <>
-              <div className="mb-4 flex flex-wrap items-center justify-center gap-2 lg:gap-4">
-                {Object.entries(imageStats).map(([state, count]) => (
-                  <div
-                    key={state}
-                    className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                      highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
-                    }`}
-                  >
-                    <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
-                    <div className="text-lg font-bold text-black">{count}</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 flex items-center justify-between gap-4">
-                <ClickInfoPopup />
-                <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
-              </div>
-              <Leaderboard />
-              <div className="relative mt-8">
-                <div className="absolute -top-0 left-1/2 left-[15%] h-[100px] w-[160px] -translate-x-1/2 transform">
-                  <Image
-                    src={`/images/story/slide2/bubble_m.png`}
-                    alt="Speech Bubble"
-                    width={160}
-                    height={100}
-                    className="object-contain"
-                  />
-                  <p className="text-md absolute left-[45%] top-[60%] -translate-x-1/2 -translate-y-1/2 transform text-center font-bold text-black">
-                    Click to feed me and get free $GARA
-                  </p>
-                </div>
-                <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
+          {/* Left Section */}
+          <div className="flex flex-col items-center">
+            <div className="relative">
+              <button onClick={handleGaryClick} className="relative focus:outline-none">
+                <div className="relative flex flex-col items-center mb-[50px]">
+                  {/* Gary Image */}
                   <Image
                     src={garyImage}
                     alt="Gary"
                     width={200}
                     height={260}
-                    className="ml-[150px] h-[240px] w-[180px] object-contain"
+                    className="relative z-10 object-contain"
                   />
-                </button>
-              </div>
-              <div className="mt-6 mb-20">
-                <p className="mb-4 text-center text-xl font-bold text-white lg:text-2xl">
-                  Gary doesn&apos;t have much time left
-                </p>
-                <CountdownTimer />
-              </div>
-            </>
-          ) : (
-            <>
-              <button onClick={(event) => handleGaryClick(event)} className="focus:outline-none">
-                <div className="relative h-[300px] w-[250px]">
-                  <Image src={garyImage} alt="Gary" layout="fill" objectFit="contain" className="absolute" />
+                  {/* Larger Ice Block */}
+                  <Image
+                    src="/images/ice_block.svg"
+                    alt="Ice Block"
+                    width={700} 
+                    height={400}
+                    className="absolute bottom-[-30px] object-contain scale-[1.5] lg:scale-[2]"
+                  />
                 </div>
               </button>
-              <div className="absolute -top-[35%] left-[40%] mb-4 h-[250px] w-[250px]">
+              <div className="absolute -top-[45%] left-[40%] lg:left-[60%] mb-4 h-[200px] w-[200px]">
                 <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
-                  Click to feed me and get free $GARA
+                  Click to feed me
                 </p>
                 <Image
                   src="/images/story/slide1/bubble.png"
@@ -374,31 +339,106 @@ export default function GarySection() {
                   className="object-contain"
                 />
               </div>
-              <div className="mt-4 flex flex-nowrap items-center justify-center gap-2 lg:gap-4">
-                {Object.entries(imageStats).map(([state, count]) => (
-                  <div
-                    key={state}
-                    className={`flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 font-heading shadow-md ${
-                      highlightedBox === state ? "bg-yellow-300" : "bg-gradient-to-t from-blue-100 via-white to-white"
-                    }`}
-                  >
-                    <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
-                    <div className="text-lg font-bold text-black">{count}</div>
+            </div>
+            <p className="mt-4 text-center text-lg font-bold text-white">Your score: {clickCount}</p>
+            <div className="mt-4 flex flex-wrap gap-2 justify-center">
+              {Object.entries(imageStats).map(([state, count]) => (
+                <div
+                  key={state}
+                  className="flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl p-2 bg-gradient-to-t from-blue-100 via-white to-white shadow-md"
+                >
+                  <Image
+                    src={`/images/${state}.png`}
+                    alt={state}
+                    width={32}
+                    height={32}
+                    className="rounded"
+                  />
+                  <p className="text-lg font-bold text-black">{count}</p>
+                </div>
+              ))}
+            </div>
+            <Leaderboard />
+          </div>
+  
+          {/* Right Section */}
+          <div className="mt-8 lg:mt-0 flex flex-col items-start lg:w-1/2">
+            <Heading className="text-center text-4xl font-bold leading-none tracking-normal lg:text-6xl mb-4">
+              Feed Gary & win 100 $GARA
+            </Heading>
+            <p className="mt-2 text-base text-white">
+              <span className="font-bold">Every click has a chance to earn 100 $GARA!</span> You
+              can win a maximum of <span className="font-bold">3 times per day</span> (300 $GARA in total).
+              To receive the $GARA tokens, you need to enter your wallet in the winning pop-up window.
+              The earned $GARA from the clicks will be credited at the end of each month.
+            </p>
+            <div className="mt-4 w-full">
+              <h3 className="text-lg font-bold text-white">Click Rewards</h3>
+                <div className="mt-2 grid grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:gap-4 w-full">
+                  {/* First Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image
+                      src={`/images/state_1.png`}
+                      alt="fish"
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <p className="text-white font-bold">+1 point</p>
                   </div>
-                ))}
-              </div>
-              <div className="mt-4 flex items-center justify-between gap-4">
-                <ClickInfoPopup />
-                <p className="text-xl font-bold text-white">Your score: {clickCount}</p>
-              </div>
-              <Leaderboard />
-            </>
-          )}
 
-          {/* Airdrop Popup */}
-          {showAirdropWin && <AirdropWin onClose={() => setShowAirdropWin(false)} />}
+                  {/* Second Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image
+                      src={`/images/state_2.png`}
+                      alt="fish"
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <p className="text-white font-bold">+2 point</p>
+                  </div>
+
+                  {/* Third Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image
+                      src={`/images/state_3.png`}
+                      alt="fish"
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <p className="text-white font-bold">+5 point</p>
+                  </div>
+
+                  {/* Fourth Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image
+                      src={`/images/state_4.png`}
+                      alt="fish"
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <p className="text-white font-bold">+10 point</p>
+                  </div>
+
+                  {/* Last Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2 col-span-2">
+                    <Image
+                      src={`/images/state_5.png`}
+                      alt="fish"
+                      width={32}
+                      height={32}
+                      className="rounded"
+                    />
+                    <p className="text-white font-bold">100 $GARA reward</p>
+                  </div>
+                </div>
+            </div>
+          </div>
         </>
       )}
     </div>
-  )
+  );
 }

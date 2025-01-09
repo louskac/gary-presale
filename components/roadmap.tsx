@@ -12,11 +12,7 @@ const roadData = [
     period: "2021-23",
     events: [
       { quarter: "2021 Q3", description: "Founding the company and forming the team." },
-      {
-        quarter: "2023 Q1",
-        description:
-          "Successful launch of Coingarage platform including FIAT/Crypto payment gateways. Creation of $GARA.",
-      },
+      { quarter: "2023 Q1", description: "Successful launch of Coingarage platform including FIAT/Crypto payment gateways. Creation of $GARA." },
       { quarter: "2023 Q2", description: "Launch of mobile applications." },
       { quarter: "2023 Q4", description: "Listing of more than 100 coins on Coingarage exchange." },
     ],
@@ -27,12 +23,16 @@ const roadData = [
       { quarter: "Q1", description: "Launching trading app on Coingarage exchange." },
       { quarter: "Q3", description: "Stake $GARA Program with annual returns up to 30%." },
       { quarter: "Q4", description: "Start of the first round of $GARA Pre-sale." },
-      { quarter: "Q4", description: "Launch of crypto academy on Coingarage platform." },
+      { quarter: "Q4", description: "Creation of HelpGary.com" },
+      { quarter: "Q4", description: "Launch Presale of HelpGary" },
+      { quarter: "Q4", description: "Launch HelpGary marketing" },
+      { quarter: "Q4", description: "Locking team GARA tokens" },
     ],
   },
   {
     period: "2025",
     events: [
+      { quarter: "Q1", description: "Launch of crypto academy on Coingarage platform." },
       { quarter: "Q1", description: "Listing of $GARA for trading on the Coingarage exchange." },
       { quarter: "Q1", description: "Listing on Uniswap, CoinMarketCap, and CoinGecko." },
       { quarter: "Q2", description: "$GARA Airdrop and $GARA listing on other exchanges." },
@@ -62,8 +62,8 @@ const Roadmap = () => {
     <div className="roadmap relative m-auto">
       <Heading className="!mt-0 text-center text-6xl font-bold tracking-wider text-gary-yellow">$GARA Roadmap</Heading>
 
-      <div className="absolute left-0 top-[126px] hidden h-2 w-[50%] bg-gary-light-blue lg:block"></div>
-      <div className="absolute right-0 top-[126px] hidden h-2 w-[50%] bg-[#0D1E35] lg:block"></div>
+      <div className="absolute left-0 top-[126px] hidden h-2 w-[70%] bg-gary-light-blue lg:block"></div>
+      <div className="absolute right-0 top-[126px] hidden h-2 w-[30%] bg-[#0D1E35] lg:block"></div>
 
       <div className="m-auto mt-10 w-[90%] lg:mt-36">
         {isMobile ? (
@@ -117,10 +117,10 @@ const Roadmap = () => {
             {roadData.map((section, index) => (
               <div
                 key={index}
-                className={`roadmap-section relative mx-5 w-[350px] rounded-[30px] bg-[#0D1E35] px-10 lg:h-full lg:pb-10 ${index < 2 ? "border-8 border-solid border-gary-light-blue" : "border-8 border-solid border-transparent"}`}
+                className={`roadmap-section relative mx-5 w-[350px] rounded-[30px] bg-[#0D1E35] px-10 lg:h-full lg:pb-10 ${index < 3 ? "border-8 border-solid border-gary-light-blue" : "border-8 border-solid border-transparent"}`}
               >
                 <div
-                  className={`absolute left-1/2 top-[-115px] flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full border-8 border-solid ${index < 2 ? "border-gary-light-blue" : "border-[#0D1E35]"} bg-[#0D1E35]`}
+                  className={`absolute left-1/2 top-[-115px] flex h-16 w-16 -translate-x-1/2 transform items-center justify-center rounded-full border-8 border-solid ${index < 3 ? "border-gary-light-blue" : "border-[#0D1E35]"} bg-[#0D1E35]`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -137,7 +137,7 @@ const Roadmap = () => {
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
                   <div
-                    className={`absolute top-14 m-auto h-11 w-2 ${index < 2 ? "bg-gary-light-blue" : "bg-[#0D1E35]"}`}
+                    className={`absolute top-14 m-auto h-11 w-2 ${index < 3 ? "bg-gary-light-blue" : "bg-[#0D1E35]"}`}
                   ></div>
                 </div>
 
@@ -147,8 +147,8 @@ const Roadmap = () => {
 
                 <ul>
                   {section.events.map((event, idx) => (
-                    <li key={idx} className="mt-4 w-[241px] font-bold text-white">
-                      <strong className="text-[18px] text-gary-light-blue">{event.quarter}:</strong> {event.description}
+                    <li key={idx} className="mt-4 w-[241px] text-white">
+                      <strong className="text-[18px] text-gary-light-blue">{event.quarter} -</strong> {event.description}
                     </li>
                   ))}
                 </ul>

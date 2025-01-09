@@ -20,34 +20,8 @@ export const SavePenguins = () => {
 
   return (
     <div className="container relative mx-auto flex min-h-screen flex-col items-center py-10">
-      {/* Section 2 */}
-      <div className={`mt-16 flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:gap-16`}>
-        <div className="flex flex-col justify-center lg:w-[55%] lg:max-w-[700px]">
-          <Heading className="text-center text-6xl font-bold tracking-wider text-gary-yellow lg:text-left">
-            Gary got adopted
-          </Heading>
-          {isMobile && (
-            <div className="relative m-auto mt-6 h-[400px] w-full max-w-[550px] overflow-hidden rounded-3xl lg:m-0">
-              <Image src={`/images/penguin.png`} sizes="550px" alt="" fill className="object-contain" />
-            </div>
-          )}
-          <p className="mt-4 text-center text-xl font-bold text-white md:px-0 lg:text-left">
-            Penguin designated as AP 619 was found abandoned by its colony. Since it’s too young to survive on its own,
-            it was taken to a rescue station, where it will stay until it grows strong enough to be released back into
-            the wild and rejoin the penguin colony in Simon&apos;s Town. To support the efforts of this organization and
-            ensure that this young penguin has everything it needs, we decided to adopt it and named him Gary. We are
-            currently discussing the possibility of setting up a webcam to monitor his growth and eventual release.
-          </p>
-        </div>
-        {!isMobile && (
-          <div className="relative mt-20 h-[650px] w-full overflow-hidden rounded-3xl lg:mt-0 lg:w-[500px] lg:max-w-[500px]">
-            <Image src={`/images/penguin.png`} sizes="500px" alt="" fill className="object-contain" />
-          </div>
-        )}
-      </div>
 
-      {/* Section 3 */}
-      <div
+<div
         className={`flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:justify-center lg:gap-16`}
       >
         {!isMobile && (
@@ -112,6 +86,31 @@ export const SavePenguins = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      <div className={`mt-16 flex ${isMobile ? "flex-col" : "flex-row"} flex-wrap justify-between lg:gap-16`}>
+        <div className="flex flex-col justify-center lg:w-[55%] lg:max-w-[700px]">
+          <Heading className="text-center text-6xl font-bold tracking-wider text-gary-yellow lg:text-left">
+            Gary got adopted
+          </Heading>
+          {isMobile && (
+            <div className="relative m-auto mt-6 h-[400px] w-full max-w-[550px] overflow-hidden rounded-3xl lg:m-0">
+              <Image src={`/images/penguin.png`} sizes="550px" alt="" fill className="object-contain" />
+            </div>
+          )}
+          <p className="mt-4 text-center text-xl font-bold text-white md:px-0 lg:text-left">
+            Penguin designated as AP 619 was found abandoned by its colony. Since it’s too young to survive on its own,
+            it was taken to a rescue station, where it will stay until it grows strong enough to be released back into
+            the wild and rejoin the penguin colony in Simon&apos;s Town. To support the efforts of this organization and
+            ensure that this young penguin has everything it needs, we decided to adopt it and named him Gary. We are
+            currently discussing the possibility of setting up a webcam to monitor his growth and eventual release.
+          </p>
+        </div>
+        {!isMobile && (
+          <div className="relative mt-20 h-[650px] w-full overflow-hidden rounded-3xl lg:mt-0 lg:w-[500px] lg:max-w-[500px]">
+            <Image src={`/images/penguin.png`} sizes="500px" alt="" fill className="object-contain" />
+          </div>
+        )}
       </div>
     </div>
   )

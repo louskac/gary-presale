@@ -33,34 +33,34 @@ const garysRoadMapData = [
     img: "rescue.png",
   },
   {
-    votes: 2000000,
+    votes: 1500000,
     title: "NEW JOB FOR GARY",
     description: "Gary will get new job in company and will be able to enforce at least 2 $GARA airdrops.",
     img: "new_job.png",
   },
   {
-    votes: 5000000,
+    votes: 2000000,
     title: "GARY'S PROMOTION",
     description:
       "Gary will gain more influence in the company and push listing of $GARA coin on selected exchanges in the top 50.",
     img: "promotion.png",
   },
   {
-    votes: 10000000,
+    votes: 3000000,
     title: "Seat on the board of directors",
     description:
       "GARY will use his influence in the company and list $GARA coin on some of the top 10 crypto exchanges.",
     img: "board-member.png",
   },
   {
-    votes: 30000000,
+    votes: 3500000,
     title: "Taking over",
     description:
       "GARY will become king and gain control of the exchange Coingarage and rename it Coinguin. As the first act of his reign, he will burn 15% of the total supply of $GARA coin.",
     img: "assumption.png",
   },
   {
-    votes: 50000000,
+    votes: 4000000,
     title: "SPREAD OF INFLUENCE",
     description:
       "GARY gains a huge influx of power and quickly expands his influence worldwide. He will use money from the pre-sale for marketing and development of new products which will use $GARA coin.",
@@ -133,11 +133,11 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
             <div
               className={cn(
                 "relative flex w-full max-w-full flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 md:max-w-[700px] lg:flex-row lg:pb-2",
-                index <= activeStep && "border-4 border-gary-yellow"
+                index <= activeStep && "border-4 border-gary-yellow lg:border-0"
               )}
             >
               {index <= activeStep && (
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded-t-md bg-gary-yellow px-3 py-1 text-sm text-black">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded-t-md bg-gary-yellow px-3 py-1 text-sm text-black lg:hidden">
                   Goal Reached
                 </div>
               )}
@@ -148,27 +148,29 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
               >
-                <div className="text-lg font-bold text-gary-light-blue" suppressHydrationWarning>
-                  {formatAmount(step.votes, 0)}
+                <div className="text-lg text-gary-light-blue" suppressHydrationWarning>
+                  <span className="font-bold">${formatAmount(step.votes, 0)}</span> Raised
                 </div>
                 <h3 className="mb-2 text-lg font-bold uppercase text-gary-yellow sm:text-2xl">{step.title}</h3>
                 <p className="text-lg font-bold">{step.description}</p>
               </motion.div>
-              <motion.div
-                className="relative mr-5 flex h-32 w-32 items-center justify-center"
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
-              >
-                <Image
-                  src={`/images/help-gary/${step.img}`}
-                  alt=""
-                  fill
-                  className="max-w-full object-contain"
-                  sizes="(max-width: 768px) 100vw, 365px"
-                  quality={100}
-                />
-              </motion.div>
+              {index !== 4 && (
+                <motion.div
+                  className="relative mr-5 flex h-32 w-32 items-center justify-center"
+                  initial={{ scale: 0, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
+                >
+                  <Image
+                    src={`/images/help-gary/${step.img}`}
+                    alt=""
+                    fill
+                    className="max-w-full object-contain"
+                    sizes="(max-width: 768px) 100vw, 365px"
+                    quality={100}
+                  />
+                </motion.div>
+              )}
             </div>
           </motion.div>
         ))}

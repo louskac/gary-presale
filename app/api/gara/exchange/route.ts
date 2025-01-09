@@ -135,7 +135,7 @@ export async function POST(req: NextRequest) {
       await createTransactionLog({
         transaction_tx_hash: txHash,
         log: {
-          message: "Sending GARA",
+          message: "Sending $GARA",
           metadata: {
             to: garaTo,
             garaAmount: amountInGara,
@@ -156,7 +156,7 @@ export async function POST(req: NextRequest) {
       await createTransactionLog({
         transaction_tx_hash: txHash,
         log: {
-          message: "GARA sent",
+          message: "$GARA sent",
           metadata: {
             garaTxHash,
           },
@@ -164,11 +164,11 @@ export async function POST(req: NextRequest) {
       })
       console.log("Transaction hash:", garaTxHash)
     } catch (error) {
-      console.error("Error sending GARA token:", error)
+      console.error("Error sending $GARA token:", error)
       await createTransactionLog({
         transaction_tx_hash: txHash,
         log: {
-          message: "Error sending GARA",
+          message: "Error sending $GARA",
           metadata: {
             // @ts-ignore
             error: error?.message,
@@ -176,7 +176,7 @@ export async function POST(req: NextRequest) {
         },
       })
       await updateTransactionByTxHash(txHash, { status: "failed" })
-      throw new Error("Error sending GARA token")
+      throw new Error("Error sending $GARA token")
     }
 
     try {
@@ -189,7 +189,7 @@ export async function POST(req: NextRequest) {
       await createTransactionLog({
         transaction_tx_hash: txHash,
         log: {
-          message: "GARA transaction confirmed",
+          message: "$GARA transaction confirmed",
           metadata: {
             receipt: parsedReceipt,
           },
@@ -214,7 +214,7 @@ export async function POST(req: NextRequest) {
     try {
       await sendMail({
         recipients: ["d.forejtek@gmail.com"],
-        subject: `GARA Coin - New transaction`,
+        subject: `$GARA Coin - New transaction`,
         content: universal({
           data: {
             usdChain: chain,
@@ -233,10 +233,10 @@ export async function POST(req: NextRequest) {
     await updateTransactionByTxHash(txHash, { status: "success" })
     return NextResponse.json({ success: true, txHash: garaTxHash, status: receipt?.status })
   } catch (error) {
-    console.error("Error sending GARA token:", error)
+    console.error("Error sending $GARA token:", error)
     await sendMail({
       recipients: ["d.forejtek@gmail.com", "office@coingarage.io"],
-      subject: `GARA Coin - Error in sending GARA`,
+      subject: `$GARA Coin - Error in sending $GARA`,
       // @ts-ignore
       content: JSON.stringify({ error: error?.message }, undefined, 2),
     })

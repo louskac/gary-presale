@@ -1,5 +1,5 @@
 "use client"
-import { Check, ChevronsUpDown } from "lucide-react"
+import { Check, ChevronDown } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -45,7 +45,7 @@ export function CurrencySelect({ form }: { form: any }) {
                     variant="outline"
                     role="combobox"
                     className={cn(
-                      "!mt-0 h-[44px] w-full justify-between rounded-full border-none bg-gary-input-blue font-bold text-gary-blue hover:bg-gary-light-blue",
+                      "!mt-0 h-[24px] w-full justify-between rounded-full border-none bg-gary-input-blue/40 font-bold text-gary-blue hover:bg-gary-input-blue !p-0",
                       !field.value && "text-muted-foreground"
                     )}
                   >
@@ -54,13 +54,9 @@ export function CurrencySelect({ form }: { form: any }) {
                       alt={field.value}
                       width={32}
                       height={32}
-                      className="mr-1"
+                      className="mr-2"
                     />
-                    {field.value && !address && ethTokens.find((token) => token.value === field.value)?.label}
-                    {field.value && chain?.id === 1 && ethTokens.find((token) => token.value === field.value)?.label}
-                    {field.value && chain?.id === 137 && polTokens.find((token) => token.value === field.value)?.label}
-                    {field.value && chain?.id === 56 && bnbTokens.find((token) => token.value === field.value)?.label}
-                    <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                    <ChevronDown className="h-8 w-8 shrink-0 opacity-50 mr-4" />
                   </Button>
                 </FormControl>
               </PopoverTrigger>

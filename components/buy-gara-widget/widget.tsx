@@ -28,7 +28,7 @@ import { getTokenBalance } from "@/lib/get-balance"
 import Arrow from "@/public/images/gara-coin/arrow.svg"
 import Polygon from "@/public/images/gara-coin/pol.png"
 import CountdownTimer from "@/components/countdown-timer"
-import { Rounds } from "@/components/rounds"
+import ProgressBar from "@ramonak/react-progress-bar"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
@@ -1418,38 +1418,106 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     reset()
   }
 
+  useEffect(() => {
+    const progressBarFiller = document.getElementById("progress-bar-filler");
+  
+    if (progressBarFiller) {
+      // Ensure the progress bar has relative positioning
+      progressBarFiller.style.position = "relative";
+  
+      // Create arrow container
+      const arrowContainer = document.createElement("div");
+      arrowContainer.className =
+        "absolute inset-0 flex items-center justify-start pointer-events-none arrow";
+  
+      // Add spans for the arrows
+      for (let i = 0; i < 3; i++) {
+        const arrow = document.createElement("span");
+        arrow.className =
+          "block w-[1.5vw] h-[1.5vw] border-b-[5px] border-r-[5px] border-white transform rotate-45";
+        if (i === 1) arrow.style.animationDelay = "-0.2s";
+        if (i === 2) arrow.style.animationDelay = "-0.4s";
+        arrowContainer.appendChild(arrow);
+      }
+  
+      // Append arrow container to the progress bar filler
+      progressBarFiller.appendChild(arrowContainer);
+  
+      // Inject animation keyframes and styles dynamically
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes animate {
+          0% {
+            opacity: 0;
+            transform: rotate(315deg) translate(-10px, -10px);
+          }
+          50% {
+            opacity: 0.3;
+          }
+          100% {
+            opacity: 0;
+            transform: rotate(315deg) translate(10px, 10px);
+          }
+        }
+  
+        .arrow span {
+          animation: animate 2s infinite;
+          margin: -10px;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  const setAmountValue = (value: string) => {
+    form.setValue("amount", value);
+  };
+
   return (
     <section
       id="buy-gara"
       className={cn(
-        "relative w-full max-w-[420px] mx-auto flex-1 rounded-2xl lg:rounded-t-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md mb-20",
+        "relative w-full max-w-[420px] mx-auto flex-1 rounded-2xl lg:rounded-t-2xl bg-white p-6 px-5 shadow-md mb-20",
         className
       )}
     >
-      {!hideHeader && (
-        <h3 className="mb-6 text-center font-heading text-4xl font-bold text-gary-blue">{t("header")}</h3>
-      )}
-      <Table className="text-base">
-        <TableBody className="text-base">
-          <TableRow className="!border-none hover:bg-transparent">
-            <TableCell className="!p-1 font-bold">{t("distributedTokens")}</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink">99M GARA</TableCell>
-          </TableRow>
-          <TableRow className="!border-none hover:bg-transparent">
-            <TableCell className="!p-1 font-bold">{t("soldTokens")}</TableCell>
-            <TableCell className="!p-1 text-end font-bold text-gary-pink" lang="en-US" suppressHydrationWarning>
-              {new Intl.NumberFormat("en-US").format(tokenSold)} GARA
-            </TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-      <div className="mt-4 grid grid-cols-[1fr_180px_1fr] gap-2">
+      <div className="relative flex overflow-x-hidden bg-[#222222] text-white -mx-5">
+        <div className="py-2 animate-marquee whitespace-nowrap flex items-center">
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+        </div>
+
+        <div className="absolute top-0 py-2 animate-marquee2 whitespace-nowrap flex items-center">
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="w-3 h-3 bg-[#02F577] rounded-full animate-pulse ml-4"></div>
+            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 grid grid-cols-[1fr_280px_1fr] gap-2">
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
-        <p className="text-center font-heading font-bold">
-          Time Left - {calculateRound()}
-          <sup>nd</sup> round
+        <p className="text-center font-heading font-black text-xl">
+          Countdown to Price Increase
         </p>
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
@@ -1458,63 +1526,146 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="my-4 flex flex-row justify-center">
         <CountdownTimer />
       </div>
-      <div className="mt-4 grid grid-cols-[1fr_120px_1fr] gap-2">
+      <div className="p-4 rounded-md flex flex-col justify-between items-center">
+        <div className="w-full flex justify-between text-lg text-gray-800">
+          <span>
+            Current Price: <span className="text-gary-pink font-bold">$0.12</span>
+          </span>
+          <span>
+            Listing price: <span className="text-gray-900 font-bold">$0.36</span>
+          </span>
+        </div>
+        <div className="relative my-2 w-full">
+          <ProgressBar
+            completed={((tokenSold / 4000000) * 100).toFixed(2)}
+            animateOnRender={true}
+            isLabelVisible={false}
+            height="16px"
+            bgColor="#28E0B9"
+            baseBgColor="#0D1E35"
+            borderRadius="20px"
+            className="shadow-md"
+          />
+        </div>
+        <p className="text-lg text-gray-800 text-center">
+          Raised: <span className="font-black text-gray-900">
+            ${new Intl.NumberFormat("en-US").format(tokenSold)} / $4,000,000
+          </span>
+        </p>
+      </div>
+      <div className="mt-4 grid grid-cols-[1fr_220px_1fr] gap-2 lg:hidden">
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
-        <p className="text-center font-heading font-bold">Rounds</p>
+        <p className="text-center font-heading text-lg">
+          Presale payment methods
+        </p>
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
-      <Rounds />
+      <div className="mt-4 gap-2 flex flex-row justify-between items-center">
+        <button
+          onClick={() => handleNetworkSwitch("ethereum")}
+          className={`group flex-1 h-10 rounded-full border-0 ${
+            activeButton === "ethereum"
+              ? "bg-[#024365]"
+              : "bg-[#FFEEDC]"
+          } flex items-center justify-center p-4`}
+        >
+          <img
+            src="/images/gara-coin/ethereum.png"
+            alt="Ethereum"
+            className="w-[24px] h-[24px] mr-2"
+          /><span className={`font-black ${activeButton === "ethereum" ? "text-white" : "text-black"}`}>Ethereum</span>
+        </button>
+        <button
+          onClick={() => handleNetworkSwitch("polygon")}
+          className={`group flex-1 h-10 rounded-full border-0 ${
+            activeButton === "polygon"
+              ? "bg-[#024365]"
+              : "bg-[#FFEEDC]"
+          } flex items-center justify-center p-4`}
+        >
+          <img
+            src="/images/gara-coin/polygon.png"
+            alt="Polygon"
+            className="w-[24px] h-[24px] mr-2"
+          /><span className={`font-black ${activeButton === "polygon" ? "text-white" : "text-black"}`}>Polygon</span>
+        </button>
+        <button
+          onClick={() => handleNetworkSwitch("bsc")}
+          className={`group flex-1 h-10 rounded-full border-0 ${
+            activeButton === "bsc"
+              ? "bg-[#024365]"
+              : "bg-[#FFEEDC]"
+          } flex items-center justify-center p-4`}
+        >
+          <img
+            src="/images/gara-coin/bsc.png"
+            alt="BSC"
+            className="w-[24px] h-[24px] mr-2"
+          /><span className={`font-black ${activeButton === "bsc" ? "text-white" : "text-black"}`}>BSC</span>
+        </button>
+      </div>
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
-        <div className="mt-4 grid w-full grid-cols-[1fr_auto] gap-2">
-          <CoinInput
-            coin="USDC"
-            type="number"
-            placeholder="0.000"
-            {...register("amount", { required: "Amount is required" })}
-            showIcon={false}
-            className="w-full"
-          />
-          <div className="flex items-center">
-            <CurrencySelect name="token" form={form} />
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          <div className="flex flex-col">
+            <p className="font-black">Pay with eth</p>
+            <CoinInput
+              coin="USDC"
+              type="number"
+              placeholder="0.000"
+              {...register("amount", { required: "Amount is required" })}
+              form={form}
+              showIcon={false}
+              className="w-full"
+            />
+            {hasLowerInputBalance && (
+              <p className="mt-2 text-sm text-red-500">
+                Amount must be greater than {minTokenBalance} {token}
+              </p>
+            )}
+            {hasUnsufficientBalance && (
+              <p className="mt-2 text-sm text-red-500">Insufficient balance</p>
+            )}
           </div>
-        </div>
-        {hasLowerInputBalance && (
-          <p className="mt-2 pl-4 text-sm text-red-500">
-            Amount must be greater than {minTokenBalance} {token}
-          </p>
-        )}
-        {hasUnsufficientBalance && <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>}
-        <div className="mt-4">
-          <CoinInput
-            coin="GARA"
-            type="text"
-            placeholder="0.000"
-            className="cursor-disabled pointer-events-none"
-            {...register("garaEstimate")}
-            readOnly
-          />
+          <div>
+            <p className="font-black">Receive $GARA</p>
+            <CoinInput
+              coin="GARA"
+              type="text"
+              placeholder="0.000"
+              className="cursor-disabled pointer-events-none w-full"
+              {...register("garaEstimate")}
+              readOnly
+            />
+          </div>
         </div>
         <input type="hidden" {...register("from")} />
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
+        <div className="mt-4 grid grid-cols-5 gap-2">
+          {[50, 100, 500, 1000, 5000].map((value) => (
+            <button
+              key={value}
+              className="group font-black flex-1 rounded-full border-0 bg-[#FFEEDC] flex items-center justify-center p-2"
+              onClick={(e) => {
+                e.preventDefault();
+                setAmountValue(value.toString());
+              }}
+            >
+              {`$${value}`}
+            </button>
+          ))}
+        </div>
         <div
           className={cn(
             "mt-8 gap-4",
             address ? "flex flex-col" : "flex flex-col lg:flex-row"
           )}
         >
-          <div className="flex-1">
-            <ConnectButton
-              label={t("btnConnectWallet")}
-              showBalance={false}
-              className="h-12 w-full rounded-full bg-[#FF4473] text-xl font-bold text-white text-center"
-            />
-          </div>
-          <div className="flex-1">
+          <div className={cn("flex-1", !address && "hidden")}> 
             <Button
               type="submit"
               variant={address ? "default" : "outlinePrimary"}
@@ -1523,6 +1674,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             >
               {t("btnBuyGARA")}
             </Button>
+          </div>
+          <div className="flex-1">
+            <ConnectButton
+              label={t("btnConnectWallet")}
+              showBalance={false}
+              className="h-12 w-full rounded-full bg-[#FF4473] text-xl font-bold text-white text-center"
+            />
           </div>
         </div>
         <TransactionStatusModal

@@ -38,31 +38,6 @@ export const NavBar = () => {
     };
   }, []);
 
-  // Hide the sticky-button when menu is open
-  useEffect(() => {
-    const stickyButton = document.getElementById("sticky-button");
-    if (stickyButton) {
-      const handleResize = () => {
-        if (window.innerWidth > 756 || menuOpen) {
-          stickyButton.style.display = "none";
-        } else {
-          stickyButton.style.display = "block";
-        }
-      };
-  
-      // Initial check on mount
-      handleResize();
-  
-      // Add resize event listener
-      window.addEventListener("resize", handleResize);
-  
-      // Cleanup event listener on unmount
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      };
-    }
-  }, [menuOpen]);
-
   const navbarHandlerScroll = scrolled ? "lg:bg-[#061022]" : "bg-transparent";
 
   return (
@@ -97,8 +72,29 @@ export const NavBar = () => {
         </nav>
 
         <div className="hidden flex-shrink-0 lg:flex lg:items-center lg:justify-end">
+          <div className="lg:justify-left m-auto flex flex-row justify-center gap-2 md:gap-4 mr-4 lg:justify-normal">
+            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+              <a href="https://x.com/Help_Gary_" target="_blank" rel="noopener noreferrer">
+                <Image src={`/images/save-penguins/twitter.svg`} width={32} height={32} alt="Twitter" className="scale-[2]" />
+              </a>
+            </Button>
+            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+              <a
+                href="https://www.facebook.com/profile.php?id=61568221981440"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image src={`/images/save-penguins/facebook.svg`} width={32} height={32} alt="Facebook" className="scale-[3]" />
+              </a>
+            </Button>
+            <Button className="aspect-square h-[40px] w-[40px] rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow flex items-center justify-center">
+              <a href="https://t.me/helpgary" target="_blank" rel="noopener noreferrer">
+                <Image src={`/images/save-penguins/telegram.svg`} width={32} height={32} alt="Telegram" className="scale-[2.5]" />
+              </a>
+            </Button>
+          </div>
           <AnchorLink anchor="help-gary">
-            <Button className="my-2 h-14 border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
+            <Button className="border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
               Buy $GARA coin
             </Button>
           </AnchorLink>

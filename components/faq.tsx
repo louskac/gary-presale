@@ -50,7 +50,7 @@ export const Faq = () => {
             className="flex flex-col rounded-3xl bg-[#0D1E35] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
           >
             <div className="flex items-center justify-between">
-              <Heading className="text-left text-xl font-bold sm:text-2xl">{faq.title}</Heading>
+              <Heading className="text-left text-xl font-bold sm:text-2xl"><span  style={{WebkitTextStroke: "0px hsl(var(--gary-blue))", paintOrder: "fill",}}>{faq.title}</span></Heading>
               <button onClick={() => toggleFaq(index)} className="text-white hover:text-gary-yellow focus:outline-none">
                 {activeIndex === index ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
               </button>
@@ -61,7 +61,7 @@ export const Faq = () => {
               }`}
             >
               <p
-                className="text-sm font-normal text-white sm:text-base"
+                className="text-sm font-black text-white sm:text-base"
                 dangerouslySetInnerHTML={{ __html: faq.text }}
               ></p>
               {faq.hasCopyButton && faq.contractAddress && (
