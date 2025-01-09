@@ -45,11 +45,11 @@ export default function OurTeam() {
         a meaningful impact in the crypto space. Together, we combine
         creativity, dedication, and expertise to bring HelpGary.com to the top.
       </p>
-      <div className="flex flex-wrap justify-center gap-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-y-8 gap-x-6 justify-center px-4">
         {teamMembers.map((member) => (
           <div
             key={member.name}
-            className="bg-[#0D1E35] p-6 rounded-lg text-center w-64 shadow-lg"
+            className="bg-[#0D1E35] p-6 rounded-3xl lg:rounded-lg text-center shadow-lg w-full max-w-[300px]"
           >
             <div className="w-32 h-32 mx-auto mb-4 relative">
               <Image

@@ -285,7 +285,7 @@ export default function GarySection() {
   }
 
   return (
-    <div className="relative mt-6 flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between lg:gap-12 mx-4 lg:mx-40 mt-40">
+    <div className="relative flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between lg:gap-12 mx-4 lg:mx-40 mt-40">
       {captchaVisible && !captchaVerified ? (
         // CAPTCHA Section
         <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
