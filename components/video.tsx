@@ -25,7 +25,7 @@ const VideoPlayer = () => {
             onClick={handlePlay}
             className="relative flex items-center justify-center rounded-full bg-gary-yellow px-8 py-4 font-bold text-black shadow-lg hover:bg-yellow-600 focus:outline-none"
           >
-            <span className="mr-2">Play video</span>
+            <span className="mr-2 font-black">Play video</span>
             <svg 
               fill="#000000" 
               height="20px" 
