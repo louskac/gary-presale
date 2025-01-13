@@ -154,23 +154,21 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 <h3 className="mb-2 text-lg font-bold uppercase text-gary-yellow sm:text-2xl">{step.title}</h3>
                 <p className="text-lg font-bold">{step.description}</p>
               </motion.div>
-              {index !== 4 && (
-                <motion.div
-                  className="relative mr-5 flex h-32 w-32 items-center justify-center"
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
-                >
-                  <Image
-                    src={`/images/help-gary/${step.img}`}
-                    alt=""
-                    fill
-                    className="max-w-full object-contain"
-                    sizes="(max-width: 768px) 100vw, 365px"
-                    quality={100}
-                  />
-                </motion.div>
-              )}
+              <motion.div
+                className="relative mr-5 flex h-32 w-32 items-center justify-center"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
+              >
+                <Image
+                  src={`/images/help-gary/${step.img}`}
+                  alt=""
+                  fill
+                  className="max-w-full object-contain"
+                  sizes="(max-width: 768px) 100vw, 365px"
+                  quality={100}
+                />
+              </motion.div>
             </div>
           </motion.div>
         ))}

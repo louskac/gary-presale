@@ -14,7 +14,7 @@ const balooBhai = Baloo_Bhai_2({
 })
 
 export const metadata: Metadata = {
-  title: "Save penguin Gary!",
+  title: "Help penguin Gary!",
   description: "Help to save Gary and his job",
 }
 

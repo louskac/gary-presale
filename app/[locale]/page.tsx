@@ -15,8 +15,10 @@ import GarySection from "@/components/clickable-gary"
 import Roadmap from "@/components/roadmap"
 import Tokenomics from "@/components/tokenomics"
 import OurTeam from "@/components/our-team"
+import MemeGenerator from "@/components/meme-generator"
 import { BuyGara } from "@/components/buy-gara-widget/widget"
 import { Button } from "@/components/ui/button"
+import VideoPlayer from "@/components/video"
 
 export default function Home() {
   const [backgroundSrc, setBackgroundSrc] = useState("/backgrounds/0.jpg")
@@ -91,28 +93,23 @@ export default function Home() {
 
         <div className="mt-10 flex h-full w-full flex-col items-center justify-between px-4 lg:mt-16 lg:flex-row lg:items-start lg:px-20">
           <div className="mb-8 flex w-full flex-1 flex-col items-center justify-start lg:mb-0 lg:w-auto">
-            <div className="relative flex h-[300px] w-full max-w-[400px] items-center justify-center rounded-2xl bg-gray-500 shadow-lg sm:h-[400px] sm:max-w-[600px] lg:h-[580px] lg:max-w-[926px]">
-              <button className="rounded-full bg-[#061022BF] px-10 py-4 font-bold text-white hover:bg-opacity-80 focus:outline-none">
-                Watch my story
-              </button>
+            <div className="relative flex h-[300px] w-full max-w-[500px] items-center justify-center rounded-2xl bg-black shadow-lg sm:h-[400px] sm:max-w-[600px] lg:h-[580px] lg:max-w-[926px]">
+              <VideoPlayer />
             </div>
-
-            <div className="mt-4">
-              <Image
-                src="/images/kyc_gold_badge.png"
-                width={150}
-                height={60}
-                alt="KYC Gold Badge"
-                className="object-contain"
-              />
-            </div>
+            <div className="mt-4"></div>
           </div>
 
-          <div className="flex w-full flex-1 flex-col items-center justify-start lg:w-[500px] lg:items-start">
+          <div className="flex w-full flex-1 flex-col items-end justify-start lg:w-[420px] lg:items-end">
             <div className="relative w-full px-0 sm:px-2">
               <BuyGara hideHeader />
-              <div className="absolute -bottom-10 left-0 z-[9990] hidden h-[140px] w-full lg:block">
-                <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" className="object-contain" />
+
+              <div className="absolute -bottom-6 right-2 z-[9990] h-[140px] w-full lg:w-[420px]">
+                <Image 
+                  src="/images/ice_buy_gara.svg" 
+                  fill 
+                  alt="Ice Background" 
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>

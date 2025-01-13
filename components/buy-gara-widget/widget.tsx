@@ -1474,11 +1474,12 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     form.setValue("amount", value)
   }
 
+
   return (
     <section
       id="buy-gara"
       className={cn(
-        "relative mx-auto mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-white p-6 px-5 shadow-md lg:rounded-t-2xl",
+        "relative mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-white p-6 px-5 shadow-md lg:rounded-t-2xl lg:ml-auto",
         className
       )}
     >
@@ -1528,7 +1529,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="flex flex-col items-center justify-between rounded-md p-4">
         <div className="flex w-full justify-between text-lg text-gray-800">
           <span>
-            Current Price: <span className="font-bold text-gary-pink">$0.12</span>
+            Current Price: <span className="font-bold text-gary-pink">$0.13</span>
           </span>
           <span>
             Listing price: <span className="font-bold text-gray-900">$0.36</span>
@@ -1543,7 +1544,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             bgColor="#28E0B9"
             baseBgColor="#0D1E35"
             borderRadius="20px"
-            className="shadow-md"
+            className=""
           />
         </div>
         <p className="text-center text-lg text-gray-800">
@@ -1560,7 +1561,9 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
+              {/*
       <div className="mt-4 flex flex-row items-center justify-between gap-2">
+ 
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1610,14 +1613,15 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           </span>
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
+              */}
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full mb-4">
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <p className="font-black">Pay with eth</p>
             <CoinInput
               coin="USDC"
               type="number"
-              placeholder="0.000"
+              placeholder="20"
               {...register("amount", { required: "Amount is required" })}
               form={form}
               showIcon={false}
@@ -1659,7 +1663,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             </button>
           ))}
         </div>
-        <div className={cn("mt-8 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
+        <div className={cn("mt-6 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
           <div className={cn("flex-1", !address && "hidden")}>
             <Button
               type="submit"

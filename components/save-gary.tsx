@@ -25,7 +25,7 @@ export const SaveGary = () => {
     <div className="relative mb-8 mt-5 flex h-full flex-1 flex-col items-center justify-center gap-8">
       <div>
         <Heading className="text-center text-4xl font-bold leading-none tracking-normal lg:text-6xl">
-          Save penguin Gary
+          Help penguin Gary
         </Heading>
         <p className="mt-4 text-center text-xl font-bold text-gary-blue lg:text-2xl">
           The cutest and most determined penguin in the crypto world
