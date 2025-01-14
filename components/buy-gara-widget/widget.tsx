@@ -28,7 +28,7 @@ import { getTokenBalance } from "@/lib/get-balance"
 import Arrow from "@/public/images/gara-coin/arrow.svg"
 import Polygon from "@/public/images/gara-coin/pol.png"
 import CountdownTimer from "@/components/countdown-timer"
-import ProgressBar from "@ramonak/react-progress-bar"
+import ProgressBar from '@ramonak/react-progress-bar/@ramonak/react-progress-bar'
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
