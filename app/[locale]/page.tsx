@@ -116,7 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="relative z-10 -mb-12 -mt-16 h-32 w-full px-4 sm:h-48 sm:px-6">
+      <div className="relative z-10 -mb-12 -mt-16 h-32 w-full px-4 sm:h-48 sm:px-6 blur-xl">
         <Image src="/backgrounds/gradient.png" alt="" fill className="hidden object-cover lg:block" />
       </div>
 
@@ -127,7 +127,7 @@ export default function Home() {
       <section id="help-gary" className="bg-background py-12 sm:px-6 sm:pb-24">
         <HelpGary />
       </section>
-      <div className="relative z-10 -mb-12 h-32 w-full px-4 sm:h-48 sm:px-6">
+      <div className="relative z-10 -mb-12 h-32 w-full px-4 sm:h-48 sm:px-6 blur-xl">
         <Image src="/backgrounds/gradient2.png" alt="" fill className="hidden object-cover lg:block" />
       </div>
       <section id="earn" className="relative flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-24">

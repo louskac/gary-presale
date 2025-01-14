@@ -38,7 +38,7 @@ export const SavePenguins = () => {
           </div>
         )}
         <div className="flex flex-col justify-center lg:w-[44%] lg:max-w-[500px]">
-          <Heading className="mt-20 text-center text-6xl font-bold leading-none tracking-normal lg:text-left">
+          <Heading className="mt-6 lg:mt-20 text-center text-6xl font-bold leading-none tracking-normal lg:text-left">
             Save penguins
           </Heading>
           {isMobile && (
@@ -55,7 +55,7 @@ export const SavePenguins = () => {
               ></iframe>
             </div>
           )}
-          <p className="mt-4 px-6 text-center text-xl font-bold text-white md:px-0 lg:text-left">
+          <p className="mt-4 px-6 text-center text-xl font-normal lg:font-bold text-white md:px-0 lg:text-left">
             African penguins are in serious trouble. Their numbers have plummeted over the past century due to the
             destruction of nesting sites, egg poaching, oil spills, global climate change, and competition for food
             resources with commercial fishing. There is hope to save these iconic species through organizations focusing
@@ -71,7 +71,7 @@ export const SavePenguins = () => {
               href="https://savingpenguins.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-bold text-white hover:text-gary-yellow"
+              className="text-xl font-bold text-white hover:text-gary-yellow underline"
             >
               savingpenguins.org
             </a>
@@ -79,7 +79,7 @@ export const SavePenguins = () => {
               href="https://sanccob.co.za"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-bold text-white hover:text-gary-yellow"
+              className="text-xl font-bold text-white hover:text-gary-yellow underline pointer"
             >
               sanccob.co.za
             </a>
@@ -97,7 +97,7 @@ export const SavePenguins = () => {
               <Image src={`/images/penguin.png`} sizes="550px" alt="" fill className="object-contain" />
             </div>
           )}
-          <p className="mt-4 text-center text-xl font-bold text-white md:px-0 lg:text-left">
+          <p className="mt-4 text-center text-xl font-normal lg:font-bold text-white md:px-0 lg:text-left">
             Penguin designated as AP 619 was found abandoned by its colony. Since it’s too young to survive on its own,
             it was taken to a rescue station, where it will stay until it grows strong enough to be released back into
             the wild and rejoin the penguin colony in Simon&apos;s Town. To support the efforts of this organization and

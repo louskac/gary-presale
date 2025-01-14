@@ -77,7 +77,7 @@ export const Faq = () => {
               }`}
             >
               <p
-                className="text-sm font-black text-white sm:text-base"
+                className="text-md lg:font-black text-white sm:text-base"
                 dangerouslySetInnerHTML={{ __html: faq.text }}
               ></p>
               {faq.hasCopyButton && faq.contractAddress && (

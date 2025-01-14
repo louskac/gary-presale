@@ -1529,7 +1529,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="flex flex-col items-center justify-between rounded-md p-4">
         <div className="flex w-full justify-between text-lg text-gray-800">
           <span>
-            Current Price: <span className="font-bold text-gary-pink">$0.13</span>
+            Current Price: <span className="font-bold text-gary-pink">$0.12</span>
           </span>
           <span>
             Listing price: <span className="font-bold text-gray-900">$0.36</span>

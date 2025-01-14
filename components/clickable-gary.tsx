@@ -285,7 +285,7 @@ export default function GarySection() {
   }
 
   return (
-    <div className="relative mx-4 mt-40 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+    <div className="relative mx-4 mt-40 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
       {captchaVisible && !captchaVerified ? (
         // CAPTCHA Section
         <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
@@ -350,7 +350,7 @@ export default function GarySection() {
           </div>
 
           {/* Right Section */}
-          <div className="mt-8 flex flex-col items-start lg:mt-0 lg:w-1/2">
+          <div className="mt-8 flex flex-col items-start lg:mt-0 lg:w-[60%]">
             <Heading className="mb-4 text-center text-4xl font-bold leading-none tracking-normal lg:text-6xl">
               Feed Gary & win 100 $GARA
             </Heading>
@@ -366,31 +366,31 @@ export default function GarySection() {
                 {/* First Reward */}
                 <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
                   <Image src={`/images/state_1.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white">+1 point</p>
+                  <p className="font-bold text-white pr-2">+1 point</p>
                 </div>
 
                 {/* Second Reward */}
                 <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
                   <Image src={`/images/state_2.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white">+2 point</p>
+                  <p className="font-bold text-white pr-2">+2 point</p>
                 </div>
 
                 {/* Third Reward */}
                 <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
                   <Image src={`/images/state_3.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white">+5 point</p>
+                  <p className="font-bold text-white pr-2">+5 point</p>
                 </div>
 
                 {/* Fourth Reward */}
                 <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
                   <Image src={`/images/state_4.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white">+10 point</p>
+                  <p className="font-bold text-white pr-2">+10 point</p>
                 </div>
 
                 {/* Last Reward */}
                 <div className="col-span-2 flex items-center gap-2 rounded-xl bg-gray-600 p-2">
                   <Image src={`/images/state_5.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white">100 $GARA reward</p>
+                  <p className="font-bold text-white pr-2">100 $GARA reward</p>
                 </div>
               </div>
             </div>
