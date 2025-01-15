@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image"; // Assuming you're using Next.js
 
 const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -9,7 +8,7 @@ const VideoPlayer = () => {
   };
 
   return (
-    <div className="relative flex h-[300px] w-full max-w-[500px] items-center justify-center rounded-2xl bg-black shadow-lg sm:h-[400px] sm:max-w-[600px] lg:h-[580px] lg:max-w-[926px] drop-shadow-2xl">
+    <div className="relative w-full max-w-[1040px] aspect-[16/9] rounded-2xl bg-black shadow-lg drop-shadow-2xl">
       {!isPlaying ? (
         <div
           className="relative flex h-full w-full items-center justify-center rounded-2xl bg-cover bg-center"
@@ -44,12 +43,14 @@ const VideoPlayer = () => {
           </button>
         </div>
       ) : (
-        <video
-          className="h-full w-full rounded-2xl"
-          src="video.mp4"
-          controls
-          autoPlay
-        />
+        <div className="relative w-full max-w-[1040px] aspect-[16/9] bg-black rounded-2xl">
+          <video
+            className="w-full h-full object-cover rounded-2xl"
+            src="video.mp4"
+            controls
+            autoPlay
+          />
+        </div>
       )}
     </div>
   );

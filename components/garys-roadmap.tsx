@@ -133,11 +133,11 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
             <div
               className={cn(
                 "relative flex w-full max-w-full flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 md:max-w-[700px] lg:flex-row lg:pb-2",
-                index <= activeStep && "border-4 border-gary-yellow lg:border-0"
+                index <= activeStep && "border-4 border-gary-yellow"
               )}
             >
               {index <= activeStep && (
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded-t-md bg-gary-yellow px-3 py-1 text-sm text-black lg:hidden">
+                <div className="absolute -top-8 left-1/2 -translate-x-1/2 transform rounded-t-md bg-gary-yellow px-3 py-1 text-sm text-black">
                   Goal Reached
                 </div>
               )}

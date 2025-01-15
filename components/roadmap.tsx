@@ -37,11 +37,11 @@ const roadData = [
   {
     period: "2025",
     events: [
-      { quarter: "Q1", description: "Launch of crypto academy on Coingarage platform." },
-      { quarter: "Q1", description: "Listing of $GARA for trading on the Coingarage exchange." },
-      { quarter: "Q1", description: "Listing on Uniswap, CoinMarketCap, and CoinGecko." },
+      { quarter: "Q2", description: "Launch of crypto academy on Coingarage platform." },
+      { quarter: "Q2", description: "Listing of $GARA for trading on the Coingarage exchange." },
+      { quarter: "Q2", description: "Listing on Uniswap, CoinMarketCap, and CoinGecko." },
       { quarter: "Q2", description: "$GARA Airdrop and $GARA listing on other exchanges." },
-      { quarter: "Q2", description: "Applying $GARA fees and burning $GARA." },
+      { quarter: "Q3", description: "Applying $GARA fees and burning $GARA." },
       { quarter: "Q3", description: "Application of $GARA as fuel for trading bots." },
       { quarter: "Q4", description: "Crypto payment card and cashback $GARA." },
     ],
