@@ -43,7 +43,7 @@ export const NavBar = () => {
   return (
     <>
       <div
-        className={`z-[9999] hidden w-full transform items-center justify-around py-4 transition-all lg:fixed lg:flex ${navbarHandlerScroll}`}
+        className={`z-[9999] hidden w-full transform items-center justify-around py-4 transition-all lg:fixed lg:flex px-28 ${navbarHandlerScroll}`}
       >
         <div className="hidden h-14 w-14 flex-shrink-0 rounded-full lg:block">
           <Image src="/logo.png" alt="Gary" width={60} height={60} />

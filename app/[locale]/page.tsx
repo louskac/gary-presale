@@ -91,7 +91,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="mt-10 flex h-full w-full flex-col items-center justify-between px-4 lg:mt-16 lg:flex-row lg:items-start lg:px-20">
+        <div className="mt-10 flex h-full w-full flex-col items-center justify-between px-4 lg:mt-16 lg:flex-row lg:items-start lg:px-40">
           <div className="mb-8 flex w-full flex-1 flex-col items-center justify-start lg:mb-0 lg:w-auto">
             <div className="relative flex h-[300px] w-full max-w-[500px] items-center justify-center rounded-2xl bg-black shadow-lg sm:h-[400px] sm:max-w-[600px] lg:h-[580px] lg:max-w-[926px]">
               <VideoPlayer />
