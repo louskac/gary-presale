@@ -1561,9 +1561,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
-              {/*
       <div className="mt-4 flex flex-row items-center justify-between gap-2">
- 
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1580,7 +1578,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             <span className="inline text-2xl sm:hidden">ETH</span>
           </span>
         </button>
-
         <button
           onClick={() => handleNetworkSwitch("polygon")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1597,7 +1594,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             <span className="inline text-2xl sm:hidden">POL</span>
           </span>
         </button>
-
         <button
           onClick={() => handleNetworkSwitch("bsc")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1613,7 +1609,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           </span>
         </button>
       </div>
-              */}
+
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full mb-4">
         <div className="mt-8 grid grid-cols-2 gap-4">
           <div className="flex flex-col">
