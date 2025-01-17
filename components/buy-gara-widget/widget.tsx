@@ -11,7 +11,7 @@ import { z } from "zod"
 import { useQuery } from "@tanstack/react-query"
 import { useTranslations } from "next-intl"
 import Image from "next/image"
-import { ethers } from "ethers"
+import { BigNumber, ethers } from "ethers"
 
 import { CoinInput } from "@/components/buy-gara-widget/coin-input"
 import { Button } from "@/components/ui/button"
@@ -28,7 +28,10 @@ import { getTokenBalance } from "@/lib/get-balance"
 import Arrow from "@/public/images/gara-coin/arrow.svg"
 import Polygon from "@/public/images/gara-coin/pol.png"
 import CountdownTimer from "@/components/countdown-timer"
-import ProgressBar from '@ramonak/react-progress-bar'
+import { Rounds } from "@/components/rounds"
+import { useSwitchChain } from "wagmi"
+import { mainnet, polygon, bsc } from "@wagmi/core/chains"
+import { getChainByName } from "@/app/api/gara/lib/utils"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
@@ -984,6 +987,7 @@ const formSchema = z.object({
   amount: z.string(),
   token: z.string(),
 })
+
 const calculateRound = () => {
   const currentTime = new Date().getTime()
   if (firstRoundEndDate * 1000 > Number(currentTime)) {
@@ -995,30 +999,49 @@ const calculateRound = () => {
   }
 }
 
-//L: Here implement the functions
-//L: After wallet connect this entire logic and the 3 frontend buttons can be hidden so it won't confuse users (once wallet is connected only way to switch networks is the current way thru the connect button)
-const switchToEthereum = () => {
-  console.log("Switching to Ethereum")
-  //L: Switch the network to etheruem (the default state)
-  //L: Currency select will have USDT, USDC and ETH currencies
-  //L: Please fix the minimum amount check to work here as well (before the wallet connect)
-}
-
-const switchToPolygon = () => {
-  console.log("Switching to Polygon")
-  //L: Switch the network to polygon
-  //L: Currency select will have USDT, USDC and POL currencies
-}
-
-const switchToBSC = () => {
-  console.log("Switching to Binance Smart Chain")
-  //L: Switch the network to polygon
-  //L: Currency select will have USDT, USDC and BSC currencies
-}
-
 export function BuyGara({ className, hideHeader = false }: { className?: string; hideHeader?: boolean }) {
+  const [currentNetworkId, setCurrentNetworkId] = useState(1)
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
   const [activeButton, setActiveButton] = useState("ethereum") // Default active button
+  const { switchChainAsync } = useSwitchChain()
+  //@ts-ignore
+  async function changeChain(chains) {
+    try {
+      const _chain = getChainByName(chains)
+      //@ts-ignore
+      const switchedChain = await switchChainAsync({ chainId: _chain.id })
+      //@ts-ignore
+      console.log("Switched to chain:", switchedChain.id)
+      setCurrentNetworkId(switchedChain.id)
+      // console.log('Switched to chain:', chain&&chain?.id);
+    } catch (error) {
+      //@ts-ignore
+      console.error("Failed to switch chain:", error.message)
+    }
+  }
+  //L: Here implement the functions
+  //L: After wallet connect this entire logic and the 3 frontend buttons can be hidden so it won't confuse users (once wallet is connected only way to switch networks is the current way thru the connect button)
+  const switchToEthereum = async () => {
+    console.log("Switching to Ethereum")
+    await changeChain("Ethereum")
+    //L: Switch the network to etheruem (the default state)
+    //L: Currency select will have USDT, USDC and ETH currencies
+    //L: Please fix the minimum amount check to work here as well (before the wallet connect)
+  }
+
+  const switchToPolygon = async () => {
+    console.log("Switching to Polygon", polygon.id)
+    await changeChain("Polygon")
+    //L: Switch the network to polygon
+    //L: Currency select will have USDT, USDC and POL currencies
+  }
+
+  const switchToBSC = async () => {
+    console.log("Switching to Binance Smart Chain")
+    await changeChain("BNB Smart Chain")
+    //L: Switch the network to polygon
+    //L: Currency select will have USDT, USDC and BSC currencies
+  }
 
   const handleNetworkSwitch = (network) => {
     setActiveButton(network)
@@ -1075,24 +1098,16 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     reset: resetState,
   } = useGaraStore((state) => state)
   const { address, chain } = useAccount()
-  // const { data, isLoading, error } = useQuery({
-  //   queryKey: ["ethereumPrice"],
-  //   queryFn: async () => {
-  //     console.log("-----------")
-  //     // let response = null;
-  //     // if(chain?.id === 11155111){
-  //     const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd")
-  //     // }else if(chain?.id === 97){
-  //     //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
-  //     // }else{
-  //     //   response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=binancecoin&vs_currencies=usd")
-  //     // }
 
-  //     const data = await response?.json()
-  //     console.log("price:", data)
-  //     return data
-  //   },
-  // })
+  useEffect(() => {
+    if (chain?.id === 1) {
+      setActiveButton("ethereum")
+    } else if (chain?.id === 137) {
+      setActiveButton("polygon")
+    } else if (chain?.id === 56) {
+      setActiveButton("bsc")
+    }
+  }, [chain?.id])
   useEffect(() => {
     // Trigger analytics when a wallet is connected
     console.log("wallet connected")
@@ -1105,7 +1120,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   useEffect(() => {
     const fetchPrice = async () => {
       // Default to Ethereum chain if no chain is connected
-      const currentChainId = chain?.id || 1
+      const currentChainId = chain?.id || currentNetworkId
 
       if (currentChainId === 1) {
         // ETH
@@ -1132,10 +1147,10 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     }
 
     // Run normally when dependencies change
-    if (chain) {
+    if (chain || currentNetworkId) {
       fetchPrice()
     }
-  }, [chain, hasFetchedOnLoad])
+  }, [chain, hasFetchedOnLoad, currentNetworkId])
 
   // const eth_usd = data?.ethereum?.usd
 
@@ -1287,7 +1302,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     if (chain?.name === "Ethereum") {
       setValue("token", "ETH")
     }
-  }, [chain])
+  }, [chain, currentNetworkId])
 
   useEffect(() => {
     if (token === "ETH" && chain?.name !== "Ethereum") {
@@ -1479,7 +1494,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     <section
       id="buy-gara"
       className={cn(
-        "relative mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-white p-6 px-5 shadow-md lg:rounded-t-2xl lg:ml-auto",
+        "relative mx-auto mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md lg:rounded-t-2xl",
         className
       )}
     >
@@ -1561,6 +1576,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
+      <Rounds />
       <div className="mt-4 flex flex-row items-center justify-between gap-2">
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
@@ -1578,6 +1594,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             <span className="inline text-2xl sm:hidden">ETH</span>
           </span>
         </button>
+
         <button
           onClick={() => handleNetworkSwitch("polygon")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1594,6 +1611,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             <span className="inline text-2xl sm:hidden">POL</span>
           </span>
         </button>
+
         <button
           onClick={() => handleNetworkSwitch("bsc")}
           className={`group flex-1 rounded-3xl border-0 ${
@@ -1609,58 +1627,48 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           </span>
         </button>
       </div>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full mb-4">
-        <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="flex flex-col">
-            <p className="font-black">Pay with eth</p>
-            <CoinInput
-              coin="USDC"
-              type="number"
-              placeholder="20"
-              {...register("amount", { required: "Amount is required" })}
-              form={form}
-              showIcon={false}
-              className="w-full"
-            />
-            {hasLowerInputBalance && (
-              <p className="mt-2 text-sm text-red-500">
-                Amount must be greater than {minTokenBalance} {token}
-              </p>
-            )}
-            {hasUnsufficientBalance && <p className="mt-2 text-sm text-red-500">Insufficient balance</p>}
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
+        <div className="mt-4 grid w-full grid-cols-[1fr_auto] gap-2">
+          <CoinInput
+            coin="USDC"
+            type="number"
+            placeholder="0.000"
+            {...register("amount", { required: "Amount is required" })}
+            showIcon={false}
+            className="w-full"
+          />
+          <div className="flex items-center">
+            <CurrencySelect name="token" form={form} currentNetworkId = {currentNetworkId} />
           </div>
-          <div>
-            <p className="font-black">Receive $GARA</p>
-            <CoinInput
-              coin="GARA"
-              type="text"
-              placeholder="0.000"
-              className="cursor-disabled pointer-events-none w-full"
-              {...register("garaEstimate")}
-              readOnly
-            />
-          </div>
+        </div>
+        {hasLowerInputBalance && (
+          <p className="mt-2 pl-4 text-sm text-red-500">
+            Amount must be greater than {minTokenBalance} {token}
+          </p>
+        )}
+        {hasUnsufficientBalance && <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>}
+        <div className="mt-4">
+          <CoinInput
+            coin="GARA"
+            type="text"
+            placeholder="0.000"
+            className="cursor-disabled pointer-events-none"
+            {...register("garaEstimate")}
+            readOnly
+          />
         </div>
         <input type="hidden" {...register("from")} />
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
-        <div className="mt-4 grid grid-cols-5 gap-2">
-          {[50, 100, 500, 1000, 5000].map((value) => (
-            <button
-              key={value}
-              className="group flex flex-1 items-center justify-center rounded-full border-0 bg-[#FFEEDC] p-2 font-black hover:bg-[#024365] hover:text-white"
-              onClick={(e) => {
-                e.preventDefault()
-                setAmountValue(value.toString())
-              }}
-            >
-              {`$${value}`}
-            </button>
-          ))}
-        </div>
-        <div className={cn("mt-6 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
-          <div className={cn("flex-1", !address && "hidden")}>
+        <div className={cn("mt-8 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
+          <div className="flex-1">
+            <ConnectButton
+              label={t("btnConnectWallet")}
+              showBalance={false}
+              className="h-12 w-full rounded-full bg-[#FF4473] text-center text-xl font-bold text-white"
+            />
+          </div>
+          <div className="flex-1">
             <Button
               type="submit"
               variant={address ? "default" : "outlinePrimary"}
