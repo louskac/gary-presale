@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button"
 import { AnchorLink } from "./anchor-link"
 
 const links = [
-  { name: "Gary's story", anchor: "about" },
-  { name: "Help Gary", anchor: "help-gary" },
+  { name: "Gary's goals", anchor: "garys-goals" },
   { name: "Earn with Gary", anchor: "earn" },
-  { name: "FAQ", anchor: "faq" },
-  { name: "Join us!", anchor: "save" },
-  { name: "Tokenomics", anchor: "tokenomics" },
   { name: "Roadmap", anchor: "roadmap" },
+  { name: "Tokenomics", anchor: "tokenomics" },
+  { name: "Team", anchor: "ourteam" },
+  { name: "Save penguins", anchor: "save" },
+  { name: "FAQ", anchor: "faq" },
   { name: "WhitePaper", href: "/whitepaper/WhitepaperCG.pdf" },
 ]
 
@@ -46,7 +46,9 @@ export const NavBar = () => {
         className={`z-[9999] hidden w-full transform items-center justify-around py-4 transition-all lg:fixed lg:flex px-28 ${navbarHandlerScroll}`}
       >
         <div className="hidden h-14 w-14 flex-shrink-0 rounded-full lg:block">
-          <Image src="/logo.png" alt="Gary" width={60} height={60} />
+          <AnchorLink anchor="home">
+            <Image src="/logo.png" alt="Gary" width={60} height={60} />
+          </AnchorLink>
         </div>
 
         <nav className="hidden lg:flex">
@@ -111,7 +113,7 @@ export const NavBar = () => {
               </a>
             </Button>
           </div>
-          <AnchorLink anchor="help-gary">
+          <AnchorLink anchor="garys-goals">
             <Button className="border-2 border-transparent bg-gary-pink px-4 text-xl text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink">
               Buy $GARA coin
             </Button>
@@ -161,7 +163,7 @@ export const NavBar = () => {
             ))}
           </ul>
           <div className="mt-4">
-            <AnchorLink anchor="help-gary">
+            <AnchorLink anchor="garys-goals">
               <Button
                 className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
                 onClick={() => setMenuOpen(false)}

@@ -124,7 +124,7 @@ export default function Home() {
         <GarySection />
       </section>
 
-      <section id="help-gary" className="bg-background py-12 sm:px-6 sm:pb-24">
+      <section id="garys-goals" className="bg-background py-12 sm:px-6 sm:pb-24">
         <HelpGary />
       </section>
       <div className="relative z-10 -mb-12 h-32 w-full px-4 sm:h-48 sm:px-6 blur-xl">
@@ -146,13 +146,13 @@ export default function Home() {
       <section id="ourteam" className="my-28">
         <OurTeam />
       </section>
-      <section className="-mt-20 flex bg-background px-4 sm:-mt-44 sm:px-6">
+      <section id="save" className="-mt-20 flex bg-background px-4 sm:-mt-44 sm:px-6">
         <SavePenguins />
       </section>
       <section id="faq" className="bg-background px-4 sm:px-6">
         <Faq />
       </section>
-      <section id="save" className="bg-[#0D1E35] px-4 sm:px-6">
+      <section id="footer" className="bg-[#0D1E35] px-4 sm:px-6">
         <Footer />
       </section>
     </main>

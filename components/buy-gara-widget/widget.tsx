@@ -28,7 +28,8 @@ import { getTokenBalance } from "@/lib/get-balance"
 import Arrow from "@/public/images/gara-coin/arrow.svg"
 import Polygon from "@/public/images/gara-coin/pol.png"
 import CountdownTimer from "@/components/countdown-timer"
-import { Rounds } from "@/components/rounds"
+import ProgressBar from 'modified-react-progress-bar.git/@ramonak/react-progress-bar'
+
 import { useSwitchChain } from "wagmi"
 import { mainnet, polygon, bsc } from "@wagmi/core/chains"
 import { getChainByName } from "@/app/api/gara/lib/utils"
@@ -1494,7 +1495,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     <section
       id="buy-gara"
       className={cn(
-        "relative mx-auto mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-gradient-to-b from-[#FFFFFF] to-[#CFEFFF] p-6 px-5 shadow-md lg:rounded-t-2xl",
+        "relative mb-20 w-full max-w-[420px] flex-1 rounded-2xl bg-white p-6 px-5 shadow-md lg:rounded-t-2xl lg:ml-auto",
         className
       )}
     >
@@ -1576,7 +1577,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
         </div>
       </div>
-      <Rounds />
       <div className="mt-4 flex flex-row items-center justify-between gap-2">
         <button
           onClick={() => handleNetworkSwitch("ethereum")}
@@ -1627,48 +1627,61 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           </span>
         </button>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full">
-        <div className="mt-4 grid w-full grid-cols-[1fr_auto] gap-2">
-          <CoinInput
-            coin="USDC"
-            type="number"
-            placeholder="0.000"
-            {...register("amount", { required: "Amount is required" })}
-            showIcon={false}
-            className="w-full"
-          />
-          <div className="flex items-center">
-            <CurrencySelect name="token" form={form} currentNetworkId = {currentNetworkId} />
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-full mb-4">
+        <div className="mt-8 grid grid-cols-2 gap-4">
+          <div className="flex flex-col relative">
+            <p className="font-black">Pay with eth</p>
+            <CoinInput
+              coin="USDC"
+              type="number"
+              placeholder="0.000"
+              {...register("amount", { required: "Amount is required" })}
+              showIcon={false}  // Disable icon, show CurrencySelect instead
+              className="w-full"
+            />
+            <div className="absolute -right-2 top-2/3 transform -translate-y-1/2">
+              <CurrencySelect name="token" form={form} currentNetworkId={currentNetworkId} />
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <p className="font-black">Receive $GARA</p>
+            <CoinInput
+              coin="GARA"
+              type="text"
+              placeholder="0.000"
+              className="cursor-disabled pointer-events-none w-full"
+              {...register("garaEstimate")}
+              readOnly
+            />
           </div>
         </div>
         {hasLowerInputBalance && (
-          <p className="mt-2 pl-4 text-sm text-red-500">
-            Amount must be greater than {minTokenBalance} {token}
-          </p>
-        )}
-        {hasUnsufficientBalance && <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>}
-        <div className="mt-4">
-          <CoinInput
-            coin="GARA"
-            type="text"
-            placeholder="0.000"
-            className="cursor-disabled pointer-events-none"
-            {...register("garaEstimate")}
-            readOnly
-          />
-        </div>
+              <p className="mt-2 pl-4 text-sm text-red-500">
+                Amount must be greater than {minTokenBalance} {token}
+              </p>
+            )}
+            {hasUnsufficientBalance && (
+              <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>
+            )}
         <input type="hidden" {...register("from")} />
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
-        <div className={cn("mt-8 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
-          <div className="flex-1">
-            <ConnectButton
-              label={t("btnConnectWallet")}
-              showBalance={false}
-              className="h-12 w-full rounded-full bg-[#FF4473] text-center text-xl font-bold text-white"
-            />
-          </div>
-          <div className="flex-1">
+        <div className="mt-4 grid grid-cols-5 gap-2">
+          {[50, 100, 500, 1000, 5000].map((value) => (
+            <button
+              key={value}
+              className="group flex flex-1 items-center justify-center rounded-full border-0 bg-[#FFEEDC] p-2 font-black hover:bg-[#024365] hover:text-white"
+              onClick={(e) => {
+                e.preventDefault()
+                setAmountValue(value.toString())
+              }}
+            >
+              {`$${value}`}
+            </button>
+          ))}
+        </div>
+        <div className={cn("mt-6 gap-4", address ? "flex flex-col" : "flex flex-col lg:flex-row")}>
+          <div className={cn("flex-1", !address && "hidden")}>
             <Button
               type="submit"
               variant={address ? "default" : "outlinePrimary"}
@@ -1693,31 +1706,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           senderChainTxUrl={chainTxUrl}
         />
       </form>
-      {/*
-      <div className="mt-6 flex flex-row justify-between gap-2 px-4 font-bold">
-        <Button variant="link" size="sm" className="p-0 font-bold text-foreground" asChild>
-          <a
-            href="https://trade.coingarage.io/exchange/GARA-EUR"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="flex items-center"
-          >
-            {t("buyWith")}
-            <span className="mx-2 inline-flex">
-              <Image src="/icons/coins/eur.png" width="18" height="18" alt="EUR" />
-            </span>
-            EUR
-          </a>
-        </Button>
-        <div className="flex items-center justify-center">
-        </div>
-        <Button variant="link" className="p-0 font-bold">
-          <a href="https://trade.coingarage.io/exchange/GARA-EUR" target="_blank" rel="noreferrer noopener">
-            {t("linkGoToLaunchapad")}
-          </a>
-        </Button>
-      </div>
-      */}
     </section>
   )
 }

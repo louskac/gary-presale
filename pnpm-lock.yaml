@@ -41,9 +41,6 @@ importers:
       '@rainbow-me/rainbowkit':
         specifier: ^2.2.0
         version: 2.2.0(@tanstack/react-query@5.59.15(react@18.3.1))(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(viem@2.21.27(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(wagmi@2.12.19(@tanstack/query-core@5.59.13)(@tanstack/react-query@5.59.15(react@18.3.1))(@types/react@18.3.11)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(@types/react@18.3.11)(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.27(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.23.8))(zod@3.23.8))
-      '@ramonak/react-progress-bar':
-        specifier: ^5.3.0
-        version: 5.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@solana/web3.js':
         specifier: ^1.95.4
         version: 1.95.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -83,6 +80,9 @@ importers:
       lucide-react:
         specifier: ^0.452.0
         version: 0.452.0(react@18.3.1)
+      modified-react-progress-bar.git:
+        specifier: github:louskac/modified-react-progress-bar
+        version: https://codeload.github.com/louskac/modified-react-progress-bar/tar.gz/865536d97f282b037fc03a8272513b693ba2e8a7
       next:
         specifier: 14.2.15
         version: 14.2.15(@babel/core@7.25.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2699,12 +2699,6 @@ packages:
       react-dom: '>=18'
       viem: 2.x
       wagmi: ^2.9.0
-
-  '@ramonak/react-progress-bar@5.3.0':
-    resolution: {integrity: sha512-PjpOcSBAVSQNyx2cvYyBCI14Tg2eFM0psC9m2ic33PYBIdOzO9/DieWndq9BUQTSjIIarhSpa/lqJ33W/mFJMw==}
-    peerDependencies:
-      react: ^16.0.0 || ^17 || ^18
-      react-dom: ^16.0.0 || ^17 || ^18
 
   '@react-native-community/cli-clean@14.1.0':
     resolution: {integrity: sha512-/C4j1yntLo6faztNgZnsDtgpGqa6j0+GYrxOY8LqaKAN03OCnoeUUKO6w78dycbYSGglc1xjJg2RZI/M2oF2AA==}
@@ -5489,6 +5483,10 @@ packages:
 
   modern-ahocorasick@1.0.1:
     resolution: {integrity: sha512-yoe+JbhTClckZ67b2itRtistFKf8yPYelHLc7e5xAwtNAXxM6wJTUx2C7QeVSJFDzKT7bCIFyBVybPMKvmB9AA==}
+
+  modified-react-progress-bar.git@https://codeload.github.com/louskac/modified-react-progress-bar/tar.gz/865536d97f282b037fc03a8272513b693ba2e8a7:
+    resolution: {tarball: https://codeload.github.com/louskac/modified-react-progress-bar/tar.gz/865536d97f282b037fc03a8272513b693ba2e8a7}
+    version: 0.0.0
 
   motion@10.16.2:
     resolution: {integrity: sha512-p+PurYqfUdcJZvtnmAqu5fJgV2kR0uLFQuBKtLeFVTrYEVllI99tiOTSefVNYuip9ELTEkepIIDftNdze76NAQ==}
@@ -10184,11 +10182,6 @@ snapshots:
       - '@types/react'
       - babel-plugin-macros
 
-  '@ramonak/react-progress-bar@5.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-
   '@react-native-community/cli-clean@14.1.0':
     dependencies:
       '@react-native-community/cli-tools': 14.1.0
@@ -13897,6 +13890,8 @@ snapshots:
       ufo: 1.5.4
 
   modern-ahocorasick@1.0.1: {}
+
+  modified-react-progress-bar.git@https://codeload.github.com/louskac/modified-react-progress-bar/tar.gz/865536d97f282b037fc03a8272513b693ba2e8a7: {}
 
   motion@10.16.2:
     dependencies:

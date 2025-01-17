@@ -37,6 +37,7 @@ export const CoinInput = forwardRef<
           ref={ref}
           lang="en"
           min="0"
+          step="0.0001"
           className={cn(
             "flex-grow appearance-none bg-transparent text-base font-medium text-gray-800 placeholder-gray-400 outline-none sm:text-lg",
             className
