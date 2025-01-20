@@ -10,6 +10,7 @@ import AirdropWin from "@/components/airdrop-win"
 import FingerprintJS from "@fingerprintjs/fingerprintjs"
 import ReCAPTCHA from "react-google-recaptcha"
 import { Heading } from "@/components/heading"
+import { Popup } from "@/components/popup"
 
 export default function GarySection() {
   const [garyImage, setGaryImage] = useState("/images/gary_happy.png")
@@ -32,8 +33,15 @@ export default function GarySection() {
   const [captchaVisible, setCaptchaVisible] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [captchaResetCount, setCaptchaResetCount] = useState(0)
+  const [tokenPurchased, setTokenPurchased] = useState(false)
+  const [showPopup, setShowPopup] = useState(false)
 
   const CAPTCHA_SITE_KEY = "6LfiEp0qAAAAAAKwr3XEAGNaloI3-iuXnyDj8aPm"
+
+  useEffect(() => {
+    const isTokenPurchased = localStorage.getItem("tokenPurchased") === "true"
+    setTokenPurchased(isTokenPurchased)
+  }, [])
 
   useEffect(() => {
     // Generate a secure nonce when the page loads
@@ -209,6 +217,11 @@ export default function GarySection() {
   }
 
   const handleGaryClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (!tokenPurchased) {
+      setShowPopup(true)
+      return
+    }
+
     if (!event.isTrusted) {
       console.warn("Blocked an untrusted (scripted) click!")
       return
@@ -286,6 +299,7 @@ export default function GarySection() {
 
   return (
     <div className="relative mx-4 mt-40 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
+      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
       {captchaVisible && !captchaVerified ? (
         // CAPTCHA Section
         <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">

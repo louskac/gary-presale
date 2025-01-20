@@ -1218,7 +1218,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         setMinBalance(20)
         console.log("ETH")
       } else {
-        setMinBalance(10)
+        setMinBalance(20)
         console.log("Not ETH")
       }
 
@@ -1489,6 +1489,10 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   const setAmountValue = (value: string) => {
     form.setValue("amount", value)
   }
+
+  useEffect(() => {
+    setAmountValue('20');
+  }, []);
 
 
   return (

@@ -6,13 +6,13 @@ import Image from "next/image"
 export const Popup = ({ onClose }: { onClose: () => void }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
     <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-b from-white to-[#CFEFFF] p-6 text-center shadow-lg">
-      <button onClick={onClose} className="absolute right-2 top-2 text-2xl font-bold text-gray-500 hover:text-black">
+      <button onClick={onClose} className="absolute right-[14px] top-[7px] text-3xl font-bold text-gray-500 hover:text-black">
         &times;
       </button>
       <h3 className="mb-4 font-heading text-2xl font-bold text-gary-blue">
-        The presale is starting on 27th of November
+        You can't win any airdrop yet
       </h3>
-      <p className="text-lg text-gray-700">Come back soon. We’ll notify you!</p>
+      <p className="text-lg text-gray-700">You need to purchase the token to participate in this game</p>
       <div className="mt-6 flex justify-center">
         <Image
           src="/images/halt.png" // Make sure this path points to the image you want.
