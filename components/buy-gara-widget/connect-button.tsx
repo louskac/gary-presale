@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button"
 import { formatAddress } from "@/lib/utils"
 import { ConnectButton as RainbowkitConnectButton } from "@rainbow-me/rainbowkit"
 import { Loader2 } from "lucide-react"
+import Image from "next/image"
+
 export const ConnectButton = ({ label, showBalance }) => {
   return (
     <RainbowkitConnectButton.Custom>
@@ -59,7 +61,12 @@ export const ConnectButton = ({ label, showBalance }) => {
                         }}
                       >
                         {chain.iconUrl && (
-                          <img alt={chain.name ?? "Chain icon"} src={chain.iconUrl} style={{ width: 12, height: 12 }} />
+                          <Image
+                            src={chain.iconUrl}
+                            alt={chain.name ?? "Chain icon"}
+                            width={12}
+                            height={12}
+                          />                          
                         )}
                       </div>
                     )}

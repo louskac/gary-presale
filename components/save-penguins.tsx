@@ -66,12 +66,12 @@ export const SavePenguins = () => {
               10% of all money from pre-sale will be donated to these organisations
             </p>
           </div>
-          <div className="mt-4 flex flex-row flex-wrap justify-between px-6">
+          <div className="mt-4 flex flex-col items-center justify-center gap-2 px-6 md:flex-row md:justify-between">
             <a
               href="https://savingpenguins.org"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-bold text-white hover:text-gary-yellow underline"
+              className="text-2xl md:text-xl font-bold text-white hover:text-gary-yellow underline"
             >
               savingpenguins.org
             </a>
@@ -79,7 +79,7 @@ export const SavePenguins = () => {
               href="https://sanccob.co.za"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xl font-bold text-white hover:text-gary-yellow underline pointer"
+              className="text-2xl md:text-xl font-bold text-white hover:text-gary-yellow underline"
             >
               sanccob.co.za
             </a>

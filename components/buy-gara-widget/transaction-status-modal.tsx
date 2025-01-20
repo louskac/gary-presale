@@ -44,7 +44,6 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
       >
         <DialogHeader>
           <DialogTitle className="sr-only text-foreground dark:text-white">Transaction</DialogTitle>
-          {/* <DialogDescription>View the status of your outgoing and incoming transactions.</DialogDescription> */}
         </DialogHeader>
         <div className="grid gap-6">
           <div>

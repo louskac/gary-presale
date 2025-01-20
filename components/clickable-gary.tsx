@@ -298,7 +298,7 @@ export default function GarySection() {
   }
 
   return (
-    <div className="relative mx-4 mt-40 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
+    <div className="relative mx-4 mt-20 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
       {showPopup && <Popup onClose={() => setShowPopup(false)} />}
       {captchaVisible && !captchaVerified ? (
         // CAPTCHA Section
@@ -335,12 +335,12 @@ export default function GarySection() {
                   />
                 </div>
               </button>
-              <div className="absolute -top-[45%] left-[40%] mb-4 h-[200px] w-[200px] lg:left-[60%]">
-                <p className="absolute left-[55%] top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
+              <div className="absolute -top-[25%] left-[60%] md:left-[40%] mb-4 h-[150px] w-[150px] md:h-[200px] md:w-[200px] lg:left-[60%]">
+                <p className="absolute left-[55%] top-[40%] md:top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
                   Click to feed me
                 </p>
                 <Image
-                  src="/images/story/slide1/bubble.png"
+                  src={isMobile ? "/images/story/slide1/bubble_m.png" : "/images/story/slide1/bubble.png"}
                   alt="Speech Bubble"
                   width={256}
                   height={148}

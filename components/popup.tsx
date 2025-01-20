@@ -2,6 +2,8 @@
 
 import React from "react"
 import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { AnchorLink } from "./anchor-link"
 
 export const Popup = ({ onClose }: { onClose: () => void }) => (
   <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -10,9 +12,9 @@ export const Popup = ({ onClose }: { onClose: () => void }) => (
         &times;
       </button>
       <h3 className="mb-4 font-heading text-2xl font-bold text-gary-blue">
-        You can't win any airdrop yet
+        Win up to 300 $GARA everyday
       </h3>
-      <p className="text-lg text-gray-700">You need to purchase the token to participate in this game</p>
+      <p className="text-lg text-gray-700">Buy $GARA for at least $50 to unlock this feature</p>
       <div className="mt-6 flex justify-center">
         <Image
           src="/images/halt.png" // Make sure this path points to the image you want.
@@ -22,12 +24,14 @@ export const Popup = ({ onClose }: { onClose: () => void }) => (
           className="rounded-lg"
         />
       </div>
-      <button
-        onClick={onClose}
-        className="mt-8 h-12 rounded-lg border-2 border-transparent bg-gary-pink px-6 text-lg font-bold text-white shadow-md transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink"
-      >
-        Close
-      </button>
+      <AnchorLink anchor="garys-goals">
+        <Button
+          className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
+          onClick={onClose}
+        >
+          Buy $GARA coin
+        </Button>
+      </AnchorLink>
     </div>
   </div>
 )
