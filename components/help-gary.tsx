@@ -77,11 +77,6 @@ export const HelpGary = () => {
         <div className="order-1 mt-0 hidden w-full max-w-[400px] lg:order-2 lg:block">
           <div className="sticky top-40">
             <BuyGara />
-            {/* Ice Image */}
-            <div className="absolute -bottom-[7.5rem] -left-[0.75rem] hidden h-[160px] w-[106%] lg:block">
-              <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" />
-            </div>
-
             {/* Gary Image */}
             <div className="absolute -left-[150px] top-0 -z-10 hidden h-[363px] w-[324px] xl:block">
               <Image src="/images/help-gary/gary_buy_gara.png" fill alt="Gary Buy $GARA" />

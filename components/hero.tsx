@@ -24,8 +24,8 @@ const Hero: React.FC = () => {
   }, [])
 
   return (
-    <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start">
-      <Image src={backgroundSrc} alt="" className="-z-10 object-cover" priority quality={100} fill />
+    <section id="home" className="relative flex min-h-screen w-full flex-col items-center justify-start pb-10">
+      <Image src={backgroundSrc} alt="" className="-z-10" priority quality={100} fill />
       <div className="mt-16 flex flex-col items-center justify-center sm:mt-20 lg:mt-32">
         <SaveGary />
         <div className="flex lg:hidden">
@@ -59,10 +59,6 @@ const Hero: React.FC = () => {
         <div className="flex w-full lg:w-[35%] flex-col items-end justify-start relative">
           <div className="relative w-full px-0 sm:px-2">
             <BuyGara hideHeader />
-            {/* Ice Background aligned perfectly */}
-            <div className="absolute -bottom-6 right-0 z-[9990] h-[140px] w-full lg:w-[calc(100%-120px)]">
-              <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" className="object-contain" />
-            </div>
           </div>
         </div>
       </div>

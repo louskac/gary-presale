@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 
 type Partner = {
   name: string
@@ -52,7 +53,7 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
   const duplicatedPartners = Array(10).fill(partners).flat()
 
   return (
-    <div className="relative overflow-hidden bg-dark py-6">
+    <div className="relative overflow-hidden py-6">
       <div
         className={`flex ${isMobile ? "transition-transform duration-1000 ease-in-out" : ""}`}
         style={{
@@ -65,9 +66,11 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
             className={`flex-shrink-0 ${itemsPerView === 2 ? "w-1/2" : "w-1/5"} px-4`} // Adjust width dynamically
           >
             <a href={partner.link} target="_blank" rel="noopener noreferrer">
-              <img
+              <Image
                 src={partner.logo}
                 alt={partner.name}
+                width={160} // Example width
+                height={160} // Example height
                 className="h-16 mx-auto object-contain rounded-lg shadow-md transition-transform hover:scale-110"
               />
             </a>

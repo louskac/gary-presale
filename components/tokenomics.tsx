@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import Image from "next/image"
 import { Heading } from "./heading"
 
 const tokenomicsPie = "/images/tokenomics/tokenomicsPie.png"
@@ -25,7 +26,13 @@ function Tokenomics() {
           $GARA tokenomics
         </Heading>
         <div className="m-auto mt-10 flex items-center justify-center p-4">
-          <img src={isMobile ? tokenomicsPie : tokenomicsGARY} alt="tokenomics" />
+          <Image
+            src={isMobile ? tokenomicsPie : tokenomicsGARY}
+            alt="tokenomics"
+            width={isMobile ? 500 : 1000} // Example widths
+            height={isMobile ? 500 : 1000} // Example heights
+            className="object-contain"
+          />
         </div>
       </div>
     </div>

@@ -15,6 +15,7 @@ import OurTeam from "@/components/our-team"
 import MemeGenerator from "@/components/meme-generator"
 import PartnersCarousel from "@/components/partners"
 import Hero from "@/components/hero"
+import Social from "@/components/social"
 
 const partnersData = [
   {
@@ -44,15 +45,19 @@ const partnersData = [
   }
 ]
 
+const tweetIds = [
+  '1871496395452203089',
+  '1867227365010747577',
+  '1867257564708450697',
+  '1866885902196240545',
+  '1866877871874101729',
+]
+
 export default function Home() {
   return (
     <main className="z-50 h-screen">
       <NavBar />
       <Hero />
-
-      <div className="relative z-10 -mt-8 h-32 w-full sm:h-48 sm:px-6">
-        <Image src="/backgrounds/gradient.png" alt="" fill className="hidden object-cover lg:block" />
-      </div>
 
       <section id="help-gary" className="bg-background sm:px-6 sm:pb-24">
         <PartnersCarousel partners={partnersData} />
@@ -66,11 +71,8 @@ export default function Home() {
         <HelpGary />
       </section>
 
-      <div className="relative z-10 -mb-12 h-32 w-full sm:h-48 sm:px-6">
-        <Image src="/backgrounds/gradient2.png" alt="" fill className="hidden object-cover lg:block" />
-      </div>
       <section id="earn" className="relative flex flex-col justify-center px-4 py-12 sm:px-6 sm:py-24">
-        <Image src={`/backgrounds/2.jpg`} alt="" className="-z-10 object-cover" fill />
+        <Image src={`/backgrounds/2.jpg`} alt="" className="-z-10" fill />
         <EarnWithGary />
       </section>
       <div className="relative -mb-12 -mt-8 h-40 w-full sm:-mb-16 sm:-mt-10 sm:h-60">
@@ -82,6 +84,11 @@ export default function Home() {
       </section>
       <section id="tokenomics">
         <Tokenomics />
+      </section>
+      <section id="social" className="my-28">
+        <div className="container mx-auto px-4">
+          <Social tweetIds={tweetIds} />
+        </div>
       </section>
       <section id="ourteam" className="my-28">
         <OurTeam />

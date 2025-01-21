@@ -1588,7 +1588,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             activeButton === "ethereum" ? "bg-[#024365]" : "bg-[#FFEEDC]"
           } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img src="/images/gara-coin/ethereum.png" alt="Ethereum" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
+          <Image
+            src="/images/gara-coin/ethereum.png"
+            alt="Ethereum"
+            width={24}
+            height={24}
+            className="mb-1 sm:mb-0 sm:mr-2"
+          />
           <span
             className={`font-black ${
               activeButton === "ethereum" ? "text-white" : "text-black"
@@ -1605,7 +1611,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             activeButton === "polygon" ? "bg-[#024365]" : "bg-[#FFEEDC]"
           } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img src="/images/gara-coin/polygon.png" alt="Polygon" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
+          <Image
+            src="/images/gara-coin/polygon.png"
+            alt="Polygon"
+            width={24}
+            height={24}
+            className="mb-1 sm:mb-0 sm:mr-2"
+          />
           <span
             className={`font-black ${
               activeButton === "polygon" ? "text-white" : "text-black"
@@ -1622,7 +1634,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             activeButton === "bsc" ? "bg-[#024365]" : "bg-[#FFEEDC]"
           } flex h-[80px] w-[80px] flex-col items-center justify-center px-4 py-4 sm:h-12 sm:w-auto sm:flex-row sm:px-6 sm:py-2`}
         >
-          <img src="/images/gara-coin/bsc.png" alt="BSC" className="mb-1 h-[24px] w-[24px] sm:mb-0 sm:mr-2" />
+          <Image
+            src="/images/gara-coin/bsc.png"
+            alt="BSC"
+            width={24}
+            height={24}
+            className="mb-1 sm:mb-0 sm:mr-2"
+          />
           <span
             className={`font-black ${activeButton === "bsc" ? "text-white" : "text-black"} text-[10px] sm:text-base`}
           >
@@ -1710,6 +1728,9 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           senderChainTxUrl={chainTxUrl}
         />
       </form>
-    </section>
+      <div className="absolute -bottom-[calc(50%+32px)] right-0 z-[9990] w-full h-full">
+        <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" className="object-contain" />
+      </div>
+    </section> 
   )
 }
