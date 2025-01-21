@@ -52,11 +52,10 @@ const SocialPosts = ({ tweetIds }) => {
 
         {/* Display tweets */}
         <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-6`}>
-          {tweetIds.slice(currentIndex, isMobile ? currentIndex + 1 : currentIndex + visibleTweets).map((id, index) => (
-            <Tweet id={id} theme="dark" />
+          {tweetIds.slice(currentIndex, isMobile ? currentIndex + 1 : currentIndex + visibleTweets).map((id) => (
+            <Tweet key={id} id={id} theme="dark" />
           ))}
         </div>
-
         {/* Navigation buttons */}
         <div className="flex justify-center items-center mt-6 space-x-6">
           <button
@@ -71,7 +70,7 @@ const SocialPosts = ({ tweetIds }) => {
               onClick={handleShowAll}
               className="hidden md:flex px-6 py-3 bg-gray-700 text-white font-bold rounded-full hover:bg-gray-600"
             >
-              Show All ({tweetIds.length - visibleTweets} left)
+              Show All ({tweetIds.length})
             </button>
           )}
           <button
