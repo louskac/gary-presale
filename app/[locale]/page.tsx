@@ -45,6 +45,8 @@ const partnersData = [
   }
 ]
 
+const shouldShowSocialPosts = false;
+
 const tweetIds = [
   '1871496395452203089',
   '1867227365010747577',
@@ -85,13 +87,13 @@ export default function Home() {
       <section id="tokenomics">
         <Tokenomics />
       </section>
-      {/*
-      <section id="social" className="my-28">
-        <div className="container mx-auto px-4">
-          <Social tweetIds={tweetIds} />
-        </div>
-      </section>
-      */}
+      {shouldShowSocialPosts && (
+        <section id="social" className="my-28">
+          <div className="container mx-auto px-4">
+            <Social tweetIds={tweetIds} />
+          </div>
+        </section>
+      )}
       <section id="ourteam" className="my-28">
         <OurTeam />
       </section>
