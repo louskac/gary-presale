@@ -1728,7 +1728,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           senderChainTxUrl={chainTxUrl}
         />
       </form>
-      <div className="absolute -bottom-[calc(50%+32px)] right-0 z-[9990] w-full h-full">
+      <div className="absolute -bottom-[calc(50%+32px)] right-0 z-10 w-full h-full pointer-events-none">
         <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" className="object-contain" />
       </div>
     </section> 
