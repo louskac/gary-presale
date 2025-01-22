@@ -10,7 +10,7 @@ export const HelpGary = () => {
 
   const handleCopyClick = () => {
     navigator.clipboard
-      .writeText("0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead")
+      .writeText("0x0b258a4ecc4ac7a15fedb882db5d13f6ef23b02f")
       .then(() => {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)

@@ -85,11 +85,13 @@ export default function Home() {
       <section id="tokenomics">
         <Tokenomics />
       </section>
+      {/*
       <section id="social" className="my-28">
         <div className="container mx-auto px-4">
           <Social tweetIds={tweetIds} />
         </div>
       </section>
+      */}
       <section id="ourteam" className="my-28">
         <OurTeam />
       </section>

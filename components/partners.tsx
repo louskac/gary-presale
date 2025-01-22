@@ -71,7 +71,7 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
                 alt={partner.name}
                 width={160} // Example width
                 height={160} // Example height
-                className="h-16 mx-auto object-contain rounded-lg shadow-md transition-transform hover:scale-110"
+                className="h-16 mx-auto object-contain rounded-lg transition-transform hover:scale-110"
               />
             </a>
           </div>
