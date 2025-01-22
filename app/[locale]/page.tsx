@@ -87,10 +87,12 @@ export default function Home() {
       <section id="tokenomics">
         <Tokenomics />
       </section>
+      {/* This section is conditionally hidden */}
       {shouldShowSocialPosts && (
         <section id="social" className="my-28">
           <div className="container mx-auto px-4">
-            <Social tweetIds={tweetIds} />
+            {/* Social component is disabled */}
+            {/* <Social tweetIds={tweetIds} /> */}
           </div>
         </section>
       )}

@@ -3,7 +3,11 @@ import { Tweet } from 'react-tweet';
 import { Heading } from './heading';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const SocialPosts = ({ tweetIds }) => {
+interface SocialPostsProps {
+  tweetIds: string[];
+}
+
+const SocialPosts: React.FC<SocialPostsProps> = ({ tweetIds }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [visibleTweets, setVisibleTweets] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
