@@ -16,14 +16,12 @@ type PartnersCarouselProps = {
 const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
   const [itemsPerView, setItemsPerView] = useState(5) // Default for desktop
   const [offset, setOffset] = useState(0)
-  const [isMobile, setIsMobile] = useState(false) // Track if it's mobile
 
-  // Adjust itemsPerView and isMobile based on screen size
+  // Adjust itemsPerView based on screen size
   useEffect(() => {
     const updateView = () => {
       const isMobileView = window.innerWidth < 768
       setItemsPerView(isMobileView ? 2 : 5) // 2 for mobile, 5 for desktop
-      setIsMobile(isMobileView)
     }
 
     updateView()
@@ -35,7 +33,7 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
   }, [])
 
   useEffect(() => {
-    if (partners.length === 0 || !isMobile) return // Only animate on mobile
+    if (partners.length === 0) return // Don't animate if there are no partners
 
     const interval = setInterval(() => {
       setOffset((prevOffset) => {
@@ -47,7 +45,7 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
     }, 3000) // Adjust scroll interval (3 seconds)
 
     return () => clearInterval(interval)
-  }, [partners.length, isMobile])
+  }, [partners.length])
 
   // Duplicate partners array 10 times for seamless infinite scrolling
   const duplicatedPartners = Array(10).fill(partners).flat()
@@ -55,9 +53,9 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
   return (
     <div className="relative overflow-hidden py-6">
       <div
-        className={`flex ${isMobile ? "transition-transform duration-1000 ease-in-out" : ""}`}
+        className="flex transition-transform duration-1000 ease-in-out"
         style={{
-          transform: isMobile ? `translateX(-${offset * (100 / itemsPerView)}%)` : "none",
+          transform: `translateX(-${offset * (100 / itemsPerView)}%)`,
         }}
       >
         {duplicatedPartners.map((partner, index) => (

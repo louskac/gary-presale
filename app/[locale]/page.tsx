@@ -39,9 +39,14 @@ const partnersData = [
     link: "https://cryptodaily.co.uk/2025/01/help-gary-token-pre-sale-a-unique-initiative-by-coingarage-exchange"
   },
   {
-    name: "Coin Paper",
+    name: "CoinPaper",
     logo: "/logos/coinpaper.svg",
     link: "https://coinpaper.com/6960/top-5-memecoins-for-2025-that-you-simply-can-t-miss"
+  },
+  {
+    name: "CoinMarketCap",
+    logo: "/logos/coinmarketcap.svg",
+    link: "https://coinmarketcap.com/community/articles/6790d7c3d12de6198cb919df/"
   }
 ]
 

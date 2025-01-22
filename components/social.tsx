@@ -53,7 +53,6 @@ const SocialPosts: React.FC<SocialPostsProps> = ({ tweetIds }) => {
         <Heading stroke={false} className="text-center text-3xl lg:text-6xl mb-6">
           Our Social Posts
         </Heading>
-
         {/* Display tweets */}
         <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-3'} gap-6`}>
           {tweetIds.slice(currentIndex, isMobile ? currentIndex + 1 : currentIndex + visibleTweets).map((id) => (

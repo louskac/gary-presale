@@ -27,6 +27,15 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
     useEffect(() => {
       if (hasFinished) {
         localStorage.setItem("tokenPurchased", "true");
+
+        if (typeof gtag === "function") {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-16542608466/FS6iCNuugJAaENLYkNA9',
+            'value': 20.0,
+            'currency': 'USD',
+            'transaction_id': ''
+          });
+        }
       }
     }, [hasFinished])
 
