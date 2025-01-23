@@ -69,14 +69,14 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
         {duplicatedPartners.map((partner, index) => (
           <div
             key={index}
-            className={`flex-shrink-0 ${itemsPerView === 2 ? "w-1/2" : "w-1/5"} px-4`} // Adjust width dynamically
+            className={`flex-shrink-0 ${itemsPerView === 2 ? "w-1/2" : "w-1/5"} px-2`} // Adjust width dynamically
           >
             <a href={partner.link} target="_blank" rel="noopener noreferrer">
               <Image
                 src={partner.logo}
                 alt={partner.name}
-                width={160} // Example width
-                height={160} // Example height
+                width={200} // Example width
+                height={200} // Example height
                 className="h-16 mx-auto object-contain rounded-lg transition-transform hover:scale-110"
               />
             </a>
