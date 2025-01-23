@@ -29,9 +29,9 @@ const partnersData = [
     link: "https://cryptopotato.com/coingarage-bringing-the-most-crypto-utility-to-europe/"
   },
   {
-    name: "Crypto News Flash",
-    logo: "/logos/cryptonewsflash.png",
-    link: "https://www.crypto-news-flash.com/memecoins-a-fun-dive-into-the-world-of-crypto/"
+    name: "CoinMarketCap",
+    logo: "/logos/coinmarketcap.svg",
+    link: "https://coinmarketcap.com/community/articles/6790d7c3d12de6198cb919df/"
   },
   {
     name: "CryptoDaily",
@@ -44,10 +44,10 @@ const partnersData = [
     link: "https://coinpaper.com/6960/top-5-memecoins-for-2025-that-you-simply-can-t-miss"
   },
   {
-    name: "CoinMarketCap",
-    logo: "/logos/coinmarketcap.svg",
-    link: "https://coinmarketcap.com/community/articles/6790d7c3d12de6198cb919df/"
-  }
+    name: "Crypto News Flash",
+    logo: "/logos/cryptonewsflash.png",
+    link: "https://www.crypto-news-flash.com/memecoins-a-fun-dive-into-the-world-of-crypto/"
+  },
 ]
 
 const shouldShowSocialPosts = false;

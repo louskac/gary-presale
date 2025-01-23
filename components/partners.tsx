@@ -16,6 +16,7 @@ type PartnersCarouselProps = {
 const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
   const [itemsPerView, setItemsPerView] = useState(5) // Default for desktop
   const [offset, setOffset] = useState(0)
+  const [isPaused, setIsPaused] = useState(false) // To track hover state
 
   // Adjust itemsPerView based on screen size
   useEffect(() => {
@@ -32,28 +33,35 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
     }
   }, [])
 
+  // Animation logic for smooth scrolling
   useEffect(() => {
-    if (partners.length === 0) return // Don't animate if there are no partners
+    if (partners.length === 0 || isPaused) return // Don't animate if no partners or paused
+
+    const step = 0.01 // Smaller step for smoother transition
+    const intervalTime = 50 // Smaller interval for smooth animation
+    const totalItems = partners.length * 10 // Total items with 10x duplication
 
     const interval = setInterval(() => {
       setOffset((prevOffset) => {
-        const totalItems = partners.length * 10 // Total items with 10x duplication
-        const nextOffset = prevOffset + 1
-
-        return nextOffset % totalItems
+        const nextOffset = prevOffset + step
+        return nextOffset % totalItems // Wrap around when reaching the end
       })
-    }, 3000) // Adjust scroll interval (3 seconds)
+    }, intervalTime)
 
     return () => clearInterval(interval)
-  }, [partners.length])
+  }, [partners.length, isPaused])
 
   // Duplicate partners array 10 times for seamless infinite scrolling
   const duplicatedPartners = Array(10).fill(partners).flat()
 
   return (
-    <div className="relative overflow-hidden py-6">
+    <div
+      className="relative overflow-hidden py-6"
+      onMouseEnter={() => setIsPaused(true)} // Pause on hover
+      onMouseLeave={() => setIsPaused(false)} // Resume on mouse leave
+    >
       <div
-        className="flex transition-transform duration-1000 ease-in-out"
+        className="flex transition-transform ease-linear"
         style={{
           transform: `translateX(-${offset * (100 / itemsPerView)}%)`,
         }}
