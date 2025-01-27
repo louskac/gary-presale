@@ -48,6 +48,12 @@ const partnersData = [
     logo: "/logos/cryptonewsflash.png",
     link: "https://www.crypto-news-flash.com/memecoins-a-fun-dive-into-the-world-of-crypto/"
   },
+  {
+    name: "Coin gabbar",
+    logo: "/logos/coingabbar.svg",
+    link: "https://www.coingabbar.com/en/crypto-blogs-details/help-gary-crypto-project-gara-token-on-polygon-blockchain"
+  },
+  
 ]
 
 const shouldShowSocialPosts = false;
