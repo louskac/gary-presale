@@ -1,6 +1,5 @@
 import { Heading } from "@/components/heading"
 import { GarysRoadmap } from "@/components/garys-roadmap"
-import { BuyGara } from "@/components/buy-gara-widget/widget"
 import Image from "next/image"
 import { useState } from "react"
 import { Copy, Check } from "lucide-react"
@@ -72,20 +71,8 @@ export const HelpGary = () => {
           </div>
         </div>
       </div>
-      <div className="container mx-auto grid justify-center gap-8 px-4 lg:grid-cols-[1fr_auto] lg:justify-between">
-        {/* Widget First on Mobile */}
-        <div className="order-1 mt-0 hidden w-full max-w-[400px] lg:order-2 lg:block">
-          <div className="sticky top-40">
-            <BuyGara />
-            {/* Gary Image */}
-            <div className="absolute -left-[150px] top-0 -z-10 hidden h-[363px] w-[324px] xl:block">
-              <Image src="/images/help-gary/gary_buy_gara.png" fill alt="Gary Buy $GARA" />
-            </div>
-          </div>
-        </div>
-
-        {/* Roadmap Second on Mobile */}
-        <div className="order-2 w-full lg:order-1">
+      <div className="mx-auto grid justify-center px-4">
+        <div className="w-full">
           <GarysRoadmap />
         </div>
       </div>

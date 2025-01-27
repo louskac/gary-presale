@@ -50,7 +50,7 @@ const partnersData = [
   },
   {
     name: "Coin gabbar",
-    logo: "/logos/coingabbar.svg",
+    logo: "/logos/coingabbar.png",
     link: "https://www.coingabbar.com/en/crypto-blogs-details/help-gary-crypto-project-gara-token-on-polygon-blockchain"
   },
   
