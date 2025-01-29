@@ -21,7 +21,7 @@ export default function TransactionStatusModal({ open, setOpen, toggleOpen, send
   const { transactionStatus, incomingTransaction, outcomingTransaction, reset } = useGaraStore((state) => state)
   const isPending = !incomingTransaction.done || !outcomingTransaction.done
   const hasFailed = incomingTransaction.error || outcomingTransaction.error
-  const hasFinished = incomingTransaction.done && !incomingTransaction.error && outcomingTransaction.done && !outcomingTransaction.error
+  const hasFinished = outcomingTransaction.done && !outcomingTransaction.error
 
     // Save purchase status to local storage when the transaction finishes successfully
     useEffect(() => {

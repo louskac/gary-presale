@@ -298,119 +298,121 @@ export default function GarySection() {
   }
 
   return (
-    <div className="relative mx-4 mt-20 flex flex-col items-center justify-center lg:mx-40 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
-      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
-      {captchaVisible && !captchaVerified ? (
-        // CAPTCHA Section
-        <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
-          <p className="mb-4 text-lg font-bold text-white">Please verify that you are human to continue!</p>
-          <div className="mb-4">
-            <ReCAPTCHA sitekey={CAPTCHA_SITE_KEY} onChange={handleCaptchaSuccess} />
+    <div className="mx-auto w-full max-w-[1440px] px-4 lg:px-0">
+      <div className="relativemt-20 flex flex-col items-center justify-center lg:flex-row lg:items-start lg:justify-between lg:gap-20">
+        {showPopup && <Popup onClose={() => setShowPopup(false)} />}
+        {captchaVisible && !captchaVerified ? (
+          // CAPTCHA Section
+          <div className="captcha-container flex flex-col items-center justify-center rounded-lg bg-gray-800 p-4 shadow-md">
+            <p className="mb-4 text-lg font-bold text-white">Please verify that you are human to continue!</p>
+            <div className="mb-4">
+              <ReCAPTCHA sitekey={CAPTCHA_SITE_KEY} onChange={handleCaptchaSuccess} />
+            </div>
+            <button
+              onClick={() => {
+                if (captchaVerified) setCaptchaVisible(false)
+              }}
+              className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none"
+            >
+              Continue
+            </button>
           </div>
-          <button
-            onClick={() => {
-              if (captchaVerified) setCaptchaVisible(false)
-            }}
-            className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none"
-          >
-            Continue
-          </button>
-        </div>
-      ) : (
-        <>
-          {/* Left Section */}
-          <div className="flex flex-col items-center">
-            <div className="relative">
-              <button onClick={handleGaryClick} className="relative focus:outline-none">
-                <div className="relative mb-[50px] flex flex-col items-center">
-                  {/* Gary Image */}
-                  <Image src={garyImage} alt="Gary" width={200} height={260} className="relative z-10 object-contain" />
-                  {/* Larger Ice Block */}
+        ) : (
+          <>
+            {/* Left Section */}
+            <div className="flex flex-col items-center">
+              <div className="relative">
+                <button onClick={handleGaryClick} className="relative focus:outline-none">
+                  <div className="relative mb-[50px] flex flex-col items-center">
+                    {/* Gary Image */}
+                    <Image src={garyImage} alt="Gary" width={200} height={260} className="relative z-10 object-contain" />
+                    {/* Larger Ice Block */}
+                    <Image
+                      src="/images/ice_block.svg"
+                      alt="Ice Block"
+                      width={700}
+                      height={400}
+                      className="absolute bottom-[-30px] scale-[1.5] object-contain lg:scale-[2]"
+                    />
+                  </div>
+                </button>
+                <div className="absolute -top-[25%] left-[60%] md:left-[40%] mb-4 h-[150px] w-[150px] md:h-[200px] md:w-[200px] lg:left-[60%]">
+                  <p className="absolute left-[55%] top-[40%] md:top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
+                    Click to feed me
+                  </p>
                   <Image
-                    src="/images/ice_block.svg"
-                    alt="Ice Block"
-                    width={700}
-                    height={400}
-                    className="absolute bottom-[-30px] scale-[1.5] object-contain lg:scale-[2]"
+                    src={isMobile ? "/images/story/slide1/bubble_m.png" : "/images/story/slide1/bubble.png"}
+                    alt="Speech Bubble"
+                    width={256}
+                    height={148}
+                    className="object-contain"
                   />
                 </div>
-              </button>
-              <div className="absolute -top-[25%] left-[60%] md:left-[40%] mb-4 h-[150px] w-[150px] md:h-[200px] md:w-[200px] lg:left-[60%]">
-                <p className="absolute left-[55%] top-[40%] md:top-[28%] -translate-x-1/2 -translate-y-1/2 transform text-center text-xl font-bold text-gary-blue">
-                  Click to feed me
-                </p>
-                <Image
-                  src={isMobile ? "/images/story/slide1/bubble_m.png" : "/images/story/slide1/bubble.png"}
-                  alt="Speech Bubble"
-                  width={256}
-                  height={148}
-                  className="object-contain"
-                />
               </div>
+              <p className="mt-4 text-center text-lg font-bold text-white">Your score: {clickCount}</p>
+              <div className="mt-4 flex flex-wrap justify-center gap-2">
+                {Object.entries(imageStats).map(([state, count]) => (
+                  <div
+                    key={state}
+                    className="flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl bg-gradient-to-t from-blue-100 via-white to-white p-2 shadow-md"
+                  >
+                    <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
+                    <p className="text-lg font-bold text-black">{count}</p>
+                  </div>
+                ))}
+              </div>
+              <Leaderboard />
             </div>
-            <p className="mt-4 text-center text-lg font-bold text-white">Your score: {clickCount}</p>
-            <div className="mt-4 flex flex-wrap justify-center gap-2">
-              {Object.entries(imageStats).map(([state, count]) => (
-                <div
-                  key={state}
-                  className="flex h-[64px] w-[64px] flex-col items-center justify-center rounded-xl bg-gradient-to-t from-blue-100 via-white to-white p-2 shadow-md"
-                >
-                  <Image src={`/images/${state}.png`} alt={state} width={32} height={32} className="rounded" />
-                  <p className="text-lg font-bold text-black">{count}</p>
-                </div>
-              ))}
-            </div>
-            <Leaderboard />
-          </div>
 
-          {/* Right Section */}
-          <div className="mt-8 flex flex-col items-start lg:mt-0 lg:w-[60%]">
-            <Heading className="mb-4 text-center text-4xl font-bold leading-none tracking-normal lg:text-6xl">
-              Feed Gary & win 100 $GARA
-            </Heading>
-            <p className="mt-2 text-base text-white">
-              <span className="font-bold">Every click has a chance to earn 100 $GARA!</span> You can win a maximum of{" "}
-              <span className="font-bold">3 times per day</span> (300 $GARA in total). To receive the $GARA tokens, you
-              need to enter your wallet in the winning pop-up window. The earned $GARA from the clicks will be credited
-              at the end of each month.
-            </p>
-            <div className="mt-4 w-full">
-              <h3 className="text-lg font-bold text-white">Click Rewards</h3>
-              <div className="mt-2 grid w-full grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:gap-4">
-                {/* First Reward */}
-                <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
-                  <Image src={`/images/state_1.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white pr-2">+1 point</p>
-                </div>
+            {/* Right Section */}
+            <div className="mt-8 flex flex-col items-start lg:mt-0 lg:w-[60%]">
+              <Heading className="mb-4 text-center text-4xl font-bold leading-none tracking-normal lg:text-6xl">
+                Feed Gary & win 100 $GARA
+              </Heading>
+              <p className="mt-2 text-base text-white">
+                <span className="font-bold">Every click has a chance to earn 100 $GARA!</span> You can win a maximum of{" "}
+                <span className="font-bold">3 times per day</span> (300 $GARA in total). To receive the $GARA tokens, you
+                need to enter your wallet in the winning pop-up window. The earned $GARA from the clicks will be credited
+                at the end of each month.
+              </p>
+              <div className="mt-4 w-full">
+                <h3 className="text-lg font-bold text-white">Click Rewards</h3>
+                <div className="mt-2 grid w-full grid-cols-2 gap-3 lg:flex lg:flex-wrap lg:gap-4">
+                  {/* First Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image src={`/images/state_1.png`} alt="fish" width={32} height={32} className="rounded" />
+                    <p className="font-bold text-white pr-2">+1 point</p>
+                  </div>
 
-                {/* Second Reward */}
-                <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
-                  <Image src={`/images/state_2.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white pr-2">+2 point</p>
-                </div>
+                  {/* Second Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image src={`/images/state_2.png`} alt="fish" width={32} height={32} className="rounded" />
+                    <p className="font-bold text-white pr-2">+2 point</p>
+                  </div>
 
-                {/* Third Reward */}
-                <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
-                  <Image src={`/images/state_3.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white pr-2">+5 point</p>
-                </div>
+                  {/* Third Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image src={`/images/state_3.png`} alt="fish" width={32} height={32} className="rounded" />
+                    <p className="font-bold text-white pr-2">+5 point</p>
+                  </div>
 
-                {/* Fourth Reward */}
-                <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
-                  <Image src={`/images/state_4.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white pr-2">+10 point</p>
-                </div>
+                  {/* Fourth Reward */}
+                  <div className="flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image src={`/images/state_4.png`} alt="fish" width={32} height={32} className="rounded" />
+                    <p className="font-bold text-white pr-2">+10 point</p>
+                  </div>
 
-                {/* Last Reward */}
-                <div className="col-span-2 flex items-center gap-2 rounded-xl bg-gray-600 p-2">
-                  <Image src={`/images/state_5.png`} alt="fish" width={32} height={32} className="rounded" />
-                  <p className="font-bold text-white pr-2">100 $GARA reward</p>
+                  {/* Last Reward */}
+                  <div className="col-span-2 flex items-center gap-2 rounded-xl bg-gray-600 p-2">
+                    <Image src={`/images/state_5.png`} alt="fish" width={32} height={32} className="rounded" />
+                    <p className="font-bold text-white pr-2">100 $GARA reward</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
+          </>
+        )}
+      </div>
     </div>
   )
 }

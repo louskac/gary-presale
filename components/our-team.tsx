@@ -44,7 +44,7 @@ export default function OurTeam() {
         passion and a shared vision to make a meaningful impact in the crypto space. Together, we combine creativity,
         dedication, and expertise to bring HelpGary.com to the top.
       </p>
-      <div className="mx-auto grid grid-cols-2 gap-x-6 gap-y-8 px-4 sm:grid-cols-2 lg:max-w-5xl lg:grid-cols-4">
+      <div className="mx-auto grid grid-cols-2 gap-x-6 gap-y-8 px-4 sm:grid-cols-2 lg:max-w-[1440px] lg:grid-cols-4">
         {teamMembers.map((member) => (
           <div
             key={member.name}

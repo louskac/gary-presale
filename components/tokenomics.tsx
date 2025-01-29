@@ -21,7 +21,7 @@ function Tokenomics() {
 
   return (
     <div className="my-32">
-      <div className="relative m-auto bg-[#0D1E35] py-10 lg:w-[70%] lg:rounded-[30px] lg:py-20">
+      <div className="relative m-auto bg-[#0D1E35] py-10 lg:w-[1440px] lg:rounded-[30px] lg:py-20">
         <Heading stroke={false} className="text-center text-3xl lg:text-6xl">
           $GARA tokenomics
         </Heading>
@@ -29,8 +29,8 @@ function Tokenomics() {
           <Image
             src={isMobile ? tokenomicsPie : tokenomicsGARY}
             alt="tokenomics"
-            width={isMobile ? 500 : 1000} // Example widths
-            height={isMobile ? 500 : 1000} // Example heights
+            width={isMobile ? 500 : 1200} // Example widths
+            height={isMobile ? 500 : 1200} // Example heights
             className="object-contain"
           />
         </div>

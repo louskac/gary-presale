@@ -132,7 +132,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
 
             <div
               className={cn(
-                "relative flex w-full max-w-full flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 md:max-w-[700px] lg:flex-row lg:pb-2",
+                "relative flex w-full max-w-[1440px] flex-col items-center justify-between rounded-3xl bg-[#0D1E35] pb-10 md:mb-0 lg:flex-row lg:pb-2",
                 index <= activeStep && "border-4 border-gary-yellow"
               )}
             >
@@ -142,8 +142,9 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 </div>
               )}
 
+              {/* Text Section - Takes 3/4 Width on Large Screens */}
               <motion.div
-                className="flex w-full max-w-[620px] flex-col px-4 py-4 sm:px-8 sm:py-6 lg:w-full"
+                className="flex w-full lg:w-3/4 flex-col px-4 py-4 sm:px-8 sm:py-6"
                 initial={{ x: -50, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
@@ -154,8 +155,10 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 <h3 className="mb-2 text-lg font-bold uppercase text-gary-yellow sm:text-2xl">{step.title}</h3>
                 <p className="text-lg font-bold">{step.description}</p>
               </motion.div>
+
+              {/* Image Section - Takes 1/4 Width on Large Screens */}
               <motion.div
-                className="relative mr-5 flex h-32 w-32 items-center justify-center"
+                className="relative flex h-32 w-full items-center justify-center lg:w-1/4"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.2 + 0.4 }}
