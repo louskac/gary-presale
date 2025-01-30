@@ -59,7 +59,7 @@ const SectionComponent: FC<{ section: Section; reverse: boolean }> = ({ section,
 const SavePenguins: FC = () => {
   return (
     <div className="relative min-h-screen py-20 bg-[#061023]">
-      <div className="mx-auto w-full md:max-w-[1440px]">
+      <div className="mx-auto w-full md:max-w-[1440px] max-w-[90%]">
         {sections.map((section, index) => (
           <SectionComponent key={index} section={section} reverse={index % 2 !== 0} />
         ))}
