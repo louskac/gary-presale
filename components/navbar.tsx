@@ -13,7 +13,7 @@ const links = [
   { name: "Team", anchor: "ourteam" },
   { name: "Save penguins", anchor: "save" },
   { name: "FAQ", anchor: "faq" },
-  { name: "WhitePaper", href: "/whitepaper/WhitepaperCG.pdf" },
+  { name: "Audit", href: "/whitepaper/WhitepaperCG.pdf" },
 ]
 
 export const NavBar = () => {
@@ -42,7 +42,7 @@ export const NavBar = () => {
       >
         <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between py-4">
           {/* Logo */}
-          <div className="h-14 w-14 flex-shrink-0 lg:block">
+          <div className="h-14 w-14 flex-shrink-0 lg:block ml-4 md:ml-0">
             <AnchorLink anchor="home">
               <Image src="/logo.png" alt="Gary" width={60} height={60} />
             </AnchorLink>
@@ -90,10 +90,10 @@ export const NavBar = () => {
                 <a href="https://www.facebook.com/profile.php?id=61568221981440" target="_blank" rel="noopener noreferrer">
                   <Image
                     src={`/images/save-penguins/facebook.svg`}
-                    width={28} 
-                    height={28} 
+                    width={32} 
+                    height={32} 
                     alt="Facebook"
-                    className="transition-transform duration-200 hover:scale-125"
+                    className="transition-transform duration-200 hover:scale-125 scale-125"
                   />
                 </a>
               </Button>
@@ -122,7 +122,7 @@ export const NavBar = () => {
       {/* Burger Menu Button (Mobile) */}
       <div className="fixed right-4 top-4 z-[9999] lg:hidden">
         <button className="focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#061022]">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#061022]">
             {menuOpen ? (
               <Image src="/icons/close.svg" alt="Close" width={24} height={24} />
             ) : (

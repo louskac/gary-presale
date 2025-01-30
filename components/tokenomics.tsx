@@ -29,8 +29,8 @@ function Tokenomics() {
           <Image
             src={isMobile ? tokenomicsPie : tokenomicsGARY}
             alt="tokenomics"
-            width={isMobile ? 500 : 1200} // Example widths
-            height={isMobile ? 500 : 1200} // Example heights
+            width={isMobile ? 500 : 800} // Example widths
+            height={isMobile ? 500 : 800} // Example heights
             className="object-contain"
           />
         </div>

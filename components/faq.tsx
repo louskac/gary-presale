@@ -41,7 +41,7 @@ export const Faq = () => {
   }
 
   return (
-    <div className="container mx-auto mb-28 mt-28 px-4 lg:max-w-[1440px] lg:px-0">
+    <div className="container mx-auto mb-28 mt-28 px-4 lg:max-w-[1000px] lg:px-0">
       <Heading className="text-center text-3xl font-bold sm:text-5xl">FAQ</Heading>
       <div className="my-8 flex flex-col gap-6 lg:mt-12 lg:gap-8">
         {faqData.map((faq, index) => (

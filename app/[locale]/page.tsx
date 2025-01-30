@@ -5,7 +5,7 @@ import Image from "next/image"
 import { NavBar } from "@/components/navbar"
 import { HelpGary } from "@/components/help-gary"
 import { EarnWithGary } from "@/components/earn-with-garry"
-import { SavePenguins } from "@/components/save-penguins"
+import SavePenguins from "@/components/save-penguins"
 import { Faq } from "@/components/faq"
 import { Footer } from "@/components/footer"
 import GarySection from "@/components/clickable-gary"
@@ -52,6 +52,11 @@ const partnersData = [
     name: "Coin gabbar",
     logo: "/logos/coingabbar.png",
     link: "https://www.coingabbar.com/en/crypto-blogs-details/help-gary-crypto-project-gara-token-on-polygon-blockchain"
+  },
+  {
+    name: "Binance square",
+    logo: "/logos/binancesquare.svg",
+    link: "https://www.binance.me/en/square/post/19590854319858"
   },
   
 ]
@@ -110,7 +115,7 @@ export default function Home() {
       <section id="ourteam" className="my-28">
         <OurTeam />
       </section>
-      <section id="save" className="-mt-20 flex bg-background px-4 sm:-mt-44 sm:px-6">
+      <section id="save" className="my-28">
         <SavePenguins />
       </section>
       <section id="faq" className="bg-background px-4 sm:px-6">

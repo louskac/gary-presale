@@ -6,6 +6,7 @@ import { SaveGary } from "@/components/save-gary"
 import { Button } from "@/components/ui/button"
 import { BuyGara } from "@/components/buy-gara-widget/widget"
 import VideoPlayer from "@/components/video"
+import { AnchorLink } from "./anchor-link"
 
 const Hero: React.FC = () => {
   const [backgroundSrc, setBackgroundSrc] = useState("/backgrounds/0.jpg")
@@ -53,7 +54,16 @@ const Hero: React.FC = () => {
           {/* Video Section */}
           <div className="mb-8 flex w-full lg:w-[65%] flex-col items-center justify-start lg:mb-0">
             <div className="relative flex w-full aspect-[16/9] items-center justify-center rounded-2xl bg-black shadow-lg">
-              <VideoPlayer />
+              <VideoPlayer />          
+            </div>
+            <div className="mt-10">
+            <a href="/whitepaper/WhitepaperCG.pdf" target="_blank">
+                <Button
+                  className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md hover:border-gary-pink hover:bg-white hover:text-gary-pink"
+                >
+                  WhitePaper
+                </Button>
+              </a>
             </div>
           </div>
 
