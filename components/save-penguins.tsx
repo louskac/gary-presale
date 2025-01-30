@@ -31,27 +31,25 @@ const sections: Section[] = [
 const SectionComponent: FC<{ section: Section; reverse: boolean }> = ({ section, reverse }) => (
   <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 py-16 items-center">
     {/* Asset Section */}
-    <div className={`flex justify-center ${reverse ? "lg:order-2" : "lg:order-1"}`}>
+    <div className={`flex ${reverse ? "lg:order-2" : "lg:order-1"} w-full`}>
       {section.type === "video" ? (
         <iframe
-          width="600px"
-          height="360px"
           src={section.asset}
           title={section.heading}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-          className="rounded-3xl"
+          className="w-full aspect-video rounded-3xl"
         ></iframe>
       ) : (
-        <div className="relative w-[600px] h-[360px] rounded-3xl overflow-hidden">
-          <Image src={section.asset} alt={section.heading} fill className="object-cover object-top" />
+        <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden">
+          <Image src={section.asset} alt={section.heading} fill className="object-cover object-center" />
         </div>
       )}
     </div>
 
     {/* Text Section */}
-    <div className={`flex flex-col justify-center ${reverse ? "lg:order-1" : "lg:order-2"}`}>
+    <div className={`flex flex-col justify-center ${reverse ? "lg:order-1" : "lg:order-2"} w-full`}>
       <Heading className="text-center text-5xl font-bold lg:text-left text-gary-yellow">{section.heading}</Heading>
       <p className="mt-4 text-center text-xl font-normal text-white lg:text-left">{section.content}</p>
     </div>
@@ -61,7 +59,7 @@ const SectionComponent: FC<{ section: Section; reverse: boolean }> = ({ section,
 const SavePenguins: FC = () => {
   return (
     <div className="relative min-h-screen py-20 bg-[#061023]">
-      <div className="mx-auto w-full md:max-w-[1440px] max-w-[90%]">
+      <div className="mx-auto w-full md:max-w-[1440px]">
         {sections.map((section, index) => (
           <SectionComponent key={index} section={section} reverse={index % 2 !== 0} />
         ))}

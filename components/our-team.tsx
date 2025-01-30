@@ -39,7 +39,7 @@ export default function OurTeam() {
   return (
     <section className="py-12 text-white">
       <Heading className="mb-8 text-center text-4xl font-bold lg:text-6xl">Our Team</Heading>
-      <p className="mx-auto mb-12 max-w-5xl text-center max-w-[90%]">
+      <p className="mx-auto mb-12 max-w-5xl text-center max-w-[90%] md:max-w-[1440px]">
         Help Gary is a project of the European crypto exchange Coingarage, and this is our team. We are driven by
         passion and a shared vision to make a meaningful impact in the crypto space. Together, we combine creativity,
         dedication, and expertise to bring HelpGary.com to the top.
