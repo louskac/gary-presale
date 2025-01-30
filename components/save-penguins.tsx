@@ -43,7 +43,7 @@ const SectionComponent: FC<{ section: Section; reverse: boolean }> = ({ section,
         ></iframe>
       ) : (
         <div className="relative w-full aspect-[16/9] rounded-3xl overflow-hidden">
-          <Image src={section.asset} alt={section.heading} fill className="object-cover object-center" />
+          <Image src={section.asset} alt={section.heading} fill className="object-cover object-[top]" />
         </div>
       )}
     </div>

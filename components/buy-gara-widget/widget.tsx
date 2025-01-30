@@ -1494,6 +1494,10 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     setAmountValue('20');
   }, []);
 
+  const getRefferalLink = () => {
+    console.log("Referral link requested");
+    //L: Your implemetation logic here
+  };
 
   return (
     <section
@@ -1721,6 +1725,12 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
+        <button
+          onClick={getRefferalLink}
+          className="w-full text-gary-pink pt-6 px-6 rounded-full font-semibold"
+        >
+          + GET REFERRAL LINK
+        </button>
         <TransactionStatusModal
           open={open}
           toggleOpen={handleOnOpenChange}
