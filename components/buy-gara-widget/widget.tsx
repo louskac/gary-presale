@@ -1507,37 +1507,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         className
       )}
     >
-      <div className="relative -mx-5 flex overflow-x-hidden bg-[#222222] text-white">
-        <div className="flex animate-marquee items-center whitespace-nowrap py-2">
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-        </div>
-
-        <div className="absolute top-0 flex animate-marquee2 items-center whitespace-nowrap py-2">
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-          <div className="flex items-center space-x-4">
-            <div className="ml-4 h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
-            <span className="text-xl">PRESALE is live! Buy $GARA now!</span>
-          </div>
-        </div>
-      </div>
       <div className="mt-4 grid grid-cols-[1fr_280px_1fr] gap-2">
         <div className="relative flex w-full flex-row items-center justify-center">
           <div className="h-[2px] w-full bg-black dark:bg-neutral-700"></div>
@@ -1725,12 +1694,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
-        <button
-          onClick={getRefferalLink}
-          className="w-full text-gary-pink pt-6 px-6 rounded-full font-semibold"
-        >
-          + GET REFERRAL LINK
-        </button>
         <TransactionStatusModal
           open={open}
           toggleOpen={handleOnOpenChange}

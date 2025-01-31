@@ -27,17 +27,16 @@ const CountdownTimer = ({ className }: { className?: string }) => {
     }
   }, [])
 
-  // Calculate the end of the current month at 11:59:59 PM
-  const getEndOfMonth = () => {
-    const now = new Date()
-    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0) // Last day of current month
-    nextMonth.setHours(23, 59, 59, 999) // Set time to 11:59:59 PM
-    return nextMonth.getTime()
+  const getTargetDate = () => {
+    const targetDate = new Date(2025, 1, 9, 23, 59, 59, 999) // February 9th, 2025, 23:59:59
+    targetDate.setDate(targetDate.getDate() + 1) // Move to midnight after February 9th
+    targetDate.setHours(0, 0, 0, 0) // Set time to midnight
+    return targetDate.getTime()
   }
 
   const calculateTimeLeft = () => {
     const now = new Date().getTime()
-    const targetDate = getEndOfMonth()
+    const targetDate = getTargetDate()
     const difference = targetDate - now
 
     const days = Math.floor(difference / (1000 * 60 * 60 * 24))
@@ -61,7 +60,7 @@ const CountdownTimer = ({ className }: { className?: string }) => {
       localStorage.setItem("garaPrice", newPrice.toFixed(2))
     }
 
-    // Reset the timer to the end of the next month
+    // Reset the timer to the next target date
     calculateTimeLeft()
   }
 

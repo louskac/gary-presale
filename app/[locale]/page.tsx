@@ -16,6 +16,7 @@ import MemeGenerator from "@/components/meme-generator"
 import PartnersCarousel from "@/components/partners"
 import Hero from "@/components/hero"
 import Social from "@/components/social"
+import UtilityFeatures from "@/components/utility-features"
 
 const partnersData = [
   {
@@ -77,6 +78,11 @@ export default function Home() {
       <NavBar />
       <Hero />
 
+    {/*
+      <section id="utility" className="my-28">
+        <UtilityFeatures />
+      </section>
+    */}
       <section id="help-gary" className="bg-background sm:px-6 sm:pb-24">
         <PartnersCarousel partners={partnersData} />
       </section>
