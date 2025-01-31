@@ -93,7 +93,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                       activeStep === index ? "rounded-b-full" : ""
                     )}
                     initial={{ height: 0 }}
-                    animate={{ height: "400%" }}
+                    animate={{ height: "500%" }}
                     transition={{
                       duration: 1.5,
                       ease: "linear",
@@ -105,7 +105,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 ) : null}
                 <div
                   className={cn(
-                    "absolute left-7 -z-20 h-[450%] w-2 bg-[#0D1E35]",
+                    "absolute left-7 -z-20 h-[500%] w-2 bg-[#0D1E35]",
                     index === 0 ? "rounded-t-full" : "",
                     index === steps.length - 1 ? "rounded-b-full" : ""
                   )}
