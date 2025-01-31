@@ -76,7 +76,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="flex flex-1 gap-6 last:mb-0"
+              className="flex flex-1 gap-6 last:mb-0 mr-16"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
