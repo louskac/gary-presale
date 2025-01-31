@@ -41,9 +41,14 @@ const Hero: React.FC = () => {
               <Image src={`/images/save-penguins/facebook.svg`} width={32} height={32} alt="Facebook" className="scale-[3]" />
             </a>
           </Button>
-          <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
+          <Button className="mr-2 flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
             <a href="https://t.me/helpgary" target="_blank" rel="noopener noreferrer">
               <Image src={`/images/save-penguins/telegram.svg`} width={32} height={32} alt="Telegram" className="scale-[2.5]" />
+            </a>
+          </Button>
+          <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
+            <a href="https://discord.gg/helpgarywin" target="_blank" rel="noopener noreferrer">
+              <Image src={`/images/save-penguins/discord.svg`} width={32} height={32} alt="Telegram" className="scale-[3]" />
             </a>
           </Button>
         </div>

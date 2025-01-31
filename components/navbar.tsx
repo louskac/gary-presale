@@ -125,6 +125,18 @@ export const NavBar = () => {
                   />
                 </a>
               </Button>
+
+              <Button className="h-12 w-12 flex items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow transition-transform duration-200 hover:scale-110">
+                <a href="https://discord.gg/helpgarywin" target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={`/images/save-penguins/discord.svg`}
+                    width={28} 
+                    height={28} 
+                    alt="Telegram"
+                    className="transition-transform duration-200 scale-125 hover:scale-125"
+                  />
+                </a>
+              </Button>
             </div>
           </div>
           <AnchorLink anchor="garys-goals">
