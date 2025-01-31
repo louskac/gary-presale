@@ -59,7 +59,7 @@ const partnersData = [
     logo: "/logos/binancesquare.svg",
     link: "https://www.binance.me/en/square/post/19590854319858"
   },
-  
+
 ]
 
 const shouldShowSocialPosts = false;

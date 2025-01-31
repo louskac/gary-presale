@@ -59,7 +59,7 @@ const Hero: React.FC = () => {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-center">
               {/* Whitepaper Button */}
               <a href="/whitepaper/WhitepaperCG.pdf" target="_blank">
-                <div className="flex items-center justify-center rounded-3xl bg-[#1D1D1D] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[70px]">
+                <div className="flex items-center justify-center rounded-3xl bg-[#061022B2] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[70px]">
                   <Image src="/whitepaper-icon.svg" alt="Whitepaper Icon" width={24} height={24} />
                   <span className="ml-3 text-lg font-semibold">Whitepaper</span>
                 </div>

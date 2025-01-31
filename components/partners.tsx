@@ -75,9 +75,11 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
               <Image
                 src={partner.logo}
                 alt={partner.name}
-                width={200} // Example width
-                height={200} // Example height
-                className="h-16 mx-auto object-contain rounded-lg transition-transform hover:scale-110"
+                width={200}
+                height={200}
+                className={`h-16 mx-auto object-contain rounded-lg transition-transform ${
+                  index === 8 ? "scale-110 hover:scale-125 bg-yellow-200" : "hover:scale-110"
+                }`}
               />
             </a>
           </div>

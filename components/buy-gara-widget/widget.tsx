@@ -33,6 +33,7 @@ import ProgressBar from 'modified-react-progress-bar.git/@ramonak/react-progress
 import { useSwitchChain } from "wagmi"
 import { mainnet, polygon, bsc } from "@wagmi/core/chains"
 import { getChainByName } from "@/app/api/gara/lib/utils"
+import { ReferralPopup } from "@/components/popup-referal"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
@@ -1005,6 +1006,8 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
   const [activeButton, setActiveButton] = useState("ethereum") // Default active button
   const { switchChainAsync } = useSwitchChain()
+  const [showPopup, setShowPopup] = useState(false)
+
   //@ts-ignore
   async function changeChain(chains) {
     try {
@@ -1496,6 +1499,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
 
   const getRefferalLink = () => {
     console.log("Referral link requested");
+    setShowPopup(true)
     //L: Your implemetation logic here
   };
 
@@ -1694,6 +1698,14 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
+        <button
+          type="button" 
+          onClick={getRefferalLink}
+          className="w-full text-gary-pink pt-6 px-6 rounded-full font-semibold"
+        >
+          + GET REFERRAL LINK
+        </button>
+        {showPopup && <ReferralPopup onClose={() => setShowPopup(false)} />}
         <TransactionStatusModal
           open={open}
           toggleOpen={handleOnOpenChange}
