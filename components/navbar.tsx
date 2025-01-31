@@ -214,6 +214,11 @@ export const NavBar = () => {
                 <Image src={`/images/save-penguins/telegram.svg`} width={24} height={24} alt="Telegram" />
               </a>
             </Button>
+            <Button className="flex h-12 w-12 items-center justify-center rounded-full border-none bg-[#0D1E35] hover:!bg-gary-yellow">
+              <a href="https://discord.gg/helpgarywin">
+                <Image src={`/images/save-penguins/discord.svg`} width={24} height={24} alt="Discord" className="scale-125" />
+              </a>
+            </Button>
           </div>
         </div>
       )}
