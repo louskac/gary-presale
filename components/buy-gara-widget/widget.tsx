@@ -1698,6 +1698,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
+        {/*
         <button
           type="button" 
           onClick={getRefferalLink}
@@ -1705,6 +1706,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         >
           + GET REFERRAL LINK
         </button>
+        */}
         {showPopup && <ReferralPopup onClose={() => setShowPopup(false)} />}
         <TransactionStatusModal
           open={open}

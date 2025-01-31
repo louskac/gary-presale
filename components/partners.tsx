@@ -78,7 +78,7 @@ const PartnersCarousel: React.FC<PartnersCarouselProps> = ({ partners }) => {
                 width={200}
                 height={200}
                 className={`h-16 mx-auto object-contain rounded-lg transition-transform ${
-                  index === 8 ? "scale-110 hover:scale-125 bg-yellow-200" : "hover:scale-110"
+                  index === 7 ? "scale-110 hover:scale-125" : "hover:scale-110"
                 }`}
               />
             </a>

@@ -72,7 +72,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
   return (
     <div className="w-full py-10">
       <div className="mx-auto w-full max-w-[1440px]">
-        <div className="relative flex flex-col gap-8 py-4 text-white">
+        <div className="relative flex flex-col gap-8 py-4 text-white mx-48">
           {steps.map((step, index) => (
             <motion.div
               key={index}

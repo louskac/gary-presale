@@ -21,7 +21,7 @@ function Tokenomics() {
 
   return (
     <div className="my-32">
-      <div className="relative m-auto bg-[#0D1E35] py-10 lg:w-[1440px] lg:rounded-[30px] lg:py-20">
+      <div className="relative m-auto bg-[#0D1E35] py-10 lg:w-[1140px] lg:rounded-[30px] lg:py-20">
         <Heading stroke={false} className="text-center text-3xl lg:text-6xl">
           $GARA tokenomics
         </Heading>
