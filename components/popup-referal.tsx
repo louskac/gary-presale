@@ -2,14 +2,30 @@
 
 import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Heading } from "./heading"
+import { Check, Copy } from "lucide-react"
 
 export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
   const [isConnected, setIsConnected] = useState(false)
   const [walletAddress, setWalletAddress] = useState("0x48...2B95") // Mock wallet address
+  const [referralCode, setReferralCode] = useState<string | null>(null)
+  const [copied, setCopied] = useState(false)
 
   const walletConnect = () => {
     setIsConnected(true)
+  }
+
+  const generateReferralCode = () => {
+    const uniqueCode = `GARA-${Math.random().toString(36).substring(2, 10).toUpperCase()}`
+    setReferralCode(uniqueCode)
+  }
+
+  const copyToClipboard = () => {
+    if (referralCode) {
+      navigator.clipboard.writeText(referralCode).then(() => {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      })
+    }
   }
 
   return (
@@ -26,9 +42,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
         {/* Initial State */}
         {!isConnected && (
           <>
-            <Heading className="mb-8 text-center text-4xl font-bold lg:text-xl">
-              Thank you for choosing to promote $GARA!
-            </Heading>
+            <p className="text-center font-heading text-xl font-black mb-6 mt-2">Thank you for choosing to promote $GARA!</p>
             <p className="mb-4 text-lg font-semibold text-gray-800">
               Earn up to 10% reward in USDT on purchases made through your referral link!
             </p>
@@ -37,7 +51,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             </div>
             <Button
               onClick={walletConnect}
-              className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white"
+              className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white !border-none outline-none pointer"
             >
               Connect Wallet
             </Button>
@@ -47,15 +61,34 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
         {/* Connected State */}
         {isConnected && (
           <>
-            <Heading className="mb-4 text-center text-4xl font-bold lg:text-xl">
-              Thank you for choosing to promote $GARA!
-            </Heading>
+            <p className="text-center font-heading text-xl font-black mb-6 mt-2">Thank you for choosing to promote $GARA!</p>
             <p className="mb-4 text-lg font-semibold text-gray-800">
               Earn up to 10% reward in USDT on purchases made through your referral link!
             </p>
-            <Button className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white">
-              Generate Code
-            </Button>
+
+            {/* Generate Code Button / Code Display */}
+            {!referralCode ? (
+              <Button onClick={generateReferralCode} className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white">
+                Generate Code
+              </Button>
+            ) : (
+              <div className="mt-4 flex items-center justify-between rounded-full border bg-white p-3 shadow-md">
+                <span className="text-lg font-semibold text-gray-800">{referralCode}</span>
+                <div className="flex items-center gap-2">
+                  {copied && <span className="text-green-500 text-sm font-semibold">Copied!</span>}
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault() // Prevent default form submission behavior
+                      copyToClipboard()
+                    }}
+                    className="h-10 px-4 rounded-full bg-gary-pink text-white text-sm font-bold"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="my-4 rounded-lg bg-gray-300 p-3 text-lg font-bold text-gray-700">
               Connected Wallet ({walletAddress})
             </div>
@@ -72,7 +105,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             </div>
             <Button
               disabled
-              className="mt-4 w-full h-12 rounded-full bg-gray-800 text-lg font-bold text-white cursor-not-allowed"
+              className="mt-4 w-full h-12 rounded-full bg-gray-800 text-lg font-bold text-white cursor-not-allowed !border-none outline-none"
             >
               Claim Referral Earnings
             </Button>
