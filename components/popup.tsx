@@ -17,14 +17,14 @@ export const Popup = ({ onClose }: { onClose: () => void }) => (
       <p className="text-lg text-gray-700">Buy $GARA for at least $50 to unlock this feature</p>
       <div className="mt-6 flex justify-center">
         <Image
-          src="/images/halt.png" // Make sure this path points to the image you want.
+          src="/images/halt.png"
           alt="Gary"
           width={150}
           height={150}
           className="rounded-lg"
         />
       </div>
-      <AnchorLink anchor="garys-goals">
+      <AnchorLink anchor="hero">
         <Button
           className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
           onClick={onClose}

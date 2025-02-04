@@ -7,44 +7,48 @@ import { Heading } from "@/components/heading"
 interface Feature {
   title: string
   description: string
-  image: string
 }
 
 const features: Feature[] = [
   {
-    title: "Seamless Trading Experience",
+    title: "Utility-Backed Growth",
     description:
-      "Our platform offers instant trades with low fees using $GARA. Unlock premium features and maximize your trading efficiency effortlessly.",
-    image: "/utility/1.webp",
+      "$GARA has real use cases on the European exchange Coingarage as payment for fees and platform features.",
   },
   {
-    title: "Rewards for Staking",
+    title: "Fuel for tranging bot",
     description:
-      "Stake your $GARA tokens and earn up to 30% annual rewards. The longer you hold, the more you benefit as the ecosystem grows.",
-    image: "/utility/2.webp",
+      "Coingarage’s trading bot makes 20–100 trades per user daily and consumes  $GARA for every trade increasing demand.",
   },
   {
-    title: "Decentralized Governance",
+    title: "Ongoing GARA Burning",
     description:
-      "Participate in decision-making and vote on key updates. As a $GARA holder, you help shape the future of Coingarage and its ecosystem.",
-    image: "/utility/3.webp",
+      "Every month, 20% of $GARA from fees is burned until only 200M remain from the original 900M.",
   },
 ]
 
 const UtilityFeatures: FC = () => {
   return (
-    <section className="py-20">
-      <div className="mx-auto w-full max-w-[1440px] px-6 text-white">
-        <Heading className="text-center text-5xl font-bold text-gary-yellow">Explore $GARA Utilities</Heading>
-        <p className="mt-4 text-center text-lg">
-          Unlock the potential of $GARA with real-world use cases designed to create sustainable growth.
-        </p>
+    <section className="relative py-20 mt-96">
+      <div className="absolute -top-96 right-80 bg-gary-yellow text-black text-center px-4 py-2 text-lg font-thin rounded-lg z-10 animate-pop">
+        <span className="text-5xl font-black">100x</span><br />potential
+      </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-[88%] w-[1200px] h-auto -z-10">
+        <Image
+          src="/images/trade.webp"
+          alt="Trading Background"
+          width={1200}
+          height={600}
+          className="object-cover"
+        />
+      </div>
+
+      <div className="mx-auto w-full max-w-[1440px] px-6 text-white">
+        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 relative">
           {features.map((feature, index) => (
-            <div key={index} className="flex flex-col items-center rounded-3xl bg-[#0D1E35] p-8 text-center">
-              <Image src={feature.image} alt={feature.title} width={120} height={120} className="mb-6" />
-              <Heading className="mb-2 text-2xl font-bold text-gary-yellow">{feature.title}</Heading>
+            <div key={index} className="flex flex-col items-start rounded-3xl bg-[#0D1E35] p-8 text-left">
+              <Heading className="mb-4 text-2xl font-bold text-gary-yellow">{feature.title}</Heading>
               <p className="text-lg text-white">{feature.description}</p>
             </div>
           ))}

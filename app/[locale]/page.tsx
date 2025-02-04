@@ -76,17 +76,19 @@ export default function Home() {
   return (
     <main className="z-50 h-screen">
       <NavBar />
-      <Hero />
 
-    {/*
-      <section id="utility" className="my-28">
-        <UtilityFeatures />
+      <section id="hero">
+        <Hero/>
       </section>
-    */}
+
       <section id="help-gary" className="bg-background sm:px-6 sm:pb-24">
         <PartnersCarousel partners={partnersData} />
       </section>
 
+      <section id="utility" className="my-28 hidden md:block">
+        <UtilityFeatures />
+      </section>
+    
       <section id="gary-section" className="bg-background py-12 sm:px-6 sm:pb-24">
         <GarySection />
       </section>
