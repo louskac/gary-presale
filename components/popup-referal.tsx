@@ -37,7 +37,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             </div>
             <Button
               onClick={walletConnect}
-              className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white"
+              className="w-full h-12 rounded-full bg-gary-yellow text-lg font-bold text-white"
             >
               Connect Wallet
             </Button>
@@ -53,7 +53,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             <p className="mb-4 text-lg font-semibold text-gray-800">
               Earn up to 10% reward in USDT on purchases made through your referral link!
             </p>
-            <Button className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white">
+            <Button className="w-full h-12 rounded-full bg-gary-yellow text-lg font-bold text-white">
               Generate Code
             </Button>
             <div className="my-4 rounded-lg bg-gray-300 p-3 text-lg font-bold text-gray-700">

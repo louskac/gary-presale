@@ -36,7 +36,7 @@ export const EarnWithGary = () => {
         <Button
           variant="default"
           size="lg"
-          className="my-2 h-14 border-2 border-transparent bg-gary-pink px-10 text-2xl text-white shadow-md outline-none transition-all sm:hover:border-gary-pink sm:hover:bg-white sm:hover:text-gary-pink dark:sm:hover:bg-white dark:sm:hover:text-gary-pink"
+          className="my-2 h-14 border-2 border-transparent bg-gary-yellow px-10 text-2xl text-white shadow-md outline-none transition-all sm:hover:border-gary-yellow sm:hover:bg-white sm:hover:text-gary-yellow dark:sm:hover:bg-white dark:sm:hover:text-gary-yellow"
           onClick={() => {
             handleClick("https://trade.coingarage.io/stake")
           }}

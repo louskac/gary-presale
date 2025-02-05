@@ -23,7 +23,7 @@ export const HelpGary = () => {
     <div className="flex flex-col justify-center">
       <div className="container mx-auto mt-10 flex flex-col items-center px-4 lg:mt-20">
         <Heading className="text-center text-3xl font-bold sm:text-6xl sm:text-[3.5rem]">
-          Help Gary reach his goals
+          Gary's goals
         </Heading>
         <div className="my-6 w-full max-w-[420px] overflow-hidden rounded-[30px] bg-[#0D1E35] p-4 text-center lg:max-w-[40%]">
           {/* Mobile Layout */}

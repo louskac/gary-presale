@@ -111,8 +111,8 @@ const config: Config = {
           "100%": { transform: "translateX(0%)" },
         },
         pop: {
-          '0%, 100%': { transform: 'rotate(20deg) scale(1)' },
-          '50%': { transform: 'rotate(20deg) scale(1.1)' },
+          '0%, 100%': { transform: 'rotate(25deg) scale(1)' },
+          '50%': { transform: 'rotate(25deg) scale(1.1)' },
         },
       },
       animation: {
