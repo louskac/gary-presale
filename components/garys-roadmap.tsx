@@ -71,12 +71,12 @@ const garysRoadMapData = [
 export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: VerticalProgressIndicatorProps) {
   return (
     <div className="w-full py-10">
-      <div className="mx-auto w-full max-w-[1440px]">
-        <div className="relative flex flex-col gap-8 py-4 text-white">
+      <div className="mx-auto w-full lg:max-w-[1440px]">
+        <div className="relative flex flex-col gap-8 py-4 text-white px-4 lg:mx-48">
           {steps.map((step, index) => (
             <motion.div
               key={index}
-              className="flex flex-1 gap-6 last:mb-0"
+              className="flex flex-1 gap-6 last:mb-0 mr-0 lg:mr-16"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -93,7 +93,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                       activeStep === index ? "rounded-b-full" : ""
                     )}
                     initial={{ height: 0 }}
-                    animate={{ height: "400%" }}
+                    animate={{ height: "500%" }}
                     transition={{
                       duration: 1.5,
                       ease: "linear",
@@ -105,7 +105,7 @@ export function GarysRoadmap({ steps = garysRoadMapData, activeStep = 0 }: Verti
                 ) : null}
                 <div
                   className={cn(
-                    "absolute left-7 -z-20 h-[450%] w-2 bg-[#0D1E35]",
+                    "absolute left-7 -z-20 h-[500%] w-2 bg-[#0D1E35]",
                     index === 0 ? "rounded-t-full" : "",
                     index === steps.length - 1 ? "rounded-b-full" : ""
                   )}

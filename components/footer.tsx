@@ -40,6 +40,11 @@ export const Footer = () => {
                   <Image src={`/images/save-penguins/telegram.svg`} width={24} height={24} alt="Telegram" />
                 </a>
               </Button>
+              <Button className="h-14 w-14 flex items-center justify-center rounded-full bg-[#1D1D1D] hover:bg-gary-yellow transition-transform hover:scale-110 !border-none outline-none">
+                <a href="https://discord.gg/helpgarywin" target="_blank" rel="noopener noreferrer">
+                  <Image src={`/images/save-penguins/discord.svg`} width={24} height={24} alt="Telegram" className="scale-125" />
+                </a>
+              </Button>
             </div>
           </div>
 

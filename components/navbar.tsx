@@ -125,10 +125,22 @@ export const NavBar = () => {
                   />
                 </a>
               </Button>
+
+              <Button className="h-12 w-12 flex items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow transition-transform duration-200 hover:scale-110">
+                <a href="https://discord.gg/helpgarywin" target="_blank" rel="noopener noreferrer">
+                  <Image
+                    src={`/images/save-penguins/discord.svg`}
+                    width={28} 
+                    height={28} 
+                    alt="Telegram"
+                    className="transition-transform duration-200 scale-125 hover:scale-125"
+                  />
+                </a>
+              </Button>
             </div>
           </div>
-          <AnchorLink anchor="garys-goals">
-            <Button className="ml-4 border-2 border-transparent bg-gary-pink px-6 text-lg text-white shadow-md hover:border-gary-pink hover:bg-white hover:text-gary-pink invisible md:visible">
+          <AnchorLink anchor="hero">
+            <Button className="ml-4 border-2 border-transparent bg-gary-yellow px-6 text-lg text-white shadow-md hover:border-gary-yellow hover:bg-white hover:text-gary-yellow invisible md:visible">
               Buy $GARA coin
             </Button>
           </AnchorLink>
@@ -177,9 +189,9 @@ export const NavBar = () => {
             ))}
           </ul>
           <div className="mt-4">
-            <AnchorLink anchor="garys-goals">
+            <AnchorLink anchor="hero">
               <Button
-                className="my-1 h-12 border-2 border-transparent bg-gary-pink px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-pink hover:bg-white hover:text-gary-pink dark:hover:bg-white dark:hover:text-gary-pink"
+                className="my-1 h-12 border-2 border-transparent bg-gary-yellow px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-yellow hover:bg-white hover:text-gary-yellow dark:hover:bg-white dark:hover:text-gary-yellow"
                 onClick={() => setMenuOpen(false)}
               >
                 Buy $GARA coin
@@ -200,6 +212,11 @@ export const NavBar = () => {
             <Button className="flex h-12 w-12 items-center justify-center rounded-full border-none bg-[#0D1E35] hover:!bg-gary-yellow">
               <a href="https://t.me/helpgary">
                 <Image src={`/images/save-penguins/telegram.svg`} width={24} height={24} alt="Telegram" />
+              </a>
+            </Button>
+            <Button className="flex h-12 w-12 items-center justify-center rounded-full border-none bg-[#0D1E35] hover:!bg-gary-yellow">
+              <a href="https://discord.gg/helpgarywin">
+                <Image src={`/images/save-penguins/discord.svg`} width={24} height={24} alt="Discord" className="scale-125" />
               </a>
             </Button>
           </div>

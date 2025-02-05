@@ -41,9 +41,14 @@ const Hero: React.FC = () => {
               <Image src={`/images/save-penguins/facebook.svg`} width={32} height={32} alt="Facebook" className="scale-[3]" />
             </a>
           </Button>
-          <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
+          <Button className="mr-2 flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
             <a href="https://t.me/helpgary" target="_blank" rel="noopener noreferrer">
               <Image src={`/images/save-penguins/telegram.svg`} width={32} height={32} alt="Telegram" className="scale-[2.5]" />
+            </a>
+          </Button>
+          <Button className="flex aspect-square h-[40px] w-[40px] items-center justify-center rounded-full border-none bg-[#1D1D1D] hover:!bg-gary-yellow">
+            <a href="https://discord.gg/helpgarywin" target="_blank" rel="noopener noreferrer">
+              <Image src={`/images/save-penguins/discord.svg`} width={32} height={32} alt="Telegram" className="scale-[3]" />
             </a>
           </Button>
         </div>
@@ -59,7 +64,7 @@ const Hero: React.FC = () => {
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-center">
               {/* Whitepaper Button */}
               <a href="/whitepaper/WhitepaperCG.pdf" target="_blank">
-                <div className="flex items-center justify-center rounded-3xl bg-[#061022B2] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[70px]">
+                <div className="flex items-center justify-center rounded-3xl bg-[#061022B2] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[60px]">
                   <Image src="/whitepaper-icon.svg" alt="Whitepaper Icon" width={24} height={24} />
                   <span className="ml-3 text-lg font-semibold">Whitepaper</span>
                 </div>
@@ -67,8 +72,8 @@ const Hero: React.FC = () => {
 
               {/* AuditBase Button */}
               <a href="/whitepaper/audit.pdf" target="_blank">
-                <div className="flex items-center justify-center rounded-3xl bg-white px-6 py-4 shadow-md w-[240px] h-[70px]">
-                  <Image src="/audit-logo.png" alt="Audit Logo" width={140} height={40} />
+                <div className="flex items-center justify-center rounded-3xl bg-white px-6 py-4 shadow-md w-[240px] h-[60px]">
+                  <Image src="/audit-logo.png" alt="Audit Logo" width={152} height={33} />
                 </div>
               </a>
             </div>

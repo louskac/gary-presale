@@ -110,6 +110,10 @@ const config: Config = {
           "0%": { transform: "translateX(100%)" },
           "100%": { transform: "translateX(0%)" },
         },
+        pop: {
+          '0%, 100%': { transform: 'rotate(25deg) scale(1)' },
+          '50%': { transform: 'rotate(25deg) scale(1.1)' },
+        },
       },
       animation: {
         "fade-in-2": "fade-in 2s ease-in-out",
@@ -119,6 +123,7 @@ const config: Config = {
         "slow-bounce": "slow-bounce 2s infinite",
         marquee: "marquee 25s linear infinite",
         marquee2: "marquee2 25s linear infinite",
+        pop: 'pop 3s ease-in-out infinite',
       },
     },
   },

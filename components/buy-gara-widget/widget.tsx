@@ -1698,13 +1698,15 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
+        {/*
         <button
           type="button" 
           onClick={getRefferalLink}
-          className="w-full text-gary-pink pt-6 px-6 rounded-full font-semibold"
+          className="w-full text-gary-yellow pt-6 px-6 rounded-full font-semibold"
         >
           + GET REFERRAL LINK
         </button>
+        */}
         {showPopup && <ReferralPopup onClose={() => setShowPopup(false)} />}
         <TransactionStatusModal
           open={open}

@@ -51,7 +51,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             </div>
             <Button
               onClick={walletConnect}
-              className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white !border-none outline-none pointer"
+              className="w-full h-12 rounded-full bg-gary-yellow text-lg font-bold text-white"
             >
               Connect Wallet
             </Button>
@@ -65,30 +65,9 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             <p className="mb-4 text-lg font-semibold text-gray-800">
               Earn up to 10% reward in USDT on purchases made through your referral link!
             </p>
-
-            {/* Generate Code Button / Code Display */}
-            {!referralCode ? (
-              <Button onClick={generateReferralCode} className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white">
-                Generate Code
-              </Button>
-            ) : (
-              <div className="mt-4 flex items-center justify-between rounded-full border bg-white p-3 shadow-md">
-                <span className="text-lg font-semibold text-gray-800">{referralCode}</span>
-                <div className="flex items-center gap-2">
-                  {copied && <span className="text-green-500 text-sm font-semibold">Copied!</span>}
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault() // Prevent default form submission behavior
-                      copyToClipboard()
-                    }}
-                    className="h-10 px-4 rounded-full bg-gary-pink text-white text-sm font-bold"
-                  >
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
+            <Button className="w-full h-12 rounded-full bg-gary-yellow text-lg font-bold text-white">
+              Generate Code
+            </Button>
             <div className="my-4 rounded-lg bg-gray-300 p-3 text-lg font-bold text-gray-700">
               Connected Wallet ({walletAddress})
             </div>
