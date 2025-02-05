@@ -21,7 +21,7 @@ const features: Feature[] = [
       "Coingarage’s trading apps makes several trades per user daily and will consume $GARA for every trade.",
   },
   {
-    title: "Ongoing GARA Burning",
+    title: "Ongoing $GARA Burning",
     description:
       "Every month, 20% of $GARA from fees is burned until only 200M remain from the original 900M.",
   },
