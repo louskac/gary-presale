@@ -16,9 +16,9 @@ const features: Feature[] = [
       "$GARA has real use cases on the European exchange Coingarage as payment for fees and platform features.",
   },
   {
-    title: "Fuel for trading bot",
+    title: "Fuel for trading apps",
     description:
-      "Coingarage’s trading bot makes 20–100 trades per user daily and consumes $GARA for every trade, increasing demand.",
+      "Coingarage’s trading apps makes several trades per user daily and will consume $GARA for every trade.",
   },
   {
     title: "Ongoing GARA Burning",
@@ -31,9 +31,9 @@ function renderDescription(description: string): JSX.Element {
   return (
     <>
       {description
-        .split(/(payment for fees|consumes \$GARA for every trade|burned until only 200M remain)/)
+        .split(/(payment for fees|consume \$GARA for every trade.|burned until only 200M)/)
         .map((part, index) =>
-          /payment for fees|consumes \$GARA for every trade|burned until only 200M remain/.test(
+          /payment for fees|consume \$GARA for every trade.|burned until only 200M/.test(
             part
           ) ? (
             <strong key={index} className="font-bold">
@@ -57,7 +57,7 @@ const UtilityFeatures: FC = () => {
         <div
           className="absolute -top-96 left-[calc(50%+520px)] bg-gary-yellow text-black text-center px-10 py-2 text-lg font-thin rounded-2xl z-10 animate-pop"
         >
-          <span className="text-5xl font-black">100x</span>
+          <span className="text-4xl font-black">100x</span>
           <br />
           potential
         </div>
