@@ -52,6 +52,34 @@ export default function RootLayout({ children, params }: { children: React.React
             `,
           }}
         />
+        {/* Facebook Pixels according to URL - fbq.getState().pixels  */}
+        {/* fbq('track', 'PageView') is not called here, it is probably called for other 6 fb pixels in GTM   */}
+        
+        <Script
+          id="facebook-pixel-1"
+          dangerouslySetInnerHTML={{
+            __html: `
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                if(window.location.search.includes('ref=t1')) {
+                 fbq('init', '1444163449895758');
+                }
+                if(window.location.search.includes('ref=t2')) {
+                 fbq('init', '923524003272405');
+                }
+                if(window.location.search.includes('ref=t3')) {
+                 fbq('init', '640882395171206');
+                }
+              `,
+          }}
+        />
+
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
