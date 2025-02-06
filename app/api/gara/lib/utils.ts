@@ -4,14 +4,9 @@ import { createPublicClient, decodeFunctionData, http, parseAbi, parseEther, par
 import { sendMail } from "@/lib/mailer"
 
 export const getGaraEstimate = (round: number, token: string, amount: number, tokenValue?: number) => {
+  console.log(round)
   if (!token || !amount) return 0
-  let price = 0.1
-  if (round === 2) {
-    price = 0.12
-  }
-  if (round == 3) {
-    price = 0.15
-  }
+  let price = 0.12 //L: change these amounts with price change
 
   if (token === "USDC" || token === "USDT") {
     return amount / price
@@ -21,7 +16,7 @@ export const getGaraEstimate = (round: number, token: string, amount: number, to
   return amount * tokenValue
 }
 
-export const usdcToGara = (usdc: number) => usdc / 0.12 // 1 USDC = 0.1 GARA round 2
+export const usdcToGara = (usdc: number) => usdc / 0.12 //L: change these amounts with price change
 
 export const getChainByName = (chain: string): Chain => {
   switch (chain) {
