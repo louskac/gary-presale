@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+"use client"
+>>>>>>> frontend
 import { parseEther, parseUnits, createPublicClient, createWalletClient, Chain } from "viem"
 import { type UseSendTransactionParameters, UseSendTransactionReturnType } from "wagmi"
 import { sendTransaction } from "@wagmi/core"
@@ -10,6 +14,10 @@ import { getRpcNode } from "@/app/api/gara/lib/utils"
 import { writeClientTransactionLog } from "@/lib/actions"
 import { config } from "@/components/buy-gara-widget/wallet-providers"
 import { waitForTransactionReceipt, writeContract, readContract } from "@wagmi/core"
+<<<<<<< HEAD
+=======
+import axios from "axios"
+>>>>>>> frontend
 
 type Address = `0x${string}`
 
@@ -1264,10 +1272,6 @@ const ethTokenAbi = [
   { anonymous: false, inputs: [], name: "Unpause", type: "event" },
 ]
 
-// const transferFromAbi = parseAbi([
-//   "function approve(address spender, uint256 amount) external returns (bool)",
-//   "function transferFrom(address from, address to, uint256 value) external returns (bool)",
-// ])
 type SendPaymentProps = {
   token: SupportedTokens
   chain: Chain
@@ -1326,31 +1330,8 @@ export const sendPayment = async ({
     })
 
     const chainName = chain?.name as SupportedChains
-    // Converts amount to 6 decimals for Polygon and Ethereum, and 18 decimals for BNB Smart Chain
-    const amountInWei =
-      chainName !== "BNB Smart Chain" ? parseUnits(amount.toString(), 6) : parseUnits(amount.toString(), 18)
-
-    // await writeClientTransactionLog({
-    //   account_address: senderAddress,
-    //   chain: chainName,
-    //   token: token,
-    //   log: {
-    //     message: "Transaction initiated",
-    //     amount: amount,
-    //   },
-    // })
 
     setTransactionStatus({ process: "sendPayment", status: "writingContract" })
-
-    // const simulateWrite = await client.simulateContract({
-    //   address: contractAddresses[token][chainName] as HexAddress,
-    //   abi: transferAbi,
-    //   functionName: "transfer",
-    //   args: [recipientAddress, amountInWei],
-    //   account: senderAddress,
-    //   chain: chain,
-    // })
-    // console.log({ simulateWrite })
 
     // Write contract
     let hash = null
@@ -1363,11 +1344,6 @@ export const sendPayment = async ({
           args: ["0", "0"],
           value: parseUnits(amount.toString(), 18),
         })
-
-        // const transactionApproveReceipt = await waitForTransactionReceipt(config, {
-        //   hash: hash,
-        // })
-
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1459,10 +1435,6 @@ export const sendPayment = async ({
           value: parseUnits(amount.toString(), 18),
         })
 
-        // const transactionApproveReceipt = await waitForTransactionReceipt(config, {
-        //   hash: hash,
-        // })
-
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1553,10 +1525,6 @@ export const sendPayment = async ({
           value: parseUnits(amount.toString(), 18),
         })
 
-        // const transactionApproveReceipt = await waitForTransactionReceipt(config, {
-        //   hash: hash,
-        // })
-
         if (!hash) {
           throw new Error("Contract write transaction failed. Transaction hash is undefined.")
         }
@@ -1639,16 +1607,6 @@ export const sendPayment = async ({
       }
     }
 
-    // await writeClientTransactionLog({
-    //   account_address: senderAddress,
-    //   transaction_tx_hash: hash,
-    //   chain: chainName,
-    //   token: token,
-    //   log: {
-    //     message: "Transaction created",
-    //     amount: amount,
-    //   },
-    // })
     console.log("Transaction sent:", hash)
     setTransactionStatus({ process: "sendPayment", status: "contractCreated" })
     setOutcomingTransaction({ txHash: hash })
@@ -1680,6 +1638,13 @@ export const sendPayment = async ({
     setTransactionStatus({ process: "sendPayment", status: "receiptReceived" })
     setOutcomingTransaction({ receipt, done: true })
     console.log("Transaction confirmed:", receipt)
+
+    try {
+      const BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
+      await axios.post(`${BACKEND_ENDPOINT}/transaction/addTransaction`, { walletAddress: senderAddress, chain: chainName, token: token, amount: amount.toString() })
+    } catch (error) {
+      console.log("legend error = ", error)
+    }
 
     return {
       txHash: hash,

@@ -34,6 +34,8 @@ import { useSwitchChain } from "wagmi"
 import { mainnet, polygon, bsc } from "@wagmi/core/chains"
 import { getChainByName } from "@/app/api/gara/lib/utils"
 import { ReferralPopup } from "@/components/popup-referal"
+import { useSearchParams } from "next/navigation"
+import axios from "axios"
 
 // const COINGARAGE_CONTRACT_ADDRESS = "0xA4AC096554f900d2F5AafcB9671FA84c55cA3bE1" as `0x${string}`
 const COINGARAGE_CONTRACT_ADDRESS = "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead" as `0x${string}`
@@ -1001,12 +1003,28 @@ const calculateRound = () => {
   }
 }
 
+const BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
+
 export function BuyGara({ className, hideHeader = false }: { className?: string; hideHeader?: boolean }) {
   const [currentNetworkId, setCurrentNetworkId] = useState(1)
   const [hasFetchedOnLoad, setHasFetchedOnLoad] = useState(false)
   const [activeButton, setActiveButton] = useState("ethereum") // Default active button
   const { switchChainAsync } = useSwitchChain()
+  const { address, chain } = useAccount()
   const [showPopup, setShowPopup] = useState(false)
+
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    const setReferred = async(walletAddress: string, referred: string) => {
+      const result = await axios.post(`${BACKEND_ENDPOINT}/user/setReferred`, {walletAddress, referred})
+    }
+
+    const referred = searchParams.get('ref')
+    if (referred && address) {
+      setReferred(address, referred)
+    }
+  }, [searchParams, address])
 
   //@ts-ignore
   async function changeChain(chains) {
@@ -1101,7 +1119,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
     setIncomingTransaction,
     reset: resetState,
   } = useGaraStore((state) => state)
-  const { address, chain } = useAccount()
 
   useEffect(() => {
     if (chain?.id === 1) {
@@ -1337,6 +1354,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       senderAddress: address,
       walletClient,
     })
+
     const response = await sendPayment({
       token,
       chain,
@@ -1400,30 +1418,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       fbq("track", "Purchase", { value: usdValue.toFixed(2), currency: "USD" })
     }
 
-    // const garaTransactionResponse = await fetch("/api/gara/exchange", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     txHash: response.txHash,
-    //     from: address,
-    //     to: to,
-    //     amount,
-    //     chain: chain?.name,
-    //     token,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    // const responseData = await garaTransactionResponse.json()
-    // console.log("GARA Transaction Response:", responseData)
-    // if (!garaTransactionResponse.ok) {
-    //   setTransactionStatus({
-    //     process: "receivePayment",
-    //     status: "transactionError",
-    //   })
-    //   setIncomingTransaction({ done: true, error: responseData.message })
-    //   return
-    // }
     addRecentTransaction({
       hash: response?.txHash,
       description: "Incoming GARA",
@@ -1655,13 +1649,13 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
           </div>
         </div>
         {hasLowerInputBalance && (
-              <p className="mt-2 pl-4 text-sm text-red-500">
-                Amount must be greater than {minTokenBalance} {token}
-              </p>
-            )}
-            {hasUnsufficientBalance && (
-              <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>
-            )}
+          <p className="mt-2 pl-4 text-sm text-red-500">
+            Amount must be greater than {minTokenBalance} {token}
+          </p>
+        )}
+        {hasUnsufficientBalance && (
+          <p className="mt-2 pl-4 text-sm text-red-500">Insufficient balance</p>
+        )}
         <input type="hidden" {...register("from")} />
         <input type="hidden" {...register("to")} />
         <input type="hidden" name="chain" value={chain?.name} />
@@ -1698,7 +1692,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
             />
           </div>
         </div>
-        {/*
         <button
           type="button" 
           onClick={getRefferalLink}
@@ -1706,7 +1699,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         >
           + GET REFERRAL LINK
         </button>
-        */}
         {showPopup && <ReferralPopup onClose={() => setShowPopup(false)} />}
         <TransactionStatusModal
           open={open}
@@ -1718,6 +1710,6 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="absolute -bottom-[calc(50%+32px)] right-0 z-10 w-full h-full pointer-events-none">
         <Image src="/images/ice_buy_gara.svg" fill alt="Ice Background" className="object-contain" />
       </div>
-    </section> 
+    </section>
   )
 }
