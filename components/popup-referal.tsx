@@ -1,17 +1,5 @@
 "use client"
 
-<<<<<<< HEAD
-import React, { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Heading } from "./heading"
-
-export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
-  const [isConnected, setIsConnected] = useState(false)
-  const [walletAddress, setWalletAddress] = useState("0x48...2B95") // Mock wallet address
-
-  const walletConnect = () => {
-    setIsConnected(true)
-=======
 import React, { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ConnectButton } from "./buy-gara-widget/connect-button"
@@ -32,8 +20,8 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
   const [copied, setCopied] = useState(false)
 
   useEffect(() => {
-    const getReferral = async(walletAddress: string) => {
-      const result = await axios.post(`${BACKEND_ENDPOINT}/user/getReferral`, {walletAddress})
+    const getReferral = async (walletAddress: string) => {
+      const result = await axios.post(`${BACKEND_ENDPOINT}/user/getReferral`, { walletAddress })
       const referral = result.data.data
       setReferralCode(referral)
     }
@@ -45,12 +33,12 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
   }, [address])
 
   const generateReferralCode = () => {
-    const setReferral = async(walletAddress: string, referral: string) => {
-      const result = await axios.post(`${BACKEND_ENDPOINT}/user/setReferral`, {walletAddress, referral})
+    const setReferral = async (walletAddress: string, referral: string) => {
+      await axios.post(`${BACKEND_ENDPOINT}/user/setReferral`, { walletAddress, referral })
     }
 
     if (address) {
-      const referral = 'GARA-' + crypto.createHash("sha256").update(address).digest("hex").slice(0, 8).toUpperCase();
+      const referral = 'GARA-' + crypto.createHash("sha256").update(address).digest("hex").slice(0, 8).toUpperCase()
       setReferralCode(referral)
       setReferral(address, referral)
     }
@@ -64,7 +52,6 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
         setTimeout(() => setCopied(false), 2000)
       })
     }
->>>>>>> frontend
   }
 
   return (
@@ -91,7 +78,6 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             <ConnectButton
               label={t("btnConnectWallet")}
               showBalance={false}
-              className="h-12 w-full rounded-full bg-[#FF4473] text-center text-xl font-bold text-white"
             />
           </>
         )}
@@ -106,11 +92,14 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
 
             {/* Generate Code Button / Code Display */}
             {!referralCode ? (
-              <Button onClick={generateReferralCode} className="w-full h-12 rounded-full bg-gary-pink text-lg font-bold text-white">
+              <Button
+                onClick={generateReferralCode}
+                className="border-2 border-transparent hover:border-gary-yellow hover:text-gary-yellow h-12 w-full rounded-full bg-gary-yellow text-center text-xl font-bold text-black shadow-[0px_5px_0px_#D29200] outline-none transition-all hover:bg-white"
+              >
                 Generate Code
               </Button>
             ) : (
-              <div className="mt-4 flex items-center justify-between rounded-full border bg-white p-3 shadow-md">
+              <div className="mt-4 flex items-center justify-between rounded-full border-2 border-[#FFAE17] bg-white p-3 shadow-[0px_5px_0px_#D29200]">
                 <span className="text-lg font-semibold text-gray-800">{`helpgary.com/?ref=${referralCode}`}</span>
                 <div className="flex items-center gap-2">
                   {copied && <span className="text-green-500 text-sm font-semibold">Copied!</span>}
@@ -119,7 +108,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
                       e.preventDefault() // Prevent default form submission behavior
                       copyToClipboard()
                     }}
-                    className="h-10 px-4 rounded-full bg-gary-pink text-white text-sm font-bold"
+                    className="border-2 border-transparent hover:border-gary-yellow hover:text-gary-yellow h-12 w-full rounded-full bg-gary-yellow text-center text-xl font-bold text-black shadow-[0px_5px_0px_#D29200] outline-none transition-all hover:bg-white px-2"
                   >
                     Copy
                   </button>

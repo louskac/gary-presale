@@ -1,23 +1,14 @@
-<<<<<<< HEAD
-=======
 "use client"
->>>>>>> frontend
+
 import { parseEther, parseUnits, createPublicClient, createWalletClient, Chain } from "viem"
 import { type UseSendTransactionParameters, UseSendTransactionReturnType } from "wagmi"
-import { sendTransaction } from "@wagmi/core"
-// @ts-ignore
-// import { useAccount, useBalance, useWalletClient } from "wagmi"
-// @ts-ignore
 import { BigNumberish, HexAddress, SupportedChains, SupportedTokens } from "@/types"
 import { contractAddresses } from "@/components/buy-gara-widget/utils"
 import { getRpcNode } from "@/app/api/gara/lib/utils"
 import { writeClientTransactionLog } from "@/lib/actions"
 import { config } from "@/components/buy-gara-widget/wallet-providers"
-import { waitForTransactionReceipt, writeContract, readContract } from "@wagmi/core"
-<<<<<<< HEAD
-=======
+import { waitForTransactionReceipt, writeContract, readContract, sendTransaction } from "@wagmi/core"
 import axios from "axios"
->>>>>>> frontend
 
 type Address = `0x${string}`
 

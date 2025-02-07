@@ -1520,7 +1520,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
       <div className="flex flex-col items-center justify-between rounded-md p-4">
         <div className="flex w-full justify-between text-lg text-gray-800">
           <span>
-            Current Price: <span className="font-bold text-gary-pink">$0.12</span>
+            Current Price: <span className="font-bold text-[#28E0B9]">$0.12</span>
           </span>
           <span>
             Listing price: <span className="font-bold text-gray-900">$0.36</span>
@@ -1695,7 +1695,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         <button
           type="button" 
           onClick={getRefferalLink}
-          className="w-full text-gary-pink pt-6 px-6 rounded-full font-semibold"
+          className="w-full text-gary-yellow pt-6 px-6 rounded-full font-semibold"
         >
           + GET REFERRAL LINK
         </button>
