@@ -76,6 +76,9 @@ export default function RootLayout({ children, params }: { children: React.React
                 if(window.location.search.includes('ref=t3')) {
                  fbq('init', '640882395171206');
                 }
+                if(window.location.search.includes('ref=t4')) {
+                 fbq('init', '925648596443532');
+                }
               `,
           }}
         />
