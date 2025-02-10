@@ -1,1 +1,1 @@
-export const DB_URL = 'mongodb://127.0.0.1:27017/helpgray';
+export const DB_URL = 'mongodb+srv://louskac:BarosMilan53@cluster0.f50x2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0';
