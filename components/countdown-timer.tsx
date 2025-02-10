@@ -28,7 +28,7 @@ const CountdownTimer = ({ className }: { className?: string }) => {
   }, [])
 
   const getTargetDate = () => {
-    const targetDate = new Date(2025, 1, 9, 23, 59, 59, 999) // February 9th, 2025, 23:59:59
+    const targetDate = new Date(2025, 1, 16, 23, 59, 59, 999) // February 9th, 2025, 23:59:59
     targetDate.setDate(targetDate.getDate() + 1) // Move to midnight after February 9th
     targetDate.setHours(0, 0, 0, 0) // Set time to midnight
     return targetDate.getTime()
