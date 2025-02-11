@@ -60,20 +60,23 @@ const Hero: React.FC = () => {
               <VideoPlayer />
             </div>
 
-            {/* Centered Button Section */}
             <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-center">
-              {/* Whitepaper Button */}
-              <a href="/whitepaper/WhitepaperCG.pdf" target="_blank">
-                <div className="flex items-center justify-center rounded-3xl bg-[#061022B2] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[60px]">
-                  <Image src="/whitepaper-icon.svg" alt="Whitepaper Icon" width={24} height={24} />
-                  <span className="ml-3 text-lg font-semibold">Whitepaper</span>
+              <a href="/whitepaper/audit.pdf" target="_blank">
+                <div className="flex items-center justify-center rounded-2xl bg-white px-6 py-4 shadow-md w-[240px] h-[60px] hover:bg-gray-100">
+                  <Image src="/audit-logo.png" alt="Audit Logo" width={152} height={33} />
                 </div>
               </a>
 
-              {/* AuditBase Button */}
-              <a href="/whitepaper/audit.pdf" target="_blank">
-                <div className="flex items-center justify-center rounded-3xl bg-white px-6 py-4 shadow-md w-[240px] h-[60px]">
-                  <Image src="/audit-logo.png" alt="Audit Logo" width={152} height={33} />
+              <a href="https://coinmarketcap.com/currencies/coingarage-token/" target="_blank">
+                <div className="flex items-center justify-center rounded-2xl bg-white px-6 py-4 shadow-md w-[240px] h-[60px] hover:bg-gray-100">
+                  <Image src="/coinmarketcap_black.svg" alt="Coinmarketcap Logo" width={180} height={50} />
+                </div>
+              </a>
+
+              <a href="/whitepaper/WhitepaperCG.pdf" target="_blank">
+                <div className="flex items-center justify-center rounded-2xl bg-[#061022B2] px-8 py-4 text-white hover:bg-gray-700 w-[240px] h-[60px]">
+                  <Image src="/whitepaper-icon.svg" alt="Whitepaper Icon" width={24} height={24} />
+                  <span className="ml-3 text-lg font-semibold">Whitepaper</span>
                 </div>
               </a>
             </div>
