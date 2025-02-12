@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { supabase } from "@/lib/supabase" // Import your Supabase client
+import { homepageUrl } from "./constants"
 
 export default function AirdropWin({ onClose }: { onClose: () => void }) {
   const [walletAddress, setWalletAddress] = useState("")
@@ -40,7 +41,7 @@ export default function AirdropWin({ onClose }: { onClose: () => void }) {
 
   const handleShare = () => {
     const text = encodeURIComponent(
-      "I just won 10 USD worth of $GARA coin on https://www.helpgary.com, try your luck too!"
+      `I just won 10 USD worth of $GARA coin on ${homepageUrl}, try your luck too!`
     )
     const twitterUrl = `https://twitter.com/intent/tweet?text=${text}`
     window.open(twitterUrl, "_blank")

@@ -8,6 +8,7 @@ import { useAccount } from "wagmi"
 import { formatAddress } from "@/lib/utils"
 import crypto from 'crypto'
 import axios from 'axios'
+import { homepageUrl } from './constants'
 
 const BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
@@ -44,9 +45,9 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
     }
   }
 
+  const referralText = `${homepageUrl}/?ref=${referralCode}`
   const copyToClipboard = () => {
     if (referralCode) {
-      const referralText = `helpgary.com/?ref=${referralCode}`
       navigator.clipboard.writeText(referralText).then(() => {
         setCopied(true)
         setTimeout(() => setCopied(false), 2000)
@@ -100,7 +101,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
               </Button>
             ) : (
               <div className="mt-4 flex items-center justify-between rounded-full border-2 border-[#FFAE17] bg-white p-3 shadow-[0px_5px_0px_#D29200]">
-                <span className="text-lg font-semibold text-gray-800">{`helpgary.com/?ref=${referralCode}`}</span>
+                <span className="text-lg font-semibold text-gray-800">{referralText}</span>
                 <div className="flex items-center gap-2">
                   {copied && <span className="text-green-500 text-sm font-semibold">Copied!</span>}
                   <button
