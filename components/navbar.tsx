@@ -152,7 +152,7 @@ export const NavBar = () => {
               </Button>
             </div>
             <AnchorLink anchor="hero">
-              <Button className="ml-4 border-2 border-transparent bg-gary-yellow px-6 text-lg text-black shadow-[0px_5px_0px_#D29200] hover:border-gary-yellow hover:bg-white hover:text-gary-yellow rounded-full">
+              <Button className="ml-4 border-2 border-transparent bg-gary-yellow px-6 text-lg text-black shadow-[0px_5px_0px_#D29200] hover:border-gary-yellow hover:bg-white hover:text-gary-black rounded-full">
                 Buy $GARA coin
               </Button>
             </AnchorLink>

@@ -1438,56 +1438,80 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
   }
 
   useEffect(() => {
-    const progressBarFillers = document.querySelectorAll("#progress-bar-filler")
-
+    const progressBarFillers = document.querySelectorAll("#progress-bar-filler");
+  
     if (progressBarFillers.length > 0) {
-      // Ensure each progress bar has the animation
       progressBarFillers.forEach((progressBarFiller) => {
-        // Ensure the progress bar has relative positioning
-        progressBarFiller.style.position = "relative"
-
-        // Create arrow container
-        const arrowContainer = document.createElement("div")
-        arrowContainer.className = "absolute inset-0 flex items-center justify-start pointer-events-none arrow"
-
-        // Add spans for the arrows
-        for (let i = 0; i < 3; i++) {
-          const arrow = document.createElement("span")
-          arrow.className =
-            "block w-[3vw] h-[3vw] border-b-[25px] border-r-[25px] lg:w-[1.5vw] lg:h-[1.5vw] lg:border-b-[5px] lg:border-r-[5px] border-white transform rotate-45"
-          if (i === 1) arrow.style.animationDelay = "-0.2s"
-          if (i === 2) arrow.style.animationDelay = "-0.4s"
-          arrowContainer.appendChild(arrow)
+        progressBarFiller.style.position = "relative";
+  
+        const arrowContainer = document.createElement("div");
+        arrowContainer.className = "absolute inset-y-0 flex items-center pointer-events-none arrow";
+  
+        const fillerWidth = progressBarFiller.offsetWidth;
+        const isMobile = window.innerWidth <= 768;
+  
+        let totalArrowWidth = 0;
+  
+        for (let i = 0; i < 30; i++) { //L: adjust here
+          const arrow = document.createElement("span");
+          arrow.className = "inline-block w-6 h-6 lg:w-4 lg:h-4";
+          arrow.style.opacity = "0.7";
+          arrow.style.position = "relative";
+  
+          arrow.innerHTML = `
+            <svg fill="#ffffff" width="100%" height="100%" viewBox="0 0 330 330">
+              <path d="M250.606,154.389l-150-149.996c-5.857-5.858-15.355-5.858-21.213,0.001c-5.857,5.858-5.857,15.355,0.001,21.213l139.393,139.39L79.393,304.394c-5.857,5.858-5.857,15.355,0.001,21.213C82.322,328.536,86.161,330,90,330s7.678-1.464,10.607-4.394l149.999-150.004c2.814-2.813,4.394-6.628,4.394-10.606C255,161.018,253.42,157.202,250.606,154.389z"/>
+            </svg>
+          `;
+  
+          totalArrowWidth += arrow.offsetWidth;
+  
+          arrowContainer.appendChild(arrow);
         }
+  
+        const spacing = 2;
+  
+        const startPos = fillerWidth - totalArrowWidth - (spacing * 2) + (isMobile ? 685 : 655); //L: adjust here
 
-        // Append arrow container to the progress bar filler
-        progressBarFiller.appendChild(arrowContainer)
-      })
-
-      const style = document.createElement("style")
+        let currentPos = startPos;
+        arrowContainer.childNodes.forEach(arrow => {
+          arrow.style.left = `${currentPos}px`;
+          currentPos += arrow.offsetWidth + spacing - (isMobile ? 35 : 25); //L: adjust here
+        });
+  
+        progressBarFiller.appendChild(arrowContainer);
+      });
+  
+      const style = document.createElement("style");
       style.textContent = `
         @keyframes animate {
           0% {
             opacity: 0;
-            transform: rotate(315deg) translate(-10px, -10px);
+            transform: translateX(-1rem);
           }
           50% {
-            opacity: 0.3;
+            opacity: 0.7;
+            transform: translateX(0.5rem);
           }
           100% {
             opacity: 0;
-            transform: rotate(315deg) translate(10px, 10px);
+            transform: translateX(1.5rem);
           }
         }
-  
+
         .arrow span {
-          animation: animate 2s infinite;
-          margin: -10px;
+          animation: animate 2s infinite linear;
         }
-      `
-      document.head.appendChild(style)
+        @media (min-width: 1024px) {
+          .arrow span {
+            margin-left: 1rem;
+          }
+        }
+      `;
+      document.head.appendChild(style);
     }
-  }, [])
+  }, []);
+  
 
   const setAmountValue = (value: string) => {
     form.setValue("amount", value)
@@ -1534,7 +1558,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         </div>
         <div className="relative my-2 w-full">
           <ProgressBar
-            completed={((tokenSold / 4000000) * 100).toFixed(2)}
+            completed={((tokenSold / 1000000) * 100).toFixed(2)}
             animateOnRender={true}
             isLabelVisible={false}
             height="16px"
@@ -1546,7 +1570,7 @@ export function BuyGara({ className, hideHeader = false }: { className?: string;
         </div>
         <p className="text-center text-lg text-gray-800">
           Raised: <span className="font-black text-gray-900">${new Intl.NumberFormat("en-US").format(tokenSold)}</span>{" "}
-          / $4,000,000
+          / $1,000,000
         </p>
       </div>
       <div className="mt-4 grid grid-cols-[1fr_220px_1fr] gap-2 lg:hidden">

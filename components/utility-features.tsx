@@ -58,9 +58,9 @@ const UtilityFeatures: FC = () => {
       <Heading className="text-5xl font-bold text-gary-yellow text-center">
         $GARA utility on Coingarage exchange
       </Heading>
-      <div className="relative pt-20 mt-[450px]">
+      <div className="relative pt-20 mt-[430px]">
         <div
-          className="absolute -top-96 left-[calc(50%+520px)] bg-gary-yellow text-black text-center px-10 py-2 text-lg font-thin rounded-2xl z-10 animate-pop"
+          className="absolute -top-96 left-[calc(50%+500px)] bg-gary-yellow text-black text-center px-10 py-2 text-lg font-thin rounded-2xl z-10 animate-pop"
         >
           <span className="text-4xl font-black">100x</span>
           <br />

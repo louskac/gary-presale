@@ -82,7 +82,7 @@ export const Faq = () => {
               ></p>
               {faq.hasCopyButton && faq.contractAddress && (
                 <div className="mt-4 flex flex-col rounded-lg bg-[#1B2D4F] p-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="text-xs text-gray-400 sm:text-sm">Contract Address:</p>
+                  <p className="text-lg text-gray-400 sm:text-sm">Contract Address:</p>
                   <span className="overflow-hidden truncate text-gary-yellow sm:ml-2 sm:text-base">
                     {faq.contractAddress}
                   </span>

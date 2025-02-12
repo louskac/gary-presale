@@ -26,7 +26,7 @@ export const Popup = ({ onClose }: { onClose: () => void }) => (
       </div>
       <AnchorLink anchor="hero">
         <Button
-          className="my-1 h-12 border-2 border-transparent bg-gary-yellow px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-yellow hover:bg-white hover:text-gary-yellow dark:hover:bg-white dark:hover:text-gary-yellow"
+          className="my-1 h-12 border-2 border-transparent bg-gary-yellow px-8 text-lg text-white shadow-md outline-none transition-all hover:border-gary-yellow hover:bg-white hover:text-gary-black dark:hover:bg-white"
           onClick={onClose}
         >
           Buy $GARA coin
