@@ -13,77 +13,168 @@ import { waitForTransactionReceipt, writeContract, readContract } from "@wagmi/c
 
 type Address = `0x${string}`
 
-const ethVaultAbi = [
+const ethVaultAbi =  [
   {
     anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint8", name: "version", type: "uint8" }],
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GarySaleInfoUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenBalanceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPriceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPurchase",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "ethWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdtWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcWithdrawBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryWithdrawl",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: false, internalType: "uint8", name: "version", type: "uint8" },
+    ],
     name: "Initialized",
     type: "event",
   },
   {
     anonymous: false,
     inputs: [
-      { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
-      { indexed: true, internalType: "address", name: "newOwner", type: "address" },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
     name: "OwnershipTransferred",
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "startSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "endSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "firstRoundEndDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "secondRoundEndDate", type: "uint256" },
-    ],
-    name: "SaleDatesUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "tokenBalance", type: "uint256" }],
-    name: "TokenBalanceUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "buyer", type: "address" },
-      { indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "value", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "chainId", type: "uint256" },
-    ],
-    name: "TokenPurchase",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "ethWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdtWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdcWithdrawBalance", type: "uint256" },
-    ],
-    name: "Withdrawl",
-    type: "event",
-  },
-  {
     inputs: [],
-    name: "TOKEN_PRICE_USD_FIRST_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_SECONDE_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_THIRD_STAGE",
+    name: "PRICE_INCREASE_PERIOD",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -97,7 +188,11 @@ const ethVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "enum ETHVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum ETHVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
     ],
     name: "buyTokenEthPay",
@@ -108,24 +203,16 @@ const ethVaultAbi = [
   {
     inputs: [
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
-      { internalType: "enum ETHVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum ETHVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
     ],
     name: "calculateTokenAmountPay",
-    outputs: [{ internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "endSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "firstRoundEndDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      { internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -137,7 +224,13 @@ const ethVaultAbi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "contract AggregatorV3Interface", name: "priceFeed", type: "address" }],
+    inputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "priceFeed",
+        type: "address",
+      },
+    ],
     name: "getLatestPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
@@ -145,18 +238,18 @@ const ethVaultAbi = [
   },
   {
     inputs: [],
-    name: "getSaleDatesAndBalance",
-    outputs: [
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastPriceUpdateTimestamp",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "initialize", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
     name: "owner",
@@ -164,12 +257,18 @@ const ethVaultAbi = [
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "renounceOwnership", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
-    name: "secondRoundEndDate",
+    name: "priceIncrease",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -191,21 +290,23 @@ const ethVaultAbi = [
   },
   {
     inputs: [],
-    name: "startSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "token",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "tokenBalance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "tokenPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -219,19 +320,16 @@ const ethVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "_startSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_endSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_firstRoundEndDate", type: "uint256" },
-      { internalType: "uint256", name: "_secondRoundEndDate", type: "uint256" },
+      {
+        internalType: "uint256",
+        name: "_lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      { internalType: "uint256", name: "_tokenPrice", type: "uint256" },
+      { internalType: "uint256", name: "_priceIncrease", type: "uint256" },
+      { internalType: "uint256", name: "_tokenBalance", type: "uint256" },
     ],
-    name: "updateSaleDates",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "_tokenBalance", type: "uint256" }],
-    name: "updateTokenBalance",
+    name: "updateSaleInfo",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -239,90 +337,192 @@ const ethVaultAbi = [
   {
     inputs: [],
     name: "usdc",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "usdt",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "withdraw", outputs: [], stateMutability: "nonpayable", type: "function" },
-]
-const bnbVaultAbi = [
+  {
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+const bnbVaultAbi =[
   {
     anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint8", name: "version", type: "uint8" }],
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GarySaleInfoUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenBalanceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPriceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPurchase",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "bnbWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdtWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcWithdrawBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryWithdrawl",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: false, internalType: "uint8", name: "version", type: "uint8" },
+    ],
     name: "Initialized",
     type: "event",
   },
   {
     anonymous: false,
     inputs: [
-      { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
-      { indexed: true, internalType: "address", name: "newOwner", type: "address" },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
     name: "OwnershipTransferred",
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "startSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "endSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "firstRoundEndDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "secondRoundEndDate", type: "uint256" },
-    ],
-    name: "SaleDatesUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "tokenBalance", type: "uint256" }],
-    name: "TokenBalanceUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "buyer", type: "address" },
-      { indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "value", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "chainId", type: "uint256" },
-    ],
-    name: "TokenPurchase",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "bnbWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdtWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdcWithdrawBalance", type: "uint256" },
-    ],
-    name: "Withdrawl",
-    type: "event",
-  },
-  {
     inputs: [],
-    name: "TOKEN_PRICE_USD_FIRST_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_SECONDE_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_THIRD_STAGE",
+    name: "PRICE_INCREASE_PERIOD",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -336,7 +536,11 @@ const bnbVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "enum BNBVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum BNBVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
     ],
     name: "buyTokenBnbPay",
@@ -347,24 +551,16 @@ const bnbVaultAbi = [
   {
     inputs: [
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
-      { internalType: "enum BNBVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum BNBVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
     ],
     name: "calculateTokenAmountPay",
-    outputs: [{ internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "endSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "firstRoundEndDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      { internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -376,7 +572,13 @@ const bnbVaultAbi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "contract AggregatorV3Interface", name: "priceFeed", type: "address" }],
+    inputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "priceFeed",
+        type: "address",
+      },
+    ],
     name: "getLatestPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
@@ -384,18 +586,18 @@ const bnbVaultAbi = [
   },
   {
     inputs: [],
-    name: "getSaleDatesAndBalance",
-    outputs: [
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastPriceUpdateTimestamp",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "initialize", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
     name: "owner",
@@ -403,12 +605,18 @@ const bnbVaultAbi = [
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "renounceOwnership", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
-    name: "secondRoundEndDate",
+    name: "priceIncrease",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -430,21 +638,23 @@ const bnbVaultAbi = [
   },
   {
     inputs: [],
-    name: "startSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "token",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "tokenBalance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "tokenPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -458,19 +668,16 @@ const bnbVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "_startSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_endSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_firstRoundEndDate", type: "uint256" },
-      { internalType: "uint256", name: "_secondRoundEndDate", type: "uint256" },
+      {
+        internalType: "uint256",
+        name: "_lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      { internalType: "uint256", name: "_tokenPrice", type: "uint256" },
+      { internalType: "uint256", name: "_priceIncrease", type: "uint256" },
+      { internalType: "uint256", name: "_tokenBalance", type: "uint256" },
     ],
-    name: "updateSaleDates",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "_tokenBalance", type: "uint256" }],
-    name: "updateTokenBalance",
+    name: "updateSaleInfo",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -478,90 +685,193 @@ const bnbVaultAbi = [
   {
     inputs: [],
     name: "usdc",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "usdt",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "withdraw", outputs: [], stateMutability: "nonpayable", type: "function" },
-]
+  {
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
+
 const polVaultAbi = [
   {
     anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint8", name: "version", type: "uint8" }],
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GarySaleInfoUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenBalanceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPriceUpdated",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "buyer",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "amount",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "value",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenPrice",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "priceIncrease",
+        type: "uint256",
+      },
+    ],
+    name: "GaryTokenPurchase",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "polWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdtWithdrawBalance",
+        type: "uint256",
+      },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "usdcWithdrawBalance",
+        type: "uint256",
+      },
+    ],
+    name: "GaryWithdrawl",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      { indexed: false, internalType: "uint8", name: "version", type: "uint8" },
+    ],
     name: "Initialized",
     type: "event",
   },
   {
     anonymous: false,
     inputs: [
-      { indexed: true, internalType: "address", name: "previousOwner", type: "address" },
-      { indexed: true, internalType: "address", name: "newOwner", type: "address" },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address",
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
     ],
     name: "OwnershipTransferred",
     type: "event",
   },
   {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "startSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "endSaleDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "firstRoundEndDate", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "secondRoundEndDate", type: "uint256" },
-    ],
-    name: "SaleDatesUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [{ indexed: false, internalType: "uint256", name: "tokenBalance", type: "uint256" }],
-    name: "TokenBalanceUpdated",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: true, internalType: "address", name: "buyer", type: "address" },
-      { indexed: false, internalType: "uint256", name: "amount", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "value", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "chainId", type: "uint256" },
-    ],
-    name: "TokenPurchase",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      { indexed: false, internalType: "uint256", name: "polWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdtWithdrawBalance", type: "uint256" },
-      { indexed: false, internalType: "uint256", name: "usdcWithdrawBalance", type: "uint256" },
-    ],
-    name: "Withdrawl",
-    type: "event",
-  },
-  {
     inputs: [],
-    name: "TOKEN_PRICE_USD_FIRST_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_SECONDE_STAGE",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "TOKEN_PRICE_USD_THIRD_STAGE",
+    name: "PRICE_INCREASE_PERIOD",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -575,7 +885,11 @@ const polVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "enum POLVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum POLVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
     ],
     name: "buyTokenPolPay",
@@ -586,24 +900,16 @@ const polVaultAbi = [
   {
     inputs: [
       { internalType: "uint256", name: "paymentAmount", type: "uint256" },
-      { internalType: "enum POLVault.PaymentMethod", name: "paymentMethod", type: "uint8" },
+      {
+        internalType: "enum POLVault.PaymentMethod",
+        name: "paymentMethod",
+        type: "uint8",
+      },
     ],
     name: "calculateTokenAmountPay",
-    outputs: [{ internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "endSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "firstRoundEndDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    outputs: [
+      { internalType: "uint256", name: "buyTokenAmountPay", type: "uint256" },
+    ],
     stateMutability: "view",
     type: "function",
   },
@@ -615,7 +921,13 @@ const polVaultAbi = [
     type: "function",
   },
   {
-    inputs: [{ internalType: "contract AggregatorV3Interface", name: "priceFeed", type: "address" }],
+    inputs: [
+      {
+        internalType: "contract AggregatorV3Interface",
+        name: "priceFeed",
+        type: "address",
+      },
+    ],
     name: "getLatestPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
@@ -623,18 +935,18 @@ const polVaultAbi = [
   },
   {
     inputs: [],
-    name: "getSaleDatesAndBalance",
-    outputs: [
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-      { internalType: "uint256", name: "", type: "uint256" },
-    ],
+    name: "initialize",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "lastPriceUpdateTimestamp",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "initialize", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
     name: "owner",
@@ -642,12 +954,18 @@ const polVaultAbi = [
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "renounceOwnership", outputs: [], stateMutability: "nonpayable", type: "function" },
   {
     inputs: [],
-    name: "secondRoundEndDate",
+    name: "priceIncrease",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
   {
@@ -669,21 +987,23 @@ const polVaultAbi = [
   },
   {
     inputs: [],
-    name: "startSaleDate",
-    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
-    stateMutability: "view",
-    type: "function",
-  },
-  {
-    inputs: [],
     name: "token",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "tokenBalance",
+    outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "tokenPrice",
     outputs: [{ internalType: "uint256", name: "", type: "uint256" }],
     stateMutability: "view",
     type: "function",
@@ -697,19 +1017,16 @@ const polVaultAbi = [
   },
   {
     inputs: [
-      { internalType: "uint256", name: "_startSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_endSaleDate", type: "uint256" },
-      { internalType: "uint256", name: "_firstRoundEndDate", type: "uint256" },
-      { internalType: "uint256", name: "_secondRoundEndDate", type: "uint256" },
+      {
+        internalType: "uint256",
+        name: "_lastPriceUpdateTimestamp",
+        type: "uint256",
+      },
+      { internalType: "uint256", name: "_tokenPrice", type: "uint256" },
+      { internalType: "uint256", name: "_priceIncrease", type: "uint256" },
+      { internalType: "uint256", name: "_tokenBalance", type: "uint256" },
     ],
-    name: "updateSaleDates",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [{ internalType: "uint256", name: "_tokenBalance", type: "uint256" }],
-    name: "updateTokenBalance",
+    name: "updateSaleInfo",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -717,19 +1034,30 @@ const polVaultAbi = [
   {
     inputs: [],
     name: "usdc",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
   {
     inputs: [],
     name: "usdt",
-    outputs: [{ internalType: "contract IERC20Upgradeable", name: "", type: "address" }],
+    outputs: [
+      { internalType: "contract IERC20Upgradeable", name: "", type: "address" },
+    ],
     stateMutability: "view",
     type: "function",
   },
-  { inputs: [], name: "withdraw", outputs: [], stateMutability: "nonpayable", type: "function" },
-]
+  {
+    inputs: [],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+];
+
 const tokenAbi = [
   { inputs: [], stateMutability: "nonpayable", type: "constructor" },
   {
@@ -1358,7 +1686,7 @@ export const sendPayment = async ({
       if (token === "ETH") {
         hash = await writeContract(config, {
           abi: ethVaultAbi,
-          address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
+          address: "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43",
           functionName: "buyTokenEthPay",
           args: ["0", "0"],
           value: parseUnits(amount.toString(), 18),
@@ -1376,7 +1704,7 @@ export const sendPayment = async ({
           abi: ethTokenAbi,
           address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
           functionName: "allowance",
-          args: [senderAddress, "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"],
+          args: [senderAddress, "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43"],
         })
         console.log("allowance", allowance, parseUnits(amount.toString(), 6))
         if (Number(allowance) < Number(parseUnits(amount.toString(), 6))) {
@@ -1384,7 +1712,7 @@ export const sendPayment = async ({
             abi: ethTokenAbi,
             address: "0xdAC17F958D2ee523a2206206994597C13D831ec7",
             functionName: "approve",
-            args: ["0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79", parseUnits(amount.toString(), 6)],
+            args: ["0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43", parseUnits(amount.toString(), 6)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1393,7 +1721,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: ethVaultAbi,
-              address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
+              address: "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43",
               functionName: "buyTokenEthPay",
               args: ["1", parseUnits(amount.toString(), 6)],
             })
@@ -1401,7 +1729,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: ethVaultAbi,
-            address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
+            address: "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43",
             functionName: "buyTokenEthPay",
             args: ["1", parseUnits(amount.toString(), 6)],
           })
@@ -1415,14 +1743,14 @@ export const sendPayment = async ({
           abi: tokenAbi,
           address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
           functionName: "allowance",
-          args: [senderAddress, "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79"],
+          args: [senderAddress, "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43"],
         })
         if (Number(allowance) < Number(parseUnits(amount.toString(), 6))) {
           const hash1 = await writeContract(config, {
             abi: tokenAbi,
             address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
             functionName: "approve",
-            args: ["0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79", parseUnits(amount.toString(), 6)],
+            args: ["0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43", parseUnits(amount.toString(), 6)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1431,7 +1759,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: ethVaultAbi,
-              address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
+              address: "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43",
               functionName: "buyTokenEthPay",
               args: ["2", parseUnits(amount.toString(), 6)],
             })
@@ -1439,7 +1767,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: ethVaultAbi,
-            address: "0x8ecE1A114ae4768545211Ec3f5Bb62987165cd79",
+            address: "0x409f1dB17C7A3e2d423660EAb9755bbF3873EB43",
             functionName: "buyTokenEthPay",
             args: ["2", parseUnits(amount.toString(), 6)],
           })
@@ -1453,7 +1781,7 @@ export const sendPayment = async ({
       if (token === "BNB") {
         hash = await writeContract(config, {
           abi: bnbVaultAbi,
-          address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
+          address: "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E",
           functionName: "buyTokenBnbPay",
           args: ["0", "0"],
           value: parseUnits(amount.toString(), 18),
@@ -1471,14 +1799,14 @@ export const sendPayment = async ({
           abi: tokenAbi,
           address: "0x55d398326f99059fF775485246999027B3197955",
           functionName: "allowance",
-          args: [senderAddress, "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead"],
+          args: [senderAddress, "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E"],
         })
         if (Number(allowance) < Number(parseUnits(amount.toString(), 18))) {
           const hash1 = await writeContract(config, {
             abi: tokenAbi,
             address: "0x55d398326f99059fF775485246999027B3197955",
             functionName: "approve",
-            args: ["0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead", parseUnits(amount.toString(), 18)],
+            args: ["0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E", parseUnits(amount.toString(), 18)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1487,7 +1815,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: bnbVaultAbi,
-              address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
+              address: "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E",
               functionName: "buyTokenBnbPay",
               args: ["1", parseUnits(amount.toString(), 18)],
             })
@@ -1495,7 +1823,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: bnbVaultAbi,
-            address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
+            address: "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E",
             functionName: "buyTokenBnbPay",
             args: ["1", parseUnits(amount.toString(), 18)],
           })
@@ -1509,14 +1837,14 @@ export const sendPayment = async ({
           abi: tokenAbi,
           address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
           functionName: "allowance",
-          args: [senderAddress, "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead"],
+          args: [senderAddress, "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E"],
         })
         if (Number(allowance) < Number(parseUnits(amount.toString(), 18))) {
           const hash1 = await writeContract(config, {
             abi: tokenAbi,
             address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
             functionName: "approve",
-            args: ["0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead", parseUnits(amount.toString(), 18)],
+            args: ["0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E", parseUnits(amount.toString(), 18)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1525,7 +1853,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: bnbVaultAbi,
-              address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
+              address: "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E",
               functionName: "buyTokenBnbPay",
               args: ["2", parseUnits(amount.toString(), 18)],
             })
@@ -1533,7 +1861,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: bnbVaultAbi,
-            address: "0x3027691e9Fe28499DAB102e591a6BA9cc40d0Ead",
+            address: "0x3C2dA21278B82f29F7b4B7309acf5Cabf3d79b0E",
             functionName: "buyTokenBnbPay",
             args: ["2", parseUnits(amount.toString(), 18)],
           })
@@ -1547,7 +1875,7 @@ export const sendPayment = async ({
       if (token === "POL") {
         hash = await writeContract(config, {
           abi: polVaultAbi,
-          address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
+          address: "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA",
           functionName: "buyTokenPolPay",
           args: ["0", "0"],
           value: parseUnits(amount.toString(), 18),
@@ -1565,14 +1893,14 @@ export const sendPayment = async ({
           abi: tokenAbi,
           address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
           functionName: "allowance",
-          args: [senderAddress, "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be"],
+          args: [senderAddress, "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA"],
         })
         if (Number(allowance) < Number(parseUnits(amount.toString(), 6))) {
           const hash1 = await writeContract(config, {
             abi: tokenAbi,
             address: "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
             functionName: "approve",
-            args: ["0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be", parseUnits(amount.toString(), 6)],
+            args: ["0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA", parseUnits(amount.toString(), 6)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1581,7 +1909,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: polVaultAbi,
-              address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
+              address: "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA",
               functionName: "buyTokenPolPay",
               args: ["1", parseUnits(amount.toString(), 6)],
             })
@@ -1589,7 +1917,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: polVaultAbi,
-            address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
+            address: "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA",
             functionName: "buyTokenPolPay",
             args: ["1", parseUnits(amount.toString(), 6)],
           })
@@ -1603,14 +1931,14 @@ export const sendPayment = async ({
           abi: tokenAbi,
           address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
           functionName: "allowance",
-          args: [senderAddress, "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be"],
+          args: [senderAddress, "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA"],
         })
         if (Number(allowance) < Number(parseUnits(amount.toString(), 6))) {
           const hash1 = await writeContract(config, {
             abi: tokenAbi,
             address: "0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359",
             functionName: "approve",
-            args: ["0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be", parseUnits(amount.toString(), 6)],
+            args: ["0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA", parseUnits(amount.toString(), 6)],
           })
 
           const transactionApproveReceipt = await waitForTransactionReceipt(config, {
@@ -1619,7 +1947,7 @@ export const sendPayment = async ({
           if (transactionApproveReceipt.status == "success") {
             hash = await writeContract(config, {
               abi: polVaultAbi,
-              address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
+              address: "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA",
               functionName: "buyTokenPolPay",
               args: ["2", parseUnits(amount.toString(), 6)],
             })
@@ -1627,7 +1955,7 @@ export const sendPayment = async ({
         } else {
           hash = await writeContract(config, {
             abi: polVaultAbi,
-            address: "0xAa0B637a5F94CCe6EA5EE11Ed8f00A80fd55a8Be",
+            address: "0xBA3479b98c961512bD51BA6fd3c16d46bf47fADA",
             functionName: "buyTokenPolPay",
             args: ["2", parseUnits(amount.toString(), 6)],
           })
