@@ -1,5 +1,5 @@
 import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
-import { TransactionService } from './transactino.service.js';
+import { TransactionService } from './transaction.service.js';
 import { AddTransactionDTO } from './transaction.dto.js';
 
 @Controller('transaction')

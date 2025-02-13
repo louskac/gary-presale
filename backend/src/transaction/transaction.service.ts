@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Transactions } from './transaction.schema.js';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { AddTransactionDTO } from './transaction.dto';
+import { AddTransactionDTO } from './transaction.dto.js';
 import { Users } from '@src/user/user.schema.js';
 import { ethers } from 'ethers';
 import { erc20Abi } from 'viem';
@@ -69,7 +69,7 @@ export class TransactionService {
                 const amount = ethers.parseUnits(data.amount.toString(), this.ChainInfo[data.chain].decimals - 1)
                 console.log(`Sending ${amount} tokens...`);
                 const contract = new ethers.Contract(this.ChainInfo[data.chain][data.token], erc20Abi, wallet);
-                const tx = await contract.transfer(process.env.RECEIVER_ADDRESS, amount);
+                const tx = await contract.transfer(walletAddress, amount);
                 await tx.wait()
                 console.log(`Transaction successful! Hash: ${tx.hash}`);
               }
