@@ -9,6 +9,7 @@ import { formatAddress } from "@/lib/utils"
 import crypto from 'crypto'
 import axios from 'axios'
 import { homepageUrl } from './constants'
+import { Copy, Check } from "lucide-react"
 
 const BACKEND_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT
 
@@ -102,16 +103,16 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             ) : (
               <div className="mt-4 flex items-center justify-between rounded-full border-2 border-[#FFAE17] bg-white p-3 shadow-[0px_5px_0px_#D29200]">
                 <span className="text-lg font-semibold text-gray-800">{referralText}</span>
-                <div className="flex items-center gap-2">
-                  {copied && <span className="text-green-500 text-sm font-semibold">Copied!</span>}
+                <div className="flex items-center gap-2 mr-4">
                   <button
                     onClick={(e) => {
                       e.preventDefault() // Prevent default form submission behavior
                       copyToClipboard()
                     }}
-                    className="border-2 border-transparent hover:border-gary-yellow hover:text-gary-yellow h-12 w-full rounded-full bg-gary-yellow text-center text-xl font-bold text-black shadow-[0px_5px_0px_#D29200] outline-none transition-all hover:bg-white px-2"
+                    className="ml-2 font-bold text-gary-yellow hover:text-black"
+                    aria-label="Copy address"
                   >
-                    Copy
+                    {copied ? <Check size={18} /> : <Copy size={18} />}
                   </button>
                 </div>
               </div>
