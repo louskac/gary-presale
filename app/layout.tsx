@@ -6,6 +6,7 @@ import { Providers } from "@/app/[locale]/providers"
 import "@rainbow-me/rainbowkit/styles.css"
 import "./globals.css"
 import Script from "next/script"
+import { homepageUrl } from "@/components/constants"
 
 const balooBhai = Baloo_Bhai_2({
   subsets: ["latin"],
@@ -31,14 +32,14 @@ export default function RootLayout({ children, params }: { children: React.React
         {/* OpenGraph Metadata */}
         <meta property="og:title" content="Save Penguin Gary!" />
         <meta property="og:description" content="Help to save Gary and his job" />
-        <meta property="og:image" content="https://www.helpgary.com/images/share-image.png" /> {/* Full URL */}
-        <meta property="og:url" content="https://www.helpgary.com" />
+        <meta property="og:image" content={`${homepageUrl}/images/share-image.png`} /> {/* Full URL */}
+        <meta property="og:url" content={homepageUrl} />
         <meta property="og:type" content="website" />
         {/* Twitter Card Metadata */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Save Penguin Gary!" />
         <meta name="twitter:description" content="Help to save Gary and his job" />
-        <meta name="twitter:image" content="https://www.helpgary.com/images/share-image.png" /> {/* Full URL */}
+        <meta name="twitter:image" content={`${homepageUrl}/images/share-image.png`} /> {/* Full URL */}
         {/* Google Analytics */}
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-SK1L5K78GF" />
         <Script

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Heading } from "./heading"
 import { Button } from "./ui/button"
+import { emailSupport } from "./constants"
 
 export const Footer = () => {
   return (
@@ -54,8 +55,8 @@ export const Footer = () => {
             <p>Revoluční 1082/8, Nové Město (Praha 1),</p>
             <p>110 00 Prague, Czech Republic</p>
             <p className="mt-4 text-gary-yellow">
-              <a href="mailto:support@helpgary.com" className="underline">
-                support@helpgary.com
+              <a href={`mailto:${emailSupport}`} className="underline">
+                {emailSupport}
               </a>
             </p>
           </div>
