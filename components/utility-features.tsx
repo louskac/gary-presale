@@ -3,6 +3,7 @@
 import { FC } from "react";
 import Image from "next/image";
 import { Heading } from "@/components/heading";
+import { Button } from "./ui/button";
 
 interface Feature {
   title: string;
@@ -47,13 +48,17 @@ function renderDescription(description: string): JSX.Element {
   );
 }
 
+const handleClick = (url: string) => {
+  window.open(url, "_blank");
+};
+
 const UtilityFeatures: FC = () => {
   return (
-    <section>
+    <section className="pb-20">
       <Heading className="text-5xl font-bold text-gary-yellow text-center">
         $GARA utility on Coingarage exchange
       </Heading>
-      <div className="relative py-20 mt-[450px]">
+      <div className="relative pt-20 mt-[450px]">
         <div
           className="absolute -top-96 left-[calc(50%+520px)] bg-gary-yellow text-black text-center px-10 py-2 text-lg font-thin rounded-2xl z-10 animate-pop"
         >
@@ -104,6 +109,23 @@ const UtilityFeatures: FC = () => {
               </div>
             ))}
           </div>
+          {/* Centering the Button and Green Flashing Text */}
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center mt-10 space-y-3">
+        <Button
+          variant="default"
+          size="lg"
+          className="h-14 border-2 border-transparent bg-gary-yellow px-10 text-2xl text-black shadow-[0px_5px_0px_#D29200] rounded-full outline-none transition-all sm:hover:border-gary-yellow sm:hover:bg-white sm:hover:text-black dark:sm:hover:bg-white dark:sm:hover:text-black"
+          onClick={() => {
+             handleClick("https://coingarage.io");
+          }}
+        >
+          Visit Coingarage
+        </Button>
+        <div className="flex items-center mt-2">
+          <div className="h-3 w-3 animate-pulse rounded-full bg-[#02F577]"></div>
+          <span className="ml-2 text-lg font-semibold text-[#02F577]">The exchange is live</span>
         </div>
       </div>
     </section>
