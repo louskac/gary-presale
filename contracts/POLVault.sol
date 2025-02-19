@@ -108,14 +108,17 @@ contract POLVault is OwnableUpgradeable {
         uint256 paymentAmount
     ) external payable {
         uint256 buyTokenAmountPay;
+
+        // update token price if new epoch already started
         if (
             block.timestamp >= lastPriceUpdateTimestamp + PRICE_INCREASE_PERIOD
         ) {
-            tokenPrice = tokenPrice + priceIncrease;
-            lastPriceUpdateTimestamp =
-                lastPriceUpdateTimestamp +
-                PRICE_INCREASE_PERIOD;
+            uint256 increaseSteps = (block.timestamp - lastPriceUpdateTimestamp) / PRICE_INCREASE_PERIOD + 1;
+
+            tokenPrice = tokenPrice + (priceIncrease * increaseSteps);
+            lastPriceUpdateTimestamp = lastPriceUpdateTimestamp + (PRICE_INCREASE_PERIOD * increaseSteps);
         }
+
         if (paymentMethod == PaymentMethod.NATIVE) {
             require(msg.value > 0, "No POL sent");
 
@@ -180,6 +183,17 @@ contract POLVault is OwnableUpgradeable {
         );
     }
 
+    function tokenPricePrecise() public view returns (uint256) {
+        if (block.timestamp < lastPriceUpdateTimestamp + PRICE_INCREASE_PERIOD) {
+            return tokenPrice;
+        }
+
+        uint256 increaseSteps = (block.timestamp - lastPriceUpdateTimestamp) / PRICE_INCREASE_PERIOD + 1;
+        uint256 tokenPriceFinal = tokenPrice + (priceIncrease * increaseSteps);
+
+        return tokenPriceFinal
+    }
+
     function calculateTokenAmountPay(
         uint256 paymentAmount,
         PaymentMethod paymentMethod
@@ -205,9 +219,12 @@ contract POLVault is OwnableUpgradeable {
         if (
             block.timestamp >= lastPriceUpdateTimestamp + PRICE_INCREASE_PERIOD
         ) {
+            uint256 increaseSteps = (block.timestamp - lastPriceUpdateTimestamp) / PRICE_INCREASE_PERIOD + 1;
+            uint256 tokenPriceFinal = tokenPrice + (priceIncrease * increaseSteps);
+
             buyTokenAmountPay =
                 usdValue /
-                ((tokenPrice + priceIncrease) * 1e12);
+                ((tokenPriceFinal + priceIncrease) * 1e12);
         } else {
             buyTokenAmountPay = usdValue / (tokenPrice * 1e12);
         }
